@@ -7,6 +7,7 @@
 #define _LOANORDER_H
 
 #include "DeliveryPoint.h"
+#include "Loan.h"
 
 using namespace System;
 using namespace System::Collections::Generic;

@@ -17,7 +17,7 @@ namespace MrBookyModel {
         public:
             int StudentCode;
             List<String^>^ Preferences;
-			List<Loan^>^ LoanHistory;
+			//List<Loan^>^ LoanHistory;
 
             void AddPreference();
 
