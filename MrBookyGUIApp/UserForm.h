@@ -103,6 +103,7 @@ namespace MrBookyGUIApp {
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(265, 22);
 			this->textBox1->TabIndex = 3;
+			this->textBox1->TextChanged += gcnew System::EventHandler(this, &UserForm::textBox1_TextChanged);
 			// 
 			// textBox2
 			// 
@@ -156,6 +157,8 @@ namespace MrBookyGUIApp {
 	private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+}
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
