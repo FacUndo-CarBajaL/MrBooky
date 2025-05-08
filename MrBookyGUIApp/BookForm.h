@@ -79,35 +79,35 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::Cornsilk;
-			this->label1->Location = System::Drawing::Point(12, 18);
+			this->label1->Location = System::Drawing::Point(76, 18);
 			this->label1->Name = L"label1";
 			this->label1->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
-			this->label1->Size = System::Drawing::Size(546, 125);
+			this->label1->Size = System::Drawing::Size(702, 125);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Bienvenido Sistema de Búsqueda MrBooky";
-			this->label1->TextAlign = System::Drawing::ContentAlignment::TopRight;
+			this->label1->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::SystemColors::ControlLightLight;
 			this->label2->Location = System::Drawing::Point(25, 211);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(247, 29);
+			this->label2->Size = System::Drawing::Size(216, 26);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Busqueda Avanzada";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label3->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::SystemColors::ControlLightLight;
 			this->label3->Location = System::Drawing::Point(27, 270);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(38, 16);
+			this->label3->Size = System::Drawing::Size(38, 15);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Autor";
 			this->label3->Click += gcnew System::EventHandler(this, &BookForm::label3_Click);
@@ -115,20 +115,24 @@ namespace MrBookyGUIApp {
 			// label4
 			// 
 			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::SystemColors::ControlLightLight;
 			this->label4->Location = System::Drawing::Point(27, 311);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(56, 16);
+			this->label4->Size = System::Drawing::Size(55, 15);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Editorial";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
+			this->label5->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::SystemColors::ControlLightLight;
 			this->label5->Location = System::Drawing::Point(27, 357);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(52, 16);
+			this->label5->Size = System::Drawing::Size(44, 15);
 			this->label5->TabIndex = 4;
 			this->label5->Text = L"Género";
 			// 
