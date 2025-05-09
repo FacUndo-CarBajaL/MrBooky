@@ -233,7 +233,7 @@ namespace MrBookyGUIApp {
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::Color::White;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"AddBook";
 			this->Text = L"AddBook";
 			this->ResumeLayout(false);
@@ -241,5 +241,5 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
-	};
+};
 }

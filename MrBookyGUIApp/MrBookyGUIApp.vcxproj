@@ -122,15 +122,20 @@
   <ItemGroup>
     <ClCompile Include="AddBook.cpp" />
     <ClCompile Include="BookForm.cpp" />
+    <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
+    <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddBook.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="BookForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="BookReport.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
@@ -142,6 +147,9 @@
     <ClInclude Include="UserForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UserReport.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AddBook.resx">
@@ -149,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BookForm.resx">
       <DependentUpon>BookForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookReport.resx">
+      <DependentUpon>BookReport.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianLogIn.resx">
       <DependentUpon>LibrarianLogIn.h</DependentUpon>
@@ -158,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserReport.resx">
+      <DependentUpon>UserReport.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
