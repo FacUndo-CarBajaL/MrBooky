@@ -14,6 +14,7 @@ using namespace System::Collections::Generic;
 namespace MrBookyModel {
     public ref class CartItem {
     public:
+		int CartItemID;
         Book^ book;
         int Quantity;
 
