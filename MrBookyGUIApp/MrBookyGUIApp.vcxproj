@@ -118,15 +118,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddBook.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
+    <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddBook.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="BookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stock.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="UserForm.h">
@@ -134,11 +142,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddBook.resx">
+      <DependentUpon>AddBook.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BookForm.resx">
       <DependentUpon>BookForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianLogIn.resx">
       <DependentUpon>LibrarianLogIn.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock.resx">
+      <DependentUpon>Stock.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.h</DependentUpon>

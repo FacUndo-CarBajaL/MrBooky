@@ -88,22 +88,22 @@ namespace MrBookyGUIApp {
 			// 
 			this->button2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(201, 253);
+			this->button2->Location = System::Drawing::Point(201, 254);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(515, 41);
 			this->button2->TabIndex = 2;
-			this->button2->Text = L"Reporte por Usuario";
+			this->button2->Text = L"Registrar Libro";
 			this->button2->UseVisualStyleBackColor = true;
 			// 
 			// button3
 			// 
 			this->button3->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(201, 352);
+			this->button3->Location = System::Drawing::Point(201, 354);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(515, 41);
 			this->button3->TabIndex = 3;
-			this->button3->Text = L"Reporte por libro";
+			this->button3->Text = L"Reporte por Usuario";
 			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// LibrarianLogIn
