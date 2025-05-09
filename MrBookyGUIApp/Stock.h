@@ -124,7 +124,6 @@ namespace MrBookyGUIApp {
 			this->label1->Size = System::Drawing::Size(80, 25);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Título :";
-			this->label1->Click += gcnew System::EventHandler(this, &Stock::label1_Click);
 			// 
 			// label2
 			// 

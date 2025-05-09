@@ -70,7 +70,6 @@ namespace MrBookyGUIApp {
 			this->label1->Size = System::Drawing::Size(652, 51);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Sistema de Logística Mr.Booky";
-			this->label1->Click += gcnew System::EventHandler(this, &LibrarianLogIn::label1_Click);
 			// 
 			// button1
 			// 
