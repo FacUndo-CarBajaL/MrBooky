@@ -17,7 +17,7 @@ namespace MrBookyModel {
         public:
             int LoanID;
             Book^ Book;
-            //Client^ Client;
+            Client^ Client;
             DateTime^ DateLoan;
             DateTime^ ReturnDate;
             String^ Status;

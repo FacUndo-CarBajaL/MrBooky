@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{84B9E126-4773-5A15-0293-C333D8A769CB}</ProjectGuid>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>MrBookyGUIApp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -173,6 +173,14 @@
     <EmbeddedResource Include="UserReport.resx">
       <DependentUpon>UserReport.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MrBookyController\MrBookyController.vcxproj">
+      <Project>{4ea03123-e424-8d92-4969-add2c3a67eac}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MrBookyModel\MrBookyModel.vcxproj">
+      <Project>{a1296533-d732-ed0a-c488-666b1398d740}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
