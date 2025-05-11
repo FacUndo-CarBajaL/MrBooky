@@ -148,6 +148,9 @@
     <ProjectReference Include="..\MrBookyModel\MrBookyModel.vcxproj">
       <Project>{a1296533-d732-ed0a-c488-666b1398d740}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\MrBookyPersistance\MrBookyPersistance.vcxproj">
+      <Project>{d1aff3e6-64c6-1d9b-49fc-058fbefacc92}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

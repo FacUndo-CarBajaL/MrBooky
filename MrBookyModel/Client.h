@@ -7,7 +7,7 @@
 #define _CLIENT_H
 
 #include "User.h"
-#include "Loan.h"
+//#include "Loan.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
