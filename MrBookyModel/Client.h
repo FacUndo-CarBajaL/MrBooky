@@ -32,6 +32,9 @@ namespace MrBookyModel {
             void SeeLoanHistory();
 
             void ReturnBook();
+
+            Client(){}
+            Client(int id, String^ name, String^ password) : User(id, name, password){}
     };
 }
 

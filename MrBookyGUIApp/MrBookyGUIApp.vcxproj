@@ -123,9 +123,13 @@
     <ClCompile Include="AddBook.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
+    <ClCompile Include="FoundBookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
+    <ClCompile Include="MainForm1.cpp" />
+    <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
+    <ClCompile Include="UserOptionsForm.cpp" />
     <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,13 +142,25 @@
     <ClInclude Include="BookReport.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="FoundBookForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MainForm1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RegisterUserForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Stock.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="UserForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="UserOptionsForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="UserReport.h">
@@ -161,14 +177,26 @@
     <EmbeddedResource Include="BookReport.resx">
       <DependentUpon>BookReport.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FoundBookForm.resx">
+      <DependentUpon>FoundBookForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LibrarianLogIn.resx">
       <DependentUpon>LibrarianLogIn.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm1.resx">
+      <DependentUpon>MainForm1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegisterUserForm.resx">
+      <DependentUpon>RegisterUserForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock.resx">
       <DependentUpon>Stock.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserOptionsForm.resx">
+      <DependentUpon>UserOptionsForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserReport.resx">
       <DependentUpon>UserReport.h</DependentUpon>

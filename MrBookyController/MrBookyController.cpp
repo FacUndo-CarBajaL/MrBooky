@@ -2,11 +2,13 @@
 
 #include "MrBookyController.h"
 
-int MrBookyController::MrBookyController::AddBook(Book^ book)
+int MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
     try {
         books->Add(book);
+		Persistance::PersistXMLFile("books.xml", books);
+
 		return 1;
     }
 	catch (Exception^ ex) {
@@ -15,13 +17,13 @@ int MrBookyController::MrBookyController::AddBook(Book^ book)
     return 0;
 }
 
-List<Book^>^ MrBookyController::MrBookyController::GetBooks()
+List<Book^>^ MrBookyController::Controller::GetBooks()
 {
 	// Devuelve la lista de libros
     return books;
 }
 
-Book^ MrBookyController::MrBookyController::SearchBook(int index)
+Book^ MrBookyController::Controller::SearchBook(int index)
 {
 	// Busca el libro en la lista de libros
 	for each (Book^ book in books)
@@ -34,7 +36,7 @@ Book^ MrBookyController::MrBookyController::SearchBook(int index)
     
 }
 
-int MrBookyController::MrBookyController::UpdateBook(Book^ book)
+int MrBookyController::Controller::UpdateBook(Book^ book)
 {
 	// Busca el libro en la lista de libros
 	for (int i = 0; i < books->Count; i++)
@@ -49,7 +51,7 @@ int MrBookyController::MrBookyController::UpdateBook(Book^ book)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteBook(int index)
+int MrBookyController::Controller::DeleteBook(int index)
 {
 	for (int i = 0; i < books->Count; i++)
 	{
@@ -63,7 +65,7 @@ int MrBookyController::MrBookyController::DeleteBook(int index)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::AddRobot(DeliveryRobot^ robot)
+int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
 	// Agrega el robot a la lista de robots
 	try {
@@ -76,13 +78,13 @@ int MrBookyController::MrBookyController::AddRobot(DeliveryRobot^ robot)
 	return 0;
 }
 
-List<DeliveryRobot^>^ MrBookyController::MrBookyController::GetRobots()
+List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots()
 {
 	// TODO: Insertar una instrucción "return" aquí
 	return robots;
 }
 
-DeliveryRobot^ MrBookyController::MrBookyController::SearchRobot(int robotId)
+DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (DeliveryRobot ^ robot in robots)
@@ -94,7 +96,7 @@ DeliveryRobot^ MrBookyController::MrBookyController::SearchRobot(int robotId)
 	}
 }
 
-int MrBookyController::MrBookyController::UpdateRobot(DeliveryRobot^ robot)
+int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 {
 	// Busca el robot en la lista de robots
 	for (int i = 0; i < robots->Count; i++)
@@ -109,7 +111,7 @@ int MrBookyController::MrBookyController::UpdateRobot(DeliveryRobot^ robot)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteRobot(int robotId)
+int MrBookyController::Controller::DeleteRobot(int robotId)
 {
 	// Busca el robot en la lista de robots
 	for (int i = 0; i < robots->Count; i++)
@@ -124,7 +126,7 @@ int MrBookyController::MrBookyController::DeleteRobot(int robotId)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::AddLibrary(Library^ library)
+int MrBookyController::Controller::AddLibrary(Library^ library)
 {
 	try {
 		// Agrega la biblioteca a la lista de bibliotecas
@@ -137,13 +139,13 @@ int MrBookyController::MrBookyController::AddLibrary(Library^ library)
 	return 0;
 }
 
-List<Library^>^ MrBookyController::MrBookyController::GetLibraries()
+List<Library^>^ MrBookyController::Controller::GetLibraries()
 {
 	// TODO: Insertar una instrucción "return" aquí
 	return libraries;
 }
 
-Library^ MrBookyController::MrBookyController::SearchLibrary(int libraryId)
+Library^ MrBookyController::Controller::SearchLibrary(int libraryId)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Library ^ library in libraries)
@@ -155,7 +157,7 @@ Library^ MrBookyController::MrBookyController::SearchLibrary(int libraryId)
 	}
 }
 
-int MrBookyController::MrBookyController::UpdateLibrary(Library^ library)
+int MrBookyController::Controller::UpdateLibrary(Library^ library)
 {
 	// Busca la biblioteca en la lista de bibliotecas
 	for (int i = 0; i < libraries->Count; i++)
@@ -170,7 +172,7 @@ int MrBookyController::MrBookyController::UpdateLibrary(Library^ library)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteLibrary(int libraryId)
+int MrBookyController::Controller::DeleteLibrary(int libraryId)
 {
 	// Busca la biblioteca en la lista de bibliotecas
 	for (int i = 0; i < libraries->Count; i++)
@@ -185,11 +187,13 @@ int MrBookyController::MrBookyController::DeleteLibrary(int libraryId)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::AddUser(User^ user)
+int MrBookyController::Controller::AddUser(User^ user)
 {
 	try {
 		// Agrega el usuario a la lista de usuarios
 		users->Add(user);
+		Persistance::PersistTextFile_User("users.txt", users);
+		
 		return 1;
 	}
 	catch (Exception^ ex) {
@@ -198,13 +202,13 @@ int MrBookyController::MrBookyController::AddUser(User^ user)
 	return 0;
 }
 
-List<User^>^ MrBookyController::MrBookyController::GetUsers()
+List<User^>^ MrBookyController::Controller::GetUsers()
 {
 	// TODO: Insertar una instrucción "return" aquí
 	return users;
 }
 
-User^ MrBookyController::MrBookyController::SearchUser(int userId)
+User^ MrBookyController::Controller::SearchUser(int userId)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (User ^ user in users)
@@ -216,7 +220,46 @@ User^ MrBookyController::MrBookyController::SearchUser(int userId)
 	}
 }
 
-int MrBookyController::MrBookyController::UpdateUser(User^ user)
+
+
+//Agregadoooo////////////////////////
+int MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
+{
+	
+	users = (List<User^>^)Persistance::LoadUsersFromTextFile("users.txt");
+	for each (User ^ user in users)
+	{
+		if (user->Name == userName)
+		{
+			if (user->Password == userPassword) {
+				
+				return 2;
+			}
+			else {
+				return 1;
+			}
+		}
+	}
+
+	return 0;
+}
+Book^ MrBookyController::Controller::SearchBookByName(String^ bookName)
+{
+	// Busca el libro en la lista de libros
+	books = (List<Book^>^)Persistance::LoadBookFromXMLFile("books.xml");
+	for each (Book ^ book in books)
+	{
+		if (book->Title == bookName)
+		{
+			return book;
+		}
+	}
+}
+//
+
+
+
+int MrBookyController::Controller::UpdateUser(User^ user)
 {
 	// Busca el usuario en la lista de usuarios
 	for (int i = 0; i < users->Count; i++)
@@ -231,7 +274,7 @@ int MrBookyController::MrBookyController::UpdateUser(User^ user)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteUser(int userId)
+int MrBookyController::Controller::DeleteUser(int userId)
 {
 	// Busca el usuario en la lista de usuarios
 	for (int i = 0; i < users->Count; i++)
@@ -246,7 +289,7 @@ int MrBookyController::MrBookyController::DeleteUser(int userId)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::AddLoan(Loan^ loan)
+int MrBookyController::Controller::AddLoan(Loan^ loan)
 {
 	try {
 		// Agrega el préstamo a la lista de préstamos
@@ -259,13 +302,13 @@ int MrBookyController::MrBookyController::AddLoan(Loan^ loan)
 	return 0;
 }
 
-List<Loan^>^ MrBookyController::MrBookyController::GetLoans()
+List<Loan^>^ MrBookyController::Controller::GetLoans()
 {
 	// TODO: Insertar una instrucción "return" aquí
 	return loans;
 }
 
-Loan^ MrBookyController::MrBookyController::SearchLoan(int loanId)
+Loan^ MrBookyController::Controller::SearchLoan(int loanId)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Loan ^ loan in loans)
@@ -277,7 +320,7 @@ Loan^ MrBookyController::MrBookyController::SearchLoan(int loanId)
 	}
 }
 
-int MrBookyController::MrBookyController::UpdateLoan(Loan^ loan)
+int MrBookyController::Controller::UpdateLoan(Loan^ loan)
 {
 	// Busca el préstamo en la lista de préstamos
 	for (int i = 0; i < loans->Count; i++)
@@ -292,7 +335,7 @@ int MrBookyController::MrBookyController::UpdateLoan(Loan^ loan)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteLoan(int loanId)
+int MrBookyController::Controller::DeleteLoan(int loanId)
 {
 	// Busca el préstamo en la lista de préstamos
 	for (int i = 0; i < loans->Count; i++)
@@ -307,7 +350,7 @@ int MrBookyController::MrBookyController::DeleteLoan(int loanId)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::AddCartItem(CartItem^ cartItem)
+int MrBookyController::Controller::AddCartItem(CartItem^ cartItem)
 {
 	try {
 		// Agrega el artículo al carrito a la lista de artículos del carrito
@@ -320,13 +363,13 @@ int MrBookyController::MrBookyController::AddCartItem(CartItem^ cartItem)
 	return 0;
 }
 
-List<CartItem^>^ MrBookyController::MrBookyController::GetCartItems()
+List<CartItem^>^ MrBookyController::Controller::GetCartItems()
 {
 	// TODO: Insertar una instrucción "return" aquí
 	return cartItems;
 }
 
-CartItem^ MrBookyController::MrBookyController::SearchCartItem(int cartItemId)
+CartItem^ MrBookyController::Controller::SearchCartItem(int cartItemId)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (CartItem ^ cartItem in cartItems)
@@ -338,7 +381,7 @@ CartItem^ MrBookyController::MrBookyController::SearchCartItem(int cartItemId)
 	}
 }
 
-int MrBookyController::MrBookyController::UpdateCartItem(CartItem^ cartItem)
+int MrBookyController::Controller::UpdateCartItem(CartItem^ cartItem)
 {
 	// Busca el artículo en el carrito en la lista de artículos del carrito
 	for (int i = 0; i < cartItems->Count; i++)
@@ -353,7 +396,7 @@ int MrBookyController::MrBookyController::UpdateCartItem(CartItem^ cartItem)
 	return 0;
 }
 
-int MrBookyController::MrBookyController::DeleteCartItem(int cartItemId)
+int MrBookyController::Controller::DeleteCartItem(int cartItemId)
 {
 	// Busca el artículo en el carrito en la lista de artículos del carrito
 	for (int i = 0; i < cartItems->Count; i++)

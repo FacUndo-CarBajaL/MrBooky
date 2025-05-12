@@ -34,6 +34,9 @@ namespace MrBookyModel {
         void RegisterEmployee();
 
         void MakeDailyReport();
+
+        Librarian(){}
+        Librarian(int id, String^ name, String^ password){}
     };
 }
 

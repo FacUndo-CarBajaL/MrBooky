@@ -3,9 +3,10 @@
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace MrBookyModel;
+using namespace MrBookyPersistance;
 
 namespace MrBookyController {
-	public ref class MrBookyController
+	public ref class Controller
 	{
 		private:
 			static List<Book^>^ books = gcnew List<Book^>();
@@ -43,6 +44,9 @@ namespace MrBookyController {
 			static User^ SearchUser(int userId);
 			static int UpdateUser(User^ user);
 			static int DeleteUser(int userId);
+
+			static int SearchUserByNameAndPassword(String^ userName, String^ userPassword);
+			static Book^ SearchBookByName(String^ bookName);
 
 			// Métodos CRUD para Loan
 			static int AddLoan(Loan^ loan);
