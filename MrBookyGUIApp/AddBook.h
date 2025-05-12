@@ -280,6 +280,7 @@ private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e)
 		return;
 	}
 	MessageBox::Show("Libro registrado","Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	int bookId = 1;
 	Book^ book = gcnew Book();
 	book->Title = title;
 	book->Author = author;
@@ -287,6 +288,7 @@ private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e)
 	book->Publisher = editorial;
 	book->Stock = quantity;
 	book->Description = description;
+	book->BookID = bookId;
 
 	Controller::AddBook(book);
 	txtTitle->Clear();
@@ -296,6 +298,8 @@ private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e)
 	txtQuantity->Clear();
 	txtProvider->Clear();
 	rtxtDescription->Clear();
+
+	bookId++;
 }
 };
 }
