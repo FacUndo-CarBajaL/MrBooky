@@ -34,15 +34,24 @@ namespace MrBookyGUIApp {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ txtUser;
+	private: System::Windows::Forms::Button^ btnSearch;
+	private: System::Windows::Forms::Label^ lbResults;
+	private: System::Windows::Forms::Label^ lbName;
+	private: System::Windows::Forms::Label^ lbEmail;
+	private: System::Windows::Forms::Label^ lbPhone;
+	private: System::Windows::Forms::Panel^ pnHistorial;
 	protected:
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Panel^ panel1;
-	private: System::Windows::Forms::Label^ label5;
+
+	protected:
+
+
+
+
+
+
+	private: System::Windows::Forms::Label^ lbHistorial;
+
 
 	private:
 		/// <summary>
@@ -57,93 +66,94 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->txtUser = (gcnew System::Windows::Forms::TextBox());
+			this->btnSearch = (gcnew System::Windows::Forms::Button());
+			this->lbResults = (gcnew System::Windows::Forms::Label());
+			this->lbName = (gcnew System::Windows::Forms::Label());
+			this->lbEmail = (gcnew System::Windows::Forms::Label());
+			this->lbPhone = (gcnew System::Windows::Forms::Label());
+			this->pnHistorial = (gcnew System::Windows::Forms::Panel());
+			this->lbHistorial = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// textBox1
+			// txtUser
 			// 
-			this->textBox1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+			this->txtUser->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox1->ForeColor = System::Drawing::Color::DarkGray;
-			this->textBox1->Location = System::Drawing::Point(48, 25);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(568, 29);
-			this->textBox1->TabIndex = 0;
-			this->textBox1->Text = L"Ingrese Usuario";
+			this->txtUser->ForeColor = System::Drawing::Color::DarkGray;
+			this->txtUser->Location = System::Drawing::Point(48, 25);
+			this->txtUser->Name = L"txtUser";
+			this->txtUser->Size = System::Drawing::Size(568, 29);
+			this->txtUser->TabIndex = 0;
+			this->txtUser->Text = L"Ingrese Usuario";
 			// 
-			// button1
+			// btnSearch
 			// 
-			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Location = System::Drawing::Point(645, 23);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(86, 33);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Buscar";
-			this->button1->UseVisualStyleBackColor = true;
+			this->btnSearch->ForeColor = System::Drawing::Color::Black;
+			this->btnSearch->Location = System::Drawing::Point(645, 23);
+			this->btnSearch->Name = L"btnSearch";
+			this->btnSearch->Size = System::Drawing::Size(86, 33);
+			this->btnSearch->TabIndex = 1;
+			this->btnSearch->Text = L"Buscar";
+			this->btnSearch->UseVisualStyleBackColor = true;
+			this->btnSearch->Click += gcnew System::EventHandler(this, &UserReport::btnSearch_Click);
 			// 
-			// label1
+			// lbResults
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
+			this->lbResults->AutoSize = true;
+			this->lbResults->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(44, 68);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(106, 22);
-			this->label1->TabIndex = 2;
-			this->label1->Text = L"Resultados :";
+			this->lbResults->ForeColor = System::Drawing::Color::White;
+			this->lbResults->Location = System::Drawing::Point(44, 68);
+			this->lbResults->Name = L"lbResults";
+			this->lbResults->Size = System::Drawing::Size(106, 22);
+			this->lbResults->TabIndex = 2;
+			this->lbResults->Text = L"Resultados :";
 			// 
-			// label2
+			// lbName
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(44, 116);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(83, 22);
-			this->label2->TabIndex = 3;
-			this->label2->Text = L"Nombre :";
+			this->lbName->AutoSize = true;
+			this->lbName->Location = System::Drawing::Point(44, 116);
+			this->lbName->Name = L"lbName";
+			this->lbName->Size = System::Drawing::Size(83, 22);
+			this->lbName->TabIndex = 3;
+			this->lbName->Text = L"Nombre :";
 			// 
-			// label3
+			// lbEmail
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(44, 163);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(70, 22);
-			this->label3->TabIndex = 4;
-			this->label3->Text = L"Email :";
+			this->lbEmail->AutoSize = true;
+			this->lbEmail->Location = System::Drawing::Point(44, 163);
+			this->lbEmail->Name = L"lbEmail";
+			this->lbEmail->Size = System::Drawing::Size(70, 22);
+			this->lbEmail->TabIndex = 4;
+			this->lbEmail->Text = L"Email :";
 			// 
-			// label4
+			// lbPhone
 			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(571, 116);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(181, 22);
-			this->label4->TabIndex = 5;
-			this->label4->Text = L"Número de teléfono : ";
+			this->lbPhone->AutoSize = true;
+			this->lbPhone->Location = System::Drawing::Point(571, 116);
+			this->lbPhone->Name = L"lbPhone";
+			this->lbPhone->Size = System::Drawing::Size(181, 22);
+			this->lbPhone->TabIndex = 5;
+			this->lbPhone->Text = L"Número de teléfono : ";
 			// 
-			// panel1
+			// pnHistorial
 			// 
-			this->panel1->AutoScroll = true;
-			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->panel1->Location = System::Drawing::Point(44, 227);
-			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(857, 232);
-			this->panel1->TabIndex = 6;
+			this->pnHistorial->AutoScroll = true;
+			this->pnHistorial->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->pnHistorial->Location = System::Drawing::Point(44, 227);
+			this->pnHistorial->Name = L"pnHistorial";
+			this->pnHistorial->Size = System::Drawing::Size(857, 232);
+			this->pnHistorial->TabIndex = 6;
 			// 
-			// label5
+			// lbHistorial
 			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(428, 196);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(83, 22);
-			this->label5->TabIndex = 7;
-			this->label5->Text = L"Historial";
+			this->lbHistorial->AutoSize = true;
+			this->lbHistorial->Location = System::Drawing::Point(428, 196);
+			this->lbHistorial->Name = L"lbHistorial";
+			this->lbHistorial->Size = System::Drawing::Size(83, 22);
+			this->lbHistorial->TabIndex = 7;
+			this->lbHistorial->Text = L"Historial";
 			// 
 			// UserReport
 			// 
@@ -152,18 +162,18 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(942, 493);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->panel1);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->lbHistorial);
+			this->Controls->Add(this->pnHistorial);
+			this->Controls->Add(this->lbPhone);
+			this->Controls->Add(this->lbEmail);
+			this->Controls->Add(this->lbName);
+			this->Controls->Add(this->lbResults);
+			this->Controls->Add(this->btnSearch);
+			this->Controls->Add(this->txtUser);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::Color::White;
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"UserReport";
 			this->Text = L"UserReport";
 			this->ResumeLayout(false);
@@ -171,5 +181,9 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
+		String^ user = txtUser->Text;
+
+	}
+};
 }

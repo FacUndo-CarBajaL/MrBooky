@@ -42,13 +42,21 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::TextBox^ textBox5;
-	private: System::Windows::Forms::TextBox^ textBox6;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::TextBox^ txtTitle;
+	private: System::Windows::Forms::TextBox^ txtAuthor;
+	private: System::Windows::Forms::TextBox^ txtGenre;
+	private: System::Windows::Forms::TextBox^ txtEditorial;
+	private: System::Windows::Forms::TextBox^ txtQuantity;
+	private: System::Windows::Forms::TextBox^ txtProvider;
+	private: System::Windows::Forms::RichTextBox^ rtxtDescription;
+	private: System::Windows::Forms::Button^ btnAdd;
+
+
+
+
+
+
+
 	protected:
 
 	private:
@@ -72,13 +80,14 @@ namespace MrBookyGUIApp {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->txtTitle = (gcnew System::Windows::Forms::TextBox());
+			this->txtAuthor = (gcnew System::Windows::Forms::TextBox());
+			this->txtGenre = (gcnew System::Windows::Forms::TextBox());
+			this->txtEditorial = (gcnew System::Windows::Forms::TextBox());
+			this->txtQuantity = (gcnew System::Windows::Forms::TextBox());
+			this->txtProvider = (gcnew System::Windows::Forms::TextBox());
+			this->rtxtDescription = (gcnew System::Windows::Forms::RichTextBox());
+			this->btnAdd = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -96,7 +105,7 @@ namespace MrBookyGUIApp {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(51, 76);
+			this->label2->Location = System::Drawing::Point(51, 68);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(69, 22);
 			this->label2->TabIndex = 1;
@@ -105,7 +114,7 @@ namespace MrBookyGUIApp {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(51, 126);
+			this->label3->Location = System::Drawing::Point(51, 118);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(67, 22);
 			this->label3->TabIndex = 2;
@@ -115,7 +124,7 @@ namespace MrBookyGUIApp {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(51, 181);
+			this->label4->Location = System::Drawing::Point(51, 173);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(77, 22);
 			this->label4->TabIndex = 3;
@@ -124,7 +133,7 @@ namespace MrBookyGUIApp {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(51, 233);
+			this->label5->Location = System::Drawing::Point(51, 225);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(94, 22);
 			this->label5->TabIndex = 4;
@@ -134,7 +143,7 @@ namespace MrBookyGUIApp {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(51, 285);
+			this->label6->Location = System::Drawing::Point(51, 277);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(92, 22);
 			this->label6->TabIndex = 5;
@@ -143,7 +152,7 @@ namespace MrBookyGUIApp {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(51, 340);
+			this->label7->Location = System::Drawing::Point(51, 332);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(102, 22);
 			this->label7->TabIndex = 6;
@@ -152,61 +161,74 @@ namespace MrBookyGUIApp {
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(51, 395);
+			this->label8->Location = System::Drawing::Point(51, 387);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(116, 22);
 			this->label8->TabIndex = 7;
 			this->label8->Text = L"Descripción :";
 			// 
-			// textBox1
+			// txtTitle
 			// 
-			this->textBox1->Location = System::Drawing::Point(170, 69);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(500, 29);
-			this->textBox1->TabIndex = 8;
+			this->txtTitle->Location = System::Drawing::Point(170, 61);
+			this->txtTitle->Name = L"txtTitle";
+			this->txtTitle->Size = System::Drawing::Size(500, 29);
+			this->txtTitle->TabIndex = 8;
 			// 
-			// textBox2
+			// txtAuthor
 			// 
-			this->textBox2->Location = System::Drawing::Point(170, 119);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(500, 29);
-			this->textBox2->TabIndex = 9;
+			this->txtAuthor->Location = System::Drawing::Point(170, 111);
+			this->txtAuthor->Name = L"txtAuthor";
+			this->txtAuthor->Size = System::Drawing::Size(500, 29);
+			this->txtAuthor->TabIndex = 9;
 			// 
-			// textBox3
+			// txtGenre
 			// 
-			this->textBox3->Location = System::Drawing::Point(170, 174);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(333, 29);
-			this->textBox3->TabIndex = 10;
+			this->txtGenre->Location = System::Drawing::Point(170, 166);
+			this->txtGenre->Name = L"txtGenre";
+			this->txtGenre->Size = System::Drawing::Size(333, 29);
+			this->txtGenre->TabIndex = 10;
 			// 
-			// textBox4
+			// txtEditorial
 			// 
-			this->textBox4->Location = System::Drawing::Point(170, 226);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(332, 29);
-			this->textBox4->TabIndex = 11;
+			this->txtEditorial->Location = System::Drawing::Point(170, 218);
+			this->txtEditorial->Name = L"txtEditorial";
+			this->txtEditorial->Size = System::Drawing::Size(332, 29);
+			this->txtEditorial->TabIndex = 11;
 			// 
-			// textBox5
+			// txtQuantity
 			// 
-			this->textBox5->Location = System::Drawing::Point(170, 278);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(113, 29);
-			this->textBox5->TabIndex = 12;
+			this->txtQuantity->Location = System::Drawing::Point(170, 270);
+			this->txtQuantity->Name = L"txtQuantity";
+			this->txtQuantity->Size = System::Drawing::Size(113, 29);
+			this->txtQuantity->TabIndex = 12;
 			// 
-			// textBox6
+			// txtProvider
 			// 
-			this->textBox6->Location = System::Drawing::Point(170, 333);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(377, 29);
-			this->textBox6->TabIndex = 13;
+			this->txtProvider->Location = System::Drawing::Point(170, 325);
+			this->txtProvider->Name = L"txtProvider";
+			this->txtProvider->Size = System::Drawing::Size(377, 29);
+			this->txtProvider->TabIndex = 13;
 			// 
-			// richTextBox1
+			// rtxtDescription
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(170, 385);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(495, 89);
-			this->richTextBox1->TabIndex = 14;
-			this->richTextBox1->Text = L"";
+			this->rtxtDescription->Location = System::Drawing::Point(170, 377);
+			this->rtxtDescription->Name = L"rtxtDescription";
+			this->rtxtDescription->Size = System::Drawing::Size(495, 57);
+			this->rtxtDescription->TabIndex = 14;
+			this->rtxtDescription->Text = L"";
+			// 
+			// btnAdd
+			// 
+			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnAdd->ForeColor = System::Drawing::Color::Black;
+			this->btnAdd->Location = System::Drawing::Point(404, 449);
+			this->btnAdd->Name = L"btnAdd";
+			this->btnAdd->Size = System::Drawing::Size(123, 32);
+			this->btnAdd->TabIndex = 15;
+			this->btnAdd->Text = L"Agregar";
+			this->btnAdd->UseVisualStyleBackColor = true;
+			this->btnAdd->Click += gcnew System::EventHandler(this, &AddBook::btnAdd_Click);
 			// 
 			// AddBook
 			// 
@@ -215,13 +237,14 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(942, 493);
-			this->Controls->Add(this->richTextBox1);
-			this->Controls->Add(this->textBox6);
-			this->Controls->Add(this->textBox5);
-			this->Controls->Add(this->textBox4);
-			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->btnAdd);
+			this->Controls->Add(this->rtxtDescription);
+			this->Controls->Add(this->txtProvider);
+			this->Controls->Add(this->txtQuantity);
+			this->Controls->Add(this->txtEditorial);
+			this->Controls->Add(this->txtGenre);
+			this->Controls->Add(this->txtAuthor);
+			this->Controls->Add(this->txtTitle);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
@@ -241,5 +264,27 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ title = txtTitle->Text;
+	String^ author = txtAuthor->Text;
+	String^ genre = txtGenre->Text;
+	String^ editorial = txtEditorial->Text;
+	int quantity = Int32::Parse(txtQuantity->Text);
+	String^ provider = txtProvider->Text;
+	String^ description = rtxtDescription->Text;
+
+	if (title->Length == 0 || author->Length == 0 || editorial->Length == 0 || quantity == 0) {
+		MessageBox::Show("Complete los campos obligatorios.","Aviso", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		return;
+	}
+	MessageBox::Show("Libro registrado","Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	txtTitle->Clear();
+	txtAuthor->Clear();
+	txtGenre->Clear();
+	txtEditorial->Clear();
+	txtQuantity->Clear();
+	txtProvider->Clear();
+	rtxtDescription->Clear();
+}
 };
 }
