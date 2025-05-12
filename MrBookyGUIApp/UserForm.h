@@ -1,5 +1,5 @@
 #pragma once
-
+#include "RegisterUserForm.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -40,8 +40,10 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
+	private: System::Windows::Forms::Button^ btnIngresar;
+
 
 	private:
 		/// <summary>
@@ -61,8 +63,8 @@ namespace MrBookyGUIApp {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
+			this->btnIngresar = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -111,14 +113,6 @@ namespace MrBookyGUIApp {
 			this->textBox2->Size = System::Drawing::Size(265, 22);
 			this->textBox2->TabIndex = 4;
 			// 
-			// richTextBox1
-			// 
-			this->richTextBox1->Location = System::Drawing::Point(335, 293);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(72, 24);
-			this->richTextBox1->TabIndex = 5;
-			this->richTextBox1->Text = L"Ingresar";
-			// 
 			// linkLabel1
 			// 
 			this->linkLabel1->AutoSize = true;
@@ -129,6 +123,17 @@ namespace MrBookyGUIApp {
 			this->linkLabel1->TabIndex = 6;
 			this->linkLabel1->TabStop = true;
 			this->linkLabel1->Text = L"¿No está registrado\?";
+			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &UserForm::linkLabel1_LinkClicked);
+			// 
+			// btnIngresar
+			// 
+			this->btnIngresar->Location = System::Drawing::Point(326, 294);
+			this->btnIngresar->Name = L"btnIngresar";
+			this->btnIngresar->Size = System::Drawing::Size(95, 25);
+			this->btnIngresar->TabIndex = 8;
+			this->btnIngresar->Text = L"Ingresar";
+			this->btnIngresar->UseVisualStyleBackColor = true;
+			this->btnIngresar->Click += gcnew System::EventHandler(this, &UserForm::btnIngresar_Click);
 			// 
 			// UserForm
 			// 
@@ -137,19 +142,30 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(792, 466);
+			this->Controls->Add(this->btnIngresar);
 			this->Controls->Add(this->linkLabel1);
-			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->IsMdiContainer = true;
 			this->Name = L"UserForm";
 			this->Text = L"UserForm";
+			this->Load += gcnew System::EventHandler(this, &UserForm::UserForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+	RegisterUserForm^ registerForm = gcnew RegisterUserForm();
+	registerForm->Show();
+}
+private: System::Void UserForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }

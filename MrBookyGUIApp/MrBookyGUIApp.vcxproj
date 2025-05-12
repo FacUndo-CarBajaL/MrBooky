@@ -124,6 +124,7 @@
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
+    <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
     <ClCompile Include="UserReport.cpp" />
@@ -139,6 +140,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RegisterUserForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Stock.h">
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianLogIn.resx">
       <DependentUpon>LibrarianLogIn.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegisterUserForm.resx">
+      <DependentUpon>RegisterUserForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock.resx">
       <DependentUpon>Stock.h</DependentUpon>

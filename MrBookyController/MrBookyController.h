@@ -3,9 +3,10 @@
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace MrBookyModel;
+using namespace MrBookyPersistance;
 
 namespace MrBookyController {
-	public ref class MrBookyController
+	public ref class Controller
 	{
 		private:
 			static List<Book^>^ books = gcnew List<Book^>();

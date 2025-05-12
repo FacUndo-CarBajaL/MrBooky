@@ -10,6 +10,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    public enum class UserType {Client, Librarian};
     public ref class User {
         public:
             int UserID;
@@ -22,6 +23,13 @@ namespace MrBookyModel {
             void Login();
 
             void Logout();
+
+        User(){}
+        User(int id, String^ name, String^ password) {
+            this->UserID = id;
+            this->Name = name;
+            this->Password = password;
+        }
     };
 }
 
