@@ -27,7 +27,7 @@
     <ClCompile Include="Stock.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="AddBook.cpp">
+    <ClCompile Include="MaintenanceBook.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="UserReport.cpp">
@@ -62,7 +62,7 @@
     <ClInclude Include="Stock.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="AddBook.h">
+    <ClInclude Include="MaintenanceBook.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="UserReport.h">
