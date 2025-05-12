@@ -36,7 +36,7 @@ namespace MrBookyModel {
         void MakeDailyReport();
 
         Librarian(){}
-        Librarian(int id, String^ name, String^ password){}
+        Librarian(int id, String^ name, String^ password) : User(id, name, password) {}
     };
 }
 

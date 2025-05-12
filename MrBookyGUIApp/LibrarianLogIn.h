@@ -88,6 +88,7 @@ namespace MrBookyGUIApp {
 			// 
 			// btnStock
 			// 
+			this->btnStock->BackColor = System::Drawing::Color::White;
 			this->btnStock->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnStock->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
@@ -96,11 +97,12 @@ namespace MrBookyGUIApp {
 			this->btnStock->Size = System::Drawing::Size(515, 42);
 			this->btnStock->TabIndex = 1;
 			this->btnStock->Text = L"Verificar Stock";
-			this->btnStock->UseVisualStyleBackColor = true;
+			this->btnStock->UseVisualStyleBackColor = false;
 			this->btnStock->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnStock_Click);
 			// 
 			// btnAddBook
 			// 
+			this->btnAddBook->BackColor = System::Drawing::Color::White;
 			this->btnAddBook->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnAddBook->Location = System::Drawing::Point(201, 235);
@@ -108,7 +110,7 @@ namespace MrBookyGUIApp {
 			this->btnAddBook->Size = System::Drawing::Size(515, 41);
 			this->btnAddBook->TabIndex = 2;
 			this->btnAddBook->Text = L"Registrar Libro";
-			this->btnAddBook->UseVisualStyleBackColor = true;
+			this->btnAddBook->UseVisualStyleBackColor = false;
 			this->btnAddBook->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnAddBook_Click);
 			// 
 			// btnReporte
@@ -125,6 +127,7 @@ namespace MrBookyGUIApp {
 			// 
 			// btnUserReport
 			// 
+			this->btnUserReport->BackColor = System::Drawing::Color::White;
 			this->btnUserReport->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnUserReport->Location = System::Drawing::Point(201, 359);
@@ -132,12 +135,13 @@ namespace MrBookyGUIApp {
 			this->btnUserReport->Size = System::Drawing::Size(515, 34);
 			this->btnUserReport->TabIndex = 4;
 			this->btnUserReport->Text = L"Por Usuario";
-			this->btnUserReport->UseVisualStyleBackColor = true;
+			this->btnUserReport->UseVisualStyleBackColor = false;
 			this->btnUserReport->Visible = false;
 			this->btnUserReport->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnUserReport_Click);
 			// 
 			// btnBookReport
 			// 
+			this->btnBookReport->BackColor = System::Drawing::Color::White;
 			this->btnBookReport->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBookReport->Location = System::Drawing::Point(201, 392);
@@ -145,7 +149,7 @@ namespace MrBookyGUIApp {
 			this->btnBookReport->Size = System::Drawing::Size(515, 37);
 			this->btnBookReport->TabIndex = 5;
 			this->btnBookReport->Text = L"Por Libro";
-			this->btnBookReport->UseVisualStyleBackColor = true;
+			this->btnBookReport->UseVisualStyleBackColor = false;
 			this->btnBookReport->Visible = false;
 			this->btnBookReport->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnBookReport_Click);
 			// 

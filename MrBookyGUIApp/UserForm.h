@@ -1,6 +1,7 @@
 #pragma once
 #include "RegisterUserForm.h"
 #include "UserOptionsForm.h"
+#include "LibrarianLogIn.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -182,6 +183,13 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 		UserOptionsForm^ userOptions= gcnew UserOptionsForm();
 		userOptions->Show();
 		this->Close();
+	}
+	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 3) {
+		MessageBox::Show("Se ingresó como bibliotecario exitósamente");
+		LibrarianLogIn^ librarianLogIn = gcnew LibrarianLogIn();
+		librarianLogIn->Show();
+		this->Close();
+
 	}
 }
 };

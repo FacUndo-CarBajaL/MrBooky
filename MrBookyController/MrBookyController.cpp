@@ -232,8 +232,12 @@ int MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName,
 		if (user->Name == userName)
 		{
 			if (user->Password == userPassword) {
-				
-				return 2;
+				if (user->GetType() == Client::typeid) {
+					return 2;
+				}
+				else if (user->GetType() == Librarian::typeid) {
+					return 3;
+				}
 			}
 			else {
 				return 1;
