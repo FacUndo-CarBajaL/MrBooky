@@ -120,7 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AddBook.cpp" />
+    <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="FoundBookForm.cpp" />
@@ -133,7 +133,7 @@
     <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AddBook.h">
+    <ClInclude Include="MaintenanceBook.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="BookForm.h">
@@ -168,8 +168,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddBook.resx">
-      <DependentUpon>AddBook.h</DependentUpon>
+    <EmbeddedResource Include="MaintenanceBook.resx">
+      <DependentUpon>MaintenanceBook.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BookForm.resx">
       <DependentUpon>BookForm.h</DependentUpon>
