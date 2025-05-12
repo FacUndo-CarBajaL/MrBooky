@@ -7,6 +7,8 @@ int MrBookyController::Controller::AddBook(Book^ book)
 	// Agrega el libro a la lista de libros
     try {
         books->Add(book);
+		Persistance::PersistXMLFile("books.xml", books);
+
 		return 1;
     }
 	catch (Exception^ ex) {
@@ -221,18 +223,39 @@ User^ MrBookyController::Controller::SearchUser(int userId)
 
 
 //Agregadoooo////////////////////////
-/*int MrBookyController::Controller::SearchUserByNameAndPassword(int userId)
+int MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
-	// TODO: Insertar una instrucción "return" aquí
+	
+	users = (List<User^>^)Persistance::LoadUsersFromTextFile("users.txt");
 	for each (User ^ user in users)
 	{
-		if (user->UserID == userId)
+		if (user->Name == userName)
 		{
-			return user;
+			if (user->Password == userPassword) {
+				
+				return 2;
+			}
+			else {
+				return 1;
+			}
+		}
+	}
+
+	return 0;
+}
+Book^ MrBookyController::Controller::SearchBookByName(String^ bookName)
+{
+	// Busca el libro en la lista de libros
+	books = (List<Book^>^)Persistance::LoadBookFromXMLFile("books.xml");
+	for each (Book ^ book in books)
+	{
+		if (book->Title == bookName)
+		{
+			return book;
 		}
 	}
 }
-*/
+//
 
 
 

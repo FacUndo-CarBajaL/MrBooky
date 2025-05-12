@@ -237,6 +237,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label1);
 			this->Name = L"RegisterUserForm";
 			this->Text = L"RegisterUserForm";
+			this->Load += gcnew System::EventHandler(this, &RegisterUserForm::RegisterUserForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -263,6 +264,13 @@ namespace MrBookyGUIApp {
 				user = gcnew Client(userId, userName, userPassword);
 				if (Controller::AddUser(user) == 1) {
 					MessageBox::Show("Cliente registrado éxitosamente. Bienvenid@ " + userName);
+					txtNombreCompleto->Clear();
+					txtNombreUsuario->Clear();
+					txtCorreo->Clear();
+					txtCelular->Clear();
+					txtContraseña->Clear();
+					cmbTipoUsuario->SelectedIndex = -1;
+					this->Close();
 				}
 				else {
 					MessageBox::Show("No se ha podido registrar su usuario");
@@ -272,12 +280,21 @@ namespace MrBookyGUIApp {
 				user = gcnew Librarian(userId, userName, userPassword);
 				if (Controller::AddUser(user) == 1) {
 					MessageBox::Show("Solicitud para registro de bibliotecario enviada. Espere la confirmación" + userName);
+					txtNombreCompleto->Clear();
+					txtNombreUsuario->Clear();
+					txtCorreo->Clear();
+					txtCelular->Clear();
+					txtContraseña->Clear();
+					cmbTipoUsuario->SelectedIndex = -1;
+					this->Close();
 				}
 				else {
 					MessageBox::Show("No se ha podido registrar su solicitud");
 				}
 				break;
 			}
+
+
 			
 		}
 		catch (Exception^ ex) {
@@ -286,5 +303,7 @@ namespace MrBookyGUIApp {
 		}
 
 	}
+private: System::Void RegisterUserForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

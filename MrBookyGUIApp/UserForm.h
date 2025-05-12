@@ -1,5 +1,6 @@
 #pragma once
 #include "RegisterUserForm.h"
+#include "UserOptionsForm.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -38,8 +39,10 @@ namespace MrBookyGUIApp {
 	protected:
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::TextBox^ txtUserName;
+	private: System::Windows::Forms::TextBox^ txtUserPassword;
+
+
 
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 	private: System::Windows::Forms::Button^ btnIngresar;
@@ -61,8 +64,8 @@ namespace MrBookyGUIApp {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->txtUserName = (gcnew System::Windows::Forms::TextBox());
+			this->txtUserPassword = (gcnew System::Windows::Forms::TextBox());
 			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->btnIngresar = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
@@ -99,19 +102,19 @@ namespace MrBookyGUIApp {
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Contraseña:";
 			// 
-			// textBox1
+			// txtUserName
 			// 
-			this->textBox1->Location = System::Drawing::Point(267, 191);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(265, 22);
-			this->textBox1->TabIndex = 3;
+			this->txtUserName->Location = System::Drawing::Point(267, 191);
+			this->txtUserName->Name = L"txtUserName";
+			this->txtUserName->Size = System::Drawing::Size(265, 22);
+			this->txtUserName->TabIndex = 3;
 			// 
-			// textBox2
+			// txtUserPassword
 			// 
-			this->textBox2->Location = System::Drawing::Point(267, 233);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(265, 22);
-			this->textBox2->TabIndex = 4;
+			this->txtUserPassword->Location = System::Drawing::Point(267, 233);
+			this->txtUserPassword->Name = L"txtUserPassword";
+			this->txtUserPassword->Size = System::Drawing::Size(265, 22);
+			this->txtUserPassword->TabIndex = 4;
 			// 
 			// linkLabel1
 			// 
@@ -127,12 +130,13 @@ namespace MrBookyGUIApp {
 			// 
 			// btnIngresar
 			// 
+			this->btnIngresar->BackColor = System::Drawing::Color::White;
 			this->btnIngresar->Location = System::Drawing::Point(326, 294);
 			this->btnIngresar->Name = L"btnIngresar";
 			this->btnIngresar->Size = System::Drawing::Size(95, 25);
 			this->btnIngresar->TabIndex = 8;
 			this->btnIngresar->Text = L"Ingresar";
-			this->btnIngresar->UseVisualStyleBackColor = true;
+			this->btnIngresar->UseVisualStyleBackColor = false;
 			this->btnIngresar->Click += gcnew System::EventHandler(this, &UserForm::btnIngresar_Click);
 			// 
 			// UserForm
@@ -144,12 +148,11 @@ namespace MrBookyGUIApp {
 			this->ClientSize = System::Drawing::Size(792, 466);
 			this->Controls->Add(this->btnIngresar);
 			this->Controls->Add(this->linkLabel1);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->txtUserPassword);
+			this->Controls->Add(this->txtUserName);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->IsMdiContainer = true;
 			this->Name = L"UserForm";
 			this->Text = L"UserForm";
 			this->Load += gcnew System::EventHandler(this, &UserForm::UserForm_Load);
@@ -165,7 +168,21 @@ private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Win
 private: System::Void UserForm_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ userName = txtUserName->Text->Trim();
+	String^ userPassword = txtUserPassword->Text->Trim();
 
+	if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 0) {
+		MessageBox::Show("Usuario no encontrado");
+	}
+	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 1) {
+		MessageBox::Show("Contraseña incorrecta");
+	}
+	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 2) {
+		MessageBox::Show("Se ingresó al usuario exitósamente");
+		UserOptionsForm^ userOptions= gcnew UserOptionsForm();
+		userOptions->Show();
+		this->Close();
+	}
 }
 };
 }

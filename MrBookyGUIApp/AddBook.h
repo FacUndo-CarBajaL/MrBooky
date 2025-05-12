@@ -8,6 +8,8 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MrBookyModel;
+	using namespace MrBookyController;
 
 	/// <summary>
 	/// Resumen de AddBook
@@ -278,6 +280,15 @@ private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e)
 		return;
 	}
 	MessageBox::Show("Libro registrado","Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	Book^ book = gcnew Book();
+	book->Title = title;
+	book->Author = author;
+	book->Genre = genre;
+	book->Publisher = editorial;
+	book->Stock = quantity;
+	book->Description = description;
+
+	Controller::AddBook(book);
 	txtTitle->Clear();
 	txtAuthor->Clear();
 	txtGenre->Clear();

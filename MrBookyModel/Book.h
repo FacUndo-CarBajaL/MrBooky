@@ -26,6 +26,8 @@ namespace MrBookyModel {
             int LoanTime;
             int Weight;
 
+            Book() {};
+
             void AddReview();
 
             void CalculateAverageStars();

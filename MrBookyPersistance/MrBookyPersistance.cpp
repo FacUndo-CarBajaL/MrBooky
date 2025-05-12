@@ -52,7 +52,7 @@ void MrBookyPersistance::Persistance::PersistTextFile_User(String^ fileName, Obj
 	FileStream^ file = nullptr;
 	StreamWriter^ writer = nullptr;
 	try {
-		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		file = gcnew FileStream(fileName, FileMode::Append, FileAccess::Write);
 		writer = gcnew StreamWriter(file);
 		if (persistObject->GetType() == List<User^>::typeid) {
 			List<User^>^ users = (List<User^>^) persistObject;

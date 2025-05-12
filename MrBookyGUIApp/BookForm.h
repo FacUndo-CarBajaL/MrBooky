@@ -1,5 +1,5 @@
 #pragma once
-
+#include "FoundBookForm.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -8,6 +8,8 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MrBookyModel;
+	using namespace MrBookyController;
 
 	/// <summary>
 	/// Resumen de BookForm
@@ -39,11 +41,45 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::TextBox^ txtAutor;
+	private: System::Windows::Forms::TextBox^ txtEditorial;
+	private: System::Windows::Forms::TextBox^ txtGenero;
+
+
+
+	private: System::Windows::Forms::TextBox^ txtNombreLibro;
+
+	private: System::Windows::Forms::RichTextBox^ txtBuscar;
+	private: System::Windows::Forms::DataGridView^ dgvLibrosEncontrados;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTitutlo;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaEditorial;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaGenero;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaDisponibles;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private: System::ComponentModel::IContainer^ components;
 
 	protected:
 
@@ -51,7 +87,7 @@ namespace MrBookyGUIApp {
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -65,11 +101,18 @@ namespace MrBookyGUIApp {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->txtAutor = (gcnew System::Windows::Forms::TextBox());
+			this->txtEditorial = (gcnew System::Windows::Forms::TextBox());
+			this->txtGenero = (gcnew System::Windows::Forms::TextBox());
+			this->txtNombreLibro = (gcnew System::Windows::Forms::TextBox());
+			this->txtBuscar = (gcnew System::Windows::Forms::RichTextBox());
+			this->dgvLibrosEncontrados = (gcnew System::Windows::Forms::DataGridView());
+			this->ColumnaTitutlo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaEditorial = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaGenero = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaDisponibles = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLibrosEncontrados))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -79,7 +122,7 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::Cornsilk;
-			this->label1->Location = System::Drawing::Point(76, 18);
+			this->label1->Location = System::Drawing::Point(57, 27);
 			this->label1->Name = L"label1";
 			this->label1->RightToLeft = System::Windows::Forms::RightToLeft::Yes;
 			this->label1->Size = System::Drawing::Size(702, 125);
@@ -118,11 +161,12 @@ namespace MrBookyGUIApp {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label4->Location = System::Drawing::Point(27, 311);
+			this->label4->Location = System::Drawing::Point(310, 270);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(55, 15);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Editorial";
+			this->label4->Click += gcnew System::EventHandler(this, &BookForm::label4_Click);
 			// 
 			// label5
 			// 
@@ -130,47 +174,97 @@ namespace MrBookyGUIApp {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label5->Location = System::Drawing::Point(27, 357);
+			this->label5->Location = System::Drawing::Point(593, 270);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(44, 15);
 			this->label5->TabIndex = 4;
 			this->label5->Text = L"Género";
 			// 
-			// textBox1
+			// txtAutor
 			// 
-			this->textBox1->Location = System::Drawing::Point(101, 270);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(144, 22);
-			this->textBox1->TabIndex = 5;
+			this->txtAutor->Location = System::Drawing::Point(101, 270);
+			this->txtAutor->Name = L"txtAutor";
+			this->txtAutor->Size = System::Drawing::Size(144, 22);
+			this->txtAutor->TabIndex = 5;
 			// 
-			// textBox2
+			// txtEditorial
 			// 
-			this->textBox2->Location = System::Drawing::Point(101, 311);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(144, 22);
-			this->textBox2->TabIndex = 6;
+			this->txtEditorial->Location = System::Drawing::Point(384, 270);
+			this->txtEditorial->Name = L"txtEditorial";
+			this->txtEditorial->Size = System::Drawing::Size(144, 22);
+			this->txtEditorial->TabIndex = 6;
 			// 
-			// textBox3
+			// txtGenero
 			// 
-			this->textBox3->Location = System::Drawing::Point(101, 357);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(144, 22);
-			this->textBox3->TabIndex = 7;
+			this->txtGenero->Location = System::Drawing::Point(667, 270);
+			this->txtGenero->Name = L"txtGenero";
+			this->txtGenero->Size = System::Drawing::Size(144, 22);
+			this->txtGenero->TabIndex = 7;
 			// 
-			// textBox4
+			// txtNombreLibro
 			// 
-			this->textBox4->Location = System::Drawing::Point(30, 157);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(579, 22);
-			this->textBox4->TabIndex = 8;
+			this->txtNombreLibro->Location = System::Drawing::Point(30, 157);
+			this->txtNombreLibro->Name = L"txtNombreLibro";
+			this->txtNombreLibro->Size = System::Drawing::Size(579, 22);
+			this->txtNombreLibro->TabIndex = 8;
 			// 
-			// richTextBox1
+			// txtBuscar
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(631, 155);
-			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(60, 24);
-			this->richTextBox1->TabIndex = 9;
-			this->richTextBox1->Text = L"Buscar";
+			this->txtBuscar->Location = System::Drawing::Point(631, 155);
+			this->txtBuscar->Name = L"txtBuscar";
+			this->txtBuscar->Size = System::Drawing::Size(84, 24);
+			this->txtBuscar->TabIndex = 9;
+			this->txtBuscar->Text = L"Buscar";
+			this->txtBuscar->TextChanged += gcnew System::EventHandler(this, &BookForm::richTextBox1_TextChanged);
+			// 
+			// dgvLibrosEncontrados
+			// 
+			this->dgvLibrosEncontrados->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvLibrosEncontrados->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->ColumnaTitutlo,
+					this->ColumnaAutor, this->ColumnaEditorial, this->ColumnaGenero, this->ColumnaDisponibles
+			});
+			this->dgvLibrosEncontrados->Location = System::Drawing::Point(30, 344);
+			this->dgvLibrosEncontrados->Name = L"dgvLibrosEncontrados";
+			this->dgvLibrosEncontrados->RowHeadersWidth = 51;
+			this->dgvLibrosEncontrados->RowTemplate->Height = 24;
+			this->dgvLibrosEncontrados->Size = System::Drawing::Size(673, 197);
+			this->dgvLibrosEncontrados->TabIndex = 10;
+			// 
+			// ColumnaTitutlo
+			// 
+			this->ColumnaTitutlo->HeaderText = L"Titulo";
+			this->ColumnaTitutlo->MinimumWidth = 6;
+			this->ColumnaTitutlo->Name = L"ColumnaTitutlo";
+			this->ColumnaTitutlo->Width = 125;
+			// 
+			// ColumnaAutor
+			// 
+			this->ColumnaAutor->HeaderText = L"Autor";
+			this->ColumnaAutor->MinimumWidth = 6;
+			this->ColumnaAutor->Name = L"ColumnaAutor";
+			this->ColumnaAutor->Width = 125;
+			// 
+			// ColumnaEditorial
+			// 
+			this->ColumnaEditorial->HeaderText = L"Editorial";
+			this->ColumnaEditorial->MinimumWidth = 6;
+			this->ColumnaEditorial->Name = L"ColumnaEditorial";
+			this->ColumnaEditorial->Width = 125;
+			// 
+			// ColumnaGenero
+			// 
+			this->ColumnaGenero->HeaderText = L"Genero";
+			this->ColumnaGenero->MinimumWidth = 6;
+			this->ColumnaGenero->Name = L"ColumnaGenero";
+			this->ColumnaGenero->Width = 125;
+			// 
+			// ColumnaDisponibles
+			// 
+			this->ColumnaDisponibles->HeaderText = L"Disponibles";
+			this->ColumnaDisponibles->MinimumWidth = 6;
+			this->ColumnaDisponibles->Name = L"ColumnaDisponibles";
+			this->ColumnaDisponibles->Width = 125;
 			// 
 			// BookForm
 			// 
@@ -178,12 +272,13 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->ClientSize = System::Drawing::Size(858, 452);
-			this->Controls->Add(this->richTextBox1);
-			this->Controls->Add(this->textBox4);
-			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
+			this->ClientSize = System::Drawing::Size(858, 574);
+			this->Controls->Add(this->dgvLibrosEncontrados);
+			this->Controls->Add(this->txtBuscar);
+			this->Controls->Add(this->txtNombreLibro);
+			this->Controls->Add(this->txtGenero);
+			this->Controls->Add(this->txtEditorial);
+			this->Controls->Add(this->txtAutor);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
@@ -192,6 +287,7 @@ namespace MrBookyGUIApp {
 			this->Name = L"BookForm";
 			this->Text = L"Búsqueda con filtros";
 			this->Load += gcnew System::EventHandler(this, &BookForm::BookForm_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLibrosEncontrados))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -203,5 +299,20 @@ namespace MrBookyGUIApp {
 	}
 	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
+
+private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	String^ title = txtNombreLibro->Text->Trim();
+
+	Book^ book = Controller::SearchBookByName(title);
+
+	String^ author = book->Author;
+	String^ publisher = book->Publisher;
+	String^ genre = book->Genre;
+	int stock = book->Stock;
+
+	dgvLibrosEncontrados->Rows->Add(title, author, publisher, genre, stock);
+}
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
