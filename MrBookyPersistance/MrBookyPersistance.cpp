@@ -60,7 +60,7 @@ void MrBookyPersistance::Persistance::PersistTextFile_User(String^ fileName, Obj
 			for (int i = 0; i < users->Count; i++) {
 				User^ user = users[i];
 				if (user->GetType() == Client::typeid)
-					type = static_cast<int>(UserType::Client);
+                    type = static_cast<int>(UserType::Client);
 				if (user->GetType() == Librarian::typeid)
 					type = static_cast<int>(UserType::Librarian);
 
@@ -101,6 +101,109 @@ Object^ MrBookyPersistance::Persistance::LoadUsersFromTextFile(String^ fileName)
 				break;
 			}
 			((List<User^>^)result)->Add(user);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
+
+void MrBookyPersistance::Persistance::PersistTextFile_Robot(String^ fileName, Object^ persistObject)
+{
+	FileStream^ file = nullptr;
+	StreamWriter^ writer = nullptr;
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		writer = gcnew StreamWriter(file);
+		if (persistObject->GetType() == List<DeliveryRobot^>::typeid) {
+			List<DeliveryRobot^>^ robots = (List<DeliveryRobot^>^) persistObject;
+			for (int i = 0; i < robots->Count; i++) {
+				DeliveryRobot^ robot = robots[i];
+				writer->WriteLine("{0}|{1}|{2}|{3}",
+					robot->RobotID, robot->Name, robot->Status, robot->MaxCapacity);
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (writer != nullptr) writer->Close();
+		if (file != nullptr) file->Close();
+	}
+}
+
+Object^ MrBookyPersistance::Persistance::LoadRobotsFromTextFile(String^ fileName)
+{
+	// TODO: Insertar una instrucción "return" aquí
+	FileStream^ file;
+	StreamReader^ reader;
+	Object^ result = gcnew List<DeliveryRobot^>();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		while (!reader->EndOfStream) {
+			String^ line = reader->ReadLine();
+			array<String^>^ record = line->Split('|');
+            DeliveryRobot^ robot = gcnew DeliveryRobot(Int32::Parse(record[0]), record[1], record[2], Int32::Parse(record[3]));
+			((List<DeliveryRobot^>^)result)->Add(robot);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
+
+void MrBookyPersistance::Persistance::PersistTextFile_Library(String^ fileName, Object^ persistObject)
+{
+	FileStream^ file = nullptr;
+	StreamWriter^ writer = nullptr;
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		writer = gcnew StreamWriter(file);
+		if (persistObject->GetType() == List<Library^>::typeid) {
+			List<Library^>^ libraries = (List<Library^>^) persistObject;
+			for (int i = 0; i < libraries->Count; i++) {
+				Library^ library = libraries[i];
+				writer->WriteLine("{0}|{1}|{2}|{3}|{4}",
+					library->LibraryID, library->Name, library->ContactEmail,
+					library->OpeningHour, library->CloseHour);
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (writer != nullptr) writer->Close();
+		if (file != nullptr) file->Close();
+	}
+}
+
+Object^ MrBookyPersistance::Persistance::LoadLibrariesFromTextFile(String^ fileName)
+{
+	// TODO: Insertar una instrucción "return" aquí
+	FileStream^ file;
+	StreamReader^ reader;
+	Object^ result = gcnew List<Library^>();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		while (!reader->EndOfStream) {
+			String^ line = reader->ReadLine();
+			array<String^>^ record = line->Split('|');
+			Library^ library = gcnew Library(Int32::Parse(record[0]), record[1], record[2], Int32::Parse(record[3]), Int32::Parse(record[4]));
+			((List<Library^>^)result)->Add(library);
 		}
 	}
 	catch (Exception^ ex) {

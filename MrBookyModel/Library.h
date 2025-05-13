@@ -30,6 +30,14 @@ namespace MrBookyModel {
         List<Loan^>^ Loans;
         List<DeliveryRobot^> Robots;
 
+        Library(int id, String^ name, String^ email, int openHour, int closeHour) {
+			this->LibraryID = id;
+			this->Name = name;
+			this->ContactEmail = email;
+			this->OpeningHour = openHour;
+			this->CloseHour = closeHour;
+        }
+
         void ShowPosition();
 
         void AddBook();

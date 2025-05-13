@@ -15,8 +15,16 @@ namespace MrBookyPersistance {
 		static void PersistXMLFile(String^ fileName, Object^ persistObject);
 		static Object^ LoadBookFromXMLFile(String^ fileName);
 
-		//Métodos para guardar y leer los datos de platos en archivos de texto plano
+		//Métodos para guardar y leer los datos de usuarios en archivos de texto plano
 		static void PersistTextFile_User(String^ fileName, Object^ persistObject);
 		static Object^ LoadUsersFromTextFile(String^ fileName);
+
+		// Métodos para guardar y leer los datos de robots en archivos de texto plano
+		static void PersistTextFile_Robot(String^ fileName, Object^ persistObject);
+		static Object^ LoadRobotsFromTextFile(String^ fileName);
+
+		// Métodos para guardar y leer los datos de bibliotecas en archivos de texto plano
+		static void PersistTextFile_Library(String^ fileName, Object^ persistObject);
+		static Object^ LoadLibrariesFromTextFile(String^ fileName);
 	};
 }
