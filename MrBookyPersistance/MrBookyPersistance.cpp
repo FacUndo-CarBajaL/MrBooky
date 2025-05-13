@@ -202,7 +202,7 @@ Object^ MrBookyPersistance::Persistance::LoadLibrariesFromTextFile(String^ fileN
 		while (!reader->EndOfStream) {
 			String^ line = reader->ReadLine();
 			array<String^>^ record = line->Split('|');
-			Library^ library = gcnew Library(Int32::Parse(record[0]), record[1], record[2], Int32::Parse(record[3]), Int32::Parse(record[4]));
+			Library^ library = gcnew Library(Int32::Parse(record[0]), record[1], record[2], record[3], record[4]);
 			((List<Library^>^)result)->Add(library);
 		}
 	}

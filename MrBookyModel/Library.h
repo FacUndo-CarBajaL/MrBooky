@@ -21,8 +21,8 @@ namespace MrBookyModel {
         int LibraryID;
         String^ Name;
         String^ ContactEmail;
-        int OpeningHour;
-        int CloseHour;
+        String^ OpeningHour;
+        String^ CloseHour;
         Point^ Position;
         List<Book^>^ Catalogue;
         Dictionary<int, int>^ Stock;
@@ -30,7 +30,7 @@ namespace MrBookyModel {
         List<Loan^>^ Loans;
         List<DeliveryRobot^> Robots;
 
-        Library(int id, String^ name, String^ email, int openHour, int closeHour) {
+        Library(int id, String^ name, String^ email, String^ openHour, String^ closeHour) {
 			this->LibraryID = id;
 			this->Name = name;
 			this->ContactEmail = email;
