@@ -24,6 +24,7 @@ namespace MrBookyModel {
         int DeliveryRobotID;
         DeliveryPoint^ DeliveryPoint;
 
+        LoanOrder() {};
         void AddLoan();
 
         void ReturnBooks();

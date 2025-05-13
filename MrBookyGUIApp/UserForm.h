@@ -10,6 +10,8 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MrBookyController;
+	using namespace MrBookyModel;
 
 	/// <summary>
 	/// Resumen de UserForm
@@ -132,6 +134,12 @@ namespace MrBookyGUIApp {
 			// btnIngresar
 			// 
 			this->btnIngresar->BackColor = System::Drawing::Color::White;
+			this->btnIngresar->FlatAppearance->BorderColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->btnIngresar->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->btnIngresar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(128)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
 			this->btnIngresar->Location = System::Drawing::Point(326, 294);
 			this->btnIngresar->Name = L"btnIngresar";
 			this->btnIngresar->Size = System::Drawing::Size(95, 25);
@@ -171,24 +179,25 @@ private: System::Void UserForm_Load(System::Object^ sender, System::EventArgs^ e
 private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ userName = txtUserName->Text->Trim();
 	String^ userPassword = txtUserPassword->Text->Trim();
+	User^ user = Controller::SearchUserByNameAndPassword(userName, userPassword);
 
-	if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 0) {
-		MessageBox::Show("Usuario no encontrado");
+	if (user == nullptr) {
+		MessageBox::Show("Usuario y/o contraseña inválidos");
 	}
-	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 1) {
-		MessageBox::Show("Contraseña incorrecta");
-	}
-	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 2) {
-		MessageBox::Show("Se ingresó al usuario exitósamente");
-		UserOptionsForm^ userOptions= gcnew UserOptionsForm();
-		userOptions->Show();
-		this->Close();
-	}
-	else if (Controller::SearchUserByNameAndPassword(userName, userPassword) == 3) {
-		MessageBox::Show("Se ingresó como bibliotecario exitósamente");
-		LibrarianLogIn^ librarianLogIn = gcnew LibrarianLogIn();
-		librarianLogIn->Show();
-		this->Close();
+	else {
+		if (user->GetType() == Client::typeid) {
+			Persistance::UserRAMBinaryFile("TempUser.bin", user);
+			UserOptionsForm^ clientForm = gcnew UserOptionsForm();
+			MessageBox::Show("Se ha ingresado como cliente. Bienvenid@ "+ userName);
+			clientForm->Show();
+			this->Close();
+		}
+		else if (user->GetType() == Librarian::typeid) {
+			LibrarianLogIn^ librarianForm = gcnew LibrarianLogIn();
+			MessageBox::Show("Se ha ingresado como blibliotecario. Bienvenid@ "+ userName);
+			librarianForm->Show();
+			this->Close();
+		}
 
 	}
 }

@@ -1,20 +1,20 @@
 #include "pch.h"
 
 #include "MrBookyController.h"
+#include "DuplicateBookException.h"
+#include "NotFoundException.h"
 
-int MrBookyController::Controller::AddBook(Book^ book)
+void MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
-    try {
-        books->Add(book);
-		Persistance::PersistTextFile_Book("books.txt", books);
 
-		return 1;
-    }
-	catch (Exception^ ex) {
-		throw ex;
+	for each (Book^ registeredBook in books) {
+		if (registeredBook->Title == book->Title) {
+			throw gcnew DuplicateBookException("El nombre de el libro ya existe en la base de datos.");
+		}
 	}
-    return 0;
+    books->Add(book);
+	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
 }
 
 List<Book^>^ MrBookyController::Controller::GetBooks()
@@ -63,6 +63,26 @@ int MrBookyController::Controller::DeleteBook(int index)
 		}
 	}
 	return 0;
+}
+
+List<Book^>^ MrBookyController::Controller::AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre)
+{
+	List<Book^>^ foundBooks = gcnew List<Book^>();
+	try {
+		books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+		for each (Book ^ book in books) {
+			if (book != nullptr) {
+				if (book->Title == title) foundBooks->Add(book);
+				else if (book->Author == author) foundBooks->Add(book);
+				else if (book->Publisher == publisher) foundBooks->Add(book);
+				else if (book->Genre == genre) foundBooks->Add(book);
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	return foundBooks;
 }
 
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
@@ -189,30 +209,26 @@ int MrBookyController::Controller::DeleteLibrary(int libraryId)
 	return 0;
 }
 
-int MrBookyController::Controller::AddUser(User^ user)
+void MrBookyController::Controller::AddUser(User^ user)
 {
-	try {
-		// Agrega el usuario a la lista de usuarios
-		users->Add(user);
-		Persistance::PersistTextFile_User("users.txt", users);
-		
-		return 1;
+	for each (User^ registeredUser in users) {
+		if (registeredUser->Name == user->Name) {
+			throw gcnew DuplicateBookException("El nombre de el usuario ya existe en la base de datos.");
+		}
 	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	return 0;
+    users->Add(user);
+	Persistance::PersistBinaryFile(BIN_USER_FILE_NAME, users);
 }
 
 List<User^>^ MrBookyController::Controller::GetUsers()
 {
-	// TODO: Insertar una instrucción "return" aquí
+	users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
 	return users;
 }
 
 User^ MrBookyController::Controller::SearchUser(int userId)
 {
-	// TODO: Insertar una instrucción "return" aquí
+	users = GetUsers();
 	for each (User ^ user in users)
 	{
 		if (user->UserID == userId)
@@ -225,34 +241,26 @@ User^ MrBookyController::Controller::SearchUser(int userId)
 
 
 //Agregadoooo////////////////////////
-int MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
+User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
 	
-	users = (List<User^>^)Persistance::LoadUsersFromTextFile("users.txt");
+	users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
 	for each (User ^ user in users)
 	{
 		if (user->Name == userName)
 		{
 			if (user->Password == userPassword) {
-				if (user->GetType() == Client::typeid) {
-					return 2;
-				}
-				else if (user->GetType() == Librarian::typeid) {
-					return 3;
-				}
-			}
-			else {
-				return 1;
+				return user;
 			}
 		}
+
 	}
 
-	return 0;
 }
 Book^ MrBookyController::Controller::SearchBookByName(String^ bookName)
 {
-	// Busca el libro en la lista de libros
-	books = (List<Book^>^)Persistance::LoadBooksFromTextFile("books.txt");
+
+	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	for each (Book ^ book in books)
 	{
 		if (book->Title == bookName)
@@ -415,4 +423,28 @@ int MrBookyController::Controller::DeleteCartItem(int cartItemId)
 		}
 	}
 	return 0;
+}
+
+void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
+{
+	for each (LoanOrder^ registeredLoanOrder in loanOrders) {
+		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
+			throw gcnew DuplicateBookException("ID ya utilizado.");
+		}
+	}
+	loanOrders->Add(loanOrder);
+	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+}
+
+LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
+{
+	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		if (loanOrder->Client == user) {
+			return loanOrder;
+		}
+		else {
+			return nullptr;
+		}
+	}
 }

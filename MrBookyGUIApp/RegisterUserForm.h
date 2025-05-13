@@ -53,10 +53,13 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::ComboBox^ cmbTipoUsuario;
 
-	private: System::Windows::Forms::Label^ label7;
+
+
 	private: System::Windows::Forms::Button^ btnRegistrar;
+	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::TextBox^ txtCodigoEstudiante;
+
 
 
 	private:
@@ -83,9 +86,9 @@ namespace MrBookyGUIApp {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->cmbTipoUsuario = (gcnew System::Windows::Forms::ComboBox());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->btnRegistrar = (gcnew System::Windows::Forms::Button());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->txtCodigoEstudiante = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -185,34 +188,32 @@ namespace MrBookyGUIApp {
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Contraseña :";
 			// 
-			// cmbTipoUsuario
-			// 
-			this->cmbTipoUsuario->FormattingEnabled = true;
-			this->cmbTipoUsuario->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Cliente", L"Bibliotecario" });
-			this->cmbTipoUsuario->Location = System::Drawing::Point(281, 368);
-			this->cmbTipoUsuario->Name = L"cmbTipoUsuario";
-			this->cmbTipoUsuario->Size = System::Drawing::Size(121, 24);
-			this->cmbTipoUsuario->TabIndex = 12;
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label7->Location = System::Drawing::Point(154, 368);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(110, 16);
-			this->label7->TabIndex = 13;
-			this->label7->Text = L"Tipo de Usuario :";
-			// 
 			// btnRegistrar
 			// 
-			this->btnRegistrar->Location = System::Drawing::Point(329, 431);
+			this->btnRegistrar->Location = System::Drawing::Point(342, 404);
 			this->btnRegistrar->Name = L"btnRegistrar";
 			this->btnRegistrar->Size = System::Drawing::Size(75, 23);
 			this->btnRegistrar->TabIndex = 14;
 			this->btnRegistrar->Text = L"Registrar";
 			this->btnRegistrar->UseVisualStyleBackColor = true;
 			this->btnRegistrar->Click += gcnew System::EventHandler(this, &RegisterUserForm::btnRegistrar_Click);
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->label7->Location = System::Drawing::Point(141, 366);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(123, 16);
+			this->label7->TabIndex = 16;
+			this->label7->Text = L"Codigo Estudiante :";
+			// 
+			// txtCodigoEstudiante
+			// 
+			this->txtCodigoEstudiante->Location = System::Drawing::Point(281, 360);
+			this->txtCodigoEstudiante->Name = L"txtCodigoEstudiante";
+			this->txtCodigoEstudiante->Size = System::Drawing::Size(298, 22);
+			this->txtCodigoEstudiante->TabIndex = 15;
 			// 
 			// RegisterUserForm
 			// 
@@ -221,9 +222,9 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(792, 506);
-			this->Controls->Add(this->btnRegistrar);
 			this->Controls->Add(this->label7);
-			this->Controls->Add(this->cmbTipoUsuario);
+			this->Controls->Add(this->txtCodigoEstudiante);
+			this->Controls->Add(this->btnRegistrar);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
@@ -252,50 +253,25 @@ namespace MrBookyGUIApp {
 				return;
 			}
 			String^ userPassword = txtContraseña->Text->Trim();
-			int selectedIndex = cmbTipoUsuario->SelectedIndex;
-			if (selectedIndex < 0) {
-				MessageBox::Show("Debe seleccionar el tipo de usuario que desea registrar");
-				return;
-			}
-			UserType userType = static_cast<UserType>(selectedIndex);
-			User^ user = nullptr;
-			switch (userType) {
-			case UserType::Client:
-				user = gcnew Client(userId, userName, userPassword);
-				if (Controller::AddUser(user) == 1) {
-					MessageBox::Show("Cliente registrado éxitosamente. Bienvenid@ " + userName);
-					txtNombreCompleto->Clear();
-					txtNombreUsuario->Clear();
-					txtCorreo->Clear();
-					txtCelular->Clear();
-					txtContraseña->Clear();
-					cmbTipoUsuario->SelectedIndex = -1;
-					this->Close();
-					userId++;
-				}
-				else {
-					MessageBox::Show("No se ha podido registrar su usuario");
-				}
-				break;
-			case UserType::Librarian:
-				user = gcnew Librarian(userId, userName, userPassword);
-				if (Controller::AddUser(user) == 1) {
-					MessageBox::Show("Solicitud para registro de bibliotecario enviada. Espere la confirmación " + userName);
-					txtNombreCompleto->Clear();
-					txtNombreUsuario->Clear();
-					txtCorreo->Clear();
-					txtCelular->Clear();
-					txtContraseña->Clear();
-					cmbTipoUsuario->SelectedIndex = -1;
-					this->Close();
-					userId++;
-				}
-				else {
-					MessageBox::Show("No se ha podido registrar su solicitud");
-				}
-				break;
-			}
 
+			Client^ user = gcnew Client(userId, userName, userPassword);
+
+			user->FormalName = txtNombreCompleto->Text->Trim();
+			user->Email = txtCorreo->Text->Trim();
+			user->PhoneNumber = Convert::ToInt32(txtCelular->Text);
+			user->StudentCode = Convert::ToInt32(txtCodigoEstudiante->Text);
+
+			Controller::AddUser(user);
+			txtNombreCompleto->Clear();
+			txtNombreUsuario->Clear();
+			txtCorreo->Clear();
+			txtCelular->Clear();
+			txtContraseña->Clear();
+			txtCodigoEstudiante->Clear();
+			this->Close();
+			userId++;
+
+			MessageBox::Show("Usuario registrado éxitosamente.");
 
 			
 		}

@@ -22,8 +22,8 @@ namespace MrBookyModel {
             DateTime^ ReturnDate;
             String^ Status;
 
+            Loan() {};
             void GetStatus();
-
             void ReturnBook();
     };
 }

@@ -54,16 +54,16 @@
     <ClCompile Include="AddLibrary.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="UserInterface.cpp">
+    <ClCompile Include="UserProfileForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="BookSearchResults.cpp">
+    <ClCompile Include="CarritoPrestamoForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="CurrentMap.cpp">
+    <ClCompile Include="ReporteGraficaClienteForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="UserLoansList.cpp">
+    <ClCompile Include="BookHistoryForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,16 +107,16 @@
     <ClInclude Include="AddLibrary.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="UserInterface.h">
+    <ClInclude Include="UserProfileForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="BookSearchResults.h">
+    <ClInclude Include="CarritoPrestamoForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="CurrentMap.h">
+    <ClInclude Include="ReporteGraficaClienteForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="UserLoansList.h">
+    <ClInclude Include="BookHistoryForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
