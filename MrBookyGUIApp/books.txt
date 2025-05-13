@@ -1,1 +1,2 @@
-0|Pinocho|yo|Sideral Carrion|masculino|1
+1|MiPequeñaPinga|Kevin|SideralCarrion |Masculino|200
+1|Caperucita Roja|aaa|aaa|aaa|4
