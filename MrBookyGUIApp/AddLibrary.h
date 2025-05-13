@@ -55,6 +55,13 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::TextBox^ txtEmail;
 
 	private: System::Windows::Forms::Button^ btnAddLibrary;
+	private: System::Windows::Forms::DataGridView^ dvgLibrerias;
+
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaNombre;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaCorreo;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaHoraApertura;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaHoraCierre;
 
 	private:
 		/// <summary>
@@ -81,6 +88,13 @@ namespace MrBookyGUIApp {
 			this->txtCloseHour = (gcnew System::Windows::Forms::TextBox());
 			this->txtEmail = (gcnew System::Windows::Forms::TextBox());
 			this->btnAddLibrary = (gcnew System::Windows::Forms::Button());
+			this->dvgLibrerias = (gcnew System::Windows::Forms::DataGridView());
+			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaNombre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaCorreo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaHoraApertura = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaHoraCierre = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dvgLibrerias))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -182,11 +196,62 @@ namespace MrBookyGUIApp {
 			this->btnAddLibrary->UseVisualStyleBackColor = true;
 			this->btnAddLibrary->Click += gcnew System::EventHandler(this, &AddLibrary::btnAddLibrary_Click);
 			// 
+			// dvgLibrerias
+			// 
+			this->dvgLibrerias->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dvgLibrerias->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
+				this->ColumnaID,
+					this->ColumnaNombre, this->ColumnaCorreo, this->ColumnaHoraApertura, this->ColumnaHoraCierre
+			});
+			this->dvgLibrerias->Location = System::Drawing::Point(51, 299);
+			this->dvgLibrerias->Name = L"dvgLibrerias";
+			this->dvgLibrerias->RowHeadersWidth = 51;
+			this->dvgLibrerias->RowTemplate->Height = 24;
+			this->dvgLibrerias->Size = System::Drawing::Size(467, 123);
+			this->dvgLibrerias->TabIndex = 12;
+			this->dvgLibrerias->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &AddLibrary::dataGridView1_CellContentClick);
+			// 
+			// ColumnaID
+			// 
+			this->ColumnaID->HeaderText = L"ID";
+			this->ColumnaID->MinimumWidth = 6;
+			this->ColumnaID->Name = L"ColumnaID";
+			this->ColumnaID->Width = 125;
+			// 
+			// ColumnaNombre
+			// 
+			this->ColumnaNombre->HeaderText = L"Nombre";
+			this->ColumnaNombre->MinimumWidth = 6;
+			this->ColumnaNombre->Name = L"ColumnaNombre";
+			this->ColumnaNombre->Width = 125;
+			// 
+			// ColumnaCorreo
+			// 
+			this->ColumnaCorreo->HeaderText = L"E-mail";
+			this->ColumnaCorreo->MinimumWidth = 6;
+			this->ColumnaCorreo->Name = L"ColumnaCorreo";
+			this->ColumnaCorreo->Width = 125;
+			// 
+			// ColumnaHoraApertura
+			// 
+			this->ColumnaHoraApertura->HeaderText = L"HoraApertura";
+			this->ColumnaHoraApertura->MinimumWidth = 6;
+			this->ColumnaHoraApertura->Name = L"ColumnaHoraApertura";
+			this->ColumnaHoraApertura->Width = 125;
+			// 
+			// ColumnaHoraCierre
+			// 
+			this->ColumnaHoraCierre->HeaderText = L"HoraCierre";
+			this->ColumnaHoraCierre->MinimumWidth = 6;
+			this->ColumnaHoraCierre->Name = L"ColumnaHoraCierre";
+			this->ColumnaHoraCierre->Width = 125;
+			// 
 			// AddLibrary
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(412, 293);
+			this->ClientSize = System::Drawing::Size(553, 463);
+			this->Controls->Add(this->dvgLibrerias);
 			this->Controls->Add(this->btnAddLibrary);
 			this->Controls->Add(this->txtEmail);
 			this->Controls->Add(this->txtCloseHour);
@@ -201,6 +266,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label1);
 			this->Name = L"AddLibrary";
 			this->Text = L"AddLibrary";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dvgLibrerias))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -211,21 +277,25 @@ private: System::Void btnAddLibrary_Click(System::Object^ sender, System::EventA
 	int id = Int32::Parse(txtID->Text);
 	String^ name = txtName->Text;
 	String^ email = txtEmail->Text;
-	int openHour = Int32::Parse(txtOpenHour->Text);
-	int closeHour = Int32::Parse(txtCloseHour->Text);
+	String^ openHour = txtOpenHour->Text;
+	String^ closeHour = txtCloseHour->Text;
 	Library^ library = gcnew Library(id, name, email, openHour, closeHour);
 	if (Controller::AddLibrary(library) == 1) {
 		MessageBox::Show("Biblioteca registrada exitosamente", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		
 		txtID->Clear();
 		txtName->Clear();
 		txtEmail->Clear();
 		txtOpenHour->Clear();
 		txtCloseHour->Clear();
-		this->Close();
+		dvgLibrerias->Rows->Add(id, name, email, openHour, closeHour);
 	}
 	else {
 		MessageBox::Show("No se ha podido registrar la biblioteca");
 	}
+}
+private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+
 }
 };
 }

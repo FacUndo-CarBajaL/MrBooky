@@ -145,6 +145,7 @@ namespace MrBookyGUIApp {
 			this->dgvLibrosEncontrados->RowTemplate->Height = 24;
 			this->dgvLibrosEncontrados->Size = System::Drawing::Size(678, 217);
 			this->dgvLibrosEncontrados->TabIndex = 10;
+			this->dgvLibrosEncontrados->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookForm::dgvLibrosEncontrados_CellContentClick);
 			// 
 			// ColumnaTitutlo
 			// 
@@ -237,6 +238,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	else {
 		MessageBox::Show("No se encontró un libro con ese titulo");
 	}
+}
+private: System::Void dgvLibrosEncontrados_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 }
 };
 }
