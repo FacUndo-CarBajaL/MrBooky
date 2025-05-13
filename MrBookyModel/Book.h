@@ -9,6 +9,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    [Serializable]
     public ref class Book {
         public:
             int BookID;
@@ -24,7 +25,8 @@ namespace MrBookyModel {
             String^ Availability;
             int AvailabilityTime;
             int LoanTime;
-            int Weight;
+            double Weight;
+            array<Byte>^ Photo;
 
             Book() {};
 

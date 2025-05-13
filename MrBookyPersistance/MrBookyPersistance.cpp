@@ -1,6 +1,8 @@
 #include "pch.h"
 
 #include "MrBookyPersistance.h"
+using namespace System::Runtime::Serialization::Formatters::Binary;
+using namespace System::IO;
 
 void MrBookyPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject)
 {
@@ -271,5 +273,68 @@ Object^ MrBookyPersistance::Persistance::LoadBooksFromTextFile(String^ fileName)
 		if (file != nullptr) file->Close();
 	}
 	return result;
+}
+
+void MrBookyPersistance::Persistance::PersistBinaryFile(String^ fileName, Object^ persistObject)
+{
+	FileStream^ file;
+	BinaryFormatter^ formatter = gcnew BinaryFormatter();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		formatter->Serialize(file, persistObject);
+	}
+	catch (Exception^ ex) { throw ex; }
+	finally {
+		if (file != nullptr) file->Close();
+	}
+}
+
+Object^ MrBookyPersistance::Persistance::LoadBinaryFile(String^ fileName)
+{
+	FileStream^ file;
+	Object^ result;
+	BinaryFormatter^ formatter;
+	try {
+		if (File::Exists(fileName)) {
+			file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+			formatter = gcnew BinaryFormatter();
+			result = formatter->Deserialize(file);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
+
+void MrBookyPersistance::Persistance::UserRAMBinaryFile(String^ fileName, Object^ persistObject)
+{
+	FileStream^ UserRAMfile = nullptr;
+	BinaryFormatter^ UserRAMformatter = gcnew BinaryFormatter();
+	try {
+		UserRAMfile = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		UserRAMformatter->Serialize(UserRAMfile, persistObject);
+	}
+	catch (Exception^ ex) { throw ex; }
+	finally {
+		if (UserRAMfile != nullptr) UserRAMfile->Close();
+	}
+}
+
+void MrBookyPersistance::Persistance::RAMBinaryFile(String^ fileName, Object^ persistObject)
+{
+	FileStream^ RAMfile = nullptr;
+	BinaryFormatter^ RAMformatter = gcnew BinaryFormatter();
+	try {
+		RAMfile = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		RAMformatter->Serialize(RAMfile, persistObject);
+	}
+	catch (Exception^ ex) { throw ex; }
+	finally {
+		if (RAMfile != nullptr) RAMfile->Close();
+	}
 }
 

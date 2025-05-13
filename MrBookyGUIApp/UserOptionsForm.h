@@ -1,5 +1,6 @@
 #pragma once
 #include "BookForm.h"
+#include "UserProfileForm.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -39,6 +40,8 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ btnBuscarLibros;
 	private: System::Windows::Forms::Button^ btnVerPerfil;
+	private: System::Windows::Forms::Button^ btnBuscarLibrerias;
+	private: System::Windows::Forms::Button^ btnSolicitudesRealizadas;
 
 	private:
 		/// <summary>
@@ -57,6 +60,8 @@ namespace MrBookyGUIApp {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->btnBuscarLibros = (gcnew System::Windows::Forms::Button());
 			this->btnVerPerfil = (gcnew System::Windows::Forms::Button());
+			this->btnBuscarLibrerias = (gcnew System::Windows::Forms::Button());
+			this->btnSolicitudesRealizadas = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -90,7 +95,7 @@ namespace MrBookyGUIApp {
 			this->btnBuscarLibros->Name = L"btnBuscarLibros";
 			this->btnBuscarLibros->Size = System::Drawing::Size(172, 37);
 			this->btnBuscarLibros->TabIndex = 2;
-			this->btnBuscarLibros->Text = L"Buscar Libros";
+			this->btnBuscarLibros->Text = L"Busqueda de Libros";
 			this->btnBuscarLibros->UseVisualStyleBackColor = false;
 			this->btnBuscarLibros->Click += gcnew System::EventHandler(this, &UserOptionsForm::btnBuscarLibros_Click);
 			// 
@@ -103,6 +108,27 @@ namespace MrBookyGUIApp {
 			this->btnVerPerfil->TabIndex = 3;
 			this->btnVerPerfil->Text = L"Ver Perfil";
 			this->btnVerPerfil->UseVisualStyleBackColor = false;
+			this->btnVerPerfil->Click += gcnew System::EventHandler(this, &UserOptionsForm::btnVerPerfil_Click);
+			// 
+			// btnBuscarLibrerias
+			// 
+			this->btnBuscarLibrerias->BackColor = System::Drawing::Color::White;
+			this->btnBuscarLibrerias->Location = System::Drawing::Point(345, 376);
+			this->btnBuscarLibrerias->Name = L"btnBuscarLibrerias";
+			this->btnBuscarLibrerias->Size = System::Drawing::Size(172, 37);
+			this->btnBuscarLibrerias->TabIndex = 4;
+			this->btnBuscarLibrerias->Text = L"Buscar Librerias";
+			this->btnBuscarLibrerias->UseVisualStyleBackColor = false;
+			// 
+			// btnSolicitudesRealizadas
+			// 
+			this->btnSolicitudesRealizadas->BackColor = System::Drawing::Color::White;
+			this->btnSolicitudesRealizadas->Location = System::Drawing::Point(345, 438);
+			this->btnSolicitudesRealizadas->Name = L"btnSolicitudesRealizadas";
+			this->btnSolicitudesRealizadas->Size = System::Drawing::Size(172, 37);
+			this->btnSolicitudesRealizadas->TabIndex = 5;
+			this->btnSolicitudesRealizadas->Text = L"Solicitudes Realizadas";
+			this->btnSolicitudesRealizadas->UseVisualStyleBackColor = false;
 			// 
 			// UserOptionsForm
 			// 
@@ -111,6 +137,8 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(869, 533);
+			this->Controls->Add(this->btnSolicitudesRealizadas);
+			this->Controls->Add(this->btnBuscarLibrerias);
 			this->Controls->Add(this->btnVerPerfil);
 			this->Controls->Add(this->btnBuscarLibros);
 			this->Controls->Add(this->label2);
@@ -126,5 +154,9 @@ namespace MrBookyGUIApp {
 		BookForm^ bookForm = gcnew BookForm();
 		bookForm->Show();
 	}
+private: System::Void btnVerPerfil_Click(System::Object^ sender, System::EventArgs^ e) {
+	UserProfileForm^ profileForm = gcnew UserProfileForm();
+	profileForm->Show();
+}
 };
 }
