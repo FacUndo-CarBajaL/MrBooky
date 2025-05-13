@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBook xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Book>
+    <BookID>0</BookID>
+    <Title>hola</Title>
+    <Author>hola</Author>
+    <Publisher>hola</Publisher>
+    <ReleaseYear>0</ReleaseYear>
+    <Stock>1</Stock>
+    <Genre>hola</Genre>
+    <Description>hola</Description>
+    <AvailabilityTime>0</AvailabilityTime>
+    <LoanTime>0</LoanTime>
+    <Weight>0</Weight>
+  </Book>
+</ArrayOfBook>

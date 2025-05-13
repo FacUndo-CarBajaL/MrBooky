@@ -49,7 +49,7 @@ namespace MrBookyGUIApp {
 
 	private: System::Windows::Forms::TextBox^ txtNombreLibro;
 
-	private: System::Windows::Forms::RichTextBox^ txtBuscar;
+
 	private: System::Windows::Forms::DataGridView^ dgvLibrosEncontrados;
 
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTitutlo;
@@ -57,6 +57,8 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaEditorial;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaGenero;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaDisponibles;
+	private: System::Windows::Forms::Button^ btnBuscar;
+
 
 
 
@@ -105,13 +107,13 @@ namespace MrBookyGUIApp {
 			this->txtEditorial = (gcnew System::Windows::Forms::TextBox());
 			this->txtGenero = (gcnew System::Windows::Forms::TextBox());
 			this->txtNombreLibro = (gcnew System::Windows::Forms::TextBox());
-			this->txtBuscar = (gcnew System::Windows::Forms::RichTextBox());
 			this->dgvLibrosEncontrados = (gcnew System::Windows::Forms::DataGridView());
 			this->ColumnaTitutlo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaEditorial = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaGenero = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaDisponibles = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->btnBuscar = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLibrosEncontrados))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -208,15 +210,6 @@ namespace MrBookyGUIApp {
 			this->txtNombreLibro->Size = System::Drawing::Size(579, 22);
 			this->txtNombreLibro->TabIndex = 8;
 			// 
-			// txtBuscar
-			// 
-			this->txtBuscar->Location = System::Drawing::Point(631, 155);
-			this->txtBuscar->Name = L"txtBuscar";
-			this->txtBuscar->Size = System::Drawing::Size(84, 24);
-			this->txtBuscar->TabIndex = 9;
-			this->txtBuscar->Text = L"Buscar";
-			this->txtBuscar->TextChanged += gcnew System::EventHandler(this, &BookForm::richTextBox1_TextChanged);
-			// 
 			// dgvLibrosEncontrados
 			// 
 			this->dgvLibrosEncontrados->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
@@ -266,6 +259,17 @@ namespace MrBookyGUIApp {
 			this->ColumnaDisponibles->Name = L"ColumnaDisponibles";
 			this->ColumnaDisponibles->Width = 125;
 			// 
+			// btnBuscar
+			// 
+			this->btnBuscar->BackColor = System::Drawing::Color::White;
+			this->btnBuscar->Location = System::Drawing::Point(650, 151);
+			this->btnBuscar->Name = L"btnBuscar";
+			this->btnBuscar->Size = System::Drawing::Size(70, 28);
+			this->btnBuscar->TabIndex = 11;
+			this->btnBuscar->Text = L"Buscar";
+			this->btnBuscar->UseVisualStyleBackColor = false;
+			this->btnBuscar->Click += gcnew System::EventHandler(this, &BookForm::button1_Click);
+			// 
 			// BookForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -273,8 +277,8 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->ClientSize = System::Drawing::Size(858, 574);
+			this->Controls->Add(this->btnBuscar);
 			this->Controls->Add(this->dgvLibrosEncontrados);
-			this->Controls->Add(this->txtBuscar);
 			this->Controls->Add(this->txtNombreLibro);
 			this->Controls->Add(this->txtGenero);
 			this->Controls->Add(this->txtEditorial);
@@ -300,19 +304,24 @@ namespace MrBookyGUIApp {
 	private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 
-private: System::Void richTextBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ title = txtNombreLibro->Text->Trim();
 
 	Book^ book = Controller::SearchBookByName(title);
 
-	String^ author = book->Author;
-	String^ publisher = book->Publisher;
-	String^ genre = book->Genre;
-	int stock = book->Stock;
+	if (book != nullptr) {
+		String^ author = book->Author;
+		String^ publisher = book->Publisher;
+		String^ genre = book->Genre;
+		int stock = book->Stock;
 
-	dgvLibrosEncontrados->Rows->Add(title, author, publisher, genre, stock);
-}
-private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+		dgvLibrosEncontrados->Rows->Add(title, author, publisher, genre, stock);
+	}
+	else {
+		MessageBox::Show("No se encontró un libro con ese titulo");
+	}
 }
 };
 }

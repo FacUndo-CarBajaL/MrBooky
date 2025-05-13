@@ -113,3 +113,60 @@ Object^ MrBookyPersistance::Persistance::LoadUsersFromTextFile(String^ fileName)
 	return result;
 }
 
+void MrBookyPersistance::Persistance::PersistTextFile_Book(String^ fileName, Object^ persistObject)
+{
+	FileStream^ file = nullptr;
+	StreamWriter^ writer = nullptr;
+	try {
+		file = gcnew FileStream(fileName, FileMode::Append, FileAccess::Write);
+		writer = gcnew StreamWriter(file);
+		if (persistObject->GetType() == List<Book^>::typeid) {
+			List<Book^>^ books = (List<Book^>^) persistObject;
+			for (int i = 0; i < books->Count; i++) {
+				Book^ book = books[i];
+
+				writer->WriteLine("{0}|{1}|{2}|{3}|{4}|{5}",
+					book->BookID, book->Title, book->Author, book->Publisher, book->Genre, book->Stock);
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (writer != nullptr) writer->Close();
+		if (file != nullptr) file->Close();
+	}
+}
+
+Object^ MrBookyPersistance::Persistance::LoadBooksFromTextFile(String^ fileName)
+{
+	FileStream^ file;
+	StreamReader^ reader;
+	Object^ result = gcnew List<Book^>();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		reader = gcnew StreamReader(file);
+		while (!reader->EndOfStream) {
+			String^ line = reader->ReadLine();
+			array<String^>^ record = line->Split('|');
+			Book^ book = gcnew Book();
+			book->BookID = Int32::Parse(record[0]);
+			book->Title = record[1];
+			book->Author = record[2];
+			book->Publisher = record[3];
+			book->Genre = record[4];
+			book->Stock = Int32::Parse(record[5]);
+			((List<Book^>^)result)->Add(book);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+		if (file != nullptr) file->Close();
+	}
+	return result;
+}
+

@@ -271,6 +271,7 @@ namespace MrBookyGUIApp {
 					txtContraseña->Clear();
 					cmbTipoUsuario->SelectedIndex = -1;
 					this->Close();
+					userId++;
 				}
 				else {
 					MessageBox::Show("No se ha podido registrar su usuario");
@@ -279,7 +280,7 @@ namespace MrBookyGUIApp {
 			case UserType::Librarian:
 				user = gcnew Librarian(userId, userName, userPassword);
 				if (Controller::AddUser(user) == 1) {
-					MessageBox::Show("Solicitud para registro de bibliotecario enviada. Espere la confirmación" + userName);
+					MessageBox::Show("Solicitud para registro de bibliotecario enviada. Espere la confirmación " + userName);
 					txtNombreCompleto->Clear();
 					txtNombreUsuario->Clear();
 					txtCorreo->Clear();
@@ -287,6 +288,7 @@ namespace MrBookyGUIApp {
 					txtContraseña->Clear();
 					cmbTipoUsuario->SelectedIndex = -1;
 					this->Close();
+					userId++;
 				}
 				else {
 					MessageBox::Show("No se ha podido registrar su solicitud");
