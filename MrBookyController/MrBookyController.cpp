@@ -70,6 +70,7 @@ int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 	// Agrega el robot a la lista de robots
 	try {
 		robots->Add(robot);
+		Persistance::PersistTextFile_Robot("robots.txt", robots);
 		return 1;
 	}
 	catch (Exception^ ex) {
@@ -131,6 +132,7 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 	try {
 		// Agrega la biblioteca a la lista de bibliotecas
 		libraries->Add(library);
+		Persistance::PersistTextFile_Library("libraries.txt", libraries);
 		return 1;
 	}
 	catch (Exception^ ex) {
