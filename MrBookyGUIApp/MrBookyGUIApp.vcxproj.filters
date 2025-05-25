@@ -70,6 +70,9 @@
     <ClCompile Include="UserInterface.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="BookRequest.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookForm.h">
@@ -125,6 +128,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="UserInterface.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="BookRequest.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

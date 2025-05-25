@@ -127,6 +127,7 @@
     <ClCompile Include="AddLibrary.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
+    <ClCompile Include="BookRequest.cpp" />
     <ClCompile Include="FoundBookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="MainForm1.cpp" />
@@ -160,6 +161,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="BookReport.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="BookRequest.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="FoundBookForm.h">
