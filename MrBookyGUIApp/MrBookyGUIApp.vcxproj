@@ -128,11 +128,14 @@
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="BookRequest.cpp" />
+    <ClCompile Include="DispatchBooks.cpp" />
     <ClCompile Include="FoundBookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="MainForm1.cpp" />
     <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="ReporteGraficaClienteForm.cpp" />
+    <ClCompile Include="RobotApprove.cpp" />
+    <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
     <ClCompile Include="UserInterface.cpp" />
@@ -166,6 +169,9 @@
     <ClInclude Include="BookRequest.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="DispatchBooks.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="FoundBookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -179,6 +185,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ReporteGraficaClienteForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RobotApprove.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Stats.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Stock.h">
@@ -225,6 +237,12 @@
     <EmbeddedResource Include="BookReport.resx">
       <DependentUpon>BookReport.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BookRequest.resx">
+      <DependentUpon>BookRequest.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispatchBooks.resx">
+      <DependentUpon>DispatchBooks.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FoundBookForm.resx">
       <DependentUpon>FoundBookForm.h</DependentUpon>
     </EmbeddedResource>
@@ -239,6 +257,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReporteGraficaClienteForm.resx">
       <DependentUpon>ReporteGraficaClienteForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RobotApprove.resx">
+      <DependentUpon>RobotApprove.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stats.resx">
+      <DependentUpon>Stats.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock.resx">
       <DependentUpon>Stock.h</DependentUpon>

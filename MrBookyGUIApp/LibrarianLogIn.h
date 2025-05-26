@@ -1,11 +1,9 @@
 #pragma once
 
 #include "Stock.h"
-#include "MaintenanceBook.h"
-#include "UserReport.h"
-#include "BookReport.h"
-#include "AddDeliveryRobot.h"
-#include "AddLibrary.h"
+#include "BookRequest.h"
+#include "Stats.h"
+#include "DispatchBooks.h"
 
 namespace MrBookyGUIApp {
 
@@ -65,6 +63,7 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(LibrarianLogIn::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->btnLoans = (gcnew System::Windows::Forms::Button());
 			this->btnStock = (gcnew System::Windows::Forms::Button());
@@ -76,6 +75,7 @@ namespace MrBookyGUIApp {
 			// label1
 			// 
 			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::White;
@@ -103,6 +103,7 @@ namespace MrBookyGUIApp {
 			this->btnStock->BackColor = System::Drawing::Color::White;
 			this->btnStock->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnStock->ForeColor = System::Drawing::Color::Black;
 			this->btnStock->Location = System::Drawing::Point(201, 267);
 			this->btnStock->Name = L"btnStock";
 			this->btnStock->Size = System::Drawing::Size(515, 41);
@@ -115,6 +116,7 @@ namespace MrBookyGUIApp {
 			// 
 			this->btnStats->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnStats->ForeColor = System::Drawing::Color::Black;
 			this->btnStats->Location = System::Drawing::Point(201, 327);
 			this->btnStats->Name = L"btnStats";
 			this->btnStats->Size = System::Drawing::Size(515, 41);
@@ -127,6 +129,7 @@ namespace MrBookyGUIApp {
 			// 
 			this->btnBooksDispatch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnBooksDispatch->ForeColor = System::Drawing::Color::Black;
 			this->btnBooksDispatch->Location = System::Drawing::Point(201, 386);
 			this->btnBooksDispatch->Name = L"btnBooksDispatch";
 			this->btnBooksDispatch->Size = System::Drawing::Size(515, 41);
@@ -138,6 +141,7 @@ namespace MrBookyGUIApp {
 			// label2
 			// 
 			this->label2->AutoSize = true;
+			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::White;
@@ -171,8 +175,9 @@ namespace MrBookyGUIApp {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(14)), static_cast<System::Int32>(static_cast<System::Byte>(14)),
+				static_cast<System::Int32>(static_cast<System::Byte>(14)));
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->btnBooksDispatch);
@@ -180,6 +185,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->btnStock);
 			this->Controls->Add(this->btnLoans);
 			this->Controls->Add(this->label1);
+			this->ForeColor = System::Drawing::Color::Transparent;
 			this->Name = L"LibrarianLogIn";
 			this->Text = L"LibrarianLogIn";
 			this->ResumeLayout(false);
@@ -189,17 +195,21 @@ namespace MrBookyGUIApp {
 #pragma endregion
 
 private: System::Void btnLoans_Click(System::Object^ sender, System::EventArgs^ e) {
-	
+	BookRequest^ bookRequestForm = gcnew BookRequest();
+	bookRequestForm->Show();
 }
 
 private: System::Void btnStock_Click(System::Object^ sender, System::EventArgs^ e) {
 	Stock^ stockForm = gcnew Stock();
-	// Show the Stock form
 	stockForm->Show();
 }
 private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ e) {
+	Stats^ statsForm = gcnew Stats();
+	statsForm->Show();
 }
 private: System::Void btnBooksDispatch_Click(System::Object^ sender, System::EventArgs^ e) {
+	DispatchBooks^ dispatchBooksForm = gcnew DispatchBooks();
+	dispatchBooksForm->Show();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	AddDeliveryRobot^ deliveryRobot = gcnew AddDeliveryRobot();

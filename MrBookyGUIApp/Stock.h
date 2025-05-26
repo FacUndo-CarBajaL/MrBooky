@@ -37,23 +37,31 @@ namespace MrBookyGUIApp {
 		}
 	private: System::Windows::Forms::TextBox^ txtIdStock;
 	private: System::Windows::Forms::Button^ btnSearch;
-	private: System::Windows::Forms::GroupBox^ gbResults;
-	private: System::Windows::Forms::Label^ lbTitle;
-	private: System::Windows::Forms::Label^ lbEditorial;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ button4;
+
+
+
 	protected:
 
 
 
 
 
-	private: System::Windows::Forms::Label^ lbAuthor;
 
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::Label^ lbLocation;
 
-	private: System::Windows::Forms::Label^ lbTime;
 
-	private: System::Windows::Forms::Label^ lbQuantity;
+
+
+
+
+
 
 
 	protected:
@@ -71,18 +79,18 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stock::typeid));
 			this->txtIdStock = (gcnew System::Windows::Forms::TextBox());
 			this->btnSearch = (gcnew System::Windows::Forms::Button());
-			this->gbResults = (gcnew System::Windows::Forms::GroupBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->lbLocation = (gcnew System::Windows::Forms::Label());
-			this->lbTime = (gcnew System::Windows::Forms::Label());
-			this->lbQuantity = (gcnew System::Windows::Forms::Label());
-			this->lbEditorial = (gcnew System::Windows::Forms::Label());
-			this->lbAuthor = (gcnew System::Windows::Forms::Label());
-			this->lbTitle = (gcnew System::Windows::Forms::Label());
-			this->gbResults->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// txtIdStock
@@ -90,7 +98,7 @@ namespace MrBookyGUIApp {
 			this->txtIdStock->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtIdStock->ForeColor = System::Drawing::Color::DarkGray;
-			this->txtIdStock->Location = System::Drawing::Point(77, 56);
+			this->txtIdStock->Location = System::Drawing::Point(77, 37);
 			this->txtIdStock->Name = L"txtIdStock";
 			this->txtIdStock->Size = System::Drawing::Size(427, 29);
 			this->txtIdStock->TabIndex = 0;
@@ -100,7 +108,7 @@ namespace MrBookyGUIApp {
 			// 
 			this->btnSearch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSearch->Location = System::Drawing::Point(548, 54);
+			this->btnSearch->Location = System::Drawing::Point(533, 35);
 			this->btnSearch->Name = L"btnSearch";
 			this->btnSearch->Size = System::Drawing::Size(111, 32);
 			this->btnSearch->TabIndex = 1;
@@ -108,114 +116,114 @@ namespace MrBookyGUIApp {
 			this->btnSearch->UseVisualStyleBackColor = true;
 			this->btnSearch->Click += gcnew System::EventHandler(this, &Stock::btnSearch_Click);
 			// 
-			// gbResults
+			// textBox1
 			// 
-			this->gbResults->Controls->Add(this->pictureBox1);
-			this->gbResults->Controls->Add(this->lbLocation);
-			this->gbResults->Controls->Add(this->lbTime);
-			this->gbResults->Controls->Add(this->lbQuantity);
-			this->gbResults->Controls->Add(this->lbEditorial);
-			this->gbResults->Controls->Add(this->lbAuthor);
-			this->gbResults->Controls->Add(this->lbTitle);
-			this->gbResults->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->gbResults->ForeColor = System::Drawing::Color::White;
-			this->gbResults->Location = System::Drawing::Point(75, 111);
-			this->gbResults->Name = L"gbResults";
-			this->gbResults->Size = System::Drawing::Size(801, 344);
-			this->gbResults->TabIndex = 2;
-			this->gbResults->TabStop = false;
-			this->gbResults->Text = L"Resultados";
+			this->textBox1->ForeColor = System::Drawing::Color::DarkGray;
+			this->textBox1->Location = System::Drawing::Point(77, 88);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(427, 29);
+			this->textBox1->TabIndex = 2;
+			this->textBox1->Text = L"Ingrese Título del libro";
 			// 
-			// pictureBox1
+			// textBox2
 			// 
-			this->pictureBox1->Location = System::Drawing::Point(559, 31);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(228, 297);
-			this->pictureBox1->TabIndex = 6;
-			this->pictureBox1->TabStop = false;
-			// 
-			// lbLocation
-			// 
-			this->lbLocation->AutoSize = true;
-			this->lbLocation->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbLocation->Location = System::Drawing::Point(46, 275);
-			this->lbLocation->Name = L"lbLocation";
-			this->lbLocation->Size = System::Drawing::Size(115, 25);
-			this->lbLocation->TabIndex = 5;
-			this->lbLocation->Text = L"Ubicación :";
+			this->textBox2->ForeColor = System::Drawing::Color::DarkGray;
+			this->textBox2->Location = System::Drawing::Point(77, 136);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(427, 29);
+			this->textBox2->TabIndex = 3;
+			this->textBox2->Text = L"Cantidad";
 			// 
-			// lbTime
+			// button1
 			// 
-			this->lbTime->AutoSize = true;
-			this->lbTime->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbTime->Location = System::Drawing::Point(46, 229);
-			this->lbTime->Name = L"lbTime";
-			this->lbTime->Size = System::Drawing::Size(196, 25);
-			this->lbTime->TabIndex = 4;
-			this->lbTime->Text = L"Tiempo Disponible :";
+			this->button1->Location = System::Drawing::Point(533, 86);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(111, 32);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Buscar";
+			this->button1->UseVisualStyleBackColor = true;
 			// 
-			// lbQuantity
+			// button2
 			// 
-			this->lbQuantity->AutoSize = true;
-			this->lbQuantity->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbQuantity->Location = System::Drawing::Point(46, 183);
-			this->lbQuantity->Name = L"lbQuantity";
-			this->lbQuantity->Size = System::Drawing::Size(106, 25);
-			this->lbQuantity->TabIndex = 3;
-			this->lbQuantity->Text = L"Cantidad :";
+			this->button2->Location = System::Drawing::Point(533, 134);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(111, 32);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"Buscar";
+			this->button2->UseVisualStyleBackColor = true;
 			// 
-			// lbEditorial
+			// label1
 			// 
-			this->lbEditorial->AutoSize = true;
-			this->lbEditorial->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::Transparent;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14, System::Drawing::FontStyle::Underline));
+			this->label1->ForeColor = System::Drawing::Color::White;
+			this->label1->Location = System::Drawing::Point(72, 191);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(117, 25);
+			this->label1->TabIndex = 6;
+			this->label1->Text = L"Resultados";
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Location = System::Drawing::Point(65, 235);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 51;
+			this->dataGridView1->Size = System::Drawing::Size(818, 189);
+			this->dataGridView1->TabIndex = 7;
+			// 
+			// button3
+			// 
+			this->button3->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbEditorial->Location = System::Drawing::Point(46, 137);
-			this->lbEditorial->Name = L"lbEditorial";
-			this->lbEditorial->Size = System::Drawing::Size(108, 25);
-			this->lbEditorial->TabIndex = 2;
-			this->lbEditorial->Text = L"Editorial :";
+			this->button3->Location = System::Drawing::Point(204, 440);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(111, 32);
+			this->button3->TabIndex = 8;
+			this->button3->Text = L"Actualizar";
+			this->button3->UseVisualStyleBackColor = true;
 			// 
-			// lbAuthor
+			// button4
 			// 
-			this->lbAuthor->AutoSize = true;
-			this->lbAuthor->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button4->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbAuthor->Location = System::Drawing::Point(46, 96);
-			this->lbAuthor->Name = L"lbAuthor";
-			this->lbAuthor->Size = System::Drawing::Size(77, 25);
-			this->lbAuthor->TabIndex = 1;
-			this->lbAuthor->Text = L"Autor :";
-			// 
-			// lbTitle
-			// 
-			this->lbTitle->AutoSize = true;
-			this->lbTitle->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lbTitle->Location = System::Drawing::Point(46, 53);
-			this->lbTitle->Name = L"lbTitle";
-			this->lbTitle->Size = System::Drawing::Size(80, 25);
-			this->lbTitle->TabIndex = 0;
-			this->lbTitle->Text = L"Título :";
+			this->button4->Location = System::Drawing::Point(514, 440);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(111, 32);
+			this->button4->TabIndex = 9;
+			this->button4->Text = L"Buscar";
+			this->button4->UseVisualStyleBackColor = true;
 			// 
 			// Stock
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(14)), static_cast<System::Int32>(static_cast<System::Byte>(14)),
+				static_cast<System::Int32>(static_cast<System::Byte>(14)));
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
-			this->Controls->Add(this->gbResults);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
+			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->btnSearch);
 			this->Controls->Add(this->txtIdStock);
 			this->Name = L"Stock";
 			this->Text = L"Stock";
-			this->gbResults->ResumeLayout(false);
-			this->gbResults->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
