@@ -1,4 +1,5 @@
 #pragma once
+#include "BookSearchResults.h"
 
 namespace MrBookyGUIApp {
 
@@ -36,7 +37,8 @@ namespace MrBookyGUIApp {
 		}
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ BookTitletxt;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
@@ -51,7 +53,7 @@ namespace MrBookyGUIApp {
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -63,7 +65,7 @@ namespace MrBookyGUIApp {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UserInterface::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->BookTitletxt = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
@@ -104,19 +106,18 @@ namespace MrBookyGUIApp {
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Sistema de búsqueda MRBOOKY";
 			// 
-			// textBox1
+			// BookTitletxt
 			// 
-			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
+			this->BookTitletxt->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->textBox1->Location = System::Drawing::Point(63, 189);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(366, 26);
-			this->textBox1->TabIndex = 2;
+			this->BookTitletxt->Location = System::Drawing::Point(63, 189);
+			this->BookTitletxt->Name = L"BookTitletxt";
+			this->BookTitletxt->Size = System::Drawing::Size(366, 26);
+			this->BookTitletxt->TabIndex = 2;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
-			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(444, 189);
 			this->pictureBox1->Name = L"pictureBox1";
@@ -124,6 +125,7 @@ namespace MrBookyGUIApp {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &UserInterface::pictureBox1_Click);
 			// 
 			// label3
 			// 
@@ -223,7 +225,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->pictureBox1);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->BookTitletxt);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Name = L"UserInterface";
@@ -234,5 +236,16 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
-	};
+	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Al presionar el botón de búsqueda se debe dirigir al usuario a la ventana de resultados de búsqueda.
+		// Solo se debe abrir la ventana de resultados si se ha ingresado algún criterio de búsqueda.
+		if (System::String::IsNullOrEmpty(BookTitletxt->Text->Trim()) == false) {
+			BookSearchResults^ searchResultsForm = gcnew BookSearchResults();
+			searchResultsForm->ShowDialog();
+		}
+		else {
+			MessageBox::Show("Por favor, ingrese un criterio de búsqueda.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		}
+	}
+};
 }
