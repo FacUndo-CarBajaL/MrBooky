@@ -41,6 +41,21 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ Calificación;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookTitle;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookAuthor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookDescription;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookStatus;
+	private: System::Windows::Forms::DataGridViewImageColumn^ BookImage;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ BookLoan;
+
+
+
+
+
+
+
 
 	protected:
 
@@ -65,8 +80,17 @@ namespace MrBookyGUIApp {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Calificación = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->BookTitle = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookAuthor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookDescription = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookStatus = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookImage = (gcnew System::Windows::Forms::DataGridViewImageColumn());
+			this->BookLoan = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -147,13 +171,80 @@ namespace MrBookyGUIApp {
 			this->button1->Text = L"SOLICITAR";
 			this->button1->UseVisualStyleBackColor = false;
 			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(7) {
+				this->Calificación,
+					this->BookTitle, this->BookAuthor, this->BookDescription, this->BookStatus, this->BookImage, this->BookLoan
+			});
+			this->dataGridView1->Location = System::Drawing::Point(12, 137);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->RowHeadersWidth = 62;
+			this->dataGridView1->RowTemplate->Height = 28;
+			this->dataGridView1->Size = System::Drawing::Size(1134, 264);
+			this->dataGridView1->TabIndex = 7;
+			// 
+			// Calificación
+			// 
+			this->Calificación->HeaderText = L"Calificación";
+			this->Calificación->MinimumWidth = 8;
+			this->Calificación->Name = L"Calificación";
+			this->Calificación->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->Calificación->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
+			this->Calificación->Width = 150;
+			// 
+			// BookTitle
+			// 
+			this->BookTitle->HeaderText = L"Título";
+			this->BookTitle->MinimumWidth = 8;
+			this->BookTitle->Name = L"BookTitle";
+			this->BookTitle->Width = 150;
+			// 
+			// BookAuthor
+			// 
+			this->BookAuthor->HeaderText = L"Autor";
+			this->BookAuthor->MinimumWidth = 8;
+			this->BookAuthor->Name = L"BookAuthor";
+			this->BookAuthor->Width = 150;
+			// 
+			// BookDescription
+			// 
+			this->BookDescription->HeaderText = L"Descripción";
+			this->BookDescription->MinimumWidth = 8;
+			this->BookDescription->Name = L"BookDescription";
+			this->BookDescription->Width = 150;
+			// 
+			// BookStatus
+			// 
+			this->BookStatus->HeaderText = L"Estado";
+			this->BookStatus->MinimumWidth = 8;
+			this->BookStatus->Name = L"BookStatus";
+			this->BookStatus->Width = 150;
+			// 
+			// BookImage
+			// 
+			this->BookImage->HeaderText = L"Portada";
+			this->BookImage->MinimumWidth = 8;
+			this->BookImage->Name = L"BookImage";
+			this->BookImage->Width = 150;
+			// 
+			// BookLoan
+			// 
+			this->BookLoan->HeaderText = L"Solicitar";
+			this->BookLoan->MinimumWidth = 8;
+			this->BookLoan->Name = L"BookLoan";
+			this->BookLoan->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->BookLoan->Width = 150;
+			// 
 			// BookSearchResults
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(239)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
-			this->ClientSize = System::Drawing::Size(637, 435);
+			this->ClientSize = System::Drawing::Size(1227, 435);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->label4);
@@ -165,6 +256,7 @@ namespace MrBookyGUIApp {
 			this->Text = L"BookSearchResults";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
