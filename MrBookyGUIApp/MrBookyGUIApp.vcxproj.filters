@@ -58,12 +58,16 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="CarritoPrestamoForm.cpp">
+    <ClCompile Include="BookSearchResults.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="ReporteGraficaClienteForm.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="BookHistoryForm.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,6 +111,7 @@
     <ClInclude Include="AddLibrary.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="BookSearchResults.h">
     <ClInclude Include="UserProfileForm.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -117,6 +122,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="BookHistoryForm.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

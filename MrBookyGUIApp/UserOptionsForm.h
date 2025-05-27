@@ -1,5 +1,7 @@
 #pragma once
 #include "BookForm.h"
+#include "UserInterface.h"
+
 #include "UserProfileForm.h"
 namespace MrBookyGUIApp {
 
@@ -151,8 +153,8 @@ namespace MrBookyGUIApp {
 		}
 #pragma endregion
 	private: System::Void btnBuscarLibros_Click(System::Object^ sender, System::EventArgs^ e) {
-		BookForm^ bookForm = gcnew BookForm();
-		bookForm->Show();
+		UserInterface^ UserInterfaceForm = gcnew UserInterface();
+		UserInterfaceForm->ShowDialog();
 	}
 private: System::Void btnVerPerfil_Click(System::Object^ sender, System::EventArgs^ e) {
 	UserProfileForm^ profileForm = gcnew UserProfileForm();
