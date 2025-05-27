@@ -134,6 +134,7 @@
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
     <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="UserLoansList.cpp" />
     <ClCompile Include="UserOptionsForm.cpp" />
     <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
@@ -180,6 +181,9 @@
     <ClInclude Include="UserInterface.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UserLoansList.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="UserOptionsForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -190,6 +194,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BookSearchResults.resx">
       <DependentUpon>BookSearchResults.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurrentMap.resx">
+      <DependentUpon>CurrentMap.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MaintenanceBook.resx">
       <DependentUpon>MaintenanceBook.h</DependentUpon>
@@ -226,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface.resx">
       <DependentUpon>UserInterface.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLoansList.resx">
+      <DependentUpon>UserLoansList.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserOptionsForm.resx">
       <DependentUpon>UserOptionsForm.h</DependentUpon>
