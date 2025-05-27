@@ -182,7 +182,7 @@ namespace MrBookyGUIApp {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 62;
 			this->dataGridView1->RowTemplate->Height = 28;
-			this->dataGridView1->Size = System::Drawing::Size(1134, 264);
+			this->dataGridView1->Size = System::Drawing::Size(1115, 264);
 			this->dataGridView1->TabIndex = 7;
 			// 
 			// Calificación
