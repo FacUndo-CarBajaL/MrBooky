@@ -35,10 +35,12 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::RadioButton^ rbtAprove;
+	private: System::Windows::Forms::RadioButton^ rbtnApprove;
+
 	private: System::Windows::Forms::RadioButton^ rbtnReturn;
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnRegister;
+
 	private: System::Windows::Forms::Button^ btnApprove;
 	private: System::Windows::Forms::Button^ btnDisapprove;
 	private: System::Windows::Forms::Button^ btnReturn;
@@ -60,10 +62,10 @@ namespace MrBookyGUIApp {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(BookRequest::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->rbtAprove = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnApprove = (gcnew System::Windows::Forms::RadioButton());
 			this->rbtnReturn = (gcnew System::Windows::Forms::RadioButton());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnRegister = (gcnew System::Windows::Forms::Button());
 			this->btnApprove = (gcnew System::Windows::Forms::Button());
 			this->btnDisapprove = (gcnew System::Windows::Forms::Button());
 			this->btnReturn = (gcnew System::Windows::Forms::Button());
@@ -82,18 +84,19 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Resultados";
 			// 
-			// rbtAprove
+			// rbtnApprove
 			// 
-			this->rbtAprove->AutoSize = true;
-			this->rbtAprove->BackColor = System::Drawing::Color::Transparent;
-			this->rbtAprove->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->rbtnApprove->AutoSize = true;
+			this->rbtnApprove->BackColor = System::Drawing::Color::Transparent;
+			this->rbtnApprove->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->rbtAprove->Location = System::Drawing::Point(571, 37);
-			this->rbtAprove->Name = L"rbtAprove";
-			this->rbtAprove->Size = System::Drawing::Size(145, 29);
-			this->rbtAprove->TabIndex = 1;
-			this->rbtAprove->Text = L"Por aprobar";
-			this->rbtAprove->UseVisualStyleBackColor = false;
+			this->rbtnApprove->Location = System::Drawing::Point(571, 37);
+			this->rbtnApprove->Name = L"rbtnApprove";
+			this->rbtnApprove->Size = System::Drawing::Size(145, 29);
+			this->rbtnApprove->TabIndex = 1;
+			this->rbtnApprove->Text = L"Por aprobar";
+			this->rbtnApprove->UseVisualStyleBackColor = false;
+			this->rbtnApprove->CheckedChanged += gcnew System::EventHandler(this, &BookRequest::rbtnApprove_CheckedChanged);
 			// 
 			// rbtnReturn
 			// 
@@ -107,6 +110,7 @@ namespace MrBookyGUIApp {
 			this->rbtnReturn->TabIndex = 2;
 			this->rbtnReturn->Text = L"Por devolver";
 			this->rbtnReturn->UseVisualStyleBackColor = false;
+			this->rbtnReturn->CheckedChanged += gcnew System::EventHandler(this, &BookRequest::rbtnReturn_CheckedChanged);
 			// 
 			// dataGridView1
 			// 
@@ -118,18 +122,18 @@ namespace MrBookyGUIApp {
 			this->dataGridView1->Size = System::Drawing::Size(873, 253);
 			this->dataGridView1->TabIndex = 3;
 			// 
-			// button1
+			// btnRegister
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
-			this->button1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+			this->btnRegister->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
+			this->btnRegister->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->button1->Location = System::Drawing::Point(97, 372);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(223, 35);
-			this->button1->TabIndex = 4;
-			this->button1->Text = L"Registrar";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Visible = false;
+			this->btnRegister->Location = System::Drawing::Point(97, 372);
+			this->btnRegister->Name = L"btnRegister";
+			this->btnRegister->Size = System::Drawing::Size(223, 35);
+			this->btnRegister->TabIndex = 4;
+			this->btnRegister->Text = L"Registrar";
+			this->btnRegister->UseVisualStyleBackColor = true;
+			this->btnRegister->Visible = false;
 			// 
 			// btnApprove
 			// 
@@ -182,15 +186,15 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->btnReturn);
 			this->Controls->Add(this->btnDisapprove);
 			this->Controls->Add(this->btnApprove);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->btnRegister);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->rbtnReturn);
-			this->Controls->Add(this->rbtAprove);
+			this->Controls->Add(this->rbtnApprove);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::Color::White;
-			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
+			this->Margin = System::Windows::Forms::Padding(6);
 			this->Name = L"BookRequest";
 			this->Text = L"BookRequest";
 			this->Load += gcnew System::EventHandler(this, &BookRequest::BookRequest_Load);
@@ -203,6 +207,22 @@ namespace MrBookyGUIApp {
 	private: System::Void BookRequest_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void rbtnApprove_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnApprove->Checked) {
+		btnRegister->Visible = true;
+		btnApprove->Visible = true;
+		btnDisapprove->Visible = true;
+		btnReturn->Visible = false;
+	}
+}
+private: System::Void rbtnReturn_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnReturn->Checked) {
+		btnRegister->Visible = false;
+		btnApprove->Visible = false;
+		btnDisapprove->Visible = false;
+		btnReturn->Visible = true;
+	}
 }
 };
 }

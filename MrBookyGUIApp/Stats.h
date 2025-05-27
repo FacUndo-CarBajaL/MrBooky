@@ -36,10 +36,14 @@ namespace MrBookyGUIApp {
 		}
 	private: System::Windows::Forms::TextBox^ txtIdStock;
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::RadioButton^ radioButton1;
-	private: System::Windows::Forms::RadioButton^ radioButton2;
-	private: System::Windows::Forms::RadioButton^ radioButton3;
-	private: System::Windows::Forms::RadioButton^ radioButton4;
+	private: System::Windows::Forms::RadioButton^ rbtnIndividual;
+
+	private: System::Windows::Forms::RadioButton^ rbtnGroup;
+	private: System::Windows::Forms::RadioButton^ rbtnBook;
+
+
+	private: System::Windows::Forms::RadioButton^ rbtnUser;
+
 	private: System::Windows::Forms::Button^ btnSearch;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
@@ -64,10 +68,10 @@ namespace MrBookyGUIApp {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stats::typeid));
 			this->txtIdStock = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton3 = (gcnew System::Windows::Forms::RadioButton());
-			this->radioButton4 = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnIndividual = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnGroup = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnBook = (gcnew System::Windows::Forms::RadioButton());
+			this->rbtnUser = (gcnew System::Windows::Forms::RadioButton());
 			this->btnSearch = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
@@ -100,61 +104,65 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Gráficas";
 			// 
-			// radioButton1
+			// rbtnIndividual
 			// 
-			this->radioButton1->AutoSize = true;
-			this->radioButton1->BackColor = System::Drawing::Color::Transparent;
-			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
-			this->radioButton1->ForeColor = System::Drawing::Color::White;
-			this->radioButton1->Location = System::Drawing::Point(789, 42);
-			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(116, 26);
-			this->radioButton1->TabIndex = 3;
-			this->radioButton1->TabStop = true;
-			this->radioButton1->Text = L"Individual";
-			this->radioButton1->UseVisualStyleBackColor = false;
+			this->rbtnIndividual->AutoSize = true;
+			this->rbtnIndividual->BackColor = System::Drawing::Color::Transparent;
+			this->rbtnIndividual->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
+			this->rbtnIndividual->ForeColor = System::Drawing::Color::White;
+			this->rbtnIndividual->Location = System::Drawing::Point(789, 42);
+			this->rbtnIndividual->Name = L"rbtnIndividual";
+			this->rbtnIndividual->Size = System::Drawing::Size(116, 26);
+			this->rbtnIndividual->TabIndex = 3;
+			this->rbtnIndividual->TabStop = true;
+			this->rbtnIndividual->Text = L"Individual";
+			this->rbtnIndividual->UseVisualStyleBackColor = false;
+			this->rbtnIndividual->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnIndividual_CheckedChanged);
 			// 
-			// radioButton2
+			// rbtnGroup
 			// 
-			this->radioButton2->AutoSize = true;
-			this->radioButton2->BackColor = System::Drawing::Color::Transparent;
-			this->radioButton2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
-			this->radioButton2->ForeColor = System::Drawing::Color::White;
-			this->radioButton2->Location = System::Drawing::Point(789, 74);
-			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(87, 26);
-			this->radioButton2->TabIndex = 4;
-			this->radioButton2->TabStop = true;
-			this->radioButton2->Text = L"Grupal";
-			this->radioButton2->UseVisualStyleBackColor = false;
+			this->rbtnGroup->AutoSize = true;
+			this->rbtnGroup->BackColor = System::Drawing::Color::Transparent;
+			this->rbtnGroup->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
+			this->rbtnGroup->ForeColor = System::Drawing::Color::White;
+			this->rbtnGroup->Location = System::Drawing::Point(789, 74);
+			this->rbtnGroup->Name = L"rbtnGroup";
+			this->rbtnGroup->Size = System::Drawing::Size(87, 26);
+			this->rbtnGroup->TabIndex = 4;
+			this->rbtnGroup->TabStop = true;
+			this->rbtnGroup->Text = L"Grupal";
+			this->rbtnGroup->UseVisualStyleBackColor = false;
+			this->rbtnGroup->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnGroup_CheckedChanged);
 			// 
-			// radioButton3
+			// rbtnBook
 			// 
-			this->radioButton3->AutoSize = true;
-			this->radioButton3->BackColor = System::Drawing::Color::Transparent;
-			this->radioButton3->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
-			this->radioButton3->ForeColor = System::Drawing::Color::White;
-			this->radioButton3->Location = System::Drawing::Point(601, 74);
-			this->radioButton3->Name = L"radioButton3";
-			this->radioButton3->Size = System::Drawing::Size(77, 26);
-			this->radioButton3->TabIndex = 6;
-			this->radioButton3->TabStop = true;
-			this->radioButton3->Text = L"Libro";
-			this->radioButton3->UseVisualStyleBackColor = false;
+			this->rbtnBook->AutoSize = true;
+			this->rbtnBook->BackColor = System::Drawing::Color::Transparent;
+			this->rbtnBook->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
+			this->rbtnBook->ForeColor = System::Drawing::Color::White;
+			this->rbtnBook->Location = System::Drawing::Point(601, 74);
+			this->rbtnBook->Name = L"rbtnBook";
+			this->rbtnBook->Size = System::Drawing::Size(77, 26);
+			this->rbtnBook->TabIndex = 6;
+			this->rbtnBook->TabStop = true;
+			this->rbtnBook->Text = L"Libro";
+			this->rbtnBook->UseVisualStyleBackColor = false;
+			this->rbtnBook->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnBook_CheckedChanged);
 			// 
-			// radioButton4
+			// rbtnUser
 			// 
-			this->radioButton4->AutoSize = true;
-			this->radioButton4->BackColor = System::Drawing::Color::Transparent;
-			this->radioButton4->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
-			this->radioButton4->ForeColor = System::Drawing::Color::White;
-			this->radioButton4->Location = System::Drawing::Point(601, 42);
-			this->radioButton4->Name = L"radioButton4";
-			this->radioButton4->Size = System::Drawing::Size(94, 26);
-			this->radioButton4->TabIndex = 5;
-			this->radioButton4->TabStop = true;
-			this->radioButton4->Text = L"Usuario";
-			this->radioButton4->UseVisualStyleBackColor = false;
+			this->rbtnUser->AutoSize = true;
+			this->rbtnUser->BackColor = System::Drawing::Color::Transparent;
+			this->rbtnUser->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
+			this->rbtnUser->ForeColor = System::Drawing::Color::White;
+			this->rbtnUser->Location = System::Drawing::Point(601, 42);
+			this->rbtnUser->Name = L"rbtnUser";
+			this->rbtnUser->Size = System::Drawing::Size(94, 26);
+			this->rbtnUser->TabIndex = 5;
+			this->rbtnUser->TabStop = true;
+			this->rbtnUser->Text = L"Usuario";
+			this->rbtnUser->UseVisualStyleBackColor = false;
+			this->rbtnUser->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnUser_CheckedChanged);
 			// 
 			// btnSearch
 			// 
@@ -167,6 +175,7 @@ namespace MrBookyGUIApp {
 			this->btnSearch->TabIndex = 7;
 			this->btnSearch->Text = L"Buscar";
 			this->btnSearch->UseVisualStyleBackColor = true;
+			this->btnSearch->Click += gcnew System::EventHandler(this, &Stats::btnSearch_Click);
 			// 
 			// label2
 			// 
@@ -236,10 +245,10 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->btnSearch);
-			this->Controls->Add(this->radioButton3);
-			this->Controls->Add(this->radioButton4);
-			this->Controls->Add(this->radioButton2);
-			this->Controls->Add(this->radioButton1);
+			this->Controls->Add(this->rbtnBook);
+			this->Controls->Add(this->rbtnUser);
+			this->Controls->Add(this->rbtnGroup);
+			this->Controls->Add(this->rbtnIndividual);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->txtIdStock);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -253,5 +262,40 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
+		
+	}
+private: System::Void rbtnUser_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnUser->Checked) {
+		rbtnBook->Checked = false;
+	}
+	CheckEnableSearchButton();
+}
+
+private: System::Void rbtnBook_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnBook->Checked) {
+		rbtnUser->Checked = false;
+	}
+	CheckEnableSearchButton();
+}
+
+private: System::Void rbtnIndividual_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnIndividual->Checked) {
+		rbtnGroup->Checked = false;
+	}
+	CheckEnableSearchButton();
+}
+
+private: System::Void rbtnGroup_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (rbtnGroup->Checked) {
+		rbtnIndividual->Checked = false;
+	}
+	CheckEnableSearchButton();
+}
+private: void CheckEnableSearchButton() {
+	bool SelectedType = (rbtnUser->Checked || rbtnBook->Checked);
+	bool SelectedMode = (rbtnIndividual->Checked || rbtnGroup->Checked);
+	btnSearch->Enabled = SelectedType && SelectedMode;
+}
+};
 }
