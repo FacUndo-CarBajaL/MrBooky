@@ -120,6 +120,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BookSearchResults.cpp" />
+    <ClCompile Include="CurrentMap.cpp" />
     <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
     <ClCompile Include="AddLibrary.cpp" />
@@ -131,10 +133,18 @@
     <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="UserLoansList.cpp" />
     <ClCompile Include="UserOptionsForm.cpp" />
     <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BookSearchResults.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="CurrentMap.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MaintenanceBook.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -168,6 +178,12 @@
     <ClInclude Include="UserForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="UserLoansList.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="UserOptionsForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -176,6 +192,12 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BookSearchResults.resx">
+      <DependentUpon>BookSearchResults.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurrentMap.resx">
+      <DependentUpon>CurrentMap.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MaintenanceBook.resx">
       <DependentUpon>MaintenanceBook.h</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +230,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface.resx">
+      <DependentUpon>UserInterface.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLoansList.resx">
+      <DependentUpon>UserLoansList.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserOptionsForm.resx">
       <DependentUpon>UserOptionsForm.h</DependentUpon>
