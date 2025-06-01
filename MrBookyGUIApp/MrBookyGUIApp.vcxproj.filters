@@ -1,155 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="BookHistoryForm.cpp" />
+    <ClCompile Include="CarritoPrestamoForm.cpp" />
+    <ClCompile Include="MaintenanceBook.cpp" />
+    <ClCompile Include="AddDeliveryRobot.cpp" />
+    <ClCompile Include="AddLibrary.cpp" />
+    <ClCompile Include="BookForm.cpp" />
+    <ClCompile Include="BookReport.cpp" />
+    <ClCompile Include="BookRequest.cpp" />
+    <ClCompile Include="DispatchBooks.cpp" />
+    <ClCompile Include="LibrarianLogIn.cpp" />
+    <ClCompile Include="MainForm1.cpp" />
+    <ClCompile Include="RegisterUserForm.cpp" />
+    <ClCompile Include="ReporteGraficaClienteForm.cpp" />
+    <ClCompile Include="RobotApprove.cpp" />
+    <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="Stock.cpp" />
+    <ClCompile Include="UserForm.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="UserLoansList.cpp" />
+    <ClCompile Include="UserOptionsForm.cpp" />
+    <ClCompile Include="UserProfileForm.cpp" />
+    <ClCompile Include="UserReport.cpp" />
+    <ClCompile Include="BookResult.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BookForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UserForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="LibrarianLogIn.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Stock.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="MaintenanceBook.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UserReport.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="BookReport.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="RegisterUserForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="MainForm1.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UserOptionsForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="FoundBookForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AddDeliveryRobot.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AddLibrary.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UserProfileForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="CarritoPrestamoForm.cpp">
-    <ClCompile Include="BookSearchResults.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="ReporteGraficaClienteForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="BookHistoryForm.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInterface.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="BookRequest.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="RobotApprove.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Stats.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="DispatchBooks.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BookForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UserForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="LibrarianLogIn.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Stock.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="MaintenanceBook.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UserReport.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="BookReport.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisterUserForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="MainForm1.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UserOptionsForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="FoundBookForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AddDeliveryRobot.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AddLibrary.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="BookSearchResults.h">
-    <ClInclude Include="UserProfileForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="CarritoPrestamoForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="ReporteGraficaClienteForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="BookHistoryForm.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="UserInterface.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="BookRequest.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="RobotApprove.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Stats.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="DispatchBooks.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
+    <ClInclude Include="BookHistoryForm.h" />
+    <ClInclude Include="CarritoPrestamoForm.h" />
+    <ClInclude Include="MaintenanceBook.h" />
+    <ClInclude Include="AddDeliveryRobot.h" />
+    <ClInclude Include="AddLibrary.h" />
+    <ClInclude Include="BookForm.h" />
+    <ClInclude Include="BookReport.h" />
+    <ClInclude Include="BookRequest.h" />
+    <ClInclude Include="DispatchBooks.h" />
+    <ClInclude Include="LibrarianLogIn.h" />
+    <ClInclude Include="MainForm1.h" />
+    <ClInclude Include="RegisterUserForm.h" />
+    <ClInclude Include="ReporteGraficaClienteForm.h" />
+    <ClInclude Include="RobotApprove.h" />
+    <ClInclude Include="Stats.h" />
+    <ClInclude Include="Stock.h" />
+    <ClInclude Include="UserForm.h" />
+    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="UserLoansList.h" />
+    <ClInclude Include="UserOptionsForm.h" />
+    <ClInclude Include="UserProfileForm.h" />
+    <ClInclude Include="UserReport.h" />
+    <ClInclude Include="BookResult.h" />
   </ItemGroup>
 </Project>

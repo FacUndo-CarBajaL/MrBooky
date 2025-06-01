@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookHistoryForm.cpp" />
+    <ClCompile Include="BookResult.cpp" />
     <ClCompile Include="CarritoPrestamoForm.cpp" />
     <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
@@ -129,7 +130,6 @@
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="BookRequest.cpp" />
     <ClCompile Include="DispatchBooks.cpp" />
-    <ClCompile Include="FoundBookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="MainForm1.cpp" />
     <ClCompile Include="RegisterUserForm.cpp" />
@@ -146,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookHistoryForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="BookResult.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="CarritoPrestamoForm.h">
@@ -170,9 +173,6 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="DispatchBooks.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
-    <ClInclude Include="FoundBookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
@@ -219,6 +219,9 @@
     <EmbeddedResource Include="BookHistoryForm.resx">
       <DependentUpon>BookHistoryForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BookResult.resx">
+      <DependentUpon>BookResult.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CarritoPrestamoForm.resx">
       <DependentUpon>CarritoPrestamoForm.h</DependentUpon>
     </EmbeddedResource>
@@ -242,9 +245,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DispatchBooks.resx">
       <DependentUpon>DispatchBooks.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FoundBookForm.resx">
-      <DependentUpon>FoundBookForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianLogIn.resx">
       <DependentUpon>LibrarianLogIn.h</DependentUpon>
