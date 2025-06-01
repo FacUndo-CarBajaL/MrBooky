@@ -166,6 +166,7 @@ namespace MrBookyGUIApp {
 			// 
 			// btnSearch
 			// 
+			this->btnSearch->BackColor = System::Drawing::Color::White;
 			this->btnSearch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnSearch->ForeColor = System::Drawing::Color::Black;
@@ -174,7 +175,7 @@ namespace MrBookyGUIApp {
 			this->btnSearch->Size = System::Drawing::Size(111, 32);
 			this->btnSearch->TabIndex = 7;
 			this->btnSearch->Text = L"Buscar";
-			this->btnSearch->UseVisualStyleBackColor = true;
+			this->btnSearch->UseVisualStyleBackColor = false;
 			this->btnSearch->Click += gcnew System::EventHandler(this, &Stats::btnSearch_Click);
 			// 
 			// label2
@@ -223,6 +224,7 @@ namespace MrBookyGUIApp {
 			// 
 			// button1
 			// 
+			this->button1->BackColor = System::Drawing::Color::White;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::Color::Black;
@@ -231,7 +233,7 @@ namespace MrBookyGUIApp {
 			this->button1->Size = System::Drawing::Size(226, 32);
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Generar Reporte";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			// 
 			// Stats
 			// 

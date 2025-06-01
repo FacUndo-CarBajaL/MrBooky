@@ -87,6 +87,7 @@ namespace MrBookyGUIApp {
 			// 
 			// btnLoans
 			// 
+			this->btnLoans->BackColor = System::Drawing::Color::White;
 			this->btnLoans->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnLoans->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
@@ -95,7 +96,7 @@ namespace MrBookyGUIApp {
 			this->btnLoans->Size = System::Drawing::Size(515, 42);
 			this->btnLoans->TabIndex = 1;
 			this->btnLoans->Text = L"Ver solicitudes de préstamos";
-			this->btnLoans->UseVisualStyleBackColor = true;
+			this->btnLoans->UseVisualStyleBackColor = false;
 			this->btnLoans->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLoans_Click);
 			// 
 			// btnStock
@@ -109,11 +110,12 @@ namespace MrBookyGUIApp {
 			this->btnStock->Size = System::Drawing::Size(515, 41);
 			this->btnStock->TabIndex = 2;
 			this->btnStock->Text = L"Verificar y actualizar Stock";
-			this->btnStock->UseVisualStyleBackColor = true;
+			this->btnStock->UseVisualStyleBackColor = false;
 			this->btnStock->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnStock_Click);
 			// 
 			// btnStats
 			// 
+			this->btnStats->BackColor = System::Drawing::Color::White;
 			this->btnStats->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnStats->ForeColor = System::Drawing::Color::Black;
@@ -122,11 +124,12 @@ namespace MrBookyGUIApp {
 			this->btnStats->Size = System::Drawing::Size(515, 41);
 			this->btnStats->TabIndex = 3;
 			this->btnStats->Text = L"Ver estadísticas";
-			this->btnStats->UseVisualStyleBackColor = true;
+			this->btnStats->UseVisualStyleBackColor = false;
 			this->btnStats->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnStats_Click);
 			// 
 			// btnBooksDispatch
 			// 
+			this->btnBooksDispatch->BackColor = System::Drawing::Color::White;
 			this->btnBooksDispatch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnBooksDispatch->ForeColor = System::Drawing::Color::Black;
@@ -135,7 +138,7 @@ namespace MrBookyGUIApp {
 			this->btnBooksDispatch->Size = System::Drawing::Size(515, 41);
 			this->btnBooksDispatch->TabIndex = 4;
 			this->btnBooksDispatch->Text = L"Despacho de Libros";
-			this->btnBooksDispatch->UseVisualStyleBackColor = true;
+			this->btnBooksDispatch->UseVisualStyleBackColor = false;
 			this->btnBooksDispatch->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnBooksDispatch_Click);
 			// 
 			// label2
@@ -193,7 +196,6 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
-
 private: System::Void btnLoans_Click(System::Object^ sender, System::EventArgs^ e) {
 	BookRequest^ bookRequestForm = gcnew BookRequest();
 	bookRequestForm->Show();

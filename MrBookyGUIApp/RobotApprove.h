@@ -83,7 +83,7 @@ namespace MrBookyGUIApp {
 			// 
 			// button1
 			// 
-			this->button1->BackColor = System::Drawing::Color::Transparent;
+			this->button1->BackColor = System::Drawing::Color::White;
 			this->button1->ForeColor = System::Drawing::Color::Black;
 			this->button1->Location = System::Drawing::Point(404, 399);
 			this->button1->Name = L"button1";
@@ -104,7 +104,7 @@ namespace MrBookyGUIApp {
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::Color::White;
-			this->Margin = System::Windows::Forms::Padding(5, 5, 5, 5);
+			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"RobotApprove";
 			this->Text = L"RobotApprove";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();

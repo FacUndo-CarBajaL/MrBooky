@@ -68,6 +68,7 @@ namespace MrBookyGUIApp {
 			// 
 			// button1
 			// 
+			this->button1->BackColor = System::Drawing::Color::White;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14));
 			this->button1->ForeColor = System::Drawing::Color::Black;
 			this->button1->Location = System::Drawing::Point(339, 411);
@@ -75,7 +76,7 @@ namespace MrBookyGUIApp {
 			this->button1->Size = System::Drawing::Size(277, 37);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Libros Despachados";
-			this->button1->UseVisualStyleBackColor = true;
+			this->button1->UseVisualStyleBackColor = false;
 			// 
 			// DispatchBooks
 			// 
