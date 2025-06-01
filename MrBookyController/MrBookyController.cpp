@@ -427,11 +427,11 @@ int MrBookyController::Controller::DeleteCartItem(int cartItemId)
 
 void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 {
-	for each (LoanOrder^ registeredLoanOrder in loanOrders) {
+	/*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
 		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
 			throw gcnew DuplicateBookException("ID ya utilizado.");
 		}
-	}
+	}*/
 	loanOrders->Add(loanOrder);
 	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
 }
@@ -440,11 +440,10 @@ LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 {
 	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
 	for each (LoanOrder ^ loanOrder in loanOrders) {
-		if (loanOrder->Client == user) {
+		if (loanOrder->Client->UserID == user->UserID) {
 			return loanOrder;
 		}
-		else {
-			return nullptr;
-		}
 	}
+
+	return nullptr;
 }

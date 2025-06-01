@@ -9,6 +9,7 @@
 using namespace System;
 
 namespace MrBookyModel {
+    [Serializable]
     public ref class Point {
         private:
             int X;
