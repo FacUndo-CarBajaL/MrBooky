@@ -11,6 +11,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    [Serializable]
     public ref class LoanCart {
     public:
         int CartID;

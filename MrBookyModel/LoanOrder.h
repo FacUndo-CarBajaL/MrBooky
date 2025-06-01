@@ -13,18 +13,21 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    [Serializable]
     public ref class LoanOrder {
     public:
-        int LoanOrderID;
-        Client^ Client;
-        DateTime^ LoanDate;
-        DateTime^ DueDate;
-        List<Loan^>^ Loans;
-        Boolean IsDelivery;
-        int DeliveryRobotID;
-        DeliveryPoint^ DeliveryPoint;
+        property int LoanOrderID;
+        property Client^ Client;
+        property DateTime^ LoanDate;
+        property DateTime^ DueDate;
+        property List<Loan^>^ Loans;
+        property Boolean IsDelivery;
+        property int DeliveryRobotID;
+        property DeliveryPoint^ DeliveryPoint;
 
-        LoanOrder() {};
+        LoanOrder() {
+            Loans = gcnew List<Loan^>();
+        };
         void AddLoan();
 
         void ReturnBooks();

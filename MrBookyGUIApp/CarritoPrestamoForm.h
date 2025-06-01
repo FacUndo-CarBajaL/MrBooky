@@ -11,6 +11,8 @@ namespace MrBookyGUIApp {
 	using namespace MrBookyModel;
 	using namespace MrBookyController;
 	using namespace MrBookyPersistance;
+	using namespace System::IO;
+	using namespace System::Drawing::Imaging;
 
 	/// <summary>
 	/// Resumen de CarritoPrestamoForm
@@ -38,18 +40,22 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ lblRobot;
+
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ lblCapacidadTotalRobot;
+
 	private: System::Windows::Forms::Button^ btnVaciarCarrito;
 
 	private: System::Windows::Forms::Button^ btnConfirmarPrestamos;
 	private: System::Windows::Forms::RichTextBox^ txtTotalPesoLibros;
-	private: System::Windows::Forms::RichTextBox^ txtCapacidadPesoCarrito;
+	private: System::Windows::Forms::RichTextBox^ txtCapacidadPesoRobot;
+
+	private: System::Windows::Forms::ComboBox^ cmbRobots;
 
 
 
-	private: System::Windows::Forms::ComboBox^ cmbCarritos;
+
 
 	private: System::Windows::Forms::DataGridView^ dgvPrestamos;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaID;
@@ -60,6 +66,34 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaEstado;
 	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ ColumnaEliminar;
+	private: System::Windows::Forms::CheckBox^ chLibreria;
+	private: System::Windows::Forms::CheckBox^ chRobot;
+
+
+	private: System::Windows::Forms::Label^ lblBiblioteca;
+	private: System::Windows::Forms::ComboBox^ cmbBibliotecas;
+	private: System::Windows::Forms::Label^ lblHorarioBiblioteca;
+	private: System::Windows::Forms::RichTextBox^ txtHorario;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,14 +135,14 @@ namespace MrBookyGUIApp {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(CarritoPrestamoForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->lblRobot = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->lblCapacidadTotalRobot = (gcnew System::Windows::Forms::Label());
 			this->btnVaciarCarrito = (gcnew System::Windows::Forms::Button());
 			this->btnConfirmarPrestamos = (gcnew System::Windows::Forms::Button());
 			this->txtTotalPesoLibros = (gcnew System::Windows::Forms::RichTextBox());
-			this->txtCapacidadPesoCarrito = (gcnew System::Windows::Forms::RichTextBox());
-			this->cmbCarritos = (gcnew System::Windows::Forms::ComboBox());
+			this->txtCapacidadPesoRobot = (gcnew System::Windows::Forms::RichTextBox());
+			this->cmbRobots = (gcnew System::Windows::Forms::ComboBox());
 			this->dgvPrestamos = (gcnew System::Windows::Forms::DataGridView());
 			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaTitulo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -118,6 +152,12 @@ namespace MrBookyGUIApp {
 			this->ColumnaEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaImagen = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->ColumnaEliminar = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->chLibreria = (gcnew System::Windows::Forms::CheckBox());
+			this->chRobot = (gcnew System::Windows::Forms::CheckBox());
+			this->lblBiblioteca = (gcnew System::Windows::Forms::Label());
+			this->cmbBibliotecas = (gcnew System::Windows::Forms::ComboBox());
+			this->lblHorarioBiblioteca = (gcnew System::Windows::Forms::Label());
+			this->txtHorario = (gcnew System::Windows::Forms::RichTextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvPrestamos))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -134,18 +174,18 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Carrito de Prestamo";
 			// 
-			// label2
+			// lblRobot
 			// 
-			this->label2->AutoSize = true;
-			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblRobot->AutoSize = true;
+			this->lblRobot->BackColor = System::Drawing::Color::Transparent;
+			this->lblRobot->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label2->Location = System::Drawing::Point(541, 61);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(120, 34);
-			this->label2->TabIndex = 1;
-			this->label2->Text = L"Robot :";
+			this->lblRobot->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblRobot->Location = System::Drawing::Point(541, 61);
+			this->lblRobot->Name = L"lblRobot";
+			this->lblRobot->Size = System::Drawing::Size(120, 34);
+			this->lblRobot->TabIndex = 1;
+			this->lblRobot->Text = L"Robot :";
 			// 
 			// label3
 			// 
@@ -160,18 +200,18 @@ namespace MrBookyGUIApp {
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Total de Libros:";
 			// 
-			// label4
+			// lblCapacidadTotalRobot
 			// 
-			this->label4->AutoSize = true;
-			this->label4->BackColor = System::Drawing::Color::Transparent;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Artifakt Element", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->lblCapacidadTotalRobot->AutoSize = true;
+			this->lblCapacidadTotalRobot->BackColor = System::Drawing::Color::Transparent;
+			this->lblCapacidadTotalRobot->Font = (gcnew System::Drawing::Font(L"Artifakt Element", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label4->Location = System::Drawing::Point(541, 108);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(205, 35);
-			this->label4->TabIndex = 3;
-			this->label4->Text = L"Capacidad Total:";
+			this->lblCapacidadTotalRobot->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblCapacidadTotalRobot->Location = System::Drawing::Point(541, 108);
+			this->lblCapacidadTotalRobot->Name = L"lblCapacidadTotalRobot";
+			this->lblCapacidadTotalRobot->Size = System::Drawing::Size(205, 35);
+			this->lblCapacidadTotalRobot->TabIndex = 3;
+			this->lblCapacidadTotalRobot->Text = L"Capacidad Total:";
 			// 
 			// btnVaciarCarrito
 			// 
@@ -199,25 +239,26 @@ namespace MrBookyGUIApp {
 			this->txtTotalPesoLibros->TabIndex = 6;
 			this->txtTotalPesoLibros->Text = L"";
 			// 
-			// txtCapacidadPesoCarrito
+			// txtCapacidadPesoRobot
 			// 
-			this->txtCapacidadPesoCarrito->Location = System::Drawing::Point(762, 108);
-			this->txtCapacidadPesoCarrito->Name = L"txtCapacidadPesoCarrito";
-			this->txtCapacidadPesoCarrito->Size = System::Drawing::Size(132, 35);
-			this->txtCapacidadPesoCarrito->TabIndex = 7;
-			this->txtCapacidadPesoCarrito->Text = L"";
+			this->txtCapacidadPesoRobot->Location = System::Drawing::Point(762, 108);
+			this->txtCapacidadPesoRobot->Name = L"txtCapacidadPesoRobot";
+			this->txtCapacidadPesoRobot->Size = System::Drawing::Size(132, 35);
+			this->txtCapacidadPesoRobot->TabIndex = 7;
+			this->txtCapacidadPesoRobot->Text = L"";
 			// 
-			// cmbCarritos
+			// cmbRobots
 			// 
-			this->cmbCarritos->FormattingEnabled = true;
-			this->cmbCarritos->Location = System::Drawing::Point(682, 71);
-			this->cmbCarritos->Name = L"cmbCarritos";
-			this->cmbCarritos->Size = System::Drawing::Size(284, 24);
-			this->cmbCarritos->TabIndex = 8;
+			this->cmbRobots->FormattingEnabled = true;
+			this->cmbRobots->Location = System::Drawing::Point(682, 71);
+			this->cmbRobots->Name = L"cmbRobots";
+			this->cmbRobots->Size = System::Drawing::Size(284, 24);
+			this->cmbRobots->TabIndex = 8;
 			// 
 			// dgvPrestamos
 			// 
 			this->dgvPrestamos->AllowUserToAddRows = false;
+			this->dgvPrestamos->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dgvPrestamos->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvPrestamos->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->ColumnaID,
@@ -226,8 +267,8 @@ namespace MrBookyGUIApp {
 			this->dgvPrestamos->Location = System::Drawing::Point(39, 252);
 			this->dgvPrestamos->Name = L"dgvPrestamos";
 			this->dgvPrestamos->RowHeadersWidth = 51;
-			this->dgvPrestamos->RowTemplate->Height = 24;
-			this->dgvPrestamos->Size = System::Drawing::Size(1037, 231);
+			this->dgvPrestamos->RowTemplate->Height = 110;
+			this->dgvPrestamos->Size = System::Drawing::Size(1037, 549);
 			this->dgvPrestamos->TabIndex = 9;
 			this->dgvPrestamos->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CarritoPrestamoForm::dgvPrestamos_CellClick);
 			this->dgvPrestamos->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CarritoPrestamoForm::dgvPrestamos_CellContentClick);
@@ -237,49 +278,43 @@ namespace MrBookyGUIApp {
 			this->ColumnaID->HeaderText = L"ID";
 			this->ColumnaID->MinimumWidth = 6;
 			this->ColumnaID->Name = L"ColumnaID";
-			this->ColumnaID->Width = 125;
 			// 
 			// ColumnaTitulo
 			// 
 			this->ColumnaTitulo->HeaderText = L"Titulo";
 			this->ColumnaTitulo->MinimumWidth = 6;
 			this->ColumnaTitulo->Name = L"ColumnaTitulo";
-			this->ColumnaTitulo->Width = 125;
 			// 
 			// ColumnaTiempo
 			// 
-			this->ColumnaTiempo->HeaderText = L"Tiempo de Prestamo";
+			this->ColumnaTiempo->HeaderText = L"Tiempo de Prestamo (dias)";
 			this->ColumnaTiempo->MinimumWidth = 6;
 			this->ColumnaTiempo->Name = L"ColumnaTiempo";
-			this->ColumnaTiempo->Width = 125;
 			// 
 			// ColumnaPeso
 			// 
-			this->ColumnaPeso->HeaderText = L"Peso";
+			this->ColumnaPeso->HeaderText = L"Peso (kg)";
 			this->ColumnaPeso->MinimumWidth = 6;
 			this->ColumnaPeso->Name = L"ColumnaPeso";
-			this->ColumnaPeso->Width = 125;
 			// 
 			// ColumnaAutor
 			// 
 			this->ColumnaAutor->HeaderText = L"Autor";
 			this->ColumnaAutor->MinimumWidth = 6;
 			this->ColumnaAutor->Name = L"ColumnaAutor";
-			this->ColumnaAutor->Width = 125;
 			// 
 			// ColumnaEstado
 			// 
 			this->ColumnaEstado->HeaderText = L"Estado";
 			this->ColumnaEstado->MinimumWidth = 6;
 			this->ColumnaEstado->Name = L"ColumnaEstado";
-			this->ColumnaEstado->Width = 125;
 			// 
 			// ColumnaImagen
 			// 
 			this->ColumnaImagen->HeaderText = L"Imagen";
+			this->ColumnaImagen->ImageLayout = System::Windows::Forms::DataGridViewImageCellLayout::Zoom;
 			this->ColumnaImagen->MinimumWidth = 6;
 			this->ColumnaImagen->Name = L"ColumnaImagen";
-			this->ColumnaImagen->Width = 125;
 			// 
 			// ColumnaEliminar
 			// 
@@ -290,24 +325,98 @@ namespace MrBookyGUIApp {
 			this->ColumnaEliminar->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::Automatic;
 			this->ColumnaEliminar->Text = L"Eliminar";
 			this->ColumnaEliminar->UseColumnTextForButtonValue = true;
-			this->ColumnaEliminar->Width = 125;
+			// 
+			// chLibreria
+			// 
+			this->chLibreria->AutoSize = true;
+			this->chLibreria->BackColor = System::Drawing::Color::Transparent;
+			this->chLibreria->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->chLibreria->Location = System::Drawing::Point(547, 22);
+			this->chLibreria->Name = L"chLibreria";
+			this->chLibreria->Size = System::Drawing::Size(139, 20);
+			this->chLibreria->TabIndex = 10;
+			this->chLibreria->Text = L"Recojo en Libreria";
+			this->chLibreria->UseVisualStyleBackColor = false;
+			this->chLibreria->CheckedChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::chLibreria_CheckedChanged);
+			// 
+			// chRobot
+			// 
+			this->chRobot->AutoSize = true;
+			this->chRobot->BackColor = System::Drawing::Color::Transparent;
+			this->chRobot->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->chRobot->Location = System::Drawing::Point(702, 22);
+			this->chRobot->Name = L"chRobot";
+			this->chRobot->Size = System::Drawing::Size(142, 20);
+			this->chRobot->TabIndex = 11;
+			this->chRobot->Text = L"Enviado por Robot";
+			this->chRobot->UseVisualStyleBackColor = false;
+			this->chRobot->CheckedChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::chRobot_CheckedChanged);
+			// 
+			// lblBiblioteca
+			// 
+			this->lblBiblioteca->AutoSize = true;
+			this->lblBiblioteca->BackColor = System::Drawing::Color::Transparent;
+			this->lblBiblioteca->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblBiblioteca->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblBiblioteca->Location = System::Drawing::Point(541, 61);
+			this->lblBiblioteca->Name = L"lblBiblioteca";
+			this->lblBiblioteca->Size = System::Drawing::Size(163, 34);
+			this->lblBiblioteca->TabIndex = 12;
+			this->lblBiblioteca->Text = L"Biblioteca";
+			// 
+			// cmbBibliotecas
+			// 
+			this->cmbBibliotecas->FormattingEnabled = true;
+			this->cmbBibliotecas->Location = System::Drawing::Point(724, 71);
+			this->cmbBibliotecas->Name = L"cmbBibliotecas";
+			this->cmbBibliotecas->Size = System::Drawing::Size(284, 24);
+			this->cmbBibliotecas->TabIndex = 13;
+			// 
+			// lblHorarioBiblioteca
+			// 
+			this->lblHorarioBiblioteca->AutoSize = true;
+			this->lblHorarioBiblioteca->BackColor = System::Drawing::Color::Transparent;
+			this->lblHorarioBiblioteca->Font = (gcnew System::Drawing::Font(L"Artifakt Element", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblHorarioBiblioteca->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->lblHorarioBiblioteca->Location = System::Drawing::Point(541, 108);
+			this->lblHorarioBiblioteca->Name = L"lblHorarioBiblioteca";
+			this->lblHorarioBiblioteca->Size = System::Drawing::Size(229, 35);
+			this->lblHorarioBiblioteca->TabIndex = 14;
+			this->lblHorarioBiblioteca->Text = L"Horario Biblioteca";
+			// 
+			// txtHorario
+			// 
+			this->txtHorario->Location = System::Drawing::Point(781, 108);
+			this->txtHorario->Name = L"txtHorario";
+			this->txtHorario->Size = System::Drawing::Size(245, 38);
+			this->txtHorario->TabIndex = 15;
+			this->txtHorario->Text = L"";
 			// 
 			// CarritoPrestamoForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(1088, 576);
+			this->ClientSize = System::Drawing::Size(1107, 813);
+			this->Controls->Add(this->txtHorario);
+			this->Controls->Add(this->lblHorarioBiblioteca);
+			this->Controls->Add(this->cmbBibliotecas);
+			this->Controls->Add(this->lblBiblioteca);
+			this->Controls->Add(this->chRobot);
+			this->Controls->Add(this->chLibreria);
 			this->Controls->Add(this->dgvPrestamos);
-			this->Controls->Add(this->cmbCarritos);
-			this->Controls->Add(this->txtCapacidadPesoCarrito);
+			this->Controls->Add(this->cmbRobots);
+			this->Controls->Add(this->txtCapacidadPesoRobot);
 			this->Controls->Add(this->txtTotalPesoLibros);
 			this->Controls->Add(this->btnConfirmarPrestamos);
 			this->Controls->Add(this->btnVaciarCarrito);
-			this->Controls->Add(this->label4);
+			this->Controls->Add(this->lblCapacidadTotalRobot);
 			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
+			this->Controls->Add(this->lblRobot);
 			this->Controls->Add(this->label1);
+			this->MaximizeBox = false;
 			this->Name = L"CarritoPrestamoForm";
 			this->Text = L"CarritoPrestamoForm";
 			this->Load += gcnew System::EventHandler(this, &CarritoPrestamoForm::CarritoPrestamoForm_Load);
@@ -317,6 +426,85 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+		void SimularLoanOrder() {
+			LoanOrder^ loanOrder_1 = gcnew LoanOrder();
+
+			////////////////////////////////////////////////////////////
+			Loan^ loan1 = gcnew Loan();
+			Book^ book1 = gcnew Book();
+			book1->Title = "Calculo Integral";
+			book1->LoanTime = 12;
+			book1->Weight = 0.98;
+			book1->Author = "Cecilia Gaita";
+			String^ path1 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\CalculoIntegral.png";
+			if (!System::IO::File::Exists(path1)) {
+				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
+				return;
+			}
+			FileStream^ fs1 = gcnew FileStream(path1, FileMode::Open, FileAccess::Read);
+			Bitmap^ original1 = gcnew Bitmap(fs1);
+			Bitmap^ bmp1 = gcnew Bitmap(original1); // <- copia segura
+			fs1->Close();
+			MemoryStream^ ms1 = gcnew MemoryStream();
+			bmp1->Save(ms1, ImageFormat::Jpeg); // ya no lanza error
+			book1->Photo = ms1->ToArray();
+			loan1->LoanID = 123;
+			loan1->Status = "Disponible";
+			loan1->Book = book1;
+			loanOrder_1->Loans->Add(loan1);
+			////////////////////////////////////////////////////////////
+			Loan^ loan2 = gcnew Loan();
+			Book^ book2 = gcnew Book();
+			book2->Title = "Fisica 3";
+			book2->LoanTime = 20;
+			book2->Weight = 0.5;
+			book2->Author = "Hugo Medina";
+			String^ path2 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\Fisica3.jpg";
+			if (!System::IO::File::Exists(path2)) {
+				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
+				return;
+			}
+			FileStream^ fs2 = gcnew FileStream(path2, FileMode::Open, FileAccess::Read);
+			Bitmap^ original2 = gcnew Bitmap(fs2);
+			Bitmap^ bmp2 = gcnew Bitmap(original2); // <- copia segura
+			fs2->Close();
+			MemoryStream^ ms2 = gcnew MemoryStream();
+			bmp2->Save(ms2, ImageFormat::Jpeg); // ya no lanza error
+			book2->Photo = ms2->ToArray();
+			loan2->LoanID = 1234;
+			loan2->Status = "Disponible";
+			loan2->Book = book2;
+			loanOrder_1->Loans->Add(loan2);
+			////////////////////////////////////////////////////////////
+			Loan^ loan3 = gcnew Loan();
+			Book^ book3 = gcnew Book();
+			book3->Title = "Dinamica";
+			book3->LoanTime = 9999;
+			book3->Weight = 1.2;
+			book3->Author = "Jorge Rodriguez";
+			String^ path3 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\Dinamica.jpg";
+			if (!System::IO::File::Exists(path3)) {
+				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
+				return;
+			}
+			FileStream^ fs3 = gcnew FileStream(path3, FileMode::Open, FileAccess::Read);
+			Bitmap^ original3 = gcnew Bitmap(fs3);
+			Bitmap^ bmp3 = gcnew Bitmap(original3); // <- copia segura
+			fs3->Close();
+			MemoryStream^ ms3 = gcnew MemoryStream();
+			bmp3->Save(ms3, ImageFormat::Jpeg); // ya no lanza error
+			book3->Photo = ms3->ToArray();
+			loan3->LoanID = 12345;
+			loan3->Status = "Disponible";
+			loan3->Book = book3;
+			loanOrder_1->Loans->Add(loan3);
+			////////////////////////////////////////////////////////////
+
+
+			Client^ user = (Client^)Persistance::LoadBinaryFile("TempUser.bin");
+			loanOrder_1->Client = user;
+			Controller::AddLoanOrder(loanOrder_1);
+		};
 		void ShowLoans() {
 			User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
 			LoanOrder^ loanOrder = Controller::SearchLoanOrderByUser(user);
@@ -327,7 +515,7 @@ namespace MrBookyGUIApp {
 					int index = dgvPrestamos->Rows->Add(gcnew array<String^>{
 						"" + loans[i]->LoanID,
 							loans[i]->Book->Title,
-							"" + loans[i]->ReturnDate,
+							"" + loans[i]->Book->LoanTime,
 							"" + loans[i]->Book->Weight,
 							loans[i]->Book->Author,
 							loans[i]->Status}
@@ -346,18 +534,98 @@ namespace MrBookyGUIApp {
 			}
 		};
 
-	private: System::Void CarritoPrestamoForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		//ShowLoans();
-		dgvPrestamos->Rows->Add(gcnew array<String^>{
-			"1", "Pinocho", "12 dias", "15 kg", "Mario", "Disponible"});
-	}
+		void UpdateBooksWeight() {
+			double total = 0.0;
+			for (int i = 0; i < dgvPrestamos->Rows->Count; i++) {
+
+				Object^ valor = dgvPrestamos->Rows[i]->Cells[3]->Value;
+				if (valor != nullptr) {
+					double pesoFila = Double::Parse(valor->ToString());
+					total = pesoFila + total;
+				}
+			}
+			txtTotalPesoLibros->Text = total.ToString("F2");
+		};
+
+private: System::Void CarritoPrestamoForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	// Ocultar opciones robot
+	cmbRobots->Visible = false;
+	lblRobot->Visible = false;
+	lblCapacidadTotalRobot->Visible = false;
+	txtCapacidadPesoRobot->Visible = false;
+
+	// Ocultar opciones biblioteca
+	cmbBibliotecas->Visible = false;
+	lblBiblioteca->Visible = false;
+	txtHorario->Visible = false;
+	lblHorarioBiblioteca->Visible = false;
+
+		SimularLoanOrder();
+		ShowLoans();
+		UpdateBooksWeight();
+}
+
 private: System::Void dgvPrestamos_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 
-	if (e->ColumnIndex == 7) {
-		dgvPrestamos->Rows->Clear();
+	if (e->ColumnIndex == 7 && e->RowIndex >= 0) {  // Asegura que es una celda válida
+		if (MessageBox::Show("¿Eliminar este préstamo?", "Confirmar", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
+			dgvPrestamos->Rows->RemoveAt(e->RowIndex);
+			UpdateBooksWeight();
+		}
 	}
 }
 private: System::Void dgvPrestamos_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+}
+
+private: System::Void chLibreria_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (chLibreria->Checked) {
+		chRobot->Checked = false;
+
+		// Mostrar opciones biblioteca
+		cmbBibliotecas->Visible = true;
+		lblBiblioteca->Visible = true;
+		txtHorario->Visible = true;
+		lblHorarioBiblioteca->Visible = true;
+
+		// Ocultar opciones robot
+		cmbRobots->Visible = false;
+		lblRobot->Visible = false;
+		lblCapacidadTotalRobot->Visible = false;
+		txtCapacidadPesoRobot->Visible = false;
+	}
+	else {
+		// Ocultar opciones biblioteca
+		cmbBibliotecas->Visible = false;
+		lblBiblioteca->Visible = false;
+		txtHorario->Visible = false;
+		lblHorarioBiblioteca->Visible = false;
+	}
+}
+
+
+private: System::Void chRobot_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+	if (chRobot->Checked) {
+		chLibreria->Checked = false;
+
+		// Ocultar opciones biblioteca
+		cmbBibliotecas->Visible = false;
+		lblBiblioteca->Visible = false;
+		txtHorario->Visible = false;
+		lblHorarioBiblioteca->Visible = false;
+
+		// Mostrar opciones robot
+		cmbRobots->Visible = true;
+		lblRobot->Visible = true;
+		lblCapacidadTotalRobot->Visible = true;
+		txtCapacidadPesoRobot->Visible = true;
+	}
+	else {
+		// Ocultar opciones robot
+		cmbRobots->Visible = false;
+		lblRobot->Visible = false;
+		lblCapacidadTotalRobot->Visible = false;
+		txtCapacidadPesoRobot->Visible = false;
+	}
 }
 };
 }
