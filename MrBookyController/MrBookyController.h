@@ -4,6 +4,8 @@ using namespace System;
 using namespace System::Collections::Generic;
 using namespace MrBookyModel;
 using namespace MrBookyPersistance;
+using namespace System::IO;
+using namespace System::IO::Ports;
 
 namespace MrBookyController {
 	public ref class Controller
