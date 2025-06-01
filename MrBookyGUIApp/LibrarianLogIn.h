@@ -154,26 +154,6 @@ namespace MrBookyGUIApp {
 			this->label2->TabIndex = 5;
 			this->label2->Text = L"Bibliotecario, Bienvenido";
 			// 
-			// btnRobot
-			// 
-			this->btnRobot->Location = System::Drawing::Point(336, 461);
-			this->btnRobot->Name = L"btnRobot";
-			this->btnRobot->Size = System::Drawing::Size(258, 34);
-			this->btnRobot->TabIndex = 6;
-			this->btnRobot->Text = L"Robot";
-			this->btnRobot->UseVisualStyleBackColor = true;
-			this->btnRobot->Click += gcnew System::EventHandler(this, &LibrarianLogIn::button1_Click);
-			// 
-			// btnLibreria
-			// 
-			this->btnLibreria->Location = System::Drawing::Point(336, 501);
-			this->btnLibreria->Name = L"btnLibreria";
-			this->btnLibreria->Size = System::Drawing::Size(258, 34);
-			this->btnLibreria->TabIndex = 7;
-			this->btnLibreria->Text = L"Libreria";
-			this->btnLibreria->UseVisualStyleBackColor = true;
-			this->btnLibreria->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLibreria_Click);
-			// 
 			// LibrarianLogIn
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -212,15 +192,6 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
 private: System::Void btnBooksDispatch_Click(System::Object^ sender, System::EventArgs^ e) {
 	DispatchBooks^ dispatchBooksForm = gcnew DispatchBooks();
 	dispatchBooksForm->Show();
-}
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	AddDeliveryRobot^ deliveryRobot = gcnew AddDeliveryRobot();
-	deliveryRobot->Show();
-
-}
-private: System::Void btnLibreria_Click(System::Object^ sender, System::EventArgs^ e) {
-	AddLibrary^ libreria = gcnew AddLibrary();
-	libreria->Show();
 }
 };
 }

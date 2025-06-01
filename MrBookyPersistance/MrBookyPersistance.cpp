@@ -280,7 +280,7 @@ void MrBookyPersistance::Persistance::PersistBinaryFile(String^ fileName, Object
 	FileStream^ file;
 	BinaryFormatter^ formatter = gcnew BinaryFormatter();
 	try {
-		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		file = gcnew FileStream(fileName, FileMode::Append, FileAccess::Write);
 		formatter->Serialize(file, persistObject);
 	}
 	catch (Exception^ ex) { throw ex; }
@@ -292,13 +292,17 @@ void MrBookyPersistance::Persistance::PersistBinaryFile(String^ fileName, Object
 Object^ MrBookyPersistance::Persistance::LoadBinaryFile(String^ fileName)
 {
 	FileStream^ file;
-	Object^ result;
+	List<Object^>^ result = gcnew List<Object^>();
 	BinaryFormatter^ formatter;
 	try {
 		if (File::Exists(fileName)) {
 			file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
 			formatter = gcnew BinaryFormatter();
-			result = formatter->Deserialize(file);
+			//result = formatter->Deserialize(file);
+			while (file->Position < file->Length) {
+				Object^ obj = formatter->Deserialize(file);
+				result->Add(obj);
+			}
 		}
 	}
 	catch (Exception^ ex) {
