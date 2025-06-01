@@ -142,7 +142,7 @@ namespace MrBookyGUIApp {
 				static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
 			this->btnIngresar->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(128)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)), static_cast<System::Int32>(static_cast<System::Byte>(255)));
-			this->btnIngresar->Location = System::Drawing::Point(327, 294);
+			this->btnIngresar->Location = System::Drawing::Point(323, 290);
 			this->btnIngresar->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnIngresar->Name = L"btnIngresar";
 			this->btnIngresar->Size = System::Drawing::Size(95, 25);
