@@ -148,7 +148,7 @@ namespace MrBookyGUIApp {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(183, 37);
+			this->label2->Location = System::Drawing::Point(183, 46);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(545, 51);
 			this->label2->TabIndex = 5;
