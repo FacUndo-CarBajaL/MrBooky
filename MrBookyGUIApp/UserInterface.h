@@ -1,5 +1,5 @@
 #pragma once
-#include "BookSearchResults.h"
+#include "BookResult.h"
 
 namespace MrBookyGUIApp {
 
@@ -240,7 +240,7 @@ namespace MrBookyGUIApp {
 		// Al presionar el botón de búsqueda se debe dirigir al usuario a la ventana de resultados de búsqueda.
 		// Solo se debe abrir la ventana de resultados si se ha ingresado algún criterio de búsqueda.
 		if (System::String::IsNullOrEmpty(BookTitletxt->Text->Trim()) == false) {
-			BookSearchResults^ searchResultsForm = gcnew BookSearchResults();
+			BookResult^ searchResultsForm = gcnew BookResult();
 			searchResultsForm->ShowDialog();
 		}
 		else {

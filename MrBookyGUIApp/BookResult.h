@@ -15,12 +15,14 @@ namespace MrBookyGUIApp {
 	public ref class BookResult : public System::Windows::Forms::Form
 	{
 	public:
-		BookResult(void)
+		BookResult(List<Book^>^ books)
 		{
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			// Método para llenar el DataGridView con los libros
+			//ShowBooks(books);
 		}
 
 	protected:
@@ -42,9 +44,19 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookAuthor;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookYear;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookDescription;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookStatus;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookTimeLoan;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookImage;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ LoanBook;
+
+
+
+
+
+
+
+
 
 	private:
 		/// <summary>
@@ -66,6 +78,8 @@ namespace MrBookyGUIApp {
 			this->BookName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookAuthor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookYear = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookDescription = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->BookStatus = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookTimeLoan = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookImage = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->LoanBook = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
@@ -82,20 +96,20 @@ namespace MrBookyGUIApp {
 			this->label1->Size = System::Drawing::Size(125, 25);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"RESULTADOS";
-			this->label1->Click += gcnew System::EventHandler(this, &BookResult::label1_Click);
 			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(10) {
 				this->SeeReviews,
-					this->StarsRevies, this->BookName, this->BookAuthor, this->BookYear, this->BookTimeLoan, this->BookImage, this->LoanBook
+					this->StarsRevies, this->BookName, this->BookAuthor, this->BookYear, this->BookDescription, this->BookStatus, this->BookTimeLoan,
+					this->BookImage, this->LoanBook
 			});
 			this->dataGridView1->Location = System::Drawing::Point(17, 95);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(1053, 203);
+			this->dataGridView1->Size = System::Drawing::Size(1304, 203);
 			this->dataGridView1->TabIndex = 1;
 			// 
 			// SeeReviews
@@ -133,6 +147,20 @@ namespace MrBookyGUIApp {
 			this->BookYear->Name = L"BookYear";
 			this->BookYear->Width = 125;
 			// 
+			// BookDescription
+			// 
+			this->BookDescription->HeaderText = L"Descripción";
+			this->BookDescription->MinimumWidth = 6;
+			this->BookDescription->Name = L"BookDescription";
+			this->BookDescription->Width = 125;
+			// 
+			// BookStatus
+			// 
+			this->BookStatus->HeaderText = L"Estado";
+			this->BookStatus->MinimumWidth = 6;
+			this->BookStatus->Name = L"BookStatus";
+			this->BookStatus->Width = 125;
+			// 
 			// BookTimeLoan
 			// 
 			this->BookTimeLoan->HeaderText = L"Tiempo de Prestamo";
@@ -158,7 +186,7 @@ namespace MrBookyGUIApp {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1089, 338);
+			this->ClientSize = System::Drawing::Size(1341, 338);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label1);
 			this->Name = L"BookResult";
@@ -169,6 +197,24 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+		private:
+			/*void ShowBooks(List<Book^>^ books)
+			{
+				for each (Book ^ book in books)
+				{
+					int rowIndex = dataGridView1->Rows->Add();
+					DataGridViewRow^ row = dataGridView1->Rows[rowIndex];
+					row->Cells["SeeReviews"]->Value = "Ver Reseñas";
+					row->Cells["StarsRevies"]->Value = "5 estrellas";
+					row->Cells["BookName"]->Value = "Título";
+					row->Cells["BookAuthor"]->Value = "Autor";
+					row->Cells["BookYear"]->Value = "Año";
+					row->Cells["BookDescription"]->Value = "Descripcion";
+					row->Cells["BookStatus"]->Value = "Estado";
+					row->Cells["BookTimeLoan"]->Value = "Tiempo de Prestamo";
+					row->Cells["BookImage"]->Value = "Imagen"; // Assuming GetImagePath returns a string path
+				}
+			}*/
 	
 	};
 }
