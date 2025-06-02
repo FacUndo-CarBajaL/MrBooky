@@ -4,6 +4,7 @@
 #include "BookRequest.h"
 #include "Stats.h"
 #include "DispatchBooks.h"
+#include "MaintenanceBook.h"
 
 namespace MrBookyGUIApp {
 
@@ -46,6 +47,7 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Button^ btnStats;
 	private: System::Windows::Forms::Button^ btnBooksDispatch;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ btnCRUDLibros;
 
 
 	protected:
@@ -70,6 +72,7 @@ namespace MrBookyGUIApp {
 			this->btnStats = (gcnew System::Windows::Forms::Button());
 			this->btnBooksDispatch = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->btnCRUDLibros = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -154,6 +157,20 @@ namespace MrBookyGUIApp {
 			this->label2->TabIndex = 5;
 			this->label2->Text = L"Bibliotecario, Bienvenido";
 			// 
+			// btnCRUDLibros
+			// 
+			this->btnCRUDLibros->BackColor = System::Drawing::Color::White;
+			this->btnCRUDLibros->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->btnCRUDLibros->ForeColor = System::Drawing::Color::Black;
+			this->btnCRUDLibros->Location = System::Drawing::Point(201, 440);
+			this->btnCRUDLibros->Name = L"btnCRUDLibros";
+			this->btnCRUDLibros->Size = System::Drawing::Size(515, 41);
+			this->btnCRUDLibros->TabIndex = 6;
+			this->btnCRUDLibros->Text = L"CRUD Libros";
+			this->btnCRUDLibros->UseVisualStyleBackColor = false;
+			this->btnCRUDLibros->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnCRUDLibros_Click);
+			// 
 			// LibrarianLogIn
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -162,6 +179,7 @@ namespace MrBookyGUIApp {
 				static_cast<System::Int32>(static_cast<System::Byte>(14)));
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
+			this->Controls->Add(this->btnCRUDLibros);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->btnBooksDispatch);
 			this->Controls->Add(this->btnStats);
@@ -192,6 +210,10 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
 private: System::Void btnBooksDispatch_Click(System::Object^ sender, System::EventArgs^ e) {
 	DispatchBooks^ dispatchBooksForm = gcnew DispatchBooks();
 	dispatchBooksForm->Show();
+}
+private: System::Void btnCRUDLibros_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceBook^ bookForm = gcnew MaintenanceBook();
+	bookForm->Show();
 }
 };
 }

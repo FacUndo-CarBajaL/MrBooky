@@ -7,7 +7,7 @@
 void MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
-
+	books = Controller::GetBooks();
 	for each (Book^ registeredBook in books) {
 		if (registeredBook->Title == book->Title) {
 			throw gcnew DuplicateBookException("El nombre de el libro ya existe en la base de datos.");
@@ -19,7 +19,7 @@ void MrBookyController::Controller::AddBook(Book^ book)
 
 List<Book^>^ MrBookyController::Controller::GetBooks()
 {
-	// Devuelve la lista de libros
+	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
     return books;
 }
 

@@ -19,6 +19,7 @@ namespace MrBookyModel {
             int ReleaseYear;
             int Stock;
             String^ Genre;
+            String^ Provider;
             List<String^>^ Reviews;
             List<int>^ Stars;
             String^ Description;

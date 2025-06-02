@@ -183,11 +183,7 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 	String^ userName = txtUserName->Text->Trim();
 	String^ userPassword = txtUserPassword->Text->Trim();
 	User^ user = Controller::SearchUserByNameAndPassword(userName, userPassword);
-	/*List<User^>^ users = (List<User^>^)Persistance::LoadBinaryFile("users.bin");
-	for each (User ^ user in users) {
-		// Mostrar los usuarios
-		MessageBox::Show(user->Name + " - " + user->Password);
-	}*/
+	
 	if (user == nullptr) {
 		MessageBox::Show("Usuario y/o contraseña inválidos");
 	}
