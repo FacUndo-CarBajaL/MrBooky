@@ -26,12 +26,14 @@ namespace MrBookyModel {
         int Battery;
         LoanOrder Robot;
 
+        DeliveryRobot() {};
 		DeliveryRobot(int id, String^ name, String^ status, int maxCapacity) {
 			this->RobotID = id;
 			this->Name = name;
 			this->Status = status;
 			this->MaxCapacity = maxCapacity;
 			this->Battery = 100;
+            this->Status = "Disponible";
         }
 
         void AssignLoan();

@@ -10,7 +10,9 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    [Serializable]
     public enum class UserType {Client, Librarian};
+    [Serializable]
     public ref class User {
         public:
             int UserID;
@@ -29,6 +31,7 @@ namespace MrBookyModel {
             this->UserID = id;
             this->Name = name;
             this->Password = password;
+
         }
     };
 }

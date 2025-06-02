@@ -13,6 +13,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
+    [Serializable]
     public ref class Client : public User {
         public:
             int StudentCode;

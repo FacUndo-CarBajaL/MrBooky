@@ -415,7 +415,6 @@ namespace MrBookyGUIApp {
 				   for (int i = 0; i < libraries->Count; i++) {
 					   dgvLibraries->Rows->Add(gcnew array<String^>{
 						   libraries[i]->Name,
-							   libraries[i]->Name,
 							   ""+libraries[i]->X,
 							   "" +libraries[i]->Y,
 							   libraries[i]->ContactEmail,

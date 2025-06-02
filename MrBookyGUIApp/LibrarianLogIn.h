@@ -4,8 +4,9 @@
 #include "MaintenanceBook.h"
 #include "UserReport.h"
 #include "BookReport.h"
-#include "AddDeliveryRobot.h"
+#include "MaintenanceRobot.h"
 #include "MaintenanceLibrary.h"
+#include "MaintenanceLibrarian.h"
 
 namespace MrBookyGUIApp {
 
@@ -53,6 +54,8 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Button^ btnBookReport;
 	private: System::Windows::Forms::Button^ btnRobot;
 	private: System::Windows::Forms::Button^ btnLibreria;
+	private: System::Windows::Forms::Button^ btnLibrarian;
+
 
 
 
@@ -82,6 +85,7 @@ namespace MrBookyGUIApp {
 			this->btnBookReport = (gcnew System::Windows::Forms::Button());
 			this->btnRobot = (gcnew System::Windows::Forms::Button());
 			this->btnLibreria = (gcnew System::Windows::Forms::Button());
+			this->btnLibrarian = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -90,9 +94,10 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(137, 44);
+			this->label1->Location = System::Drawing::Point(206, 69);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(652, 51);
+			this->label1->Size = System::Drawing::Size(1041, 83);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Sistema de Logística Mr.Booky";
 			// 
@@ -102,9 +107,10 @@ namespace MrBookyGUIApp {
 			this->btnStock->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnStock->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->btnStock->Location = System::Drawing::Point(201, 140);
+			this->btnStock->Location = System::Drawing::Point(316, 164);
+			this->btnStock->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnStock->Name = L"btnStock";
-			this->btnStock->Size = System::Drawing::Size(515, 42);
+			this->btnStock->Size = System::Drawing::Size(772, 66);
 			this->btnStock->TabIndex = 1;
 			this->btnStock->Text = L"Verificar Stock";
 			this->btnStock->UseVisualStyleBackColor = false;
@@ -114,9 +120,10 @@ namespace MrBookyGUIApp {
 			// 
 			this->btnMaintenanceBook->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnMaintenanceBook->Location = System::Drawing::Point(201, 235);
+			this->btnMaintenanceBook->Location = System::Drawing::Point(316, 312);
+			this->btnMaintenanceBook->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnMaintenanceBook->Name = L"btnMaintenanceBook";
-			this->btnMaintenanceBook->Size = System::Drawing::Size(515, 41);
+			this->btnMaintenanceBook->Size = System::Drawing::Size(772, 64);
 			this->btnMaintenanceBook->TabIndex = 2;
 			this->btnMaintenanceBook->Text = L"Mantenimiento Libro";
 			this->btnMaintenanceBook->UseVisualStyleBackColor = true;
@@ -126,9 +133,10 @@ namespace MrBookyGUIApp {
 			// 
 			this->btnReporte->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnReporte->Location = System::Drawing::Point(201, 327);
+			this->btnReporte->Location = System::Drawing::Point(316, 456);
+			this->btnReporte->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnReporte->Name = L"btnReporte";
-			this->btnReporte->Size = System::Drawing::Size(515, 41);
+			this->btnReporte->Size = System::Drawing::Size(772, 64);
 			this->btnReporte->TabIndex = 3;
 			this->btnReporte->Text = L"Generar Reporte";
 			this->btnReporte->UseVisualStyleBackColor = true;
@@ -139,9 +147,10 @@ namespace MrBookyGUIApp {
 			this->btnUserReport->BackColor = System::Drawing::Color::White;
 			this->btnUserReport->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnUserReport->Location = System::Drawing::Point(201, 359);
+			this->btnUserReport->Location = System::Drawing::Point(316, 506);
+			this->btnUserReport->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnUserReport->Name = L"btnUserReport";
-			this->btnUserReport->Size = System::Drawing::Size(515, 34);
+			this->btnUserReport->Size = System::Drawing::Size(772, 53);
 			this->btnUserReport->TabIndex = 4;
 			this->btnUserReport->Text = L"Por Usuario";
 			this->btnUserReport->UseVisualStyleBackColor = false;
@@ -153,9 +162,10 @@ namespace MrBookyGUIApp {
 			this->btnBookReport->BackColor = System::Drawing::Color::White;
 			this->btnBookReport->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnBookReport->Location = System::Drawing::Point(201, 392);
+			this->btnBookReport->Location = System::Drawing::Point(316, 557);
+			this->btnBookReport->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnBookReport->Name = L"btnBookReport";
-			this->btnBookReport->Size = System::Drawing::Size(515, 37);
+			this->btnBookReport->Size = System::Drawing::Size(772, 58);
 			this->btnBookReport->TabIndex = 5;
 			this->btnBookReport->Text = L"Por Libro";
 			this->btnBookReport->UseVisualStyleBackColor = false;
@@ -164,9 +174,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnRobot
 			// 
-			this->btnRobot->Location = System::Drawing::Point(336, 461);
+			this->btnRobot->Location = System::Drawing::Point(504, 720);
+			this->btnRobot->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnRobot->Name = L"btnRobot";
-			this->btnRobot->Size = System::Drawing::Size(258, 34);
+			this->btnRobot->Size = System::Drawing::Size(387, 53);
 			this->btnRobot->TabIndex = 6;
 			this->btnRobot->Text = L"Robot";
 			this->btnRobot->UseVisualStyleBackColor = true;
@@ -174,21 +185,34 @@ namespace MrBookyGUIApp {
 			// 
 			// btnLibreria
 			// 
-			this->btnLibreria->Location = System::Drawing::Point(336, 501);
+			this->btnLibreria->Location = System::Drawing::Point(504, 783);
+			this->btnLibreria->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnLibreria->Name = L"btnLibreria";
-			this->btnLibreria->Size = System::Drawing::Size(258, 34);
+			this->btnLibreria->Size = System::Drawing::Size(387, 53);
 			this->btnLibreria->TabIndex = 7;
 			this->btnLibreria->Text = L"Libreria";
 			this->btnLibreria->UseVisualStyleBackColor = true;
 			this->btnLibreria->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLibreria_Click);
 			// 
+			// btnLibrarian
+			// 
+			this->btnLibrarian->Location = System::Drawing::Point(504, 657);
+			this->btnLibrarian->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnLibrarian->Name = L"btnLibrarian";
+			this->btnLibrarian->Size = System::Drawing::Size(387, 53);
+			this->btnLibrarian->TabIndex = 8;
+			this->btnLibrarian->Text = L"Bibliotecario";
+			this->btnLibrarian->UseVisualStyleBackColor = true;
+			this->btnLibrarian->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLibrarian_Click);
+			// 
 			// LibrarianLogIn
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->ClientSize = System::Drawing::Size(942, 564);
+			this->ClientSize = System::Drawing::Size(1413, 881);
+			this->Controls->Add(this->btnLibrarian);
 			this->Controls->Add(this->btnLibreria);
 			this->Controls->Add(this->btnRobot);
 			this->Controls->Add(this->btnBookReport);
@@ -197,6 +221,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->btnMaintenanceBook);
 			this->Controls->Add(this->btnStock);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->Name = L"LibrarianLogIn";
 			this->Text = L"LibrarianLogIn";
 			this->ResumeLayout(false);
@@ -225,13 +250,18 @@ private: System::Void btnBookReport_Click(System::Object^ sender, System::EventA
 	bookReport->Show();
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	AddDeliveryRobot^ deliveryRobot = gcnew AddDeliveryRobot();
+	MaintenanceRobot^ deliveryRobot = gcnew MaintenanceRobot();
 	deliveryRobot->Show();
 
 }
 private: System::Void btnLibreria_Click(System::Object^ sender, System::EventArgs^ e) {
 	MaintenanceLibrary^ libreria = gcnew MaintenanceLibrary();
 	libreria->Show();
+}
+private: System::Void btnLibrarian_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceLibrarian^ librarian = gcnew MaintenanceLibrarian();
+	librarian->Show();
+
 }
 };
 }

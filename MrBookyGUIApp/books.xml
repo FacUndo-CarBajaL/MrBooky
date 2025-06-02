@@ -16,4 +16,18 @@
     <LoanTime>0</LoanTime>
     <Weight>0</Weight>
   </Book>
+  <Book>
+    <BookID>0</BookID>
+    <Title>AMGA</Title>
+    <Author>Cecilia Gaita</Author>
+    <Publisher>LibrosD</Publisher>
+    <ReleaseYear>0</ReleaseYear>
+    <Quantity>2345</Quantity>
+    <Genre>Algebra</Genre>
+    <Description>Libro para universitarios</Description>
+    <Provider>PUCP</Provider>
+    <AvailabilityTime>0</AvailabilityTime>
+    <LoanTime>0</LoanTime>
+    <Weight>0</Weight>
+  </Book>
 </ArrayOfBook>

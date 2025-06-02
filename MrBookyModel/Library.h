@@ -10,7 +10,6 @@
 #include "Loan.h"
 #include "DeliveryRobot.h"
 #include "Librarian.h"
-#include "StockItem.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -30,11 +29,18 @@ namespace MrBookyModel {
         Double X;
         Double Y;
         List<Book^>^ Catalogue;
+        Dictionary<int, int>^ Stock;
         List<Librarian^>^ Staff;
         List<Loan^>^ Loans;
-        List<DeliveryRobot^> Robots;
+        List<DeliveryRobot^>^ Robots;
 
-        Library() {};
+        Library() {
+            List<Book^>^ Catalogue = gcnew List<Book^>();
+            Dictionary<int, int>^  Stock = gcnew Dictionary<int, int>();
+            List<Librarian^>^  Staff = gcnew List<Librarian^>();
+            List<Loan^>^  Loans = gcnew List<Loan^>();
+            List<DeliveryRobot^>^ Robots = gcnew List<DeliveryRobot^>();
+        };
         Library(String^ name, String^ email, String^ openHour, String^ closeHour, Double x, Double y) {
 			this->Name = name;
 			this->ContactEmail = email;

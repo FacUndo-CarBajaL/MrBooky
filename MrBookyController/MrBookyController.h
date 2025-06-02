@@ -9,12 +9,23 @@ namespace MrBookyController {
 	public ref class Controller
 	{
 		private:
-			static List<Book^>^ books = gcnew List<Book^>();
-			static List<DeliveryRobot^>^ robots = gcnew List<DeliveryRobot^>();
-			static List<Library^>^ libraries = gcnew List<Library^>();
-			static List<User^>^ users = gcnew List<User^>();
-			static List<Loan^>^ loans = gcnew List<Loan^>();
-			static List<CartItem^>^ cartItems = gcnew List<CartItem^>();
+	private:
+		static List<Book^>^ books;
+		static List<DeliveryRobot^>^ robots;
+		static List<Library^>^ libraries;
+		static List<User^>^ users;
+		static List<Loan^>^ loans;
+		static List<CartItem^>^ cartItems;
+
+		static Controller() { // <-- Constructor est�tico
+			books = gcnew List<Book^>();
+			robots = gcnew List<DeliveryRobot^>();
+			libraries = gcnew List<Library^>();
+			users = gcnew List<User^>();
+			loans = gcnew List<Loan^>();
+			cartItems = gcnew List<CartItem^>();
+		}
+
 		// TODO: Agregue aquí los métodos de esta clase.
 		public:
 			static int AddBook(Book^ book);
