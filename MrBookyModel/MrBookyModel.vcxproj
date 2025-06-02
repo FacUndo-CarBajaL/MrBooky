@@ -119,6 +119,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Book.h" />
     <ClInclude Include="CartItem.h" />
     <ClInclude Include="Client.h" />
@@ -137,6 +138,7 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="CartItem.cpp" />
