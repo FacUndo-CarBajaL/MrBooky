@@ -17,12 +17,12 @@ namespace MrBookyController {
 			static List<CartItem^>^ cartItems = gcnew List<CartItem^>();
 		// TODO: Agregue aqu√≠ los m√©todos de esta clase.
 		public:
-			// M√©todos CRUD para Book
 			static int AddBook(Book^ book);
 			static List<Book^>^ GetBooks();
-			static Book^ SearchBook(int index);
+			static Book^ SearchBook(String^ title);
 			static int UpdateBook(Book^ book);
-			static int DeleteBook(int index);
+			static int DeleteBook(String^ title);
+
 
 			// MÈtodos CRUD para DeliveryRobot
 			static int AddRobot(DeliveryRobot^ robot);
@@ -34,9 +34,9 @@ namespace MrBookyController {
 			// MÈtodos CRUD para Library
 			static int AddLibrary(Library^ library);
 			static List<Library^>^ GetLibraries();
-			static Library^ SearchLibrary(int libraryId);
+			static Library^ SearchLibrary(String^ Name);
 			static int UpdateLibrary(Library^ library);
-			static int DeleteLibrary(int libraryId);
+			static int DeleteLibrary(String^ Name);
 
 			// MÈtodos CRUD para User
 			static int AddUser(User^ user);

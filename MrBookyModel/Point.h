@@ -7,16 +7,26 @@
 #define _POINT_H
 
 using namespace System;
+using namespace System::Collections::Generic;
+using namespace System::IO;
+using namespace System::Xml::Serialization;
 
-namespace MrBookyModel {
-    public ref class Point {
+namespace MrBookyModel{
+    [Serializable]
+    public ref class Point{
         private:
             int X;
             int Y;
 
         public:
+
             void ShowPosition();
+            Point() {};
+            Point(int x, int y) {
+                this->X = x;
+                this->Y = y;
+            }
     };
 }
 
-#endif //_POINT_H
+#endif //_POINT_H'

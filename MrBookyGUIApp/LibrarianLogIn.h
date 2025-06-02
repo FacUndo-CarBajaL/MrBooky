@@ -5,7 +5,7 @@
 #include "UserReport.h"
 #include "BookReport.h"
 #include "AddDeliveryRobot.h"
-#include "AddLibrary.h"
+#include "MaintenanceLibrary.h"
 
 namespace MrBookyGUIApp {
 
@@ -230,7 +230,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 
 }
 private: System::Void btnLibreria_Click(System::Object^ sender, System::EventArgs^ e) {
-	AddLibrary^ libreria = gcnew AddLibrary();
+	MaintenanceLibrary^ libreria = gcnew MaintenanceLibrary();
 	libreria->Show();
 }
 };

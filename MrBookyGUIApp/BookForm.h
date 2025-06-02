@@ -231,7 +231,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		String^ author = book->Author;
 		String^ publisher = book->Publisher;
 		String^ genre = book->Genre;
-		int stock = book->Stock;
+		int stock = book->Quantity;
 
 		dgvLibrosEncontrados->Rows->Add(title, author, publisher, genre, stock);
 	}

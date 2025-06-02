@@ -5,35 +5,38 @@
 int MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
-    try {
-        books->Add(book);
-		Persistance::PersistTextFile_Book("books.txt", books);
-
+	try {
+		books->Add(book);
+		MrBookyPersistance::Persistance::PersistXMLFile("books.xml", books);
 		return 1;
-    }
+	}
 	catch (Exception^ ex) {
 		throw ex;
 	}
-    return 0;
+	return 0;
 }
 
 List<Book^>^ MrBookyController::Controller::GetBooks()
 {
 	// Devuelve la lista de libros
-    return books;
+	books = (List<Book^>^)MrBookyPersistance::Persistance::LoadBookFromXMLFile("books.xml");
+	return books;
 }
 
-Book^ MrBookyController::Controller::SearchBook(int index)
+Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
 	// Busca el libro en la lista de libros
-	for each (Book^ book in books)
+	for each (Book ^ book in books)
 	{
-		if (book->BookID == index)
+		if (book->Title == title)
 		{
 			return book;
 		}
+		else {
+			return nullptr;
+		}
 	}
-    
+
 }
 
 int MrBookyController::Controller::UpdateBook(Book^ book)
@@ -41,24 +44,26 @@ int MrBookyController::Controller::UpdateBook(Book^ book)
 	// Busca el libro en la lista de libros
 	for (int i = 0; i < books->Count; i++)
 	{
-		if (books[i]->BookID == book->BookID)
+		if (books[i]->Title == book->Title)
 		{
-			// Actualiza el libro
 			books[i] = book;
+			// Actualiza el libro
+			MrBookyPersistance::Persistance::PersistXMLFile("books.xml", books);
 			return 1;
 		}
 	}
 	return 0;
 }
 
-int MrBookyController::Controller::DeleteBook(int index)
+int MrBookyController::Controller::DeleteBook(String^ Title)
 {
 	for (int i = 0; i < books->Count; i++)
 	{
-		if (books[i]->BookID == index)
+		if (books[i]->Title == Title)
 		{
-			// Elimina el libro
 			books->RemoveAt(i);
+			// Elimina el libro
+			MrBookyPersistance::Persistance::PersistXMLFile("books.xml", books);
 			return 1;
 		}
 	}
@@ -131,8 +136,12 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 {
 	try {
 		// Agrega la biblioteca a la lista de bibliotecas
+		libraries = Controller::GetLibraries();
+		if(libraries==nullptr){
+			libraries = {};
+		}
 		libraries->Add(library);
-		Persistance::PersistTextFile_Library("libraries.txt", libraries);
+		Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
 		return 1;
 	}
 	catch (Exception^ ex) {
@@ -143,16 +152,16 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 
 List<Library^>^ MrBookyController::Controller::GetLibraries()
 {
-	// TODO: Insertar una instrucción "return" aquí
+	libraries = (List<Library^>^)MrBookyPersistance::Persistance::LoadBinaryFileLibraries("libraries.bin");
 	return libraries;
 }
 
-Library^ MrBookyController::Controller::SearchLibrary(int libraryId)
+Library^ MrBookyController::Controller::SearchLibrary(String^ libraryName)
 {
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Library ^ library in libraries)
 	{
-		if (library->LibraryID == libraryId)
+		if (library->Name == libraryName)
 		{
 			return library;
 		}
@@ -168,21 +177,23 @@ int MrBookyController::Controller::UpdateLibrary(Library^ library)
 		{
 			// Actualiza la biblioteca
 			libraries[i] = library;
+			MrBookyPersistance::Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
 			return 1;
 		}
 	}
 	return 0;
 }
 
-int MrBookyController::Controller::DeleteLibrary(int libraryId)
+int MrBookyController::Controller::DeleteLibrary(String^ libraryName)
 {
 	// Busca la biblioteca en la lista de bibliotecas
 	for (int i = 0; i < libraries->Count; i++)
 	{
-		if (libraries[i]->LibraryID == libraryId)
+		if (libraries[i]->Name == libraryName)
 		{
 			// Elimina la biblioteca
 			libraries->RemoveAt(i);
+			MrBookyPersistance::Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
 			return 1;
 		}
 	}

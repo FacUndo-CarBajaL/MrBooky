@@ -124,12 +124,12 @@
     <ClCompile Include="CurrentMap.cpp" />
     <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
-    <ClCompile Include="AddLibrary.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="FoundBookForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="MainForm1.cpp" />
+    <ClCompile Include="MaintenanceLibrary.cpp" />
     <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="Stock.cpp" />
     <ClCompile Include="UserForm.cpp" />
@@ -151,9 +151,6 @@
     <ClInclude Include="AddDeliveryRobot.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="AddLibrary.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="BookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -167,6 +164,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MainForm1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MaintenanceLibrary.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="RegisterUserForm.h">
@@ -204,9 +204,6 @@
     <EmbeddedResource Include="AddDeliveryRobot.resx">
       <DependentUpon>AddDeliveryRobot.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddLibrary.resx">
-      <DependentUpon>AddLibrary.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BookForm.resx">
       <DependentUpon>BookForm.h</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm1.resx">
       <DependentUpon>MainForm1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaintenanceLibrary.resx">
+      <DependentUpon>MaintenanceLibrary.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterUserForm.resx">
       <DependentUpon>RegisterUserForm.h</DependentUpon>
@@ -250,6 +250,9 @@
     </ProjectReference>
     <ProjectReference Include="..\MrBookyModel\MrBookyModel.vcxproj">
       <Project>{a1296533-d732-ed0a-c488-666b1398d740}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MrBookyPersistance\MrBookyPersistance.vcxproj">
+      <Project>{d1aff3e6-64c6-1d9b-49fc-058fbefacc92}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,36 +1,49 @@
 #include "pch.h"
-
 #include "MrBookyPersistance.h"
+using namespace System::IO;
+using namespace System::Xml::Serialization;
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 void MrBookyPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject)
 {
 	StreamWriter^ writer;
-    try {
-		writer = gcnew StreamWriter(fileName);
-		if (persistObject->GetType() == List<Book^>::typeid) {
-			XmlSerializer^ serializer = gcnew XmlSerializer(List<Book^>::typeid);
-			serializer->Serialize(writer, (List<Book^>^)persistObject);
+	try {
+
+		// Cargar libros anteriores si existen
+		List<Book^>^ allBooks = gcnew List<Book^>();
+
+		// Agregar los nuevos libros
+		List<Book^>^ newBooks = safe_cast<List<Book^>^>(persistObject);
+		for each (Book ^ book in newBooks) {
+			allBooks->Add(book);
 		}
+
+		// Guardar la lista completa
+		writer = gcnew StreamWriter(fileName);
+		XmlSerializer^ serializer = gcnew XmlSerializer(List<Book^>::typeid);
+		serializer->Serialize(writer, allBooks);
+
+
 	}
 	catch (Exception^ ex) {
 		// Manejo de excepciones
 		throw ex;
 	}
 	finally {
-		if (writer != nullptr)
+		if (writer != nullptr) {
 			writer->Close();
+		}
 	}
 }
 
 Object^ MrBookyPersistance::Persistance::LoadBookFromXMLFile(String^ fileName)
 {
-    // TODO: Insertar una instrucción "return" aquí
 	StreamReader^ reader;
 	Object^ result = gcnew List<Book^>();
 	XmlSerializer^ serializer;
 
 	try {
-		if (!File::Exists(fileName)) {
+		if (File::Exists(fileName)) {
 			reader = gcnew StreamReader(fileName);
 			serializer = gcnew XmlSerializer(List<Book^>::typeid);
 			result = (List<Book^>^) serializer->Deserialize(reader);
@@ -41,8 +54,9 @@ Object^ MrBookyPersistance::Persistance::LoadBookFromXMLFile(String^ fileName)
 		throw ex;
 	}
 	finally {
-		if (reader != nullptr)
+		if (reader != nullptr) {
 			reader->Close();
+		}
 	}
 	return result;
 }
@@ -164,57 +178,102 @@ Object^ MrBookyPersistance::Persistance::LoadRobotsFromTextFile(String^ fileName
 	return result;
 }
 
-void MrBookyPersistance::Persistance::PersistTextFile_Library(String^ fileName, Object^ persistObject)
+void MrBookyPersistance::Persistance::PersistLibrariesXMLFile(String^ fileName, Object^ persistObject)
 {
-	FileStream^ file = nullptr;
-	StreamWriter^ writer = nullptr;
+	StreamWriter^ writer;
 	try {
-		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
-		writer = gcnew StreamWriter(file);
-		if (persistObject->GetType() == List<Library^>::typeid) {
-			List<Library^>^ libraries = (List<Library^>^) persistObject;
-			for (int i = 0; i < libraries->Count; i++) {
-				Library^ library = libraries[i];
-				writer->WriteLine("{0}|{1}|{2}|{3}|{4}",
-					library->LibraryID, library->Name, library->ContactEmail,
-					library->OpeningHour, library->CloseHour);
-			}
+
+		// Cargar librerias anteriores si existen
+		List<Library^>^ allLibraries = gcnew List<Library^>();
+
+		// Agregar las nuevas bibliotecas
+		List<Library^>^ newLibraries = safe_cast<List<Library^>^>(persistObject);
+		for each (Library ^ library in newLibraries) {
+			allLibraries->Add(library);
 		}
+
+		// Guardar la lista completa
+		writer = gcnew StreamWriter(fileName);
+		XmlSerializer^ serializer = gcnew XmlSerializer(List<Book^>::typeid);
+		serializer->Serialize(writer, allLibraries);
+
+
 	}
 	catch (Exception^ ex) {
+		// Manejo de excepciones
 		throw ex;
 	}
 	finally {
-		if (writer != nullptr) writer->Close();
-		if (file != nullptr) file->Close();
+		if (writer != nullptr) {
+			writer->Close();
+		}
 	}
 }
 
-Object^ MrBookyPersistance::Persistance::LoadLibrariesFromTextFile(String^ fileName)
+Object^ MrBookyPersistance::Persistance::LoadLibrariesFromXMLFile(String^ fileName)
 {
-	// TODO: Insertar una instrucción "return" aquí
-	FileStream^ file;
 	StreamReader^ reader;
 	Object^ result = gcnew List<Library^>();
+	XmlSerializer^ serializer;
+
 	try {
-		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
-		reader = gcnew StreamReader(file);
-		while (!reader->EndOfStream) {
-			String^ line = reader->ReadLine();
-			array<String^>^ record = line->Split('|');
-			Library^ library = gcnew Library(Int32::Parse(record[0]), record[1], record[2], record[3], record[4]);
-			((List<Library^>^)result)->Add(library);
+		if (File::Exists(fileName)) {
+			reader = gcnew StreamReader(fileName);
+			serializer = gcnew XmlSerializer(List<Library^>::typeid);
+			result = (List<Library^>^) serializer->Deserialize(reader);
+		}
+	}
+	catch (Exception^ ex) {
+		// Manejo de excepciones
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) {
+			reader->Close();
+		}
+	}
+	return result;
+}
+
+void MrBookyPersistance::Persistance::PersistBinaryFileLibraries(String^ fileName, Object^ persistObject)
+{
+	FileStream^ file;
+	BinaryFormatter^ formatter = gcnew BinaryFormatter();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		formatter->Serialize(file, persistObject);
+	}
+	catch (Exception^ ex) { throw ex; }
+	finally {
+		if (file != nullptr) file->Close();
+		delete file;
+	}
+
+}
+
+Object^ MrBookyPersistance::Persistance::LoadBinaryFileLibraries(String^ fileName)
+{
+	FileStream^ file;
+	Object^ result;
+	BinaryFormatter^ formatter;
+	try {
+		if (File::Exists(fileName)) {
+			file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+			formatter = gcnew BinaryFormatter();
+			result = formatter->Deserialize(file);
 		}
 	}
 	catch (Exception^ ex) {
 		throw ex;
 	}
 	finally {
-		if (reader != nullptr) reader->Close();
 		if (file != nullptr) file->Close();
+		delete file;
 	}
 	return result;
 }
+
+
 
 void MrBookyPersistance::Persistance::PersistTextFile_Book(String^ fileName, Object^ persistObject)
 {
@@ -229,7 +288,7 @@ void MrBookyPersistance::Persistance::PersistTextFile_Book(String^ fileName, Obj
 				Book^ book = books[i];
 
 				writer->WriteLine("{0}|{1}|{2}|{3}|{4}|{5}",
-					book->BookID, book->Title, book->Author, book->Publisher, book->Genre, book->Stock);
+					book->BookID, book->Title, book->Author, book->Publisher, book->Genre, book->Quantity);
 			}
 		}
 	}
@@ -259,7 +318,7 @@ Object^ MrBookyPersistance::Persistance::LoadBooksFromTextFile(String^ fileName)
 			book->Author = record[2];
 			book->Publisher = record[3];
 			book->Genre = record[4];
-			book->Stock = Int32::Parse(record[5]);
+			book->Quantity = Int32::Parse(record[5]);
 			((List<Book^>^)result)->Add(book);
 		}
 	}

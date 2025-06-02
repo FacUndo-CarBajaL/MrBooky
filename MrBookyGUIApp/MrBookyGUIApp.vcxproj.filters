@@ -51,9 +51,6 @@
     <ClCompile Include="AddDeliveryRobot.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="AddLibrary.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="UserInterface.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -65,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="UserLoansList.cpp">
       <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="MaintenanceLibrary.cpp">
+      <Filter>Archivos de encabezado</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,9 +104,6 @@
     <ClInclude Include="AddDeliveryRobot.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="AddLibrary.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="UserInterface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="UserLoansList.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MaintenanceLibrary.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
