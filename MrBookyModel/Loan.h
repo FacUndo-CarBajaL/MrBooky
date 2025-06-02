@@ -17,6 +17,7 @@ namespace MrBookyModel {
     public ref class Loan {
         public:
             int LoanID;
+            int Quantity;
             Book^ Book;
             Client^ Client;
             DateTime^ DateLoan;

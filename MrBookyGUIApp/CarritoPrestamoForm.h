@@ -58,14 +58,14 @@ namespace MrBookyGUIApp {
 
 
 	private: System::Windows::Forms::DataGridView^ dgvPrestamos;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaID;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTitulo;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTiempo;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaPeso;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaAutor;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaEstado;
-	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
-	private: System::Windows::Forms::DataGridViewButtonColumn^ ColumnaEliminar;
+
+
+
+
+
+
+
+
 	private: System::Windows::Forms::CheckBox^ chLibreria;
 	private: System::Windows::Forms::CheckBox^ chRobot;
 
@@ -74,6 +74,22 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::ComboBox^ cmbBibliotecas;
 	private: System::Windows::Forms::Label^ lblHorarioBiblioteca;
 	private: System::Windows::Forms::RichTextBox^ txtHorario;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaID;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTitulo;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTiempo;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaPeso;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaAutor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaCantidad;
+	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
+	private: System::Windows::Forms::DataGridViewButtonColumn^ ColumnaEliminar;
+
+
+
+
+
+
+
+
 
 
 
@@ -149,7 +165,7 @@ namespace MrBookyGUIApp {
 			this->ColumnaTiempo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaPeso = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->ColumnaEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->ColumnaCantidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaImagen = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->ColumnaEliminar = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			this->chLibreria = (gcnew System::Windows::Forms::CheckBox());
@@ -194,11 +210,11 @@ namespace MrBookyGUIApp {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Artifakt Element", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label3->Location = System::Drawing::Point(93, 111);
+			this->label3->Location = System::Drawing::Point(12, 108);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(194, 35);
+			this->label3->Size = System::Drawing::Size(313, 35);
 			this->label3->TabIndex = 2;
-			this->label3->Text = L"Total de Libros:";
+			this->label3->Text = L"Total Peso de Libros (kg):";
 			// 
 			// lblCapacidadTotalRobot
 			// 
@@ -224,16 +240,17 @@ namespace MrBookyGUIApp {
 			// 
 			// btnConfirmarPrestamos
 			// 
-			this->btnConfirmarPrestamos->Location = System::Drawing::Point(99, 163);
+			this->btnConfirmarPrestamos->Location = System::Drawing::Point(197, 163);
 			this->btnConfirmarPrestamos->Name = L"btnConfirmarPrestamos";
 			this->btnConfirmarPrestamos->Size = System::Drawing::Size(205, 39);
 			this->btnConfirmarPrestamos->TabIndex = 5;
 			this->btnConfirmarPrestamos->Text = L"Confirmar Préstamos";
 			this->btnConfirmarPrestamos->UseVisualStyleBackColor = true;
+			this->btnConfirmarPrestamos->Click += gcnew System::EventHandler(this, &CarritoPrestamoForm::btnConfirmarPrestamos_Click);
 			// 
 			// txtTotalPesoLibros
 			// 
-			this->txtTotalPesoLibros->Location = System::Drawing::Point(293, 112);
+			this->txtTotalPesoLibros->Location = System::Drawing::Point(331, 112);
 			this->txtTotalPesoLibros->Name = L"txtTotalPesoLibros";
 			this->txtTotalPesoLibros->Size = System::Drawing::Size(118, 34);
 			this->txtTotalPesoLibros->TabIndex = 6;
@@ -262,7 +279,8 @@ namespace MrBookyGUIApp {
 			this->dgvPrestamos->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvPrestamos->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->ColumnaID,
-					this->ColumnaTitulo, this->ColumnaTiempo, this->ColumnaPeso, this->ColumnaAutor, this->ColumnaEstado, this->ColumnaImagen, this->ColumnaEliminar
+					this->ColumnaTitulo, this->ColumnaTiempo, this->ColumnaPeso, this->ColumnaAutor, this->ColumnaCantidad, this->ColumnaImagen,
+					this->ColumnaEliminar
 			});
 			this->dgvPrestamos->Location = System::Drawing::Point(39, 252);
 			this->dgvPrestamos->Name = L"dgvPrestamos";
@@ -272,6 +290,7 @@ namespace MrBookyGUIApp {
 			this->dgvPrestamos->TabIndex = 9;
 			this->dgvPrestamos->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CarritoPrestamoForm::dgvPrestamos_CellClick);
 			this->dgvPrestamos->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CarritoPrestamoForm::dgvPrestamos_CellContentClick);
+			this->dgvPrestamos->CellEndEdit += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CarritoPrestamoForm::dgvPrestamos_CellEndEdit);
 			// 
 			// ColumnaID
 			// 
@@ -303,11 +322,11 @@ namespace MrBookyGUIApp {
 			this->ColumnaAutor->MinimumWidth = 6;
 			this->ColumnaAutor->Name = L"ColumnaAutor";
 			// 
-			// ColumnaEstado
+			// ColumnaCantidad
 			// 
-			this->ColumnaEstado->HeaderText = L"Estado";
-			this->ColumnaEstado->MinimumWidth = 6;
-			this->ColumnaEstado->Name = L"ColumnaEstado";
+			this->ColumnaCantidad->HeaderText = L"Cantidad";
+			this->ColumnaCantidad->MinimumWidth = 6;
+			this->ColumnaCantidad->Name = L"ColumnaCantidad";
 			// 
 			// ColumnaImagen
 			// 
@@ -318,7 +337,7 @@ namespace MrBookyGUIApp {
 			// 
 			// ColumnaEliminar
 			// 
-			this->ColumnaEliminar->HeaderText = L"Eliminar\?";
+			this->ColumnaEliminar->HeaderText = L"Eliminar Prestamo\?";
 			this->ColumnaEliminar->MinimumWidth = 6;
 			this->ColumnaEliminar->Name = L"ColumnaEliminar";
 			this->ColumnaEliminar->Resizable = System::Windows::Forms::DataGridViewTriState::True;
@@ -426,8 +445,9 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+
 		void SimularLoanOrder() {
-			LoanOrder^ loanOrder_1 = gcnew LoanOrder();
+			LoanCart^ loanCart_1 = gcnew LoanCart();
 
 			////////////////////////////////////////////////////////////
 			Loan^ loan1 = gcnew Loan();
@@ -451,7 +471,8 @@ namespace MrBookyGUIApp {
 			loan1->LoanID = 123;
 			loan1->Status = "Disponible";
 			loan1->Book = book1;
-			loanOrder_1->Loans->Add(loan1);
+			loan1->Quantity = 4;
+			loanCart_1->Loans->Add(loan1);
 			////////////////////////////////////////////////////////////
 			Loan^ loan2 = gcnew Loan();
 			Book^ book2 = gcnew Book();
@@ -474,7 +495,8 @@ namespace MrBookyGUIApp {
 			loan2->LoanID = 1234;
 			loan2->Status = "Disponible";
 			loan2->Book = book2;
-			loanOrder_1->Loans->Add(loan2);
+			loan2->Quantity = 5;
+			loanCart_1->Loans->Add(loan2);
 			////////////////////////////////////////////////////////////
 			Loan^ loan3 = gcnew Loan();
 			Book^ book3 = gcnew Book();
@@ -497,20 +519,22 @@ namespace MrBookyGUIApp {
 			loan3->LoanID = 12345;
 			loan3->Status = "Disponible";
 			loan3->Book = book3;
-			loanOrder_1->Loans->Add(loan3);
+			loan3->Quantity = 6;
+			loanCart_1->Loans->Add(loan3);
 			////////////////////////////////////////////////////////////
 
 
 			Client^ user = (Client^)Persistance::LoadBinaryFile("TempUser.bin");
-			loanOrder_1->Client = user;
-			Controller::AddLoanOrder(loanOrder_1);
+			loanCart_1->Client = user;
+			Controller::AddLoanCart(loanCart_1);
 		};
+
 		void ShowLoans() {
 			User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
-			LoanOrder^ loanOrder = Controller::SearchLoanOrderByUser(user);
-			if (loanOrder != nullptr) {
+			LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
+			if (loanCart != nullptr) {
 				dgvPrestamos->Rows->Clear();
-				List<Loan^>^ loans = loanOrder->Loans;
+				List<Loan^>^ loans = loanCart->Loans;
 				for (int i = 0; i < loans->Count; i++) {
 					int index = dgvPrestamos->Rows->Add(gcnew array<String^>{
 						"" + loans[i]->LoanID,
@@ -518,6 +542,7 @@ namespace MrBookyGUIApp {
 							"" + loans[i]->Book->LoanTime,
 							"" + loans[i]->Book->Weight,
 							loans[i]->Book->Author,
+							""+ loans[i]->Quantity,
 							loans[i]->Status}
 					);
 
@@ -538,16 +563,31 @@ namespace MrBookyGUIApp {
 			double total = 0.0;
 			for (int i = 0; i < dgvPrestamos->Rows->Count; i++) {
 
-				Object^ valor = dgvPrestamos->Rows[i]->Cells[3]->Value;
-				if (valor != nullptr) {
-					double pesoFila = Double::Parse(valor->ToString());
-					total = pesoFila + total;
+				Object^ valorPeso = dgvPrestamos->Rows[i]->Cells[3]->Value;
+				Object^ valorCantidad = dgvPrestamos->Rows[i]->Cells[5]->Value;
+				if (valorPeso != nullptr && valorCantidad != nullptr) {
+					double pesoFila = Double::Parse(valorPeso->ToString());
+					double cantidadFila = Double::Parse(valorCantidad->ToString());
+					if (cantidadFila > 0) {
+						total = pesoFila * (double)cantidadFila + total;
+					}
+					else if (cantidadFila == 0) {
+						dgvPrestamos->Rows->RemoveAt(i);
+					}
+					
 				}
 			}
 			txtTotalPesoLibros->Text = total.ToString("F2");
 		};
 
 private: System::Void CarritoPrestamoForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	//Hacer columnas no editables
+	for each (DataGridViewColumn ^ col in dgvPrestamos->Columns) {
+		col->ReadOnly = true;
+	}
+	//Hacer columna de cantidad editable
+	dgvPrestamos->Columns[5]->ReadOnly = false;
+
 	// Ocultar opciones robot
 	cmbRobots->Visible = false;
 	lblRobot->Visible = false;
@@ -626,6 +666,46 @@ private: System::Void chRobot_CheckedChanged(System::Object^ sender, System::Eve
 		lblCapacidadTotalRobot->Visible = false;
 		txtCapacidadPesoRobot->Visible = false;
 	}
+}
+private: System::Void dgvPrestamos_CellEndEdit(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	// Se actualiza el peso total cuando se cambia la cantidad de un libro
+	//if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "Cantidad") {
+	if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "ColumnaCantidad") {
+		int fila = e->RowIndex;
+
+		// Intenta convertir la cantidad ingresada
+		String^ textoCantidad = dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value->ToString();
+		int cantidad = 0;
+
+		if (!Int32::TryParse(textoCantidad, cantidad) || cantidad < 0) {
+			MessageBox::Show("Ingrese una cantidad válida (entero positivo).");
+			dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value = 1; // valor por defecto
+			cantidad = 1;
+		}
+
+		// Actualiza la cantidad en el loan
+		User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
+		LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
+		List<Loan^>^ loans = loanCart->Loans;
+		
+		loans[fila]->Quantity = cantidad;
+
+		UpdateBooksWeight();
+	}
+
+
+}
+private: System::Void btnConfirmarPrestamos_Click(System::Object^ sender, System::EventArgs^ e) {
+	User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
+	LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
+	LoanOrder^ loanOrder = gcnew LoanOrder();
+	loanOrder->Client = loanCart->Client;
+	loanOrder->Loans = loanCart->Loans;
+	loanOrder->IsDelivery = loanCart->IsDelivery;
+	loanOrder->DeliveryRobotID = loanCart->DeliveryRobotID;
+	loanOrder->DeliveryPoint = loanCart->DeliveryPoint;
+	loanOrder->Library = loanCart->Library;
+
 }
 };
 }

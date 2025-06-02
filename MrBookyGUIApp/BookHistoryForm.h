@@ -4,10 +4,15 @@ namespace MrBookyGUIApp {
 
 	using namespace System;
 	using namespace System::ComponentModel;
-	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MrBookyModel;
+	using namespace MrBookyController;
+	using namespace MrBookyPersistance;
+	using namespace System::IO;
+	using namespace System::Drawing::Imaging;
 
 	/// <summary>
 	/// Resumen de BookHistoryForm
@@ -35,8 +40,7 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	protected:
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridView^ dgvHistorial;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaID;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaTitulo;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaAutor;
@@ -45,6 +49,16 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaFechaFinPrestamo;
 	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ ColumnaAñadirReseña;
+	protected:
+
+
+
+
+
+
+
+
+
 
 	private:
 		/// <summary>
@@ -61,7 +75,7 @@ namespace MrBookyGUIApp {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(BookHistoryForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->dgvHistorial = (gcnew System::Windows::Forms::DataGridView());
 			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaTitulo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -70,7 +84,7 @@ namespace MrBookyGUIApp {
 			this->ColumnaFechaFinPrestamo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaImagen = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->ColumnaAñadirReseña = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvHistorial))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -86,21 +100,21 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Historial de Libros";
 			// 
-			// dataGridView1
+			// dgvHistorial
 			// 
-			this->dataGridView1->AllowUserToAddRows = false;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
+			this->dgvHistorial->AllowUserToAddRows = false;
+			this->dgvHistorial->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvHistorial->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->ColumnaID,
 					this->ColumnaTitulo, this->ColumnaAutor, this->ColumnaEditorial, this->ColumnaFechaPrestamo, this->ColumnaFechaFinPrestamo, this->ColumnaImagen,
 					this->ColumnaAñadirReseña
 			});
-			this->dataGridView1->Location = System::Drawing::Point(46, 135);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(1045, 353);
-			this->dataGridView1->TabIndex = 1;
+			this->dgvHistorial->Location = System::Drawing::Point(46, 135);
+			this->dgvHistorial->Name = L"dgvHistorial";
+			this->dgvHistorial->RowHeadersWidth = 51;
+			this->dgvHistorial->RowTemplate->Height = 24;
+			this->dgvHistorial->Size = System::Drawing::Size(1045, 353);
+			this->dgvHistorial->TabIndex = 1;
 			// 
 			// ColumnaID
 			// 
@@ -155,9 +169,11 @@ namespace MrBookyGUIApp {
 			// 
 			// ColumnaAñadirReseña
 			// 
-			this->ColumnaAñadirReseña->HeaderText = L"Añadir Reseña";
+			this->ColumnaAñadirReseña->HeaderText = L"Añadir Reseña\?";
 			this->ColumnaAñadirReseña->MinimumWidth = 6;
 			this->ColumnaAñadirReseña->Name = L"ColumnaAñadirReseña";
+			this->ColumnaAñadirReseña->Text = L"Añadir";
+			this->ColumnaAñadirReseña->UseColumnTextForButtonValue = true;
 			this->ColumnaAñadirReseña->Width = 125;
 			// 
 			// BookHistoryForm
@@ -166,15 +182,48 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1132, 537);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->dgvHistorial);
 			this->Controls->Add(this->label1);
 			this->Name = L"BookHistoryForm";
 			this->Text = L"BookHistoryForm";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			this->Load += gcnew System::EventHandler(this, &BookHistoryForm::BookHistoryForm_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvHistorial))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+		void ShowHistory() {
+			Client^ user = (Client^)Persistance::LoadBinaryFile("TempUser.bin");
+			List<Loan^>^ loanHistory = Controller::GetLoanHistoryByUser(user);
+			if (loanHistory != nullptr) {
+				dgvHistorial->Rows->Clear();
+				for (int i = 0; i < loanHistory->Count; i++) {
+					int index = dgvHistorial->Rows->Add(gcnew array<String^>{
+						"" + loanHistory[i]->Book->BookID,
+							loanHistory[i]->Book->Title,
+							loanHistory[i]->Book->Author,
+							loanHistory[i]->Book->Publisher,
+							loanHistory[i]->Book->Author,
+							"" + loanHistory[i]->DateLoan,
+					        "" + loanHistory[i]->ReturnDate}
+					);
+
+					array<Byte>^ photoBytes = loanHistory[i]->Book->Photo;
+					if (photoBytes != nullptr && photoBytes->Length > 0) {
+						System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
+						System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
+
+						// Insertar la imagen en la última columna
+						dgvHistorial->Rows[index]->Cells["ColumnaImagen"]->Value = image;
+					}
+
+				}
+			}
+		};
+
+	private: System::Void BookHistoryForm_Load(System::Object^ sender, System::EventArgs^ e) {
+
+	}
+};
 }
