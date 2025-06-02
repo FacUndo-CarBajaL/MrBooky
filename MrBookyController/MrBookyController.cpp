@@ -349,6 +349,7 @@ User^ MrBookyController::Controller::SearchUserbyName(String^ userName)
 			return user;
 		}
 	}
+	return nullptr; // Si no se encuentra el usuario, retorna nullptr
 }
 User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
