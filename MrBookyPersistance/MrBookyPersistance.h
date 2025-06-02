@@ -54,5 +54,7 @@ namespace MrBookyPersistance {
 
 		static void SaveLoansandCounterBin(String^ filename, int counter, List<Loan^>^ loanList);
 		static void LoadLoansWithCounter(String^ fileName, int% counter, List<Loan^>^% loanList);
+
+		static List<DeliveryRobot^>^ LoadRobotsFromBin(String^ fileName);
 	};
 }
