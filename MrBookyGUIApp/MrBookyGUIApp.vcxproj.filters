@@ -24,6 +24,8 @@
     <ClCompile Include="UserOptionsForm.cpp" />
     <ClCompile Include="UserProfileForm.cpp" />
     <ClCompile Include="UserReport.cpp" />
+    <ClCompile Include="AdminInterface.cpp" />
+    <ClCompile Include="LibrarianMaintenance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BookHistoryForm.h" />
@@ -49,5 +51,7 @@
     <ClInclude Include="UserOptionsForm.h" />
     <ClInclude Include="UserProfileForm.h" />
     <ClInclude Include="UserReport.h" />
+    <ClInclude Include="AdminInterface.h" />
+    <ClInclude Include="LibrarianMaintenance.h" />
   </ItemGroup>
 </Project>

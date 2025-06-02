@@ -2,6 +2,7 @@
 #include "RegisterUserForm.h"
 #include "UserOptionsForm.h"
 #include "LibrarianLogIn.h"
+#include "AdminInterface.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -203,11 +204,13 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 		}
 		else if (user->GetType() == Admin::typeid) {
 			MessageBox::Show("Se ha ingresado como administrador. Bienvenid@ " + userName);
-			
+			// Se debe abrir la ventana de administración
+			AdminInterface^ adminForm = gcnew AdminInterface();
+			adminForm->Show();
 		}
 		else {
 			MessageBox::Show("Tipo de usuario desconocido.");
-
+		}
 	}
 }
 };
