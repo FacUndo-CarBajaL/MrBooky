@@ -255,6 +255,7 @@ User^ MrBookyController::Controller::SearchUserbyName(String^ userName)
 			return user;
 		}
 	}
+	return nullptr; // Si no se encuentra el usuario, retorna nullptr
 }
 User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
@@ -473,4 +474,24 @@ LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 	}
 
 	return nullptr;
+}
+
+List<LoanOrder^>^ MrBookyController::Controller::GetLoanOrders()
+{
+	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	return loanOrders;
+}
+
+void MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
+{
+	for (int i = 0; i < loanOrders->Count; i++)
+	{
+		if (loanOrders[i]->Client->UserID == loanOrder->Client->UserID)
+		{
+			// Actualiza el pedido de préstamo
+			loanOrders[i] = loanOrder;
+			Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+			return;
+		}
+	}
 }
