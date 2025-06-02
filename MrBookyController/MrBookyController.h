@@ -12,6 +12,7 @@ namespace MrBookyController {
 		static String^ BIN_BOOK_FILE_NAME = "books.bin";
 		static String^ BIN_USER_FILE_NAME = "users.bin";
 		static String^ BIN_LOANORDER_FILE_NAME = "loanOrders.bin";
+		static String^ BIN_LOANCART_FILE_NAME = "loanCart.bin";
 
 		private:
 			static List<Book^>^ books = gcnew List<Book^>();
@@ -21,6 +22,7 @@ namespace MrBookyController {
 			static List<Loan^>^ loans = gcnew List<Loan^>();
 			static List<CartItem^>^ cartItems = gcnew List<CartItem^>();
 			static List<LoanOrder^>^ loanOrders = gcnew List<LoanOrder^>();
+			static List<LoanCart^>^ loanCarts = gcnew List<LoanCart^>();
 		// TODO: Agregue aqu√≠ los m√©todos de esta clase.
 		public:
 			// M√©todos CRUD para Book
@@ -30,6 +32,7 @@ namespace MrBookyController {
 			static int UpdateBook(Book^ book);
 			static int DeleteBook(int index);
 			static List<Book^>^ AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre);
+			
 
 
 			// MÈtodos CRUD para DeliveryRobot
@@ -62,6 +65,7 @@ namespace MrBookyController {
 			static Loan^ SearchLoan(int loanId);
 			static int UpdateLoan(Loan^ loan);
 			static int DeleteLoan(int loanId);
+			static List<Loan^>^ GetLoanHistoryByUser(User^ user);
 
 			// MÈtodos CRUD para CartItem
 			static int AddCartItem(CartItem^ cartItem);
@@ -70,11 +74,15 @@ namespace MrBookyController {
 			static int UpdateCartItem(CartItem^ cartItem);
 			static int DeleteCartItem(int cartItemId);
 
+			//MÈtodos CRUD para LoanCart
+			static void AddLoanCart(LoanCart^ loanCart);
+			static List<LoanCart^>^ GetLoanCarts();
+			static LoanCart^ SearchLoanCartByUser(User^ user);
+
 			//MÈtodos CRUD para LoanOrder
 			static void AddLoanOrder(LoanOrder^ loanOrder);
 			static LoanOrder^ SearchLoanOrderByUser(User^ user);
-			//static void UpdateLoanOrder(LoanOrder^ loanOrder);
-			//static void DeleteLoanOrder(LoanOrder^ loanOrder);
+			static List<LoanOrder^>^ GetAllLoanOrdersByUser(User^ user);
 
 	};
 }

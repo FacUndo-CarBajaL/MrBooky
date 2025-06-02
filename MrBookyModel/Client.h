@@ -7,7 +7,7 @@
 #define _CLIENT_H
 
 #include "User.h"
-//#include "Loan.h"
+
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -18,7 +18,7 @@ namespace MrBookyModel {
         public:
             int StudentCode;
             List<String^>^ Preferences;
-			//List<Loan^>^ LoanHistory;
+
 
             void AddPreference();
 
