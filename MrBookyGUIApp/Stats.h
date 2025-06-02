@@ -8,6 +8,9 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace MrBookyModel;
+	using namespace MrBookyController;
 
 	/// <summary>
 	/// Resumen de Stats
@@ -50,6 +53,8 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart2;
 	protected:
 
 	private:
@@ -65,6 +70,12 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Stats::typeid));
 			this->txtIdStock = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -78,6 +89,10 @@ namespace MrBookyGUIApp {
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->chart2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// txtIdStock
@@ -117,7 +132,6 @@ namespace MrBookyGUIApp {
 			this->rbtnIndividual->TabStop = true;
 			this->rbtnIndividual->Text = L"Individual";
 			this->rbtnIndividual->UseVisualStyleBackColor = false;
-			this->rbtnIndividual->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnIndividual_CheckedChanged);
 			// 
 			// rbtnGroup
 			// 
@@ -132,7 +146,6 @@ namespace MrBookyGUIApp {
 			this->rbtnGroup->TabStop = true;
 			this->rbtnGroup->Text = L"Grupal";
 			this->rbtnGroup->UseVisualStyleBackColor = false;
-			this->rbtnGroup->CheckedChanged += gcnew System::EventHandler(this, &Stats::rbtnGroup_CheckedChanged);
 			// 
 			// rbtnBook
 			// 
@@ -234,6 +247,39 @@ namespace MrBookyGUIApp {
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Generar Reporte";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &Stats::button1_Click);
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(87, 230);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(285, 192);
+			this->chart1->TabIndex = 13;
+			this->chart1->Text = L"chart1";
+			// 
+			// chart2
+			// 
+			chartArea2->Name = L"ChartArea1";
+			this->chart2->ChartAreas->Add(chartArea2);
+			legend2->Name = L"Legend1";
+			this->chart2->Legends->Add(legend2);
+			this->chart2->Location = System::Drawing::Point(480, 230);
+			this->chart2->Name = L"chart2";
+			series2->ChartArea = L"ChartArea1";
+			series2->Legend = L"Legend1";
+			series2->Name = L"Series1";
+			this->chart2->Series->Add(series2);
+			this->chart2->Size = System::Drawing::Size(285, 192);
+			this->chart2->TabIndex = 14;
+			this->chart2->Text = L"chart2";
 			// 
 			// Stats
 			// 
@@ -241,6 +287,8 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
+			this->Controls->Add(this->chart2);
+			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->label3);
@@ -259,17 +307,47 @@ namespace MrBookyGUIApp {
 			this->Margin = System::Windows::Forms::Padding(6, 5, 6, 5);
 			this->Name = L"Stats";
 			this->Text = L"Stats";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
-		
+		String^ id = txtIdStock->Text->Trim();
+		if (id->Length == 0 || id == "Ingrese Id") {
+			MessageBox::Show("Por favor, ingrese un ID válido.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		int idSearch = Convert::ToInt32(id);
+		DateTime startDate = dateTimePicker1->Value;
+		DateTime endDate = dateTimePicker2->Value;
+
+		if (startDate > endDate) {
+			MessageBox::Show("La fecha de inicio no puede ser posterior a la fecha de fin.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+		if (rbtnUser->Checked) {
+			//ShowGraphsUsers(id, startDate, endDate);
+		}
+		else if (rbtnBook->Checked) {
+			//ShowGraphsBooks(id, startDate, endDate);
+		}
 	}
+
+		   void ShowGraphsUsers(int userId, DateTime startDate, DateTime endDate) {
+			   List<Loan^>^ loans = MrBookyController::Controller::GetLoans();
+
+
+		   }
 private: System::Void rbtnUser_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	if (rbtnUser->Checked) {
 		rbtnBook->Checked = false;
+		rbtnIndividual->Checked = true;
+		rbtnIndividual->Enabled = false;
+		rbtnGroup->Enabled = false;
 	}
 	CheckEnableSearchButton();
 }
@@ -277,27 +355,19 @@ private: System::Void rbtnUser_CheckedChanged(System::Object^ sender, System::Ev
 private: System::Void rbtnBook_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 	if (rbtnBook->Checked) {
 		rbtnUser->Checked = false;
+		rbtnIndividual->Enabled = true;
+		rbtnGroup->Enabled = true;
 	}
 	CheckEnableSearchButton();
 }
 
-private: System::Void rbtnIndividual_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (rbtnIndividual->Checked) {
-		rbtnGroup->Checked = false;
-	}
-	CheckEnableSearchButton();
-}
-
-private: System::Void rbtnGroup_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (rbtnGroup->Checked) {
-		rbtnIndividual->Checked = false;
-	}
-	CheckEnableSearchButton();
-}
 private: void CheckEnableSearchButton() {
 	bool SelectedType = (rbtnUser->Checked || rbtnBook->Checked);
 	bool SelectedMode = (rbtnIndividual->Checked || rbtnGroup->Checked);
 	btnSearch->Enabled = SelectedType && SelectedMode;
+}
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	
 }
 };
 }

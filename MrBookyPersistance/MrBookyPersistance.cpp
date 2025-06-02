@@ -511,3 +511,12 @@ void MrBookyPersistance::Persistance::LoadLoansWithCounter(
 }
 
 
+List<DeliveryRobot^>^ MrBookyPersistance::Persistance::LoadRobotsFromBin(String^ fileName) {
+	Object^ data = LoadBinaryFile("robots.bin");
+	if (data != nullptr) {
+		return safe_cast<List<DeliveryRobot^>^>(data);
+	}
+	else {
+		return gcnew List<DeliveryRobot^>();
+	}
+}
