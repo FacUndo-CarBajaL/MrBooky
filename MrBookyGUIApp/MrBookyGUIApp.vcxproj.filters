@@ -77,7 +77,13 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="MaintenanceLibrary.cpp">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="MaintenanceRobot.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="MaintenanceLibrarian.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +136,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="MaintenanceLibrary.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MaintenanceRobot.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MaintenanceLibrarian.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

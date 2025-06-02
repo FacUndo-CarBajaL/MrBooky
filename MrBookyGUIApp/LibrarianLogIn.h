@@ -7,8 +7,9 @@
 #include "MaintenanceBook.h"
 #include "UserReport.h"
 #include "BookReport.h"
-#include "AddDeliveryRobot.h"
+#include "MaintenanceRobot.h"
 #include "MaintenanceLibrary.h"
+#include "MaintenanceLibrarian.h"
 
 namespace MrBookyGUIApp {
 
@@ -54,6 +55,20 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Button^ btnCRUDLibros;
 
 
+
+	private: System::Windows::Forms::Button^ btnReporte;
+	private: System::Windows::Forms::Button^ btnUserReport;
+	private: System::Windows::Forms::Button^ btnBookReport;
+	private: System::Windows::Forms::Button^ btnRobot;
+	private: System::Windows::Forms::Button^ btnLibreria;
+	private: System::Windows::Forms::Button^ btnLibrarian;
+
+
+
+
+
+
+
 	protected:
 
 	private:
@@ -73,6 +88,13 @@ namespace MrBookyGUIApp {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->btnLoans = (gcnew System::Windows::Forms::Button());
 			this->btnStock = (gcnew System::Windows::Forms::Button());
+			this->btnMaintenanceBook = (gcnew System::Windows::Forms::Button());
+			this->btnReporte = (gcnew System::Windows::Forms::Button());
+			this->btnUserReport = (gcnew System::Windows::Forms::Button());
+			this->btnBookReport = (gcnew System::Windows::Forms::Button());
+			this->btnRobot = (gcnew System::Windows::Forms::Button());
+			this->btnLibreria = (gcnew System::Windows::Forms::Button());
+			this->btnLibrarian = (gcnew System::Windows::Forms::Button());
 			this->btnStats = (gcnew System::Windows::Forms::Button());
 			this->btnBooksDispatch = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -86,9 +108,10 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(130, 117);
+			this->label1->Location = System::Drawing::Point(206, 69);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(652, 51);
+			this->label1->Size = System::Drawing::Size(1041, 83);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Sistema de Logística Mr.Booky";
 			// 
@@ -111,12 +134,13 @@ namespace MrBookyGUIApp {
 			this->btnStock->BackColor = System::Drawing::Color::White;
 			this->btnStock->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnStock->ForeColor = System::Drawing::Color::Black;
-			this->btnStock->Location = System::Drawing::Point(201, 267);
+			this->btnStock->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->btnStock->Location = System::Drawing::Point(316, 164);
+			this->btnStock->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnStock->Name = L"btnStock";
-			this->btnStock->Size = System::Drawing::Size(515, 41);
-			this->btnStock->TabIndex = 2;
-			this->btnStock->Text = L"Verificar y actualizar Stock";
+			this->btnStock->Size = System::Drawing::Size(772, 66);
+			this->btnStock->TabIndex = 1;
+			this->btnStock->Text = L"Verificar Stock";
 			this->btnStock->UseVisualStyleBackColor = false;
 			this->btnStock->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnStock_Click);
 			// 
@@ -125,6 +149,14 @@ namespace MrBookyGUIApp {
 			this->btnStats->BackColor = System::Drawing::Color::White;
 			this->btnStats->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnMaintenanceBook->Location = System::Drawing::Point(316, 312);
+			this->btnMaintenanceBook->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnMaintenanceBook->Name = L"btnMaintenanceBook";
+			this->btnMaintenanceBook->Size = System::Drawing::Size(772, 64);
+			this->btnMaintenanceBook->TabIndex = 2;
+			this->btnMaintenanceBook->Text = L"Mantenimiento Libro";
+			this->btnMaintenanceBook->UseVisualStyleBackColor = true;
+			this->btnMaintenanceBook->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnMaintenanceBook_Click);
 			this->btnStats->ForeColor = System::Drawing::Color::Black;
 			this->btnStats->Location = System::Drawing::Point(201, 327);
 			this->btnStats->Name = L"btnStats";
@@ -139,6 +171,14 @@ namespace MrBookyGUIApp {
 			this->btnBooksDispatch->BackColor = System::Drawing::Color::White;
 			this->btnBooksDispatch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnReporte->Location = System::Drawing::Point(316, 456);
+			this->btnReporte->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnReporte->Name = L"btnReporte";
+			this->btnReporte->Size = System::Drawing::Size(772, 64);
+			this->btnReporte->TabIndex = 3;
+			this->btnReporte->Text = L"Generar Reporte";
+			this->btnReporte->UseVisualStyleBackColor = true;
+			this->btnReporte->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnReporte_Click);
 			this->btnBooksDispatch->ForeColor = System::Drawing::Color::Black;
 			this->btnBooksDispatch->Location = System::Drawing::Point(201, 386);
 			this->btnBooksDispatch->Name = L"btnBooksDispatch";
@@ -154,6 +194,15 @@ namespace MrBookyGUIApp {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->btnUserReport->Location = System::Drawing::Point(316, 506);
+			this->btnUserReport->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnUserReport->Name = L"btnUserReport";
+			this->btnUserReport->Size = System::Drawing::Size(772, 53);
+			this->btnUserReport->TabIndex = 4;
+			this->btnUserReport->Text = L"Por Usuario";
+			this->btnUserReport->UseVisualStyleBackColor = false;
+			this->btnUserReport->Visible = false;
+			this->btnUserReport->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnUserReport_Click);
 			this->label2->ForeColor = System::Drawing::Color::White;
 			this->label2->Location = System::Drawing::Point(183, 46);
 			this->label2->Name = L"label2";
@@ -166,19 +215,63 @@ namespace MrBookyGUIApp {
 			this->btnCRUDLibros->BackColor = System::Drawing::Color::White;
 			this->btnCRUDLibros->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnCRUDLibros->ForeColor = System::Drawing::Color::Black;
-			this->btnCRUDLibros->Location = System::Drawing::Point(201, 440);
-			this->btnCRUDLibros->Name = L"btnCRUDLibros";
-			this->btnCRUDLibros->Size = System::Drawing::Size(515, 41);
-			this->btnCRUDLibros->TabIndex = 6;
-			this->btnCRUDLibros->Text = L"CRUD Libros";
-			this->btnCRUDLibros->UseVisualStyleBackColor = false;
-			this->btnCRUDLibros->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnCRUDLibros_Click);
+			this->btnBookReport->Location = System::Drawing::Point(316, 557);
+			this->btnBookReport->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnBookReport->Name = L"btnBookReport";
+			this->btnBookReport->Size = System::Drawing::Size(772, 58);
+			this->btnBookReport->TabIndex = 5;
+			this->btnBookReport->Text = L"Por Libro";
+			this->btnBookReport->UseVisualStyleBackColor = false;
+			this->btnBookReport->Visible = false;
+			this->btnBookReport->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnBookReport_Click);
+			// 
+			// btnRobot
+			// 
+			this->btnRobot->Location = System::Drawing::Point(504, 720);
+			this->btnRobot->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnRobot->Name = L"btnRobot";
+			this->btnRobot->Size = System::Drawing::Size(387, 53);
+			this->btnRobot->TabIndex = 6;
+			this->btnRobot->Text = L"Robot";
+			this->btnRobot->UseVisualStyleBackColor = true;
+			this->btnRobot->Click += gcnew System::EventHandler(this, &LibrarianLogIn::button1_Click);
+			// 
+			// btnLibreria
+			// 
+			this->btnLibreria->Location = System::Drawing::Point(504, 783);
+			this->btnLibreria->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnLibreria->Name = L"btnLibreria";
+			this->btnLibreria->Size = System::Drawing::Size(387, 53);
+			this->btnLibreria->TabIndex = 7;
+			this->btnLibreria->Text = L"Libreria";
+			this->btnLibreria->UseVisualStyleBackColor = true;
+			this->btnLibreria->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLibreria_Click);
+			// 
+			// btnLibrarian
+			// 
+			this->btnLibrarian->Location = System::Drawing::Point(504, 657);
+			this->btnLibrarian->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnLibrarian->Name = L"btnLibrarian";
+			this->btnLibrarian->Size = System::Drawing::Size(387, 53);
+			this->btnLibrarian->TabIndex = 8;
+			this->btnLibrarian->Text = L"Bibliotecario";
+			this->btnLibrarian->UseVisualStyleBackColor = true;
+			this->btnLibrarian->Click += gcnew System::EventHandler(this, &LibrarianLogIn::btnLibrarian_Click);
 			// 
 			// LibrarianLogIn
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->ClientSize = System::Drawing::Size(1413, 881);
+			this->Controls->Add(this->btnLibrarian);
+			this->Controls->Add(this->btnLibreria);
+			this->Controls->Add(this->btnRobot);
+			this->Controls->Add(this->btnBookReport);
+			this->Controls->Add(this->btnUserReport);
+			this->Controls->Add(this->btnReporte);
+			this->Controls->Add(this->btnMaintenanceBook);
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(14)), static_cast<System::Int32>(static_cast<System::Byte>(14)),
 				static_cast<System::Int32>(static_cast<System::Byte>(14)));
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
@@ -211,6 +304,10 @@ private: System::Void btnStats_Click(System::Object^ sender, System::EventArgs^ 
 	Stats^ statsForm = gcnew Stats();
 	statsForm->Show();
 }
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceRobot^ deliveryRobot = gcnew MaintenanceRobot();
+	deliveryRobot->Show();
+
 private: System::Void btnBooksDispatch_Click(System::Object^ sender, System::EventArgs^ e) {
 	DispatchBooks^ dispatchBooksForm = gcnew DispatchBooks();
 	dispatchBooksForm->Show();
@@ -221,6 +318,11 @@ private: System::Void btnLibreria_Click(System::Object^ sender, System::EventArg
 private: System::Void btnCRUDLibros_Click(System::Object^ sender, System::EventArgs^ e) {
 	MaintenanceBook^ bookForm = gcnew MaintenanceBook();
 	bookForm->Show();
+}
+private: System::Void btnLibrarian_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceLibrarian^ librarian = gcnew MaintenanceLibrarian();
+	librarian->Show();
+
 }
 };
 }
