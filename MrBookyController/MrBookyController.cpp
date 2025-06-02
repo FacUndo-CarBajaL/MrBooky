@@ -339,6 +339,17 @@ User^ MrBookyController::Controller::SearchUser(int userId)
 
 
 //Agregadoooo////////////////////////
+User^ MrBookyController::Controller::SearchUserbyName(String^ userName)
+{
+	users = GetUsers();
+	for each (User ^ user in users)
+	{
+		if (user->Name == userName)
+		{
+			return user;
+		}
+	}
+}
 User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
 	
@@ -403,18 +414,31 @@ int MrBookyController::Controller::DeleteUser(int userId)
 	return 0;
 }
 
-int MrBookyController::Controller::AddLoan(Loan^ loan)
-{
-	try {
-		// Agrega el préstamo a la lista de préstamos
-		loans->Add(loan);
-		return 1;
+int MrBookyController::Controller::AddLoan(Loan^ loan) {
+	// Verifica si es un nuevo día
+	if (lastLoanDate != DateTime::Today) {
+		loanOrderToday = 0;
+		lastLoanDate = DateTime::Today;
 	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	return 0;
+
+	loanOrderToday++;
+
+	// Genera el ID
+	String^ idStr = DateTime::Today.ToString("ddMMyy") + loanOrderToday.ToString("D2");
+	loan->LoanID = Int32::Parse(idStr);  // o usar String^ en la clase
+
+	loan->DateLoan = DateTime::Now;
+	loan->ReturnDate = DateTime::Now.AddDays(7); // ejemplo
+
+	// Agrega a la lista
+	loans->Add(loan);
+
+	// Guarda loans + contador
+	Persistance::SaveLoansandCounterBin(BIN_LOANORDER_FILE_NAME, loanOrderToday, loans);
+
+	return loan->LoanID;
 }
+
 
 List<Loan^>^ MrBookyController::Controller::GetLoans()
 {

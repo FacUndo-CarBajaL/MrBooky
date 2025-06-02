@@ -52,8 +52,7 @@ namespace MrBookyPersistance {
 		static void RAMBinaryFile(String^ fileName, Object^ persistObject);
 		static void UserRAMBinaryFile(String^ fileName, Object^ persistObject);
 
-		//para bookrequest: tener en cuenta la cantidad y los prestamos de un dia
-		//static void PersistLoanOrdersTodayToXMLFile(String^ fileName, List<LoanOrder^>^ loanOrders);
-		//static List<LoanOrder^>^ LoadLoanOrdersTodayFromXMLFile(String^ fileName);
+		static void SaveLoansandCounterBin(String^ filename, int counter, List<Loan^>^ loanList);
+		static void LoadLoansWithCounter(String^ fileName, int% counter, List<Loan^>^% loanList);
 	};
 }
