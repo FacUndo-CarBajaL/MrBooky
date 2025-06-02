@@ -596,7 +596,6 @@ private: System::Void btnDeleteBook_Click(System::Object^ sender, System::EventA
 }
 private: System::Void dgvBooks_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 
-
 	String^ bookName = dgvBooks->Rows[dgvBooks->SelectedCells[0]->RowIndex]->Cells[0]->Value->ToString();
 	Book^ book = Controller::SearchBook(bookName);
 	txtTitle->Text = book->Title;

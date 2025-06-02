@@ -26,7 +26,6 @@ namespace MrBookyModel {
             List<int>^ Stars;
             String^ Description;
             String^ Availability;
-            String^ Provider;
             int AvailabilityTime;
             int LoanTime;
             double Weight;

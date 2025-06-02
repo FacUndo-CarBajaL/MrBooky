@@ -26,6 +26,7 @@ List<Book^>^ MrBookyController::Controller::GetBooks()
 Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
 	// Busca el libro en la lista de libros
+	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	for each (Book ^ book in books)
 	{
 		if (book->Title == title)
@@ -42,13 +43,14 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 int MrBookyController::Controller::UpdateBook(Book^ book)
 {
 	// Busca el libro en la lista de libros
+	books = Controller::GetBooks();
 	for (int i = 0; i < books->Count; i++)
 	{
 		if (books[i]->Title == book->Title)
 		{
 			books[i] = book;
 			// Actualiza el libro
-			MrBookyPersistance::Persistance::PersistXMLFile("books.xml", books);
+			MrBookyPersistance::Persistance::PersistBinaryFile("books.bin", books);
 			return 1;
 		}
 	}
@@ -57,13 +59,12 @@ int MrBookyController::Controller::UpdateBook(Book^ book)
 
 int MrBookyController::Controller::DeleteBook(String^ Title)
 {
+	books = Controller::GetBooks();
 	for (int i = 0; i < books->Count; i++)
 	{
 		if (books[i]->Title == Title)
 		{
 			books->RemoveAt(i);
-			// Elimina el libro
-			MrBookyPersistance::Persistance::PersistXMLFile("books.xml", books);
 			return 1;
 		}
 	}

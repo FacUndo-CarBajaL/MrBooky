@@ -31,9 +31,6 @@ namespace MrBookyController {
 			static Book^ SearchBook(String^ title);
 			static int UpdateBook(Book^ book);
 			static int DeleteBook(String^ title);
-
-
-			static int DeleteBook(int index);
 			static List<Book^>^ AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre);
 			
 

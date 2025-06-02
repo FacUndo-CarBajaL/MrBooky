@@ -1,7 +1,9 @@
 #pragma once
 
-#include "AddDeliveryRobot.h"
-#include "AddLibrary.h"
+#include "MaintenanceRobot.h"
+#include "MaintenanceLibrary.h"
+//#include "AddDeliveryRobot.h"
+//#include "AddLibrary.h"
 #include "MaintenanceBook.h"
 #include "LibrarianLogIn.h"
 
@@ -156,12 +158,12 @@ namespace MrBookyGUIApp {
 #pragma endregion
 private: System::Void btnAdminRobot_Click(System::Object^ sender, System::EventArgs^ e) {
 	// Al presionarse el boton , se abrirá la interfaz de administración del robot
-	AddDeliveryRobot^ robotForm = gcnew AddDeliveryRobot();
+	MaintenanceRobot^ robotForm = gcnew MaintenanceRobot();
 	robotForm->ShowDialog();
 }
 private: System::Void btnAdminLibrary_Click(System::Object^ sender, System::EventArgs^ e) {
 	// Al presionarse el boton, se abrirá la interfaz de administración de la biblioteca
-	AddLibrary^ libraryForm = gcnew AddLibrary();
+	MaintenanceLibrary^ libraryForm = gcnew MaintenanceLibrary();
 	libraryForm->ShowDialog();
 }
 private: System::Void btnAdminBook_Click(System::Object^ sender, System::EventArgs^ e) {
