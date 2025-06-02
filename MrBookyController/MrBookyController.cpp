@@ -211,6 +211,7 @@ int MrBookyController::Controller::DeleteLibrary(int libraryId)
 
 void MrBookyController::Controller::AddUser(User^ user)
 {
+	users = Controller::GetUsers();
 	for each (User^ registeredUser in users) {
 		if (registeredUser->Name == user->Name) {
 			throw gcnew DuplicateBookException("El nombre de el usuario ya existe en la base de datos.");
