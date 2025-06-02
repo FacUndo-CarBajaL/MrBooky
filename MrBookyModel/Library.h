@@ -7,13 +7,16 @@
 #define _LIBRARY_H
 
 #include "Book.h"
-#include "Point.h"
 #include "Loan.h"
 #include "DeliveryRobot.h"
 #include "Librarian.h"
+#include "StockItem.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
+using namespace System::IO;
+using namespace System::Xml::Serialization;
+using namespace System::Runtime::Serialization::Formatters::Binary;
 
 namespace MrBookyModel {
     [Serializable]
@@ -24,19 +27,21 @@ namespace MrBookyModel {
         String^ ContactEmail;
         String^ OpeningHour;
         String^ CloseHour;
-        Point^ Position;
+        Double X;
+        Double Y;
         List<Book^>^ Catalogue;
-        Dictionary<int, int>^ Stock;
         List<Librarian^>^ Staff;
         List<Loan^>^ Loans;
         List<DeliveryRobot^> Robots;
 
-        Library(int id, String^ name, String^ email, String^ openHour, String^ closeHour) {
-			this->LibraryID = id;
+        Library() {};
+        Library(String^ name, String^ email, String^ openHour, String^ closeHour, Double x, Double y) {
 			this->Name = name;
 			this->ContactEmail = email;
 			this->OpeningHour = openHour;
 			this->CloseHour = closeHour;
+            this->X = x;
+            this->Y = y;
         }
 
         void ShowPosition();

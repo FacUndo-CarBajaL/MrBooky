@@ -7,6 +7,8 @@
 #define _BOOK_H
 using namespace System;
 using namespace System::Collections::Generic;
+using namespace System::IO;
+using namespace System::Xml::Serialization;
 
 namespace MrBookyModel {
     [Serializable]
@@ -17,25 +19,36 @@ namespace MrBookyModel {
             String^ Author;
             String^ Publisher;
             int ReleaseYear;
-            int Stock;
+            int Quantity;
             String^ Genre;
             String^ Provider;
             List<String^>^ Reviews;
             List<int>^ Stars;
             String^ Description;
             String^ Availability;
+            String^ Provider;
             int AvailabilityTime;
             int LoanTime;
             double Weight;
             array<Byte>^ Photo;
-
-            Book() {};
 
             void AddReview();
 
             void CalculateAverageStars();
 
             void ShowInformation();
+
+            Book() {};
+            Book(String^ title, String^ author, String^ genre, String^ publisher, int quantity, String^ provider, String^ description) {
+                this->Title = title;
+                this->Genre = genre;
+                this->Author = author;
+                this->Publisher = publisher;
+                this->Quantity = quantity;
+                this->Provider = provider;
+                this->Description = description;
+            }
+
     };
 }
 

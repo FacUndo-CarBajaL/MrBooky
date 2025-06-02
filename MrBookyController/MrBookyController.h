@@ -28,8 +28,11 @@ namespace MrBookyController {
 			// MÃ©todos CRUD para Book
 			static void AddBook(Book^ book);
 			static List<Book^>^ GetBooks();
-			static Book^ SearchBook(int index);
+			static Book^ SearchBook(String^ title);
 			static int UpdateBook(Book^ book);
+			static int DeleteBook(String^ title);
+
+
 			static int DeleteBook(int index);
 			static List<Book^>^ AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre);
 			
@@ -45,9 +48,9 @@ namespace MrBookyController {
 			// Métodos CRUD para Library
 			static int AddLibrary(Library^ library);
 			static List<Library^>^ GetLibraries();
-			static Library^ SearchLibrary(int libraryId);
+			static Library^ SearchLibrary(String^ Name);
 			static int UpdateLibrary(Library^ library);
-			static int DeleteLibrary(int libraryId);
+			static int DeleteLibrary(String^ Name);
 
 			// Métodos CRUD para User
 			static void AddUser(User^ user);
