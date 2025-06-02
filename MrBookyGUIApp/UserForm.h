@@ -205,6 +205,12 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 			librarianForm->Show();
 			//this->Close();
 		}
+		else if (user->GetType() == Admin::typeid) {
+			MessageBox::Show("Se ha ingresado como administrador. Bienvenid@ " + userName);
+			
+		}
+		else {
+			MessageBox::Show("Tipo de usuario desconocido.");
 
 	}
 }

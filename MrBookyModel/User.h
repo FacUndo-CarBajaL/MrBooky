@@ -10,7 +10,7 @@ using namespace System;
 using namespace System::Collections::Generic;
 
 namespace MrBookyModel {
-    public enum class UserType {Client, Librarian};
+    public enum class UserType {Client, Librarian, Admin};
     [Serializable]
     public ref class User {
         public:
