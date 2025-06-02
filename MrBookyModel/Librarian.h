@@ -15,7 +15,6 @@ namespace MrBookyModel {
     [Serializable]
     public ref class Librarian : public User {
     public:
-
         void ProcessLoanOrder();
 
         void RegisterBook();
@@ -37,7 +36,8 @@ namespace MrBookyModel {
         void MakeDailyReport();
 
         Librarian(){}
-        Librarian(int id, String^ name, String^ password) : User(id, name, password) {}
+        Librarian(int id, String^ name, String^ password) : User(id, name, password) {
+        }
     };
 }
 

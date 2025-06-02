@@ -114,7 +114,7 @@ int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 	// Agrega el robot a la lista de robots
 	try {
 		robots->Add(robot);
-		Persistance::PersistTextFile_Robot("robots.txt", robots);
+		Persistance::PersistBinaryFileRobots("robots.bin", robots);
 		return 1;
 	}
 	catch (Exception^ ex) {
@@ -123,9 +123,11 @@ int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 	return 0;
 }
 
-List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots()
-{
-	// TODO: Insertar una instrucción "return" aquí
+List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots(){
+	auto loaded = (List<DeliveryRobot^>^)MrBookyPersistance::Persistance::LoadBinaryFileRobots("robots.bin");
+	if (loaded != nullptr) {
+		robots = loaded;
+	}
 	return robots;
 }
 
@@ -150,6 +152,7 @@ int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 		{
 			// Actualiza el robot
 			robots[i] = robot;
+			Persistance::PersistBinaryFileRobots("robots.bin", robots);
 			return 1;
 		}
 	}
@@ -165,6 +168,7 @@ int MrBookyController::Controller::DeleteRobot(int robotId)
 		{
 			// Elimina el robot
 			robots->RemoveAt(i);
+			Persistance::PersistBinaryFileRobots("robots.bin", robots);
 			return 1;
 		}
 	}
@@ -175,11 +179,11 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 {
 	try {
 		// Agrega la biblioteca a la lista de bibliotecas
-		libraries = Controller::GetLibraries();
-		if(libraries==nullptr){
-			libraries = {};
+		if (libraries == nullptr) {
+			libraries= gcnew List<Library^>();;
 		}
-		libraries->Add(library);
+
+		MrBookyController::Controller::libraries ->Add(library);
 		Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
 		return 1;
 	}
@@ -191,7 +195,10 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 
 List<Library^>^ MrBookyController::Controller::GetLibraries()
 {
-	libraries = (List<Library^>^)MrBookyPersistance::Persistance::LoadBinaryFileLibraries("libraries.bin");
+	auto loaded = (List<Library^>^)MrBookyPersistance::Persistance::LoadBinaryFileLibraries("libraries.bin");
+	if (loaded != nullptr) {
+		libraries = loaded;
+	}
 	return libraries;
 }
 
@@ -313,6 +320,7 @@ int MrBookyController::Controller::UpdateUser(User^ user)
 		{
 			// Actualiza el usuario
 			users[i] = user;
+			Persistance::PersistBinaryFileLibraries("users.bin", users);
 			return 1;
 		}
 	}
@@ -328,6 +336,7 @@ int MrBookyController::Controller::DeleteUser(int userId)
 		{
 			// Elimina el usuario
 			users->RemoveAt(i);
+			Persistance::PersistBinaryFileLibraries("users.bin", users);
 			return 1;
 		}
 	}
