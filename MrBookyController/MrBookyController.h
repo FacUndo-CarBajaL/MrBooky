@@ -4,6 +4,8 @@ using namespace System;
 using namespace System::Collections::Generic;
 using namespace MrBookyModel;
 using namespace MrBookyPersistance;
+using namespace System::IO;
+using namespace System::IO::Ports;
 
 namespace MrBookyController {
 	public ref class Controller
@@ -13,6 +15,9 @@ namespace MrBookyController {
 		static String^ BIN_USER_FILE_NAME = "users.bin";
 		static String^ BIN_LOANORDER_FILE_NAME = "loanOrders.bin";
 		static String^ BIN_LOANCART_FILE_NAME = "loanCart.bin";
+
+		static int loanOrderToday = 0;
+		static DateTime lastLoanDate = DateTime::Today;
 
 		private:
 			static List<Book^>^ books = gcnew List<Book^>();
@@ -55,6 +60,7 @@ namespace MrBookyController {
 			static void AddUser(User^ user);
 			static List<User^>^ GetUsers();
 			static User^ SearchUser(int userId);
+			static User^ SearchUserbyName(String^ userName);
 			static int UpdateUser(User^ user);
 			static int DeleteUser(int userId);
 			static User^ SearchUserByNameAndPassword(String^ userName, String^ userPassword);

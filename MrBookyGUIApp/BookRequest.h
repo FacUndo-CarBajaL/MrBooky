@@ -10,6 +10,7 @@ namespace MrBookyGUIApp {
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic;
 	using namespace MrBookyModel;
+	using namespace MrBookyController;
 
 	/// <summary>
 	/// Resumen de BookRequest
@@ -37,10 +38,11 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::DataGridView^ dgvBookRequest;
 
 
 
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 	private: System::Windows::Forms::Button^ btnRegister;
 
 
@@ -91,7 +93,7 @@ namespace MrBookyGUIApp {
 			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(BookRequest::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->dgvBookRequest = (gcnew System::Windows::Forms::DataGridView());
 			this->txtUser = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->txtName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->txtQuantity = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -104,7 +106,7 @@ namespace MrBookyGUIApp {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->cmbState = (gcnew System::Windows::Forms::ComboBox());
 			this->btnUpdate = (gcnew System::Windows::Forms::Button());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvBookRequest))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -119,9 +121,9 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Resultados";
 			// 
-			// dataGridView1
+			// dgvBookRequest
 			// 
-			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCells;
+			this->dgvBookRequest->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::AllCells;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
 			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -130,19 +132,19 @@ namespace MrBookyGUIApp {
 			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
 			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+			this->dgvBookRequest->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this->dgvBookRequest->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvBookRequest->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->txtUser,
 					this->txtName, this->txtQuantity, this->txtState
 			});
-			this->dataGridView1->Location = System::Drawing::Point(110, 226);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(744, 135);
-			this->dataGridView1->TabIndex = 3;
-			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookRequest::dataGridView1_CellContentClick);
+			this->dgvBookRequest->Location = System::Drawing::Point(110, 226);
+			this->dgvBookRequest->Name = L"dgvBookRequest";
+			this->dgvBookRequest->RowHeadersWidth = 51;
+			this->dgvBookRequest->RowTemplate->Height = 24;
+			this->dgvBookRequest->Size = System::Drawing::Size(744, 135);
+			this->dgvBookRequest->TabIndex = 3;
+			this->dgvBookRequest->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookRequest::dataGridView1_CellContentClick);
 			// 
 			// txtUser
 			// 
@@ -274,7 +276,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->txtCode);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->btnRegister);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->dgvBookRequest);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -283,7 +285,7 @@ namespace MrBookyGUIApp {
 			this->Name = L"BookRequest";
 			this->Text = L"BookRequest";
 			this->Load += gcnew System::EventHandler(this, &BookRequest::BookRequest_Load);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvBookRequest))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -298,15 +300,25 @@ namespace MrBookyGUIApp {
 			MessageBox::Show("Por favor, complete todos los campos.");
 			return;
 		}
-		int userId = Int32::Parse(txtCode->Text);
+		String^ UserName = txtCode->Text;
 		int quantity = Int32::Parse(txtCantidad->Text);
 		String^ state = cmbState->SelectedItem->ToString();
-		
-		//LoanOrder ^ newLoan = gcnew LoanOrder ();
-		//newLoan.LoanOrderID = DateTime::Today.ToString("ddMMyy") + loanOrderToday.ToString;
-		//newLoan->Client = gcnew Client();
-		//newLoan->Client->UserID = userId;
-		//newLoan->LoanDate = DateTime::Now;
+		// Verificar si el usuario existe
+		User^ user = MrBookyController::Controller::SearchUserbyName(UserName);
+		Client^ client = dynamic_cast<Client^>(user);
+		if (user == nullptr) {
+			MessageBox::Show("El cliente no está registrado.");
+			return;
+		}
+		Loan^ newLoan = gcnew Loan();
+		newLoan->Client = client;
+		newLoan->Status = state;
+		newLoan->DateLoan = DateTime::Now;
+		newLoan->ReturnDate = DateTime::Now.AddDays(15);
+
+		int idLoan = MrBookyController::Controller::AddLoan(newLoan);
+
+		dgvBookRequest->Rows->Add(gcnew String(client->Name), gcnew String(newLoan->Book->Title), quantity, state);
 
 		txtCode->Clear();
 		txtCantidad->Clear();

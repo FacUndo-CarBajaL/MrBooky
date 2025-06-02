@@ -475,3 +475,39 @@ void MrBookyPersistance::Persistance::RAMBinaryFile(String^ fileName, Object^ pe
 	}
 }
 
+void MrBookyPersistance::Persistance::SaveLoansandCounterBin(String^ fileName, int counter, List<Loan^>^ loanList) {
+	FileStream^ file = nullptr;
+	BinaryFormatter^ formatter = gcnew BinaryFormatter();
+	try {
+		file = gcnew FileStream(fileName, FileMode::Create, FileAccess::Write);
+		formatter->Serialize(file, counter);         // Guarda el contador primero
+		formatter->Serialize(file, loanList);        // Luego la lista de préstamos
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+}
+
+void MrBookyPersistance::Persistance::LoadLoansWithCounter(
+	String^ fileName, int% counter, List<Loan^>^% loanList)
+{
+	counter = 0;
+	loanList = gcnew List<Loan^>();
+
+	if (!File::Exists(fileName))
+		return;
+
+	FileStream^ file = nullptr;
+	BinaryFormatter^ formatter = gcnew BinaryFormatter();
+
+	try {
+		file = gcnew FileStream(fileName, FileMode::Open, FileAccess::Read);
+		counter = safe_cast<int>(formatter->Deserialize(file));
+		loanList = safe_cast<List<Loan^>^>(formatter->Deserialize(file));
+	}
+	finally {
+		if (file != nullptr) file->Close();
+	}
+}
+
+
