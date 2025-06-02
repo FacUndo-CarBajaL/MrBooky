@@ -2,13 +2,16 @@
 <ArrayOfBook xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Book>
     <BookID>0</BookID>
-    <Title>hola</Title>
-    <Author>hola</Author>
-    <Publisher>hola</Publisher>
+    <Title>Caperucita Roja</Title>
+    <Author>Charles Perrault</Author>
+    <Publisher>nnn</Publisher>
     <ReleaseYear>0</ReleaseYear>
-    <Stock>1</Stock>
-    <Genre>hola</Genre>
-    <Description>hola</Description>
+    <Quantity>1234</Quantity>
+    <Genre>Infantil</Genre>
+    <Reviews />
+    <Stars />
+    <Description>Cuento infantil</Description>
+    <Provider>Crisol</Provider>
     <AvailabilityTime>0</AvailabilityTime>
     <LoanTime>0</LoanTime>
     <Weight>0</Weight>

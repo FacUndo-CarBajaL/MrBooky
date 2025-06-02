@@ -5,6 +5,10 @@
 #include "Stats.h"
 #include "DispatchBooks.h"
 #include "MaintenanceBook.h"
+#include "UserReport.h"
+#include "BookReport.h"
+#include "AddDeliveryRobot.h"
+#include "MaintenanceLibrary.h"
 
 namespace MrBookyGUIApp {
 
@@ -211,6 +215,9 @@ private: System::Void btnBooksDispatch_Click(System::Object^ sender, System::Eve
 	DispatchBooks^ dispatchBooksForm = gcnew DispatchBooks();
 	dispatchBooksForm->Show();
 }
+private: System::Void btnLibreria_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceLibrary^ libreria = gcnew MaintenanceLibrary();
+	libreria->Show();
 private: System::Void btnCRUDLibros_Click(System::Object^ sender, System::EventArgs^ e) {
 	MaintenanceBook^ bookForm = gcnew MaintenanceBook();
 	bookForm->Show();
