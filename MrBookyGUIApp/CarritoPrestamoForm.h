@@ -1,4 +1,5 @@
 #pragma once
+#include "ComboBoxItem.h"
 
 namespace MrBookyGUIApp {
 
@@ -23,6 +24,9 @@ namespace MrBookyGUIApp {
 		CarritoPrestamoForm(void)
 		{
 			InitializeComponent();
+
+			this->cmbRobots->SelectedIndexChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::cmbRobots_SelectedIndexChanged);
+			this->cmbBibliotecas->SelectedIndexChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::cmbBibliotecas_SelectedIndexChanged);
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -56,14 +60,7 @@ namespace MrBookyGUIApp {
 
 
 
-
 	private: System::Windows::Forms::DataGridView^ dgvPrestamos;
-
-
-
-
-
-
 
 
 	private: System::Windows::Forms::CheckBox^ chLibreria;
@@ -86,61 +83,13 @@ namespace MrBookyGUIApp {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	protected:
 
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -237,6 +186,7 @@ namespace MrBookyGUIApp {
 			this->btnVaciarCarrito->TabIndex = 4;
 			this->btnVaciarCarrito->Text = L"Vaciar Carrito";
 			this->btnVaciarCarrito->UseVisualStyleBackColor = true;
+			this->btnVaciarCarrito->Click += gcnew System::EventHandler(this, &CarritoPrestamoForm::btnVaciarCarrito_Click);
 			// 
 			// btnConfirmarPrestamos
 			// 
@@ -271,6 +221,7 @@ namespace MrBookyGUIApp {
 			this->cmbRobots->Name = L"cmbRobots";
 			this->cmbRobots->Size = System::Drawing::Size(284, 24);
 			this->cmbRobots->TabIndex = 8;
+			this->cmbRobots->SelectedIndexChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::cmbRobots_SelectedIndexChanged);
 			// 
 			// dgvPrestamos
 			// 
@@ -391,6 +342,7 @@ namespace MrBookyGUIApp {
 			this->cmbBibliotecas->Name = L"cmbBibliotecas";
 			this->cmbBibliotecas->Size = System::Drawing::Size(284, 24);
 			this->cmbBibliotecas->TabIndex = 13;
+			this->cmbBibliotecas->SelectedIndexChanged += gcnew System::EventHandler(this, &CarritoPrestamoForm::cmbBibliotecas_SelectedIndexChanged);
 			// 
 			// lblHorarioBiblioteca
 			// 
@@ -445,6 +397,28 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+
+		void FillRobotsComboBox() {
+			cmbRobots->Items->Clear();
+			List<DeliveryRobot^>^ robotList = Controller::GetRobots();
+			if (robotList != nullptr) {
+				for each (DeliveryRobot ^ robot in robotList) {
+					cmbRobots->Items->Add(gcnew ComboBoxItem(robot->RobotID,
+						robot->Name));
+				}
+			}
+		}
+
+		void FillLibrariesComboBox() {
+			cmbBibliotecas->Items->Clear();
+			List<Library^>^ librariesList = Controller::GetLibraries();
+			if (librariesList != nullptr) {
+				for each (Library ^ library in librariesList) {
+					cmbBibliotecas->Items->Add(gcnew ComboBoxItem(library->LibraryID,
+						library->Name));
+				}
+			}
+		}
 
 		void SimularLoanOrder() {
 			LoanCart^ loanCart_1 = gcnew LoanCart();
@@ -542,7 +516,7 @@ namespace MrBookyGUIApp {
 							"" + loans[i]->Book->LoanTime,
 							"" + loans[i]->Book->Weight,
 							loans[i]->Book->Author,
-							""+ loans[i]->Quantity,
+							"" + loans[i]->Quantity,
 							loans[i]->Status}
 					);
 
@@ -574,138 +548,241 @@ namespace MrBookyGUIApp {
 					else if (cantidadFila == 0) {
 						dgvPrestamos->Rows->RemoveAt(i);
 					}
-					
+
 				}
 			}
 			txtTotalPesoLibros->Text = total.ToString("F2");
 		};
 
-private: System::Void CarritoPrestamoForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	//Hacer columnas no editables
-	for each (DataGridViewColumn ^ col in dgvPrestamos->Columns) {
-		col->ReadOnly = true;
-	}
-	//Hacer columna de cantidad editable
-	dgvPrestamos->Columns[5]->ReadOnly = false;
+	private: System::Void CarritoPrestamoForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		//Hacer columnas no editables
+		for each (DataGridViewColumn ^ col in dgvPrestamos->Columns) {
+			col->ReadOnly = true;
+		}
+		//Hacer columna de cantidad editable
+		dgvPrestamos->Columns[5]->ReadOnly = false;
 
-	// Ocultar opciones robot
-	cmbRobots->Visible = false;
-	lblRobot->Visible = false;
-	lblCapacidadTotalRobot->Visible = false;
-	txtCapacidadPesoRobot->Visible = false;
+		// Ocultar opciones robot
+		cmbRobots->Visible = false;
+		lblRobot->Visible = false;
+		lblCapacidadTotalRobot->Visible = false;
+		txtCapacidadPesoRobot->Visible = false;
 
-	// Ocultar opciones biblioteca
-	cmbBibliotecas->Visible = false;
-	lblBiblioteca->Visible = false;
-	txtHorario->Visible = false;
-	lblHorarioBiblioteca->Visible = false;
+		// Ocultar opciones biblioteca
+		cmbBibliotecas->Visible = false;
+		lblBiblioteca->Visible = false;
+		txtHorario->Visible = false;
+		lblHorarioBiblioteca->Visible = false;
 
 		SimularLoanOrder();
 		ShowLoans();
 		UpdateBooksWeight();
-}
+	}
 
-private: System::Void dgvPrestamos_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	private: System::Void dgvPrestamos_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 
-	if (e->ColumnIndex == 7 && e->RowIndex >= 0) {  // Asegura que es una celda válida
-		if (MessageBox::Show("¿Eliminar este préstamo?", "Confirmar", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
-			dgvPrestamos->Rows->RemoveAt(e->RowIndex);
+		if (e->ColumnIndex == 7 && e->RowIndex >= 0) {  // Asegura que es una celda válida
+			if (MessageBox::Show("¿Eliminar este préstamo?", "Confirmar", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
+				dgvPrestamos->Rows->RemoveAt(e->RowIndex);
+				UpdateBooksWeight();
+			}
+		}
+	}
+	private: System::Void dgvPrestamos_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	}
+
+	private: System::Void chLibreria_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (chLibreria->Checked) {
+			chRobot->Checked = false;
+
+			// Mostrar opciones biblioteca
+			cmbBibliotecas->Visible = true;
+			lblBiblioteca->Visible = true;
+			txtHorario->Visible = true;
+			lblHorarioBiblioteca->Visible = true;
+
+			// Ocultar opciones robot
+			cmbRobots->Visible = false;
+			lblRobot->Visible = false;
+			lblCapacidadTotalRobot->Visible = false;
+			txtCapacidadPesoRobot->Visible = false;
+
+			FillLibrariesComboBox();
+		}
+		else {
+			// Ocultar opciones biblioteca
+			cmbBibliotecas->Visible = false;
+			lblBiblioteca->Visible = false;
+			txtHorario->Visible = false;
+			lblHorarioBiblioteca->Visible = false;
+		}
+	}
+
+
+	private: System::Void chRobot_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (chRobot->Checked) {
+			chLibreria->Checked = false;
+
+			// Ocultar opciones biblioteca
+			cmbBibliotecas->Visible = false;
+			lblBiblioteca->Visible = false;
+			txtHorario->Visible = false;
+			lblHorarioBiblioteca->Visible = false;
+
+			// Mostrar opciones robot
+			cmbRobots->Visible = true;
+			lblRobot->Visible = true;
+			lblCapacidadTotalRobot->Visible = true;
+			txtCapacidadPesoRobot->Visible = true;
+
+			FillRobotsComboBox();
+		}
+		else {
+			// Ocultar opciones robot
+			cmbRobots->Visible = false;
+			lblRobot->Visible = false;
+			lblCapacidadTotalRobot->Visible = false;
+			txtCapacidadPesoRobot->Visible = false;
+		}
+	}
+	private: System::Void dgvPrestamos_CellEndEdit(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+		// Se actualiza el peso total cuando se cambia la cantidad de un libro
+		//if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "Cantidad") {
+		if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "ColumnaCantidad") {
+			int fila = e->RowIndex;
+
+			// Intenta convertir la cantidad ingresada
+			String^ textoCantidad = dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value->ToString();
+			int cantidad = 0;
+
+			if (!Int32::TryParse(textoCantidad, cantidad) || cantidad < 0) {
+				MessageBox::Show("Ingrese una cantidad válida (entero positivo).");
+				dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value = 1; // valor por defecto
+				cantidad = 1;
+			}
+
+			// Actualiza la cantidad en el loan
+			User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
+			LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
+			List<Loan^>^ loans = loanCart->Loans;
+
+			//Quiero verificar que la cantidad que se modifica sea menor al stock de cada libro
+
+			/*String^ bookName = loans[fila]->Book->Title;
+			Book^ book = Controller::SearchBookByName(bookName);
+
+			if (book != nullptr && book->Quantity < cantidad) {
+				MessageBox::Show("La cantidad solicitada supera el stock disponible del libro.");
+				dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value = book->Quantity; // valor por defecto
+				cantidad = book->Quantity;
+			}
+			*/
+			// Actualiza la cantidad en el objeto Loan
+			loans[fila]->Quantity = cantidad;
+
 			UpdateBooksWeight();
 		}
+
+
 	}
-}
-private: System::Void dgvPrestamos_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-}
-
-private: System::Void chLibreria_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (chLibreria->Checked) {
-		chRobot->Checked = false;
-
-		// Mostrar opciones biblioteca
-		cmbBibliotecas->Visible = true;
-		lblBiblioteca->Visible = true;
-		txtHorario->Visible = true;
-		lblHorarioBiblioteca->Visible = true;
-
-		// Ocultar opciones robot
-		cmbRobots->Visible = false;
-		lblRobot->Visible = false;
-		lblCapacidadTotalRobot->Visible = false;
-		txtCapacidadPesoRobot->Visible = false;
-	}
-	else {
-		// Ocultar opciones biblioteca
-		cmbBibliotecas->Visible = false;
-		lblBiblioteca->Visible = false;
-		txtHorario->Visible = false;
-		lblHorarioBiblioteca->Visible = false;
-	}
-}
-
-
-private: System::Void chRobot_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-	if (chRobot->Checked) {
-		chLibreria->Checked = false;
-
-		// Ocultar opciones biblioteca
-		cmbBibliotecas->Visible = false;
-		lblBiblioteca->Visible = false;
-		txtHorario->Visible = false;
-		lblHorarioBiblioteca->Visible = false;
-
-		// Mostrar opciones robot
-		cmbRobots->Visible = true;
-		lblRobot->Visible = true;
-		lblCapacidadTotalRobot->Visible = true;
-		txtCapacidadPesoRobot->Visible = true;
-	}
-	else {
-		// Ocultar opciones robot
-		cmbRobots->Visible = false;
-		lblRobot->Visible = false;
-		lblCapacidadTotalRobot->Visible = false;
-		txtCapacidadPesoRobot->Visible = false;
-	}
-}
-private: System::Void dgvPrestamos_CellEndEdit(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	// Se actualiza el peso total cuando se cambia la cantidad de un libro
-	//if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "Cantidad") {
-	if (dgvPrestamos->Columns[e->ColumnIndex]->Name == "ColumnaCantidad") {
-		int fila = e->RowIndex;
-
-		// Intenta convertir la cantidad ingresada
-		String^ textoCantidad = dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value->ToString();
-		int cantidad = 0;
-
-		if (!Int32::TryParse(textoCantidad, cantidad) || cantidad < 0) {
-			MessageBox::Show("Ingrese una cantidad válida (entero positivo).");
-			dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value = 1; // valor por defecto
-			cantidad = 1;
-		}
-
-		// Actualiza la cantidad en el loan
+	private: System::Void btnConfirmarPrestamos_Click(System::Object^ sender, System::EventArgs^ e) {
 		User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
 		LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
-		List<Loan^>^ loans = loanCart->Loans;
-		
-		loans[fila]->Quantity = cantidad;
+		LoanOrder^ loanOrder = gcnew LoanOrder();
+		if (loanCart == nullptr || loanCart->Loans->Count == 0) {
+			MessageBox::Show("El carrito de préstamos está vacío.");
+			return;
+		}
 
-		UpdateBooksWeight();
+		if (!chLibreria->Checked && !chRobot->Checked) {
+			MessageBox::Show("Debe seleccionar una opción de entrega (librería o robot).");
+			return;
+		}
+
+		if (chRobot->Checked && cmbRobots->SelectedItem == nullptr) {
+			MessageBox::Show("Debe seleccionar un robot para la entrega.");
+			return;
+		}
+
+		if (chLibreria->Checked && cmbBibliotecas->SelectedItem == nullptr) {
+			MessageBox::Show("Debe seleccionar una biblioteca para la entrega.");
+			return;
+		}
+
+		double capacidadCargaRobot = Double::Parse(txtCapacidadPesoRobot->Text->Replace(" kg", ""));
+		double totalPesoLibros = Double::Parse(txtTotalPesoLibros->Text);
+
+		if (chRobot->Checked && (totalPesoLibros>capacidadCargaRobot)) {
+			MessageBox::Show("El peso total de los libros no debe superar la capacidad de carga del robot");
+			return;
+		}
+
+		if (chRobot->Checked) {
+			ComboBoxItem^ selectedItem = dynamic_cast<ComboBoxItem^>(cmbRobots->SelectedItem);
+			if (selectedItem != nullptr) {
+				loanOrder->DeliveryRobotID = selectedItem->Value;
+			}
+		}
+
+		if (chLibreria->Checked) {
+			ComboBoxItem^ selectedItem = dynamic_cast<ComboBoxItem^>(cmbBibliotecas->SelectedItem);
+			if (selectedItem != nullptr) {
+				String^ libraryName = selectedItem->Name;
+				Library^ library = Controller::SearchLibrary(libraryName);
+				if (library != nullptr) {
+					loanOrder->Library = library->Name; // Ensure the type matches LoanOrder::Library property
+				}
+			}
+		}
+
+		loanOrder->Client = loanCart->Client;
+		loanOrder->Loans = loanCart->Loans;
+		loanOrder->IsDelivery = loanCart->IsDelivery;
+		loanOrder->DeliveryRobotID = loanCart->DeliveryRobotID;
+		loanOrder->DeliveryPoint = loanCart->DeliveryPoint;
+		loanOrder->Library = loanCart->Library;
+
+		
+
+	}
+	private: System::Void cmbBibliotecas_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (cmbBibliotecas->SelectedItem != nullptr) {
+			ComboBoxItem^ selectedItem = dynamic_cast<ComboBoxItem^>(cmbBibliotecas->SelectedItem);
+			if (selectedItem != nullptr) {
+				String^ libraryName = selectedItem->Name;
+				Library^ library = Controller::SearchLibrary(libraryName);
+				if (library != nullptr) {
+					txtHorario->Text = library->OpeningHour + "-" + library->CloseHour;
+				}
+			}
+		}
+
+	}
+	private: System::Void cmbRobots_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+		if (cmbRobots->SelectedItem != nullptr) {
+			ComboBoxItem^ selectedItem = dynamic_cast<ComboBoxItem^>(cmbRobots->SelectedItem);
+			if (selectedItem != nullptr) {
+				int robotId = selectedItem->Value;
+				DeliveryRobot^ robot = Controller::SearchRobot(robotId);
+				if (robot != nullptr) {
+					txtCapacidadPesoRobot->Text = robot->MaxCapacity.ToString("F2") + " kg";
+				}
+			}
+		}
+
 	}
 
-
-}
-private: System::Void btnConfirmarPrestamos_Click(System::Object^ sender, System::EventArgs^ e) {
-	User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
-	LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
-	LoanOrder^ loanOrder = gcnew LoanOrder();
-	loanOrder->Client = loanCart->Client;
-	loanOrder->Loans = loanCart->Loans;
-	loanOrder->IsDelivery = loanCart->IsDelivery;
-	loanOrder->DeliveryRobotID = loanCart->DeliveryRobotID;
-	loanOrder->DeliveryPoint = loanCart->DeliveryPoint;
-	loanOrder->Library = loanCart->Library;
-
-}
+	private: System::Void btnVaciarCarrito_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (MessageBox::Show("¿Estás seguro de que deseas vaciar el carrito?", "Confirmar", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
+			dgvPrestamos->Rows->Clear();
+			txtTotalPesoLibros->Text = "0.00";
+			User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
+			Controller::ClearLoanCart(user);
+			MessageBox::Show("Carrito vaciado exitosamente.");
+		}
+		else {
+			MessageBox::Show("Operación cancelada.");
+		}
+	}
 };
 }

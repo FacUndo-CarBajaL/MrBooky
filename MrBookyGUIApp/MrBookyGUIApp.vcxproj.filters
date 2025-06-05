@@ -28,6 +28,7 @@
     <ClCompile Include="MaintenanceRobot.cpp" />
     <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
+    <ClCompile Include="ComboBoxItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookForm.cpp">
@@ -101,5 +102,6 @@
     <ClInclude Include="UserReport.h" />
     <ClInclude Include="MaintenanceBook.h" />
     <ClInclude Include="LibrarianLogIn.h" />
+    <ClInclude Include="ComboBoxItem.h" />
   </ItemGroup>
 </Project>

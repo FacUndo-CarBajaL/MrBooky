@@ -46,6 +46,7 @@ namespace MrBookyController {
 			static int AddLibrary(Library^ library);
 			static List<Library^>^ GetLibraries();
 			static Library^ SearchLibrary(String^ Name);
+			static Library^ SearchLibrarybyID(int libraryId);
 			static int UpdateLibrary(Library^ library);
 			static int DeleteLibrary(String^ Name);
 
@@ -78,6 +79,7 @@ namespace MrBookyController {
 			static void AddLoanCart(LoanCart^ loanCart);
 			static List<LoanCart^>^ GetLoanCarts();
 			static LoanCart^ SearchLoanCartByUser(User^ user);
+			static void ClearLoanCart(User^ user);
 
 			//Métodos CRUD para LoanOrder
 			static void AddLoanOrder(LoanOrder^ loanOrder);

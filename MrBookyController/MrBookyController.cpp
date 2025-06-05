@@ -134,15 +134,18 @@ int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 }
 
 List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots(){
-	auto loaded = (List<DeliveryRobot^>^)MrBookyPersistance::Persistance::LoadBinaryFileRobots("robots.bin");
-	if (loaded != nullptr) {
-		robots = loaded;
+
+
+	robots = (List<DeliveryRobot^>^)Persistance::LoadBinaryFileRobots("robots.bin");
+	if (robots == nullptr) {
+		robots = gcnew List<DeliveryRobot^>(); // fallback defensivo
 	}
 	return robots;
 }
 
 DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 {
+	robots = GetRobots();
 	// TODO: Insertar una instrucción "return" aquí
 	for each (DeliveryRobot ^ robot in robots)
 	{
@@ -151,6 +154,7 @@ DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 			return robot;
 		}
 	}
+	return nullptr;
 }
 
 int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
@@ -205,9 +209,9 @@ int MrBookyController::Controller::AddLibrary(Library^ library)
 
 List<Library^>^ MrBookyController::Controller::GetLibraries()
 {
-	auto loaded = (List<Library^>^)MrBookyPersistance::Persistance::LoadBinaryFileLibraries("libraries.bin");
-	if (loaded != nullptr) {
-		libraries = loaded;
+	libraries = (List<Library^>^)Persistance::LoadBinaryFileLibraries("libraries.bin");
+	if (libraries == nullptr) {
+		libraries = gcnew List<Library^>(); // fallback defensivo
 	}
 	return libraries;
 }
@@ -222,6 +226,21 @@ Library^ MrBookyController::Controller::SearchLibrary(String^ libraryName)
 			return library;
 		}
 	}
+	return nullptr;
+}
+
+Library^ MrBookyController::Controller::SearchLibrarybyID(int libraryId)
+{
+	libraries = GetLibraries();
+	for each (Library ^ library in libraries)
+	{
+		if (library->LibraryID == libraryId)
+		{
+			return library;
+		}
+	}
+
+	return nullptr;
 }
 
 int MrBookyController::Controller::UpdateLibrary(Library^ library)
@@ -502,13 +521,27 @@ LoanCart^ MrBookyController::Controller::SearchLoanCartByUser(User^ user)
 	return nullptr;
 }
 
+void MrBookyController::Controller::ClearLoanCart(User^ user)
+{
+	loanCarts = (List<LoanCart^>^) Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
+	LoanCart^ loanCartToClear = SearchLoanCartByUser(user);
+	if (loanCartToClear != nullptr) {
+		loanCarts->Remove(loanCartToClear);
+		Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+	}
+	else {
+		throw gcnew NotFoundException("No se encontró el carrito de préstamos del usuario.");
+	}
+	
+}
+
 void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 {
-	/*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
+	for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
 		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
 			throw gcnew DuplicateBookException("ID ya utilizado.");
 		}
-	}*/
+	}
 	loanOrders->Add(loanOrder);
 	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
 }
