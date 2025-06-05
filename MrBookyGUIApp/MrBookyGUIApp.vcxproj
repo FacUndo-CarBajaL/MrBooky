@@ -123,16 +123,16 @@
     <ClCompile Include="AdminInterface.cpp" />
     <ClCompile Include="BookHistoryForm.cpp" />
     <ClCompile Include="CarritoPrestamoForm.cpp" />
+    <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="LibrarianMaintenance.cpp" />
-    <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
     <ClCompile Include="BookForm.cpp" />
     <ClCompile Include="BookReport.cpp" />
     <ClCompile Include="BookRequest.cpp" />
     <ClCompile Include="DispatchBooks.cpp" />
     <ClCompile Include="FoundBookForm.cpp" />
-    <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="MainForm1.cpp" />
+    <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="MaintenanceLibrarian.cpp" />
     <ClCompile Include="MaintenanceLibrary.cpp" />
     <ClCompile Include="MaintenanceRobot.cpp" />
@@ -158,10 +158,10 @@
     <ClInclude Include="CarritoPrestamoForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="LibrarianMaintenance.h">
+    <ClInclude Include="LibrarianLogIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MaintenanceBook.h">
+    <ClInclude Include="LibrarianMaintenance.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="AddDeliveryRobot.h">
@@ -182,10 +182,10 @@
     <ClInclude Include="FoundBookForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="LibrarianLogIn.h">
+    <ClInclude Include="MainForm1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MainForm1.h">
+    <ClInclude Include="MaintenanceBook.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MaintenanceLibrarian.h">
@@ -244,9 +244,6 @@
     <EmbeddedResource Include="LibrarianMaintenance.resx">
       <DependentUpon>LibrarianMaintenance.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MaintenanceBook.resx">
-      <DependentUpon>MaintenanceBook.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AddDeliveryRobot.resx">
       <DependentUpon>AddDeliveryRobot.h</DependentUpon>
     </EmbeddedResource>
@@ -265,11 +262,11 @@
     <EmbeddedResource Include="FoundBookForm.resx">
       <DependentUpon>FoundBookForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LibrarianLogIn.resx">
-      <DependentUpon>LibrarianLogIn.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm1.resx">
       <DependentUpon>MainForm1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaintenanceBook.resx">
+      <DependentUpon>MaintenanceBook.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MaintenanceLibrarian.resx">
       <DependentUpon>MaintenanceLibrarian.h</DependentUpon>

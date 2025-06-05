@@ -328,13 +328,7 @@ namespace MrBookyGUIApp {
 				return;
 			}
 			Librarian^ librarian = gcnew Librarian(id, name, password);
-			if (Controller::AddUser(librarian) == 1) {
-				ShowUsers();
-				MessageBox::Show("Se ha agregado el bibliotecario " + name);
-			}
-			else {
-				MessageBox::Show("No se ha podido agregar el bibliotecario " + name);
-			}
+			Controller::AddUser(librarian);
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("No se ha podido agregar el bibliotecario por el siguiente motivo:\n" +

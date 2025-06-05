@@ -202,7 +202,7 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 			librarianForm->Show();
 			//this->Close();
 		}
-		else if (user->GetType() == Admin::typeid) {
+		else if (user->GetType() == Administrador::typeid) {
 			MessageBox::Show("Se ha ingresado como administrador. Bienvenid@ " + userName);
 			// Se debe abrir la ventana de administración
 			AdminInterface^ adminForm = gcnew AdminInterface();

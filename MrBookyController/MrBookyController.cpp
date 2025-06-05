@@ -7,14 +7,21 @@
 void MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
-	books = Controller::GetBooks();
-	for each (Book^ registeredBook in books) {
-		if (registeredBook->Title == book->Title) {
-			throw gcnew DuplicateBookException("El nombre de el libro ya existe en la base de datos.");
+	//books = GetBooks();
+	/*for each (Book ^ registeredBook in books) {
+		if (registeredBook->Title != nullptr && book->Title != nullptr &&
+			registeredBook->Title->Equals(book->Title)) {
+			throw gcnew DuplicateBookException("El nombre del libro ya existe en la base de datos.");
 		}
+	}*/
+	books = GetBooks();
+	if (books == nullptr) {
+		books = gcnew List<Book^>(); // fallback defensivo
 	}
-    books->Add(book);
+	books->Add(book);
 	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
+	
+	
 }
 
 List<Book^>^ MrBookyController::Controller::GetBooks()
@@ -59,7 +66,8 @@ int MrBookyController::Controller::UpdateBook(Book^ book)
 
 int MrBookyController::Controller::DeleteBook(String^ Title)
 {
-	books = Controller::GetBooks();
+	//books = Controller::GetBooks();
+	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	for (int i = 0; i < books->Count; i++)
 	{
 		if (books[i]->Title == Title)
@@ -68,6 +76,7 @@ int MrBookyController::Controller::DeleteBook(String^ Title)
 			return 1;
 		}
 	}
+	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
 	return 0;
 }
 
@@ -468,6 +477,9 @@ int MrBookyController::Controller::DeleteCartItem(int cartItemId)
 void MrBookyController::Controller::AddLoanCart(LoanCart^ loanCart)
 {
 	loanCarts = Controller::GetLoanCarts();
+	if (loanCarts == nullptr) {
+		loanCarts = gcnew List<LoanCart^>(); // fallback defensivo
+	}
 	loanCarts->Add(loanCart);
 	Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
 }
