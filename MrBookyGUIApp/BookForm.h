@@ -275,8 +275,8 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 				List<Book^>^ foundBooks = Controller::AdvancedSearchBook(title, author, publisher, genre);
 				Persistance::RAMBinaryFile("ram.bin", foundBooks);
 			}
-			FoundBookForm^ foundForm = gcnew FoundBookForm();
-			foundForm->Show();
+			//FoundBookForm^ foundForm = gcnew FoundBookForm();
+			//foundForm->Show();
 		}
 		else {
 			MessageBox::Show("Debe llenar almenos la casilla de nombre");
