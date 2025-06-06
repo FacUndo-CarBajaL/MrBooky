@@ -435,7 +435,8 @@ namespace MrBookyGUIApp {
 			if (bookList != nullptr) {
 				dgvlibros->Rows->Clear();
 				for (int i = 0; i < bookList->Count; i++) {
-					dgvlibros->Rows->Add(gcnew array<String^> { bookList[i]->Title,
+					dgvlibros->Rows->Add(gcnew array<String^> { "" + bookList[i]->BookID,
+						bookList[i]->Title,
 						bookList[i]->Author,
 						bookList[i]->Genre,
 						bookList[i]->Publisher,
@@ -578,7 +579,7 @@ private: System::Void btnActualizarFoto_Click(System::Object^ sender, System::Ev
 	}
 }
 private: System::Void dgvlibros_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-	String^ bookName = dgvlibros->Rows[dgvlibros->SelectedCells[0]->RowIndex]->Cells[0]->Value->ToString();
+	String^ bookName = dgvlibros->Rows[e->RowIndex]->Cells["ColumnaTitulo"]->Value->ToString();
 	Book^ book = Controller::SearchBookByName(bookName);
 	txtTitulo->Text = book->Title;
 	txtAutor->Text = book->Author;

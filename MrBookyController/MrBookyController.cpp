@@ -88,10 +88,11 @@ int MrBookyController::Controller::DeleteBook(String^ Title)
 		if (books[i]->Title == Title)
 		{
 			books->RemoveAt(i);
+			Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
 			return 1;
 		}
 	}
-	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
+	
 	return 0;
 }
 
