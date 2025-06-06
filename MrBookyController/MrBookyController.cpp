@@ -47,6 +47,21 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 
 }
 
+List<Book^>^ MrBookyController::Controller::SearchBooksByTitle(String^ titleSearch)
+{
+	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	for each (Book ^ book in books)
+	{
+		if (book->Title->ToLower()->Contains(titleSearch))
+		{
+			books->Add(book); // Agrega el libro a la lista de resultados
+		}
+		else {
+			return nullptr; // Retorna null si no se encuentra ningún libro
+		}
+	}
+}
+
 int MrBookyController::Controller::UpdateBook(Book^ book)
 {
 	// Busca el libro en la lista de libros
