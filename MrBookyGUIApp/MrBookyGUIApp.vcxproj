@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddReviewForm.cpp" />
     <ClCompile Include="AdminInterface.cpp" />
     <ClCompile Include="BookHistoryForm.cpp" />
     <ClCompile Include="CarritoPrestamoForm.cpp" />
@@ -150,6 +151,9 @@
     <ClCompile Include="UserReport.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddReviewForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AdminInterface.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -234,6 +238,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddReviewForm.resx">
+      <DependentUpon>AddReviewForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminInterface.resx">
       <DependentUpon>AdminInterface.h</DependentUpon>
     </EmbeddedResource>

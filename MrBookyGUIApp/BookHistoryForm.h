@@ -115,6 +115,7 @@ namespace MrBookyGUIApp {
 			this->dgvHistorial->RowTemplate->Height = 24;
 			this->dgvHistorial->Size = System::Drawing::Size(1045, 353);
 			this->dgvHistorial->TabIndex = 1;
+			this->dgvHistorial->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookHistoryForm::dgvHistorial_CellContentClick);
 			// 
 			// ColumnaID
 			// 
@@ -223,7 +224,23 @@ namespace MrBookyGUIApp {
 		};
 
 	private: System::Void BookHistoryForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		ShowHistory();
 
 	}
+private: System::Void dgvHistorial_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->ColumnIndex == dgvHistorial->Columns["ColumnaAñadirReseña"]->Index && e->RowIndex >= 0) {
+		// Obtener el libro seleccionado
+		int bookId = Int32::Parse(dgvHistorial->Rows[e->RowIndex]->Cells["ColumnaID"]->Value->ToString());
+		Book^ book = Controller::SearchBookById(bookId);
+		if (book != nullptr) {
+			// Abrir el formulario de reseña
+			AddReviewForm^ addReviewForm = gcnew AddReviewForm(book);
+			addReviewForm->ShowDialog();
+			ShowHistory(); // Actualizar el historial después de agregar la reseña
+		}
+		else {
+			MessageBox::Show("Libro no encontrado.");
+		}
+}
 };
 }
