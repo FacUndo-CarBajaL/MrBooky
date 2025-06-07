@@ -49,16 +49,24 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::TextBox^ textBox4;
-	private: System::Windows::Forms::DataGridView^ dgvBooksFound;
+	private: System::Windows::Forms::TextBox^ txtAutor;
+	private: System::Windows::Forms::TextBox^ txtEditorial;
+	private: System::Windows::Forms::TextBox^ txtGenero;
 
+
+
+	private: System::Windows::Forms::DataGridView^ dgvBooksFound;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookAuthor;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookStatus;
 	private: System::Windows::Forms::DataGridViewImageColumn^ BookImage;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ BookDetails;
+
+
+
+
+
+
 	protected:
 
 	private:
@@ -83,9 +91,9 @@ namespace MrBookyGUIApp {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->txtAutor = (gcnew System::Windows::Forms::TextBox());
+			this->txtEditorial = (gcnew System::Windows::Forms::TextBox());
+			this->txtGenero = (gcnew System::Windows::Forms::TextBox());
 			this->dgvBooksFound = (gcnew System::Windows::Forms::DataGridView());
 			this->BookName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookAuthor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -105,9 +113,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(69)),
 				static_cast<System::Int32>(static_cast<System::Byte>(89)));
-			this->label1->Location = System::Drawing::Point(55, 50);
+			this->label1->Location = System::Drawing::Point(49, 40);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(237, 48);
+			this->label1->Size = System::Drawing::Size(202, 41);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"BIENVENIDO";
 			// 
@@ -119,9 +127,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(69)),
 				static_cast<System::Int32>(static_cast<System::Byte>(89)));
-			this->label2->Location = System::Drawing::Point(57, 98);
+			this->label2->Location = System::Drawing::Point(51, 78);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(420, 38);
+			this->label2->Size = System::Drawing::Size(363, 32);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Sistema de búsqueda MRBOOKY";
 			// 
@@ -129,18 +137,20 @@ namespace MrBookyGUIApp {
 			// 
 			this->BookTitletxt->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->BookTitletxt->Location = System::Drawing::Point(63, 189);
+			this->BookTitletxt->Location = System::Drawing::Point(56, 151);
+			this->BookTitletxt->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->BookTitletxt->Name = L"BookTitletxt";
-			this->BookTitletxt->Size = System::Drawing::Size(366, 26);
+			this->BookTitletxt->Size = System::Drawing::Size(326, 22);
 			this->BookTitletxt->TabIndex = 2;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(444, 189);
+			this->pictureBox1->Location = System::Drawing::Point(395, 151);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(27, 26);
+			this->pictureBox1->Size = System::Drawing::Size(24, 21);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -154,9 +164,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label3->Location = System::Drawing::Point(57, 242);
+			this->label3->Location = System::Drawing::Point(51, 194);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(277, 32);
+			this->label3->Size = System::Drawing::Size(231, 29);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Búsqueda Avanzada";
 			// 
@@ -168,9 +178,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label4->Location = System::Drawing::Point(59, 314);
+			this->label4->Location = System::Drawing::Point(52, 251);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(59, 25);
+			this->label4->Size = System::Drawing::Size(49, 20);
 			this->label4->TabIndex = 5;
 			this->label4->Text = L"Autor";
 			// 
@@ -182,9 +192,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label5->Location = System::Drawing::Point(58, 368);
+			this->label5->Location = System::Drawing::Point(52, 294);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(81, 25);
+			this->label5->Size = System::Drawing::Size(70, 20);
 			this->label5->TabIndex = 6;
 			this->label5->Text = L"Editorial";
 			// 
@@ -196,38 +206,41 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
 				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label6->Location = System::Drawing::Point(58, 422);
+			this->label6->Location = System::Drawing::Point(52, 338);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(77, 25);
+			this->label6->Size = System::Drawing::Size(64, 20);
 			this->label6->TabIndex = 7;
 			this->label6->Text = L"Género";
 			// 
-			// textBox2
+			// txtAutor
 			// 
-			this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
+			this->txtAutor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->textBox2->Location = System::Drawing::Point(196, 313);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(233, 26);
-			this->textBox2->TabIndex = 8;
+			this->txtAutor->Location = System::Drawing::Point(174, 250);
+			this->txtAutor->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->txtAutor->Name = L"txtAutor";
+			this->txtAutor->Size = System::Drawing::Size(208, 22);
+			this->txtAutor->TabIndex = 8;
 			// 
-			// textBox3
+			// txtEditorial
 			// 
-			this->textBox3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
+			this->txtEditorial->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->textBox3->Location = System::Drawing::Point(196, 367);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(233, 26);
-			this->textBox3->TabIndex = 9;
+			this->txtEditorial->Location = System::Drawing::Point(174, 294);
+			this->txtEditorial->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->txtEditorial->Name = L"txtEditorial";
+			this->txtEditorial->Size = System::Drawing::Size(208, 22);
+			this->txtEditorial->TabIndex = 9;
 			// 
-			// textBox4
+			// txtGenero
 			// 
-			this->textBox4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
+			this->txtGenero->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->textBox4->Location = System::Drawing::Point(196, 423);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(233, 26);
-			this->textBox4->TabIndex = 10;
+			this->txtGenero->Location = System::Drawing::Point(174, 338);
+			this->txtGenero->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->txtGenero->Name = L"txtGenero";
+			this->txtGenero->Size = System::Drawing::Size(208, 22);
+			this->txtGenero->TabIndex = 10;
 			// 
 			// dgvBooksFound
 			// 
@@ -236,11 +249,12 @@ namespace MrBookyGUIApp {
 				this->BookName,
 					this->BookAuthor, this->BookStatus, this->BookImage, this->BookDetails
 			});
-			this->dgvBooksFound->Location = System::Drawing::Point(12, 501);
+			this->dgvBooksFound->Location = System::Drawing::Point(11, 401);
+			this->dgvBooksFound->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvBooksFound->Name = L"dgvBooksFound";
 			this->dgvBooksFound->RowHeadersWidth = 62;
 			this->dgvBooksFound->RowTemplate->Height = 28;
-			this->dgvBooksFound->Size = System::Drawing::Size(815, 188);
+			this->dgvBooksFound->Size = System::Drawing::Size(724, 150);
 			this->dgvBooksFound->TabIndex = 11;
 			this->dgvBooksFound->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &UserInterface::dgvBooksFound_CellContentClick);
 			// 
@@ -277,19 +291,21 @@ namespace MrBookyGUIApp {
 			this->BookDetails->HeaderText = L"Ver detalles";
 			this->BookDetails->MinimumWidth = 8;
 			this->BookDetails->Name = L"BookDetails";
+			this->BookDetails->Text = L"Ver";
+			this->BookDetails->UseColumnTextForButtonValue = true;
 			this->BookDetails->Width = 150;
 			// 
 			// UserInterface
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(239)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
-			this->ClientSize = System::Drawing::Size(841, 701);
+			this->ClientSize = System::Drawing::Size(748, 561);
 			this->Controls->Add(this->dgvBooksFound);
-			this->Controls->Add(this->textBox4);
-			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->txtGenero);
+			this->Controls->Add(this->txtEditorial);
+			this->Controls->Add(this->txtAutor);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
@@ -298,6 +314,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->BookTitletxt);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"UserInterface";
 			this->Text = L"UserInterface";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
@@ -311,9 +328,12 @@ namespace MrBookyGUIApp {
 		// Al presionar el botón de búsqueda se debe realizar la búsqueda de los libros.
 		// Solo se debe realizar la búsqueda si se ha ingresado algún criterio de búsqueda.
 		dgvBooksFound->Rows->Clear(); // Limpiar el DataGridView antes de mostrar los resultados
-		String^ bookTitle = BookTitletxt->Text->Trim();
+		String^ bookTitle = "" + BookTitletxt->Text->Trim();
+		String^ bookAuthor = "" + txtAutor->Text->Trim();
+		String^ bookPublisher = "" + txtEditorial->Text->Trim();
+		String^ bookGenre = "" + txtGenero->Text->Trim();
 		if (System::String::IsNullOrEmpty(bookTitle) == false) {
-			List<Book^>^ booksFound = Controller::SearchBooksByTitle(bookTitle);
+			List<Book^>^ booksFound = Controller::AdvancedSearchBook(bookTitle, bookAuthor, bookPublisher, bookGenre);
 			if (booksFound != nullptr) {
 				for each (Book^ book in booksFound) {
 					int rowIndex = dgvBooksFound->Rows->Add();
@@ -343,6 +363,7 @@ private: System::Void dgvBooksFound_CellContentClick(System::Object^ sender, Sys
 		Book^ selectedBook = Controller::SearchBook(bookName);
 		if (selectedBook != nullptr) {
 			// Mostrar los detalles del libro en un nuevo formulario o en un MessageBox
+			Persistance::PersistBinaryFile("tempBook", selectedBook);
 			FoundBookForm^ bookDetailsForm = gcnew FoundBookForm(selectedBook);
 			bookDetailsForm->ShowDialog();
 		}

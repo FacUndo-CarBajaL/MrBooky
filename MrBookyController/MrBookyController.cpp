@@ -33,7 +33,8 @@ List<Book^>^ MrBookyController::Controller::GetBooks()
 Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
 	// Busca el libro en la lista de libros
-	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	books = Controller::GetBooks();
+
 	for each (Book ^ book in books)
 	{
 		if (book->Title == title)
@@ -47,19 +48,30 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 
 }
 
-List<Book^>^ MrBookyController::Controller::SearchBooksByTitle(String^ titleSearch)
+List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
 {
 	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	List<Book^>^ resultBooks = gcnew List<Book^>();
+	resultBooks = nullptr;
+
 	for each (Book ^ book in books)
 	{
-		if (book->Title->ToLower()->Contains(titleSearch))
-		{
-			books->Add(book); // Agrega el libro a la lista de resultados
-		}
-		else {
-			return nullptr; // Retorna null si no se encuentra ningún libro
-		}
+			if (book->Title->ToLower() == titleSearch->ToLower())
+			{
+				resultBooks->Add(book); // Agrega el libro a la lista de resultados
+			}
+			else if (book->Author->ToLower() == authorSearch->ToLower()) {
+				resultBooks->Add(book);
+			}
+			else if (book->Genre->ToLower() == genreSearch->ToLower()) {
+				resultBooks->Add(book);
+			}
+			else if (book->Publisher->ToLower() == publisherSearch->ToLower()) {
+				resultBooks->Add(book);
+			}
+		
 	}
+	return resultBooks;
 }
 
 int MrBookyController::Controller::UpdateBook(Book^ book)

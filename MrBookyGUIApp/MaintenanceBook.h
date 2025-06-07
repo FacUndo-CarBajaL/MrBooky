@@ -76,6 +76,17 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaDescripción;
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::RichTextBox^ txtID;
+	private: System::Windows::Forms::Label^ label9;
+	private: System::Windows::Forms::RichTextBox^ txtDisponibilidad;
+
+	private: System::Windows::Forms::Label^ label10;
+	private: System::Windows::Forms::RichTextBox^ txtPeso;
+	private: System::Windows::Forms::Label^ label11;
+	private: System::Windows::Forms::RichTextBox^ txtAño;
+	private: System::Windows::Forms::Label^ label12;
+	private: System::Windows::Forms::RichTextBox^ txtTiempoPrestamo;
+
+
 
 
 
@@ -131,6 +142,14 @@ namespace MrBookyGUIApp {
 			this->ColumnaDescripción = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->txtID = (gcnew System::Windows::Forms::RichTextBox());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->txtDisponibilidad = (gcnew System::Windows::Forms::RichTextBox());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->txtPeso = (gcnew System::Windows::Forms::RichTextBox());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->txtAño = (gcnew System::Windows::Forms::RichTextBox());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->txtTiempoPrestamo = (gcnew System::Windows::Forms::RichTextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbPhoto))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvlibros))->BeginInit();
 			this->SuspendLayout();
@@ -142,9 +161,10 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 25, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(12, 9);
+			this->label1->Location = System::Drawing::Point(16, 11);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(402, 39);
+			this->label1->Size = System::Drawing::Size(495, 49);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Ingresar datos del libro";
 			// 
@@ -155,57 +175,64 @@ namespace MrBookyGUIApp {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label2->Location = System::Drawing::Point(130, 84);
+			this->label2->Location = System::Drawing::Point(173, 103);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(61, 18);
+			this->label2->Size = System::Drawing::Size(75, 23);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Titulo :";
 			// 
 			// txtTitulo
 			// 
-			this->txtTitulo->Location = System::Drawing::Point(197, 84);
+			this->txtTitulo->Location = System::Drawing::Point(263, 103);
+			this->txtTitulo->Margin = System::Windows::Forms::Padding(4);
 			this->txtTitulo->Name = L"txtTitulo";
-			this->txtTitulo->Size = System::Drawing::Size(385, 26);
+			this->txtTitulo->Size = System::Drawing::Size(512, 31);
 			this->txtTitulo->TabIndex = 2;
 			this->txtTitulo->Text = L"";
 			// 
 			// txtAutor
 			// 
-			this->txtAutor->Location = System::Drawing::Point(197, 116);
+			this->txtAutor->Location = System::Drawing::Point(263, 143);
+			this->txtAutor->Margin = System::Windows::Forms::Padding(4);
 			this->txtAutor->Name = L"txtAutor";
-			this->txtAutor->Size = System::Drawing::Size(311, 26);
+			this->txtAutor->Size = System::Drawing::Size(413, 31);
 			this->txtAutor->TabIndex = 3;
 			this->txtAutor->Text = L"";
 			// 
 			// txtGenero
 			// 
-			this->txtGenero->Location = System::Drawing::Point(197, 148);
+			this->txtGenero->Location = System::Drawing::Point(263, 182);
+			this->txtGenero->Margin = System::Windows::Forms::Padding(4);
 			this->txtGenero->Name = L"txtGenero";
-			this->txtGenero->Size = System::Drawing::Size(135, 26);
+			this->txtGenero->Size = System::Drawing::Size(179, 31);
 			this->txtGenero->TabIndex = 4;
 			this->txtGenero->Text = L"";
 			// 
 			// txtEditorial
 			// 
-			this->txtEditorial->Location = System::Drawing::Point(197, 180);
+			this->txtEditorial->Location = System::Drawing::Point(263, 222);
+			this->txtEditorial->Margin = System::Windows::Forms::Padding(4);
 			this->txtEditorial->Name = L"txtEditorial";
-			this->txtEditorial->Size = System::Drawing::Size(228, 26);
+			this->txtEditorial->Size = System::Drawing::Size(303, 31);
 			this->txtEditorial->TabIndex = 5;
 			this->txtEditorial->Text = L"";
 			// 
 			// txtCantidad
 			// 
-			this->txtCantidad->Location = System::Drawing::Point(197, 212);
+			this->txtCantidad->Location = System::Drawing::Point(263, 261);
+			this->txtCantidad->Margin = System::Windows::Forms::Padding(4);
 			this->txtCantidad->Name = L"txtCantidad";
-			this->txtCantidad->Size = System::Drawing::Size(85, 26);
+			this->txtCantidad->Size = System::Drawing::Size(112, 31);
 			this->txtCantidad->TabIndex = 6;
 			this->txtCantidad->Text = L"";
 			// 
 			// txtDescripcion
 			// 
-			this->txtDescripcion->Location = System::Drawing::Point(197, 244);
+			this->txtDescripcion->Location = System::Drawing::Point(263, 300);
+			this->txtDescripcion->Margin = System::Windows::Forms::Padding(4);
 			this->txtDescripcion->Name = L"txtDescripcion";
-			this->txtDescripcion->Size = System::Drawing::Size(385, 122);
+			this->txtDescripcion->Size = System::Drawing::Size(512, 97);
 			this->txtDescripcion->TabIndex = 7;
 			this->txtDescripcion->Text = L"";
 			// 
@@ -216,9 +243,10 @@ namespace MrBookyGUIApp {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label3->Location = System::Drawing::Point(130, 116);
+			this->label3->Location = System::Drawing::Point(173, 143);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(62, 18);
+			this->label3->Size = System::Drawing::Size(75, 23);
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Autor :";
 			// 
@@ -229,9 +257,10 @@ namespace MrBookyGUIApp {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label4->Location = System::Drawing::Point(114, 148);
+			this->label4->Location = System::Drawing::Point(152, 182);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(77, 18);
+			this->label4->Size = System::Drawing::Size(94, 23);
 			this->label4->TabIndex = 9;
 			this->label4->Text = L"Genero :";
 			// 
@@ -242,9 +271,10 @@ namespace MrBookyGUIApp {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label5->Location = System::Drawing::Point(109, 180);
+			this->label5->Location = System::Drawing::Point(145, 222);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(83, 18);
+			this->label5->Size = System::Drawing::Size(102, 23);
 			this->label5->TabIndex = 10;
 			this->label5->Text = L"Editorial :";
 			// 
@@ -255,9 +285,10 @@ namespace MrBookyGUIApp {
 			this->label6->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label6->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label6->Location = System::Drawing::Point(102, 211);
+			this->label6->Location = System::Drawing::Point(136, 260);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(89, 18);
+			this->label6->Size = System::Drawing::Size(110, 23);
 			this->label6->TabIndex = 11;
 			this->label6->Text = L"Cantidad :";
 			// 
@@ -268,25 +299,29 @@ namespace MrBookyGUIApp {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label7->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label7->Location = System::Drawing::Point(78, 243);
+			this->label7->Location = System::Drawing::Point(104, 299);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(113, 18);
+			this->label7->Size = System::Drawing::Size(139, 23);
 			this->label7->TabIndex = 12;
 			this->label7->Text = L"Descripción :";
 			// 
 			// pbPhoto
 			// 
-			this->pbPhoto->Location = System::Drawing::Point(687, 54);
+			this->pbPhoto->Location = System::Drawing::Point(916, 66);
+			this->pbPhoto->Margin = System::Windows::Forms::Padding(4);
 			this->pbPhoto->Name = L"pbPhoto";
-			this->pbPhoto->Size = System::Drawing::Size(163, 175);
+			this->pbPhoto->Size = System::Drawing::Size(217, 215);
+			this->pbPhoto->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pbPhoto->TabIndex = 13;
 			this->pbPhoto->TabStop = false;
 			// 
 			// btnActualizarFoto
 			// 
-			this->btnActualizarFoto->Location = System::Drawing::Point(687, 244);
+			this->btnActualizarFoto->Location = System::Drawing::Point(916, 300);
+			this->btnActualizarFoto->Margin = System::Windows::Forms::Padding(4);
 			this->btnActualizarFoto->Name = L"btnActualizarFoto";
-			this->btnActualizarFoto->Size = System::Drawing::Size(162, 24);
+			this->btnActualizarFoto->Size = System::Drawing::Size(216, 30);
 			this->btnActualizarFoto->TabIndex = 14;
 			this->btnActualizarFoto->Text = L"Actualizar Foto";
 			this->btnActualizarFoto->UseVisualStyleBackColor = true;
@@ -294,9 +329,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnRegistrar
 			// 
-			this->btnRegistrar->Location = System::Drawing::Point(64, 400);
+			this->btnRegistrar->Location = System::Drawing::Point(85, 492);
+			this->btnRegistrar->Margin = System::Windows::Forms::Padding(4);
 			this->btnRegistrar->Name = L"btnRegistrar";
-			this->btnRegistrar->Size = System::Drawing::Size(162, 24);
+			this->btnRegistrar->Size = System::Drawing::Size(216, 30);
 			this->btnRegistrar->TabIndex = 15;
 			this->btnRegistrar->Text = L"Registrar";
 			this->btnRegistrar->UseVisualStyleBackColor = true;
@@ -304,9 +340,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnModificar
 			// 
-			this->btnModificar->Location = System::Drawing::Point(382, 400);
+			this->btnModificar->Location = System::Drawing::Point(509, 492);
+			this->btnModificar->Margin = System::Windows::Forms::Padding(4);
 			this->btnModificar->Name = L"btnModificar";
-			this->btnModificar->Size = System::Drawing::Size(162, 24);
+			this->btnModificar->Size = System::Drawing::Size(216, 30);
 			this->btnModificar->TabIndex = 16;
 			this->btnModificar->Text = L"Modificar";
 			this->btnModificar->UseVisualStyleBackColor = true;
@@ -314,9 +351,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnEliminar
 			// 
-			this->btnEliminar->Location = System::Drawing::Point(687, 400);
+			this->btnEliminar->Location = System::Drawing::Point(916, 492);
+			this->btnEliminar->Margin = System::Windows::Forms::Padding(4);
 			this->btnEliminar->Name = L"btnEliminar";
-			this->btnEliminar->Size = System::Drawing::Size(162, 24);
+			this->btnEliminar->Size = System::Drawing::Size(216, 30);
 			this->btnEliminar->TabIndex = 17;
 			this->btnEliminar->Text = L"Eliminar";
 			this->btnEliminar->UseVisualStyleBackColor = true;
@@ -331,45 +369,54 @@ namespace MrBookyGUIApp {
 				this->ColumnaID,
 					this->ColumnaTitulo, this->ColumnaAutor, this->ColumnaGenero, this->ColumnaEditorial, this->ColumnaCantidad, this->ColumnaDescripción
 			});
-			this->dgvlibros->Location = System::Drawing::Point(29, 456);
+			this->dgvlibros->Location = System::Drawing::Point(39, 561);
+			this->dgvlibros->Margin = System::Windows::Forms::Padding(4);
 			this->dgvlibros->Name = L"dgvlibros";
-			this->dgvlibros->Size = System::Drawing::Size(849, 377);
+			this->dgvlibros->RowHeadersWidth = 51;
+			this->dgvlibros->Size = System::Drawing::Size(1132, 464);
 			this->dgvlibros->TabIndex = 18;
 			this->dgvlibros->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MaintenanceBook::dgvlibros_CellClick);
 			// 
 			// ColumnaID
 			// 
 			this->ColumnaID->HeaderText = L"ID";
+			this->ColumnaID->MinimumWidth = 6;
 			this->ColumnaID->Name = L"ColumnaID";
 			// 
 			// ColumnaTitulo
 			// 
 			this->ColumnaTitulo->HeaderText = L"Titulo";
+			this->ColumnaTitulo->MinimumWidth = 6;
 			this->ColumnaTitulo->Name = L"ColumnaTitulo";
 			// 
 			// ColumnaAutor
 			// 
 			this->ColumnaAutor->HeaderText = L"Autor";
+			this->ColumnaAutor->MinimumWidth = 6;
 			this->ColumnaAutor->Name = L"ColumnaAutor";
 			// 
 			// ColumnaGenero
 			// 
 			this->ColumnaGenero->HeaderText = L"Genero";
+			this->ColumnaGenero->MinimumWidth = 6;
 			this->ColumnaGenero->Name = L"ColumnaGenero";
 			// 
 			// ColumnaEditorial
 			// 
 			this->ColumnaEditorial->HeaderText = L"Editorial";
+			this->ColumnaEditorial->MinimumWidth = 6;
 			this->ColumnaEditorial->Name = L"ColumnaEditorial";
 			// 
 			// ColumnaCantidad
 			// 
 			this->ColumnaCantidad->HeaderText = L"Cantidad";
+			this->ColumnaCantidad->MinimumWidth = 6;
 			this->ColumnaCantidad->Name = L"ColumnaCantidad";
 			// 
 			// ColumnaDescripción
 			// 
 			this->ColumnaDescripción->HeaderText = L"Descripción";
+			this->ColumnaDescripción->MinimumWidth = 6;
 			this->ColumnaDescripción->Name = L"ColumnaDescripción";
 			// 
 			// label8
@@ -379,26 +426,128 @@ namespace MrBookyGUIApp {
 			this->label8->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label8->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label8->Location = System::Drawing::Point(157, 54);
+			this->label8->Location = System::Drawing::Point(209, 66);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(34, 18);
+			this->label8->Size = System::Drawing::Size(42, 23);
 			this->label8->TabIndex = 20;
 			this->label8->Text = L"ID :";
 			// 
 			// txtID
 			// 
-			this->txtID->Location = System::Drawing::Point(197, 49);
+			this->txtID->Location = System::Drawing::Point(263, 60);
+			this->txtID->Margin = System::Windows::Forms::Padding(4);
 			this->txtID->Name = L"txtID";
-			this->txtID->Size = System::Drawing::Size(85, 26);
+			this->txtID->Size = System::Drawing::Size(112, 31);
 			this->txtID->TabIndex = 19;
 			this->txtID->Text = L"";
 			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->BackColor = System::Drawing::Color::Transparent;
+			this->label9->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label9->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->label9->Location = System::Drawing::Point(483, 185);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(160, 23);
+			this->label9->TabIndex = 22;
+			this->label9->Text = L"Disponibilidad :";
+			// 
+			// txtDisponibilidad
+			// 
+			this->txtDisponibilidad->Location = System::Drawing::Point(651, 182);
+			this->txtDisponibilidad->Margin = System::Windows::Forms::Padding(4);
+			this->txtDisponibilidad->Name = L"txtDisponibilidad";
+			this->txtDisponibilidad->Size = System::Drawing::Size(179, 31);
+			this->txtDisponibilidad->TabIndex = 21;
+			this->txtDisponibilidad->Text = L"";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->BackColor = System::Drawing::Color::Transparent;
+			this->label10->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label10->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->label10->Location = System::Drawing::Point(569, 268);
+			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(74, 23);
+			this->label10->TabIndex = 24;
+			this->label10->Text = L"Peso : ";
+			// 
+			// txtPeso
+			// 
+			this->txtPeso->Location = System::Drawing::Point(649, 260);
+			this->txtPeso->Margin = System::Windows::Forms::Padding(4);
+			this->txtPeso->Name = L"txtPeso";
+			this->txtPeso->Size = System::Drawing::Size(179, 31);
+			this->txtPeso->TabIndex = 23;
+			this->txtPeso->Text = L"";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->BackColor = System::Drawing::Color::Transparent;
+			this->label11->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label11->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->label11->Location = System::Drawing::Point(434, 60);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(200, 23);
+			this->label11->TabIndex = 26;
+			this->label11->Text = L"Año de realización :";
+			// 
+			// txtAño
+			// 
+			this->txtAño->Location = System::Drawing::Point(651, 58);
+			this->txtAño->Margin = System::Windows::Forms::Padding(4);
+			this->txtAño->Name = L"txtAño";
+			this->txtAño->Size = System::Drawing::Size(179, 31);
+			this->txtAño->TabIndex = 25;
+			this->txtAño->Text = L"";
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->BackColor = System::Drawing::Color::Transparent;
+			this->label12->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label12->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->label12->Location = System::Drawing::Point(23, 426);
+			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(223, 23);
+			this->label12->TabIndex = 28;
+			this->label12->Text = L"Tiempo de Prestamo :";
+			// 
+			// txtTiempoPrestamo
+			// 
+			this->txtTiempoPrestamo->Location = System::Drawing::Point(263, 426);
+			this->txtTiempoPrestamo->Margin = System::Windows::Forms::Padding(4);
+			this->txtTiempoPrestamo->Name = L"txtTiempoPrestamo";
+			this->txtTiempoPrestamo->Size = System::Drawing::Size(179, 31);
+			this->txtTiempoPrestamo->TabIndex = 27;
+			this->txtTiempoPrestamo->Text = L"";
+			// 
 			// MaintenanceBook
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(903, 845);
+			this->ClientSize = System::Drawing::Size(1204, 1040);
+			this->Controls->Add(this->label12);
+			this->Controls->Add(this->txtTiempoPrestamo);
+			this->Controls->Add(this->label11);
+			this->Controls->Add(this->txtAño);
+			this->Controls->Add(this->label10);
+			this->Controls->Add(this->txtPeso);
+			this->Controls->Add(this->label9);
+			this->Controls->Add(this->txtDisponibilidad);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->txtID);
 			this->Controls->Add(this->dgvlibros);
@@ -420,6 +569,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->txtTitulo);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MaintenanceBook";
 			this->Text = L"MaintenanceBook";
 			this->Load += gcnew System::EventHandler(this, &MaintenanceBook::MaintenanceBook_Load);
@@ -520,10 +670,18 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 		String^ publisher = txtEditorial->Text;
 		String^ description = txtDescripcion->Text;
 		String^ quantityText = txtCantidad->Text;
+		String^ yearText = txtAño->Text;
+		String^ loantimetext = txtTiempoPrestamo->Text;
+		String^ availability = txtDisponibilidad->Text;
+		String^ weightText = txtPeso->Text;
+		double weight;
+		int realeaseYear;
+		int loanTime;
 		int quantity;
 		int id;
 
-		if (title->Length > 0 && author->Length > 0 && genre->Length > 0 && publisher->Length > 0 && description->Length > 0 && Int32::TryParse(quantityText, quantity) && Int32::TryParse(idText, id)) {
+		if (title->Length > 0 && author->Length > 0 && genre->Length > 0 && publisher->Length > 0 && description->Length > 0 && availability->Length > 0 && Int32::TryParse(quantityText, quantity) && Int32::TryParse(idText, id)
+			&& Int32::TryParse(yearText, realeaseYear) && Int32::TryParse(loantimetext, loanTime) && Double::TryParse(weightText, weight) ) {
 			book->BookID = id;
 			book->Title = title;
 			book->Author = author;
@@ -531,6 +689,10 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 			book->Publisher = publisher;
 			book->Description = description;
 			book->Quantity = quantity;
+			book->Availability = availability;
+			book->Weight = weight;
+			book->ReleaseYear = realeaseYear;
+			book->LoanTime = loanTime;
 		}
 
 		if (pbPhoto != nullptr && pbPhoto->Image != nullptr) {

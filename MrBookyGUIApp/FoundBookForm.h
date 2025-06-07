@@ -311,7 +311,8 @@ namespace MrBookyGUIApp {
 		}
 #pragma endregion
 	private: System::Void FoundBookForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		ShowDetails(book);
+		Book^ tempBook = (Book^)Persistance::LoadBinaryFile("tempBook");
+		ShowDetails(tempBook);
 	}
 
 	public:
@@ -325,20 +326,32 @@ namespace MrBookyGUIApp {
 			txtReleaseYear->Text = book->ReleaseYear.ToString();
 			txtStock->Text = book->Quantity.ToString();
 			txtDescription->Text = book->Description;
-			if (book->Photo != nullptr) {
-				System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream();
-				pbBook->Image->Save(ms, System::Drawing::Imaging::ImageFormat::Jpeg);
-				book->Photo = ms->ToArray(); // Asignar la imagen del libro al PictureBox
+
+			array<Byte>^ photoBytes = book->Photo;
+			if (photoBytes != nullptr && photoBytes->Length > 0) {
+				System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
+				System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
+
+				// Insertar la imagen en la última columna
+				pbBook->Image = image;
 			}
+
+			
 			txtLoanTime->Text = book->LoanTime.ToString();
 			txtWeight->Text = book->Weight.ToString();
 			// Mostrar las reseñas del libro en el DataGridView
 			dvgReviews->Rows->Clear(); // Limpiar el DataGridView antes de mostrar los resultados
-			for each (String^ review in book->Reviews) {
-				int rowIndex = dvgReviews->Rows->Add();
-				dvgReviews->Rows[rowIndex]->Cells[0]->Value = review;
-			}
+			
+			List<String^>^ reviews = book->Reviews;
 
+			if (reviews != nullptr) {
+				for each (String ^ review in reviews) {
+					int rowIndex = dvgReviews->Rows->Add();
+					dvgReviews->Rows[rowIndex]->Cells[0]->Value = review;
+				}
+
+			}
+			
 		}
 };
 }

@@ -668,7 +668,7 @@ namespace MrBookyGUIApp {
 
 			//Quiero verificar que la cantidad que se modifica sea menor al stock de cada libro
 
-			/*String^ bookName = loans[fila]->Book->Title;
+			String^ bookName = loans[fila]->Book->Title;
 			Book^ book = Controller::SearchBookByName(bookName);
 
 			if (book != nullptr && book->Quantity < cantidad) {
@@ -676,7 +676,7 @@ namespace MrBookyGUIApp {
 				dgvPrestamos->Rows[fila]->Cells["ColumnaCantidad"]->Value = book->Quantity; // valor por defecto
 				cantidad = book->Quantity;
 			}
-			*/
+			
 			// Actualiza la cantidad en el objeto Loan
 			loans[fila]->Quantity = cantidad;
 

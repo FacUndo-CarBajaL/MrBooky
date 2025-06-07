@@ -223,7 +223,7 @@ namespace MrBookyGUIApp {
 		};
 
 	private: System::Void BookHistoryForm_Load(System::Object^ sender, System::EventArgs^ e) {
-
+		ShowHistory();
 	}
 };
 }
