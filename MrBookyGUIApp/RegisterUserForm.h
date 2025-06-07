@@ -254,15 +254,16 @@ namespace MrBookyGUIApp {
 			}
 			String^ userPassword = txtContraseña->Text->Trim();
 
-			//Client^ user = gcnew Client(userId, userName, userPassword);
+			Client^ user = gcnew Client(userId, userName, userPassword);
 			//Librarian^ user = gcnew Librarian(userId, userName, userPassword);
-			Administrador^ user = gcnew Administrador(userId, userName, userPassword);
+			//Administrador^ user = gcnew Administrador(userId, userName, userPassword);
 
 			user->FormalName = txtNombreCompleto->Text->Trim();
 			user->Email = txtCorreo->Text->Trim();
 			user->PhoneNumber = Convert::ToInt32(txtCelular->Text);
-			//user->StudentCode = Convert::ToInt32(txtCodigoEstudiante->Text);
-			user->UserID = 9999;//(user->StudentCode) * 100 + 1;
+			user->StudentCode = Convert::ToInt32(txtCodigoEstudiante->Text);
+			user->UserID =(user->StudentCode) * 100 + 1;
+
 
 			Controller::AddUser(user);
 			txtNombreCompleto->Clear();
@@ -275,7 +276,6 @@ namespace MrBookyGUIApp {
 			userId++;
 
 			MessageBox::Show("Usuario registrado éxitosamente.");
-
 			
 		}
 		catch (Exception^ ex) {

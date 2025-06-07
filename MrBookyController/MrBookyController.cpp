@@ -318,6 +318,9 @@ void MrBookyController::Controller::AddUser(User^ user)
 List<User^>^ MrBookyController::Controller::GetUsers()
 {
 	users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
+	if (users == nullptr) {
+		users = gcnew List<User^>(); // fallback defensivo
+	}
 	return users;
 }
 
@@ -524,22 +527,35 @@ int MrBookyController::Controller::DeleteCartItem(int cartItemId)
 void MrBookyController::Controller::AddLoanCart(LoanCart^ loanCart)
 {
 	loanCarts = Controller::GetLoanCarts();
-	if (loanCarts == nullptr) {
-		loanCarts = gcnew List<LoanCart^>(); // fallback defensivo
-	}
 	loanCarts->Add(loanCart);
 	Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
 }
 
 List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()
 {
-	loanCarts = (List<LoanCart^>^)Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
+	{
+	try {
+		loanCarts = (List<LoanCart^>^)Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
+	}
+	catch (Exception^) {
+		// Si el archivo no existe o está corrupto, se crea una lista vacía
+		loanCarts = gcnew List<LoanCart^>();
+		Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+	}
+	
+	// Seguridad adicional
+	if (loanCarts == nullptr) {
+		loanCarts = gcnew List<LoanCart^>();
+		Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+	}
+
 	return loanCarts;
+}
 }
 
 LoanCart^ MrBookyController::Controller::SearchLoanCartByUser(User^ user)
 {
-	loanCarts = (List<LoanCart^>^) Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
+	loanCarts = GetLoanCarts();
 	for each (LoanCart ^ loanCart in loanCarts) {
 		if (loanCart->Client->UserID == user->UserID) {
 			return loanCart;

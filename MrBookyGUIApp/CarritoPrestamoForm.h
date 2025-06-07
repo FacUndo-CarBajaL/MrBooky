@@ -420,88 +420,7 @@ namespace MrBookyGUIApp {
 			}
 		}
 
-		void SimularLoanOrder() {
-			LoanCart^ loanCart_1 = gcnew LoanCart();
-
-			////////////////////////////////////////////////////////////
-			Loan^ loan1 = gcnew Loan();
-			Book^ book1 = gcnew Book();
-			book1->Title = "Calculo Integral";
-			book1->LoanTime = 12;
-			book1->Weight = 0.98;
-			book1->Author = "Cecilia Gaita";
-			String^ path1 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\CalculoIntegral.png";
-			if (!System::IO::File::Exists(path1)) {
-				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
-				return;
-			}
-			FileStream^ fs1 = gcnew FileStream(path1, FileMode::Open, FileAccess::Read);
-			Bitmap^ original1 = gcnew Bitmap(fs1);
-			Bitmap^ bmp1 = gcnew Bitmap(original1); // <- copia segura
-			fs1->Close();
-			MemoryStream^ ms1 = gcnew MemoryStream();
-			bmp1->Save(ms1, ImageFormat::Jpeg); // ya no lanza error
-			book1->Photo = ms1->ToArray();
-			loan1->LoanID = 123;
-			loan1->Status = "Disponible";
-			loan1->Book = book1;
-			loan1->Quantity = 4;
-			loanCart_1->Loans->Add(loan1);
-			////////////////////////////////////////////////////////////
-			Loan^ loan2 = gcnew Loan();
-			Book^ book2 = gcnew Book();
-			book2->Title = "Fisica 3";
-			book2->LoanTime = 20;
-			book2->Weight = 0.5;
-			book2->Author = "Hugo Medina";
-			String^ path2 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\Fisica3.jpg";
-			if (!System::IO::File::Exists(path2)) {
-				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
-				return;
-			}
-			FileStream^ fs2 = gcnew FileStream(path2, FileMode::Open, FileAccess::Read);
-			Bitmap^ original2 = gcnew Bitmap(fs2);
-			Bitmap^ bmp2 = gcnew Bitmap(original2); // <- copia segura
-			fs2->Close();
-			MemoryStream^ ms2 = gcnew MemoryStream();
-			bmp2->Save(ms2, ImageFormat::Jpeg); // ya no lanza error
-			book2->Photo = ms2->ToArray();
-			loan2->LoanID = 1234;
-			loan2->Status = "Disponible";
-			loan2->Book = book2;
-			loan2->Quantity = 5;
-			loanCart_1->Loans->Add(loan2);
-			////////////////////////////////////////////////////////////
-			Loan^ loan3 = gcnew Loan();
-			Book^ book3 = gcnew Book();
-			book3->Title = "Dinamica";
-			book3->LoanTime = 9999;
-			book3->Weight = 1.2;
-			book3->Author = "Jorge Rodriguez";
-			String^ path3 = "C:\\Users\\HP\\Downloads\\POO\\MrBooky\\Imagenes\\Portadas Libros\\Dinamica.jpg";
-			if (!System::IO::File::Exists(path3)) {
-				MessageBox::Show("La imagen no se encontró en la ruta especificada.");
-				return;
-			}
-			FileStream^ fs3 = gcnew FileStream(path3, FileMode::Open, FileAccess::Read);
-			Bitmap^ original3 = gcnew Bitmap(fs3);
-			Bitmap^ bmp3 = gcnew Bitmap(original3); // <- copia segura
-			fs3->Close();
-			MemoryStream^ ms3 = gcnew MemoryStream();
-			bmp3->Save(ms3, ImageFormat::Jpeg); // ya no lanza error
-			book3->Photo = ms3->ToArray();
-			loan3->LoanID = 12345;
-			loan3->Status = "Disponible";
-			loan3->Book = book3;
-			loan3->Quantity = 6;
-			loanCart_1->Loans->Add(loan3);
-			////////////////////////////////////////////////////////////
-
-
-			Client^ user = (Client^)Persistance::LoadBinaryFile("TempUser.bin");
-			loanCart_1->Client = user;
-			Controller::AddLoanCart(loanCart_1);
-		};
+		
 
 		void ShowLoans() {
 			User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
@@ -530,6 +449,9 @@ namespace MrBookyGUIApp {
 					}
 
 				}
+			}
+			else {
+				MessageBox::Show("No hay préstamos en el carrito.", "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
 			}
 		};
 
@@ -574,7 +496,6 @@ namespace MrBookyGUIApp {
 		txtHorario->Visible = false;
 		lblHorarioBiblioteca->Visible = false;
 
-		SimularLoanOrder();
 		ShowLoans();
 		UpdateBooksWeight();
 	}
