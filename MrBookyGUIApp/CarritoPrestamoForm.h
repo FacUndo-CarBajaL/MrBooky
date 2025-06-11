@@ -663,6 +663,8 @@ namespace MrBookyGUIApp {
 		loanOrder->DeliveryPoint = loanCart->DeliveryPoint;
 		loanOrder->Library = loanCart->Library;
 
+		Controller::AddLoanOrder(loanOrder);
+
 		
 
 	}
