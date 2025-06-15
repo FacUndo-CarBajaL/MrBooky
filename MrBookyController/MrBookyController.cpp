@@ -147,6 +147,67 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUser(User^ user)
 	return loanHistory;
 }
 
+Byte CalculateChecksum(String^ data) {
+	Byte checksum = 0;
+	// El cálculo del checksum es sobre los caracteres entre $ y *
+	for (int i = 0; i < data->Length; i++) {
+		checksum ^= data[i];  // Realiza XOR de cada caracter
+	}
+	return checksum;
+}
+
+String^ MrBookyController::Controller::SendRobotToDelivery(Protocol protocol, int robotId, int deliveryPointNumber)
+{
+	String^ result;
+	try {
+		OpenPort();
+		String^ message;
+		switch (protocol) {
+		case Protocol::UART: //Creación de cadena en formato UART
+			message = "DELIVER,LIBRARY," + Convert::ToString(deliveryPointNumber) + "\n";
+			break;
+		case Protocol::NMEA: //Creación de cadena en formato NMEA: Por ejemplo, si se envía el robot a la mesa 5, la cadena NMEA es:"$ROBOT,DELIVER,TABLE,5*46<CR><LF>"        
+			String^ str = "ROBOT,DELIVER,LIBRARY," + Convert::ToString(deliveryPointNumber);
+			Byte checksum = CalculateChecksum(str);
+			message = "$" + str + "*" + Convert::ToString(checksum, 16) + "\n";
+			break;
+		}
+		ArduinoPort->Write(message);
+		result = ArduinoPort->ReadLine();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		ClosePort();
+	}
+	return result;
+}
+
+void MrBookyController::Controller::OpenPort()
+{
+	try {
+		ArduinoPort = gcnew SerialPort();
+		ArduinoPort->PortName = "COM3";
+		ArduinoPort->BaudRate = 9600;
+		ArduinoPort->Open();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+}
+
+void MrBookyController::Controller::ClosePort()
+{
+	try {
+		if (ArduinoPort->IsOpen)
+			ArduinoPort->Close();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+}
+
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
 	// Agrega el robot a la lista de robots

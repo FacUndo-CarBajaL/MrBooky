@@ -8,6 +8,11 @@ using namespace MrBookyModel;
 using namespace MrBookyPersistance;
 
 namespace MrBookyController {
+	public enum class Protocol {
+		UART,
+		NMEA
+	};
+
 	public ref class Controller
 	{
 	public: 
@@ -25,6 +30,8 @@ namespace MrBookyController {
 			static List<CartItem^>^ cartItems = gcnew List<CartItem^>();
 			static List<LoanOrder^>^ loanOrders = gcnew List<LoanOrder^>();
 			static List<LoanCart^>^ loanCarts = gcnew List<LoanCart^>();
+
+			static SerialPort^ ArduinoPort;
 		// TODO: Agregue aqu√≠ los m√©todos de esta clase.
 		public:
 			// M√©todos CRUD para Book
@@ -36,7 +43,16 @@ namespace MrBookyController {
 			static int DeleteBook(String^ title);
 			static List<Book^>^ AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre);
 			
-
+			//Diccionario con los protocolos de comunicaciÛn UART y NMEA
+			static Dictionary<String^, Protocol>^ protocolDictionary = gcnew Dictionary<String^, Protocol>();
+			static Controller() {
+				// Agrega elementos al diccionario
+				protocolDictionary->Add("UART", Protocol::UART);
+				protocolDictionary->Add("NMEA", Protocol::NMEA);
+			}
+			static String^ SendRobotToDelivery(Protocol protocol, int robotId, int deliveryPointNumber);
+			static void OpenPort();
+			static void ClosePort();
 
 			// MÈtodos CRUD para DeliveryRobot
 			static int AddRobot(DeliveryRobot^ robot);
