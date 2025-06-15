@@ -41,11 +41,8 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 		{
 			return book;
 		}
-		else {
-			return nullptr;
-		}
 	}
-
+	return nullptr;
 }
 
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
@@ -164,10 +161,10 @@ String^ MrBookyController::Controller::SendRobotToDelivery(Protocol protocol, in
 		String^ message;
 		switch (protocol) {
 		case Protocol::UART: //Creación de cadena en formato UART
-			message = "DELIVER,LIBRARY," + Convert::ToString(deliveryPointNumber) + "\n";
+			message = "DELIVER,DELIVERYPOINT," + Convert::ToString(deliveryPointNumber) + "\n";
 			break;
 		case Protocol::NMEA: //Creación de cadena en formato NMEA: Por ejemplo, si se envía el robot a la mesa 5, la cadena NMEA es:"$ROBOT,DELIVER,TABLE,5*46<CR><LF>"        
-			String^ str = "ROBOT,DELIVER,LIBRARY," + Convert::ToString(deliveryPointNumber);
+			String^ str = "ROBOT,DELIVER,DELIVERYPOINT," + Convert::ToString(deliveryPointNumber);
 			Byte checksum = CalculateChecksum(str);
 			message = "$" + str + "*" + Convert::ToString(checksum, 16) + "\n";
 			break;
