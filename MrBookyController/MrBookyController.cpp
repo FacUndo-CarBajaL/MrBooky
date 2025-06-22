@@ -533,7 +533,7 @@ void MrBookyController::Controller::AddLoanCart(LoanCart^ loanCart)
 
 List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()
 {
-	{
+
 	try {
 		loanCarts = (List<LoanCart^>^)Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
 	}
@@ -550,7 +550,6 @@ List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()
 	}
 
 	return loanCarts;
-}
 }
 
 LoanCart^ MrBookyController::Controller::SearchLoanCartByUser(User^ user)
@@ -579,20 +578,41 @@ void MrBookyController::Controller::ClearLoanCart(User^ user)
 	
 }
 
+List<LoanOrder^>^ MrBookyController::Controller::GetLoanOrders()
+{
+	try {
+		loanOrders = (List<LoanOrder^>^)Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	}
+	catch (Exception^) {
+		// Si el archivo no existe o está corrupto, se crea una lista vacía
+		loanOrders = gcnew List<LoanOrder^>();
+		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	}
+
+	// Seguridad adicional
+	if (loanOrders == nullptr) {
+		loanOrders = gcnew List<LoanOrder^>();
+		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	}
+
+	return loanOrders;
+}
+
 void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 {
-	for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
+	loanOrders = GetLoanOrders();
+	/*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
 		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
 			throw gcnew DuplicateBookException("ID ya utilizado.");
 		}
-	}
+	}*/
 	loanOrders->Add(loanOrder);
 	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
 }
 
 LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 {
-	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	loanOrders = GetLoanOrders();
 	for each (LoanOrder ^ loanOrder in loanOrders) {
 		if (loanOrder->Client->UserID == user->UserID) {
 			return loanOrder;
@@ -614,4 +634,20 @@ List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUser(User^ us
 	}
 
 	return ordenesUsuario;;
+}
+
+int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
+{
+	// Busca la orden de préstamo en la lista de órdenes de préstamo
+	for (int i = 0; i < loanOrders->Count; i++)
+	{
+		if (loanOrders[i]->LoanOrderID == loanOrder->LoanOrderID)
+		{
+			// Actualiza la orden de préstamo
+			loanOrders[i] = loanOrder;
+			Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+			return 1;
+		}
+	}
+	return 0;
 }

@@ -505,6 +505,15 @@ namespace MrBookyGUIApp {
 		if (e->ColumnIndex == 7 && e->RowIndex >= 0) {  // Asegura que es una celda válida
 			if (MessageBox::Show("¿Eliminar este préstamo?", "Confirmar", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes) {
 				dgvPrestamos->Rows->RemoveAt(e->RowIndex);
+				int fila = e->RowIndex;
+				User^ user = (User^)Persistance::LoadBinaryFile("TempUser.bin");
+				LoanCart^ loanCart = Controller::SearchLoanCartByUser(user);
+				List<Loan^>^ loans = loanCart->Loans;
+				if (fila >= 0 && fila < loans->Count) {
+					loans->RemoveAt(fila); // Elimina el préstamo de la lista
+					Persistance::PersistBinaryFile("loanCart.bin", loanCart); // Guarda el carrito actualizado
+				}
+
 				UpdateBooksWeight();
 			}
 		}
@@ -630,12 +639,16 @@ namespace MrBookyGUIApp {
 			return;
 		}
 
-		double capacidadCargaRobot = Double::Parse(txtCapacidadPesoRobot->Text->Replace(" kg", ""));
+		
 		double totalPesoLibros = Double::Parse(txtTotalPesoLibros->Text);
 
-		if (chRobot->Checked && (totalPesoLibros>capacidadCargaRobot)) {
-			MessageBox::Show("El peso total de los libros no debe superar la capacidad de carga del robot");
-			return;
+		if (chRobot->Checked && (txtCapacidadPesoRobot->Text != nullptr)) {
+			double capacidadCargaRobot = Double::Parse(txtCapacidadPesoRobot->Text->Replace(" kg", ""));
+			if (totalPesoLibros > capacidadCargaRobot) {
+				MessageBox::Show("El peso total de los libros no debe superar la capacidad de carga del robot");
+				return;
+			}
+			
 		}
 
 		if (chRobot->Checked) {
@@ -655,15 +668,21 @@ namespace MrBookyGUIApp {
 				}
 			}
 		}
-
+		int id = Int64::Parse(DateTime::Now.ToString("yyMMddHHmmss"));
+		loanOrder->LoanOrderID = id;
 		loanOrder->Client = loanCart->Client;
 		loanOrder->Loans = loanCart->Loans;
 		loanOrder->IsDelivery = loanCart->IsDelivery;
 		loanOrder->DeliveryRobotID = loanCart->DeliveryRobotID;
 		loanOrder->DeliveryPoint = loanCart->DeliveryPoint;
 		loanOrder->Library = loanCart->Library;
+		loanOrder->Status = "Solicitado";
 
 		Controller::AddLoanOrder(loanOrder);
+		MessageBox::Show("Se solicitado el préstamo correctamente");
+		dgvPrestamos->Rows->Clear();
+		txtTotalPesoLibros->Text = "0.00";
+		Controller::ClearLoanCart(user);
 
 		
 
