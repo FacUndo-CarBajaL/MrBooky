@@ -194,7 +194,7 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 			UserOptionsForm^ clientForm = gcnew UserOptionsForm();
 			MessageBox::Show("Se ha ingresado como cliente. Bienvenid@ "+ userName);
 			clientForm->Show();
-			this->Close();
+			//this->Close();
 		}
 		else if (user->GetType() == Librarian::typeid) {
 			LibrarianLogIn^ librarianForm = gcnew LibrarianLogIn();

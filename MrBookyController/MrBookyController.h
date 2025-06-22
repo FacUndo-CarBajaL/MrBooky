@@ -40,6 +40,7 @@ namespace MrBookyController {
 			static int AddRobot(DeliveryRobot^ robot);
 			static List<DeliveryRobot^>^ GetRobots();
 			static DeliveryRobot^ SearchRobot(int robotId);
+			static DeliveryRobot^ SearchRobotByName(String^ robotName);
 			static int UpdateRobot(DeliveryRobot^ robot);
 			static int DeleteRobot(int robotId);
 
@@ -85,6 +86,7 @@ namespace MrBookyController {
 			//Métodos CRUD para LoanOrder
 			static List<LoanOrder^>^ GetLoanOrders();
 			static void AddLoanOrder(LoanOrder^ loanOrder);
+			static LoanOrder^ SearchLoanOrderById(int loanOrderId);
 			static LoanOrder^ SearchLoanOrderByUser(User^ user);
 			static List<LoanOrder^>^ GetAllLoanOrdersByUser(User^ user);
 			static int UpdateLoanOrder(LoanOrder^ loanOrder);

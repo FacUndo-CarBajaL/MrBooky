@@ -139,6 +139,8 @@
     <ClCompile Include="MaintenanceRobot.cpp" />
     <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="ReporteGraficaClienteForm.cpp" />
+    <ClCompile Include="RequestDetails.cpp" />
+    <ClCompile Include="RequestDisapprove.cpp" />
     <ClCompile Include="RobotApprove.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Stock.cpp" />
@@ -203,6 +205,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ReporteGraficaClienteForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RequestDetails.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RequestDisapprove.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="RobotApprove.h">
@@ -284,6 +292,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReporteGraficaClienteForm.resx">
       <DependentUpon>ReporteGraficaClienteForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestDetails.resx">
+      <DependentUpon>RequestDetails.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestDisapprove.resx">
+      <DependentUpon>RequestDisapprove.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RobotApprove.resx">
       <DependentUpon>RobotApprove.h</DependentUpon>

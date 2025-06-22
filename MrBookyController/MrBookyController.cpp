@@ -185,6 +185,20 @@ DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 	return nullptr;
 }
 
+DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotName)
+{
+	robots = GetRobots();
+	// TODO: Insertar una instrucción "return" aquí
+	for each (DeliveryRobot ^ robot in robots)
+	{
+		if (robot->Name == robotName)
+		{
+			return robot;
+		}
+	}
+	return nullptr;
+}
+
 int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 {
 	// Busca el robot en la lista de robots
@@ -249,7 +263,7 @@ Library^ MrBookyController::Controller::SearchLibrary(String^ libraryName)
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Library ^ library in libraries)
 	{
-		if (library->Name == libraryName)
+		if (library->Name->ToLower() == libraryName->ToLower())
 		{
 			return library;
 		}
@@ -610,6 +624,17 @@ void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
 }
 
+LoanOrder^ MrBookyController::Controller::SearchLoanOrderById(int loanOrderId)
+{
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		if (loanOrder->LoanOrderID == loanOrderId) {
+			return loanOrder;
+		}
+	}
+	return nullptr;
+}
+
 LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 {
 	loanOrders = GetLoanOrders();
@@ -639,6 +664,7 @@ List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUser(User^ us
 int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
 {
 	// Busca la orden de préstamo en la lista de órdenes de préstamo
+	loanOrders = GetLoanOrders();
 	for (int i = 0; i < loanOrders->Count; i++)
 	{
 		if (loanOrders[i]->LoanOrderID == loanOrder->LoanOrderID)

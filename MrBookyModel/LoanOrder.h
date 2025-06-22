@@ -26,6 +26,7 @@ namespace MrBookyModel {
         property DeliveryPoint^ DeliveryPoint;
         property String^ Library;
         property String^ Status;
+		property String^ DisapprovalReason;
 
         LoanOrder() {
             Loans = gcnew List<Loan^>();
