@@ -617,27 +617,37 @@ namespace MrBookyGUIApp {
 private: System::Void btnRegistrar_Click(System::Object^ sender, System::EventArgs^ e) {
 	try {
 
-		Book^ book = gcnew Book();
-		String^ idText = txtID->Text;
-		String^ title = txtTitulo->Text;
-		String^ author = txtAutor->Text;
-		String^ genre = txtGenero->Text;
-		String^ publisher = txtEditorial->Text;
-		String^ description = txtDescripcion->Text;
-		String^ quantityText = txtCantidad->Text;
-		int quantity;
-		int id;
-
-
-		if (title->Length > 0 && author->Length > 0 && genre->Length > 0 &&publisher->Length > 0 && description->Length > 0 && Int32::TryParse(quantityText, quantity) && Int32::TryParse(idText, id)) {
-		    book->BookID = id;
-			book->Title = title;
-			book->Author = author;
-			book->Genre = genre;
-			book->Publisher = publisher;
-			book->Description = description;
-			book->Quantity = quantity;
+		if (txtID->Text->Length == 0 || txtTitulo->Text->Length == 0 || txtAutor->Text->Length == 0 || txtGenero->Text->Length == 0
+			|| txtEditorial->Text->Length == 0 || txtDescripcion->Text->Length == 0 || txtCantidad->Text->Length == 0
+			|| txtAño->Text->Length == 0 || txtTiempoPrestamo->Text->Length == 0 || txtDisponibilidad->Text->Length == 0
+			|| txtPeso->Text->Length == 0) {
+			MessageBox::Show("El campo Año de realización es obligatorio.");
+			return;
 		}
+
+		int entero;
+		double decimal;
+		if (!Int32::TryParse(txtCantidad->Text, entero) && !Int32::TryParse(txtID->Text, entero) &&
+			!Int32::TryParse(txtAño->Text, entero) && !Int32::TryParse(txtTiempoPrestamo->Text, entero) &&
+			!Double::TryParse(txtPeso->Text, decimal)) {
+			MessageBox::Show("Los campos Cantidad, ID, Año de realización, Tiempo de préstamo y Peso deben ser numéricos, enteros o decimales según correspondan.");
+			return;
+		}
+
+
+		Book^ book = gcnew Book();
+
+		book->BookID = Int32::Parse(txtID->Text);
+		book->Title = txtTitulo->Text;
+		book->Author = txtAutor->Text;
+		book->Genre = txtGenero->Text;
+		book->Publisher = txtEditorial->Text;
+		book->Description = txtDescripcion->Text;
+		book->Quantity = Int32::Parse(txtCantidad->Text);
+		book->ReleaseYear = Int32::Parse(txtAño->Text);
+		book->LoanTime = Int32::Parse(txtTiempoPrestamo->Text);
+		book->Availability = txtDisponibilidad->Text;
+		book->Weight = Double::Parse(txtPeso->Text);
 		
 		if (pbPhoto != nullptr && pbPhoto->Image != nullptr) {
 			System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream();
@@ -647,7 +657,7 @@ private: System::Void btnRegistrar_Click(System::Object^ sender, System::EventAr
 
 		Controller::AddBook(book);
 		ShowBooks();
-		MessageBox::Show("Se ha agregado el libro " + id + " - " + title);
+		MessageBox::Show("Se ha agregado el libro " + book->BookID + " - " + book->Title);
 	}
 	catch (Exception^ ex) {
 		MessageBox::Show("No se ha podido agregar el libro por el siguiente motivo:\n" +
@@ -662,38 +672,38 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 	}
 	try {
 
-		Book^ book = gcnew Book();
-		String^ idText = txtID->Text;
-		String^ title = txtTitulo->Text;
-		String^ author = txtAutor->Text;
-		String^ genre = txtGenero->Text;
-		String^ publisher = txtEditorial->Text;
-		String^ description = txtDescripcion->Text;
-		String^ quantityText = txtCantidad->Text;
-		String^ yearText = txtAño->Text;
-		String^ loantimetext = txtTiempoPrestamo->Text;
-		String^ availability = txtDisponibilidad->Text;
-		String^ weightText = txtPeso->Text;
-		double weight;
-		int realeaseYear;
-		int loanTime;
-		int quantity;
-		int id;
-
-		if (title->Length > 0 && author->Length > 0 && genre->Length > 0 && publisher->Length > 0 && description->Length > 0 && availability->Length > 0 && Int32::TryParse(quantityText, quantity) && Int32::TryParse(idText, id)
-			&& Int32::TryParse(yearText, realeaseYear) && Int32::TryParse(loantimetext, loanTime) && Double::TryParse(weightText, weight) ) {
-			book->BookID = id;
-			book->Title = title;
-			book->Author = author;
-			book->Genre = genre;
-			book->Publisher = publisher;
-			book->Description = description;
-			book->Quantity = quantity;
-			book->Availability = availability;
-			book->Weight = weight;
-			book->ReleaseYear = realeaseYear;
-			book->LoanTime = loanTime;
+		if (txtID->Text->Length == 0 || txtTitulo->Text->Length == 0 || txtAutor->Text->Length == 0 || txtGenero->Text->Length == 0
+			|| txtEditorial->Text->Length == 0 || txtDescripcion->Text->Length == 0 || txtCantidad->Text->Length == 0
+			|| txtAño->Text->Length == 0 || txtTiempoPrestamo->Text->Length == 0 || txtDisponibilidad->Text->Length == 0
+			|| txtPeso->Text->Length == 0) {
+			MessageBox::Show("El campo Año de realización es obligatorio.");
+			return;
 		}
+
+		int entero;
+		double decimal;
+		if (!Int32::TryParse(txtCantidad->Text, entero ) && !Int32::TryParse(txtID->Text, entero) &&
+			!Int32::TryParse(txtAño->Text, entero) && !Int32::TryParse(txtTiempoPrestamo->Text, entero) &&
+			!Double::TryParse(txtPeso->Text, decimal)) {
+			MessageBox::Show("Los campos Cantidad, ID, Año de realización, Tiempo de préstamo y Peso deben ser numéricos, enteros o decimales según correspondan.");
+			return;
+		}
+
+
+		Book^ book = gcnew Book();
+		
+		book->BookID = Int32::Parse(txtID->Text);
+		book->Title = txtTitulo->Text;
+		book->Author = txtAutor->Text;
+		book->Genre = txtGenero->Text;
+		book->Publisher = txtEditorial->Text;
+		book->Description = txtDescripcion->Text;
+		book->Quantity = Int32::Parse(txtCantidad->Text);
+		book->ReleaseYear = Int32::Parse(txtAño->Text);
+		book->LoanTime = Int32::Parse(txtTiempoPrestamo->Text);
+		book->Availability = txtDisponibilidad->Text;
+		book->Weight = Double::Parse(txtPeso->Text);
+
 
 		if (pbPhoto != nullptr && pbPhoto->Image != nullptr) {
 			System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream();
@@ -702,7 +712,7 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 		}
 		Controller::UpdateBook(book);
 		ShowBooks();
-		MessageBox::Show("Se ha modificado el libro " + id + " - " + title);
+		MessageBox::Show("Se ha modificado el libro " + book->BookID + " - " + book->Title);
 	}
 	catch (Exception^ ex) {
 		MessageBox::Show("No se ha podido agregar el libro por el siguiente motivo:\n" +
@@ -741,6 +751,7 @@ private: System::Void btnActualizarFoto_Click(System::Object^ sender, System::Ev
 	}
 }
 private: System::Void dgvlibros_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->RowIndex < 0 || e->ColumnIndex < 0) return; // Evita errores si se hace clic en el encabezado
 	String^ bookName = dgvlibros->Rows[e->RowIndex]->Cells["ColumnaTitulo"]->Value->ToString();
 	Book^ book = Controller::SearchBookByName(bookName);
 	txtTitulo->Text = book->Title;

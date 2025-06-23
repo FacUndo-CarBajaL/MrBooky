@@ -6,6 +6,7 @@
 //#include "AddLibrary.h"
 #include "MaintenanceBook.h"
 #include "LibrarianLogIn.h"
+#include "MaintenanceLibrarian.h"
 
 namespace MrBookyGUIApp {
 
@@ -97,6 +98,7 @@ namespace MrBookyGUIApp {
 			this->btnAdminLibrarian->TabIndex = 1;
 			this->btnAdminLibrarian->Text = L"Administrar Bibliotecario";
 			this->btnAdminLibrarian->UseVisualStyleBackColor = true;
+			this->btnAdminLibrarian->Click += gcnew System::EventHandler(this, &AdminInterface::btnAdminLibrarian_Click);
 			// 
 			// btnAdminRobot
 			// 
@@ -173,6 +175,11 @@ private: System::Void btnAdminBook_Click(System::Object^ sender, System::EventAr
 private: System::Void btnLibrarianInterface_Click(System::Object^ sender, System::EventArgs^ e) {
 	LibrarianLogIn^ librarianInterfaceForm = gcnew LibrarianLogIn();
 	librarianInterfaceForm->ShowDialog();
+}
+private: System::Void btnAdminLibrarian_Click(System::Object^ sender, System::EventArgs^ e) {
+	MaintenanceLibrarian^ librarianForm = gcnew MaintenanceLibrarian();
+	librarianForm->ShowDialog();
+
 }
 };
 }

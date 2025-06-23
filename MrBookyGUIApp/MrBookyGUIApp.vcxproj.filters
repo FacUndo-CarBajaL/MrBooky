@@ -29,6 +29,9 @@
     <ClCompile Include="MaintenanceBook.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="ComboBoxItem.cpp" />
+    <ClCompile Include="RequestDetails.cpp" />
+    <ClCompile Include="RequestDisapprove.cpp" />
+    <ClCompile Include="DispatchProblemForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookForm.cpp">
@@ -103,5 +106,8 @@
     <ClInclude Include="MaintenanceBook.h" />
     <ClInclude Include="LibrarianLogIn.h" />
     <ClInclude Include="ComboBoxItem.h" />
+    <ClInclude Include="RequestDetails.h" />
+    <ClInclude Include="RequestDisapprove.h" />
+    <ClInclude Include="DispatchProblemForm.h" />
   </ItemGroup>
 </Project>

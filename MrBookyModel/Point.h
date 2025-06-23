@@ -14,7 +14,7 @@ using namespace System::Xml::Serialization;
 namespace MrBookyModel {
     [Serializable]
     public ref class Point {
-        private:
+        public:
             int X;
             int Y;
 

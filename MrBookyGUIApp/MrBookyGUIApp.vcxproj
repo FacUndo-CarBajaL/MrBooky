@@ -124,6 +124,7 @@
     <ClCompile Include="BookHistoryForm.cpp" />
     <ClCompile Include="CarritoPrestamoForm.cpp" />
     <ClCompile Include="ComboBoxItem.cpp" />
+    <ClCompile Include="DispatchProblemForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="LibrarianMaintenance.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
@@ -139,6 +140,8 @@
     <ClCompile Include="MaintenanceRobot.cpp" />
     <ClCompile Include="RegisterUserForm.cpp" />
     <ClCompile Include="ReporteGraficaClienteForm.cpp" />
+    <ClCompile Include="RequestDetails.cpp" />
+    <ClCompile Include="RequestDisapprove.cpp" />
     <ClCompile Include="RobotApprove.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Stock.cpp" />
@@ -160,6 +163,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ComboBoxItem.h" />
+    <ClInclude Include="DispatchProblemForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -205,6 +211,12 @@
     <ClInclude Include="ReporteGraficaClienteForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="RequestDetails.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RequestDisapprove.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="RobotApprove.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -242,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CarritoPrestamoForm.resx">
       <DependentUpon>CarritoPrestamoForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispatchProblemForm.resx">
+      <DependentUpon>DispatchProblemForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianMaintenance.resx">
       <DependentUpon>LibrarianMaintenance.h</DependentUpon>
@@ -284,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReporteGraficaClienteForm.resx">
       <DependentUpon>ReporteGraficaClienteForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestDetails.resx">
+      <DependentUpon>RequestDetails.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestDisapprove.resx">
+      <DependentUpon>RequestDisapprove.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RobotApprove.resx">
       <DependentUpon>RobotApprove.h</DependentUpon>

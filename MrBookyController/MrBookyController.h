@@ -6,10 +6,18 @@ using namespace System::IO;
 using namespace System::IO::Ports;
 using namespace MrBookyModel;
 using namespace MrBookyPersistance;
+using namespace System::IO::Ports;
 
 namespace MrBookyController {
+	public enum class Protocol {
+		UART,
+		NMEA
+	};
+
 	public ref class Controller
 	{
+	
+
 	public: 
 		static String^ BIN_BOOK_FILE_NAME = "books.bin";
 		static String^ BIN_USER_FILE_NAME = "users.bin";
@@ -25,6 +33,9 @@ namespace MrBookyController {
 			static List<CartItem^>^ cartItems = gcnew List<CartItem^>();
 			static List<LoanOrder^>^ loanOrders = gcnew List<LoanOrder^>();
 			static List<LoanCart^>^ loanCarts = gcnew List<LoanCart^>();
+			static SerialPort^ ArduinoPort;
+
+
 		// TODO: Agregue aqu√≠ los m√©todos de esta clase.
 		public:
 			// M√©todos CRUD para Book
@@ -42,8 +53,23 @@ namespace MrBookyController {
 			static int AddRobot(DeliveryRobot^ robot);
 			static List<DeliveryRobot^>^ GetRobots();
 			static DeliveryRobot^ SearchRobot(int robotId);
+			static DeliveryRobot^ SearchRobotByName(String^ robotName);
 			static int UpdateRobot(DeliveryRobot^ robot);
 			static int DeleteRobot(int robotId);
+
+			//Diccionario con los protocolos de comunicaciÛn UART y NMEA
+			static Dictionary<String^, Protocol>^ protocolDictionary = gcnew Dictionary<String^, Protocol>();
+			static Controller() {
+				// Agrega elementos al diccionario
+				protocolDictionary->Add("UART", Protocol::UART);
+				protocolDictionary->Add("NMEA", Protocol::NMEA);
+			}
+			static String^ SendRobotToDelivery(Protocol protocol, int robotId, int deliveryPointNumber);
+			static void OpenPort();
+			static void ClosePort();
+
+
+
 
 			// MÈtodos CRUD para Library
 			static int AddLibrary(Library^ library);
@@ -69,7 +95,7 @@ namespace MrBookyController {
 			static Loan^ SearchLoan(int loanId);
 			static int UpdateLoan(Loan^ loan);
 			static int DeleteLoan(int loanId);
-			static List<Loan^>^ GetLoanHistoryByUser(User^ user);
+			static List<Loan^>^ GetLoanHistoryByUserID(int userid);
 
 			// MÈtodos CRUD para CartItem
 			static int AddCartItem(CartItem^ cartItem);
@@ -80,14 +106,19 @@ namespace MrBookyController {
 
 			//MÈtodos CRUD para LoanCart
 			static void AddLoanCart(LoanCart^ loanCart);
+			static void UpdateLoanCart(LoanCart^ loanCart);
 			static List<LoanCart^>^ GetLoanCarts();
 			static LoanCart^ SearchLoanCartByUser(User^ user);
 			static void ClearLoanCart(User^ user);
 
 			//MÈtodos CRUD para LoanOrder
+			static List<LoanOrder^>^ GetLoanOrders();
 			static void AddLoanOrder(LoanOrder^ loanOrder);
+			static LoanOrder^ SearchLoanOrderById(int loanOrderId);
 			static LoanOrder^ SearchLoanOrderByUser(User^ user);
+			static List<LoanOrder^>^ GetAllLoanOrdersByUserID(int userid);
 			static List<LoanOrder^>^ GetAllLoanOrdersByUser(User^ user);
+			static int UpdateLoanOrder(LoanOrder^ loanOrder);
 
 	};
 }

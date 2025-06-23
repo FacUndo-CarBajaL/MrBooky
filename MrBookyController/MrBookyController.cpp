@@ -27,25 +27,24 @@ void MrBookyController::Controller::AddBook(Book^ book)
 List<Book^>^ MrBookyController::Controller::GetBooks()
 {
 	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
-    return books;
+	if (books == nullptr) {
+		books = gcnew List<Book^>(); // fallback defensivo
+	}
+	return books;
 }
 
 Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
-	// Busca el libro en la lista de libros
-	books = Controller::GetBooks();
-
+	books = GetBooks();
+	// TODO: Insertar una instrucción "return" aquí
 	for each (Book ^ book in books)
 	{
-		if (book->Title == title)
+		if (book->Title->ToUpper() == title->ToUpper())
 		{
 			return book;
 		}
-		else {
-			return nullptr;
-		}
 	}
-
+	return nullptr;
 }
 
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
@@ -128,12 +127,11 @@ List<Book^>^ MrBookyController::Controller::AdvancedSearchBook(String^ title, St
 	return foundBooks;
 }
 
-List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUser(User^ user)
+List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
 {
 	List<Loan^>^ loanHistory = gcnew(List<Loan^>);
-	loanHistory = nullptr;
 	try {
-		List<LoanOrder^>^ ordenesUsuario = Controller::GetAllLoanOrdersByUser(user);
+		List<LoanOrder^>^ ordenesUsuario = Controller::GetAllLoanOrdersByUserID(userid);
 		for each(LoanOrder^ loanOrder in ordenesUsuario) {
 			List<Loan^>^ loanList = loanOrder->Loans;
 			for each(Loan^ loan in loanList) {
@@ -143,9 +141,12 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUser(User^ user)
 	}
 	catch (Exception^ ex) {
 		throw ex;
+	}if (loanHistory != nullptr) {
+		return loanHistory;
 	}
-	return loanHistory;
+	return nullptr;
 }
+
 
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
@@ -185,6 +186,20 @@ DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 	return nullptr;
 }
 
+DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotName)
+{
+	robots = GetRobots();
+	// TODO: Insertar una instrucción "return" aquí
+	for each (DeliveryRobot ^ robot in robots)
+	{
+		if (robot->Name == robotName)
+		{
+			return robot;
+		}
+	}
+	return nullptr;
+}
+
 int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 {
 	// Busca el robot en la lista de robots
@@ -215,6 +230,67 @@ int MrBookyController::Controller::DeleteRobot(int robotId)
 		}
 	}
 	return 0;
+}
+
+Byte CalculateChecksum(String^ data) {
+	Byte checksum = 0;
+	// El cálculo del checksum es sobre los caracteres entre $ y *
+	for (int i = 0; i < data->Length; i++) {
+		checksum ^= data[i];  // Realiza XOR de cada caracter
+	}
+	return checksum;
+}
+
+String^ MrBookyController::Controller::SendRobotToDelivery(Protocol protocol, int robotId, int deliveryPointNumber)
+{
+	String^ result;
+	try {
+		OpenPort();
+		String^ message;
+		switch (protocol) {
+		case Protocol::UART: //Creación de cadena en formato UART
+			message = "DELIVER,DELIVERYPOINT," + Convert::ToString(deliveryPointNumber) + "\n";
+			break;
+		case Protocol::NMEA: //Creación de cadena en formato NMEA: Por ejemplo, si se envía el robot a la mesa 5, la cadena NMEA es:"$ROBOT,DELIVER,TABLE,5*46<CR><LF>"        
+			String^ str = "ROBOT,DELIVER,DELIVERYPOINT," + Convert::ToString(deliveryPointNumber);
+			Byte checksum = CalculateChecksum(str);
+			message = "$" + str + "*" + Convert::ToString(checksum, 16) + "\n";
+			break;
+		}
+		ArduinoPort->Write(message);
+		result = ArduinoPort->ReadLine();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		ClosePort();
+	}
+	return result;
+}
+
+void MrBookyController::Controller::OpenPort()
+{
+	try {
+		ArduinoPort = gcnew SerialPort();
+		ArduinoPort->PortName = "COM3";
+		ArduinoPort->BaudRate = 9600;
+		ArduinoPort->Open();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+}
+
+void MrBookyController::Controller::ClosePort()
+{
+	try {
+		if (ArduinoPort->IsOpen)
+			ArduinoPort->Close();
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
 }
 
 int MrBookyController::Controller::AddLibrary(Library^ library)
@@ -249,7 +325,7 @@ Library^ MrBookyController::Controller::SearchLibrary(String^ libraryName)
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Library ^ library in libraries)
 	{
-		if (library->Name == libraryName)
+		if (library->Name->ToLower() == libraryName->ToLower())
 		{
 			return library;
 		}
@@ -531,9 +607,26 @@ void MrBookyController::Controller::AddLoanCart(LoanCart^ loanCart)
 	Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
 }
 
+void MrBookyController::Controller::UpdateLoanCart(LoanCart^ loanCart)
+{
+	// Busca el carrito de préstamos en la lista de carritos de préstamos
+	loanCarts = GetLoanCarts();
+	for (int i = 0; i < loanCarts->Count; i++)
+	{
+		if (loanCarts[i]->LoanCartID == loanCart->LoanCartID)
+		{
+			// Actualiza el carrito de préstamos
+			loanCarts[i] = loanCart;
+			Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+			return;
+		}
+	}
+	throw gcnew NotFoundException("Carrito de préstamos no encontrado.");
+}
+
 List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()
 {
-	{
+
 	try {
 		loanCarts = (List<LoanCart^>^)Persistance::LoadBinaryFile(BIN_LOANCART_FILE_NAME);
 	}
@@ -550,7 +643,6 @@ List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()
 	}
 
 	return loanCarts;
-}
 }
 
 LoanCart^ MrBookyController::Controller::SearchLoanCartByUser(User^ user)
@@ -579,20 +671,52 @@ void MrBookyController::Controller::ClearLoanCart(User^ user)
 	
 }
 
+List<LoanOrder^>^ MrBookyController::Controller::GetLoanOrders()
+{
+	try {
+		loanOrders = (List<LoanOrder^>^)Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	}
+	catch (Exception^) {
+		// Si el archivo no existe o está corrupto, se crea una lista vacía
+		loanOrders = gcnew List<LoanOrder^>();
+		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	}
+
+	// Seguridad adicional
+	if (loanOrders == nullptr) {
+		loanOrders = gcnew List<LoanOrder^>();
+		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	}
+
+	return loanOrders;
+}
+
 void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 {
-	for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
+	loanOrders = GetLoanOrders();
+	/*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
 		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
 			throw gcnew DuplicateBookException("ID ya utilizado.");
 		}
-	}
+	}*/
 	loanOrders->Add(loanOrder);
 	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
 }
 
+LoanOrder^ MrBookyController::Controller::SearchLoanOrderById(int loanOrderId)
+{
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		if (loanOrder->LoanOrderID == loanOrderId) {
+			return loanOrder;
+		}
+	}
+	return nullptr;
+}
+
 LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 {
-	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	loanOrders = GetLoanOrders();
 	for each (LoanOrder ^ loanOrder in loanOrders) {
 		if (loanOrder->Client->UserID == user->UserID) {
 			return loanOrder;
@@ -602,16 +726,50 @@ LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 	return nullptr;
 }
 
+List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUserID(int userid)
+{
+	List<LoanOrder^>^ ordenesUsuario = gcnew(List<LoanOrder^>);
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		if (loanOrder->Client->UserID == userid) {
+			ordenesUsuario->Add(loanOrder);
+		}
+	}
+
+	if(ordenesUsuario!=nullptr){
+		return ordenesUsuario;
+	}
+	
+	return nullptr;
+}
+
 List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUser(User^ user)
 {
 	List<LoanOrder^>^ ordenesUsuario = gcnew(List<LoanOrder^>);
 	ordenesUsuario = nullptr;
-	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	loanOrders = GetLoanOrders();
 	for each(LoanOrder ^ loanOrder in loanOrders) {
 		if (loanOrder->Client->UserID == user->UserID) {
 			ordenesUsuario->Add(loanOrder);
 		}
 	}
 
-	return ordenesUsuario;;
+	return ordenesUsuario;
+}
+
+int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
+{
+	// Busca la orden de préstamo en la lista de órdenes de préstamo
+	loanOrders = GetLoanOrders();
+	for (int i = 0; i < loanOrders->Count; i++)
+	{
+		if (loanOrders[i]->LoanOrderID == loanOrder->LoanOrderID)
+		{
+			// Actualiza la orden de préstamo
+			loanOrders[i] = loanOrder;
+			Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+			return 1;
+		}
+	}
+	return 0;
 }
