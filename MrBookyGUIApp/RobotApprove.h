@@ -1,5 +1,5 @@
 #pragma once
-#include "MapSelector.h"
+
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -40,8 +40,9 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ btnAceptar;
 
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::Windows::Forms::Label^ lblLatitud;
 	private: System::Windows::Forms::Label^ lblLongitud;
 	protected:
@@ -61,7 +62,7 @@ namespace MrBookyGUIApp {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(RobotApprove::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnAceptar = (gcnew System::Windows::Forms::Button());
 			this->lblLatitud = (gcnew System::Windows::Forms::Label());
 			this->lblLongitud = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
@@ -74,41 +75,41 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(66, 43);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(511, 30);
+			this->label1->Size = System::Drawing::Size(403, 30);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Selección de Robots Disponible para entrega";
+			this->label1->Text = L"Trayectoria del robot para el envío";
 			// 
-			// button1
+			// btnAceptar
 			// 
-			this->button1->BackColor = System::Drawing::Color::White;
-			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Location = System::Drawing::Point(404, 399);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(147, 34);
-			this->button1->TabIndex = 2;
-			this->button1->Text = L"Seleccionar";
-			this->button1->UseVisualStyleBackColor = false;
-			this->button1->Click += gcnew System::EventHandler(this, &RobotApprove::button1_Click);
+			this->btnAceptar->BackColor = System::Drawing::Color::White;
+			this->btnAceptar->ForeColor = System::Drawing::Color::Black;
+			this->btnAceptar->Location = System::Drawing::Point(404, 399);
+			this->btnAceptar->Name = L"btnAceptar";
+			this->btnAceptar->Size = System::Drawing::Size(147, 34);
+			this->btnAceptar->TabIndex = 2;
+			this->btnAceptar->Text = L"Aceptar";
+			this->btnAceptar->UseVisualStyleBackColor = false;
+			this->btnAceptar->Click += gcnew System::EventHandler(this, &RobotApprove::button1_Click);
 			// 
 			// lblLatitud
 			// 
 			this->lblLatitud->AutoSize = true;
 			this->lblLatitud->BackColor = System::Drawing::Color::Transparent;
-			this->lblLatitud->Location = System::Drawing::Point(170, 108);
+			this->lblLatitud->Location = System::Drawing::Point(66, 112);
 			this->lblLatitud->Name = L"lblLatitud";
-			this->lblLatitud->Size = System::Drawing::Size(67, 25);
+			this->lblLatitud->Size = System::Drawing::Size(88, 25);
 			this->lblLatitud->TabIndex = 3;
-			this->lblLatitud->Text = L"label2";
+			this->lblLatitud->Text = L"Latitud:";
 			// 
 			// lblLongitud
 			// 
 			this->lblLongitud->AutoSize = true;
 			this->lblLongitud->BackColor = System::Drawing::Color::Transparent;
-			this->lblLongitud->Location = System::Drawing::Point(170, 151);
+			this->lblLongitud->Location = System::Drawing::Point(66, 165);
 			this->lblLongitud->Name = L"lblLongitud";
-			this->lblLongitud->Size = System::Drawing::Size(67, 25);
+			this->lblLongitud->Size = System::Drawing::Size(102, 25);
 			this->lblLongitud->TabIndex = 4;
-			this->lblLongitud->Text = L"label2";
+			this->lblLongitud->Text = L"Longitud:";
 			// 
 			// RobotApprove
 			// 
@@ -118,7 +119,7 @@ namespace MrBookyGUIApp {
 			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->lblLongitud);
 			this->Controls->Add(this->lblLatitud);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->btnAceptar);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -134,20 +135,22 @@ namespace MrBookyGUIApp {
 
 	
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-	MapSelector^ selector = gcnew MapSelector();
-	selector->ShowDialog();
+	LoanOrder^ loanOrder = (LoanOrder^)Persistance::LoadBinaryFile("TempLoanOrder.bin");
+	if (loanOrder != nullptr) {
+		// Actualizar el estado del préstamo a "En Envío"
+		loanOrder->Status = "Aprobado";
+		Controller::UpdateLoanOrder(loanOrder);
+		// Mostrar mensaje de éxito
+		MessageBox::Show("El préstamo ha sido aprobado.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
-	Coordenada^ destino = selector->CoordenadaSeleccionada;
-	if (destino != nullptr) {
-		double lat = selector->CoordenadaSeleccionada->Latitude;
-		double lng = selector->CoordenadaSeleccionada->Longitude;
-
-		// Mostrar o guardar resultado
-		MessageBox::Show("Coordenadas seleccionadas:\nLatitud: " + lat + "\nLongitud: " + lng);
-		// Puedes guardar en variables, etiquetas, campos de texto, etc.
-		lblLatitud->Text = lat.ToString();
-		lblLongitud->Text = lng.ToString();
+		// Cerrar el formulario
+		this->Close();
+	}
+	else {
+		MessageBox::Show("No se pudo cargar la orden de préstamo.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 }
 };
 }
+
+

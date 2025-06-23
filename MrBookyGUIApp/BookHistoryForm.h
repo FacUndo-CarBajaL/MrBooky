@@ -49,6 +49,14 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaFechaFinPrestamo;
 	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ ColumnaAñadirReseña;
+
+
+
+
+
+
+
+
 	protected:
 
 
@@ -112,7 +120,7 @@ namespace MrBookyGUIApp {
 			this->dgvHistorial->Location = System::Drawing::Point(46, 135);
 			this->dgvHistorial->Name = L"dgvHistorial";
 			this->dgvHistorial->RowHeadersWidth = 51;
-			this->dgvHistorial->RowTemplate->Height = 24;
+			this->dgvHistorial->RowTemplate->Height = 100;
 			this->dgvHistorial->Size = System::Drawing::Size(1045, 353);
 			this->dgvHistorial->TabIndex = 1;
 			// 
@@ -161,6 +169,7 @@ namespace MrBookyGUIApp {
 			// ColumnaImagen
 			// 
 			this->ColumnaImagen->HeaderText = L"Imagen";
+			this->ColumnaImagen->ImageLayout = System::Windows::Forms::DataGridViewImageCellLayout::Zoom;
 			this->ColumnaImagen->MinimumWidth = 6;
 			this->ColumnaImagen->Name = L"ColumnaImagen";
 			this->ColumnaImagen->Resizable = System::Windows::Forms::DataGridViewTriState::True;
@@ -195,7 +204,7 @@ namespace MrBookyGUIApp {
 #pragma endregion
 		void ShowHistory() {
 			Client^ user = (Client^)Persistance::LoadBinaryFile("TempUser.bin");
-			List<Loan^>^ loanHistory = Controller::GetLoanHistoryByUser(user);
+			List<Loan^>^ loanHistory = Controller::GetLoanHistoryByUserID(user->UserID);
 			if (loanHistory != nullptr) {
 				dgvHistorial->Rows->Clear();
 				for (int i = 0; i < loanHistory->Count; i++) {
@@ -204,7 +213,6 @@ namespace MrBookyGUIApp {
 							loanHistory[i]->Book->Title,
 							loanHistory[i]->Book->Author,
 							loanHistory[i]->Book->Publisher,
-							loanHistory[i]->Book->Author,
 							"" + loanHistory[i]->DateLoan,
 					        "" + loanHistory[i]->ReturnDate}
 					);

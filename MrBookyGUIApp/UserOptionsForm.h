@@ -1,7 +1,7 @@
 #pragma once
 #include "BookForm.h"
 #include "UserInterface.h"
-
+#include "UserLoansList.h"
 #include "UserProfileForm.h"
 namespace MrBookyGUIApp {
 
@@ -131,6 +131,7 @@ namespace MrBookyGUIApp {
 			this->btnSolicitudesRealizadas->TabIndex = 5;
 			this->btnSolicitudesRealizadas->Text = L"Solicitudes Realizadas";
 			this->btnSolicitudesRealizadas->UseVisualStyleBackColor = false;
+			this->btnSolicitudesRealizadas->Click += gcnew System::EventHandler(this, &UserOptionsForm::btnSolicitudesRealizadas_Click);
 			// 
 			// UserOptionsForm
 			// 
@@ -159,6 +160,11 @@ namespace MrBookyGUIApp {
 private: System::Void btnVerPerfil_Click(System::Object^ sender, System::EventArgs^ e) {
 	UserProfileForm^ profileForm = gcnew UserProfileForm();
 	profileForm->Show();
+}
+private: System::Void btnSolicitudesRealizadas_Click(System::Object^ sender, System::EventArgs^ e) {
+	UserLoansList^ loansListForm = gcnew UserLoansList();
+	loansListForm->ShowDialog();
+	// Aquí podrías agregar más lógica si es necesario, como actualizar la lista de préstamos.
 }
 };
 }

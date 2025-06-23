@@ -124,6 +124,7 @@
     <ClCompile Include="BookHistoryForm.cpp" />
     <ClCompile Include="CarritoPrestamoForm.cpp" />
     <ClCompile Include="ComboBoxItem.cpp" />
+    <ClCompile Include="DispatchProblemForm.cpp" />
     <ClCompile Include="LibrarianLogIn.cpp" />
     <ClCompile Include="LibrarianMaintenance.cpp" />
     <ClCompile Include="AddDeliveryRobot.cpp" />
@@ -162,6 +163,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ComboBoxItem.h" />
+    <ClInclude Include="DispatchProblemForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="LibrarianLogIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -250,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CarritoPrestamoForm.resx">
       <DependentUpon>CarritoPrestamoForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DispatchProblemForm.resx">
+      <DependentUpon>DispatchProblemForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LibrarianMaintenance.resx">
       <DependentUpon>LibrarianMaintenance.h</DependentUpon>

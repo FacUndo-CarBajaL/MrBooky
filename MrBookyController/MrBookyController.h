@@ -68,7 +68,7 @@ namespace MrBookyController {
 			static Loan^ SearchLoan(int loanId);
 			static int UpdateLoan(Loan^ loan);
 			static int DeleteLoan(int loanId);
-			static List<Loan^>^ GetLoanHistoryByUser(User^ user);
+			static List<Loan^>^ GetLoanHistoryByUserID(int userid);
 
 			// Métodos CRUD para CartItem
 			static int AddCartItem(CartItem^ cartItem);
@@ -89,6 +89,7 @@ namespace MrBookyController {
 			static void AddLoanOrder(LoanOrder^ loanOrder);
 			static LoanOrder^ SearchLoanOrderById(int loanOrderId);
 			static LoanOrder^ SearchLoanOrderByUser(User^ user);
+			static List<LoanOrder^>^ GetAllLoanOrdersByUserID(int userid);
 			static List<LoanOrder^>^ GetAllLoanOrdersByUser(User^ user);
 			static int UpdateLoanOrder(LoanOrder^ loanOrder);
 

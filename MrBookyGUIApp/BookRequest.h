@@ -215,12 +215,12 @@ namespace MrBookyGUIApp {
 					this->ColumnaUsuario, this->ColumnaEstado, this->ColumnaFecha, this->ColumnaMetodoEntrega
 			});
 			this->dgvPrestamos->EnableHeadersVisualStyles = false;
-			this->dgvPrestamos->Location = System::Drawing::Point(21, 210);
+			this->dgvPrestamos->Location = System::Drawing::Point(21, 225);
 			this->dgvPrestamos->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
 			this->dgvPrestamos->Name = L"dgvPrestamos";
 			this->dgvPrestamos->RowHeadersWidth = 51;
 			this->dgvPrestamos->RowTemplate->Height = 24;
-			this->dgvPrestamos->Size = System::Drawing::Size(1043, 184);
+			this->dgvPrestamos->Size = System::Drawing::Size(1043, 250);
 			this->dgvPrestamos->TabIndex = 15;
 			this->dgvPrestamos->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookRequest::dgvPrestamos_CellClick_1);
 			// 
@@ -275,7 +275,7 @@ namespace MrBookyGUIApp {
 			this->btnDenegar->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
 			this->btnDenegar->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->btnDenegar->Location = System::Drawing::Point(252, 141);
+			this->btnDenegar->Location = System::Drawing::Point(223, 141);
 			this->btnDenegar->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
 			this->btnDenegar->Name = L"btnDenegar";
 			this->btnDenegar->Size = System::Drawing::Size(171, 29);
@@ -290,7 +290,7 @@ namespace MrBookyGUIApp {
 			this->btnAceptar->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12));
 			this->btnAceptar->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->btnAceptar->Location = System::Drawing::Point(41, 140);
+			this->btnAceptar->Location = System::Drawing::Point(21, 140);
 			this->btnAceptar->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
 			this->btnAceptar->Name = L"btnAceptar";
 			this->btnAceptar->Size = System::Drawing::Size(171, 29);
@@ -342,7 +342,7 @@ namespace MrBookyGUIApp {
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(14)), static_cast<System::Int32>(static_cast<System::Byte>(14)),
 				static_cast<System::Int32>(static_cast<System::Byte>(14)));
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(1092, 457);
+			this->ClientSize = System::Drawing::Size(1092, 532);
 			this->Controls->Add(this->chbVerDesaprobadas);
 			this->Controls->Add(this->chbVerAprobadas);
 			this->Controls->Add(this->chbVerTodas);
@@ -452,27 +452,6 @@ namespace MrBookyGUIApp {
 
 
 	}
-	//private: System::Void btnRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-	//	if (txtCode->Text == "" || txtCantidad->Text == "" || cmbState->SelectedIndex == -1) {
-	//		MessageBox::Show("Por favor, complete todos los campos.");
-	//		return;
-	//	}
-	//	int userId = Int32::Parse(txtCode->Text);
-	//	int quantity = Int32::Parse(txtCantidad->Text);
-	//	String^ state = cmbState->SelectedItem->ToString();
-	//	
-	//	//LoanOrder ^ newLoan = gcnew LoanOrder ();
-	//	//newLoan.LoanOrderID = DateTime::Today.ToString("ddMMyy") + loanOrderToday.ToString;
-	//	//newLoan->Client = gcnew Client();
-	//	//newLoan->Client->UserID = userId;
-	//	//newLoan->LoanDate = DateTime::Now;
-
-	//	txtCode->Clear();
-	//	txtCantidad->Clear();
-	//	cmbState->SelectedIndex = -1;
-	//	MessageBox::Show("Solicitud de libro registrada exitosamente.");
-	//}
-
 
 private: System::Void dgvPrestamos_CellClick_1(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	if (e->RowIndex < 0 || e->ColumnIndex < 0) {
@@ -512,6 +491,7 @@ private: System::Void btnAceptar_Click(System::Object^ sender, System::EventArgs
 				MessageBox::Show("Solicitud aceptada exitosamente.");
 			}
 			else if (loanOrder->IsDelivery == true) {
+				Persistance::PersistBinaryFile("TempLoanOrder.bin", loanOrder);
 				RobotApprove^ robotApproveForm = gcnew RobotApprove();
 				robotApproveForm->ShowDialog();
 			}

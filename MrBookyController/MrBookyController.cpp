@@ -127,12 +127,11 @@ List<Book^>^ MrBookyController::Controller::AdvancedSearchBook(String^ title, St
 	return foundBooks;
 }
 
-List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUser(User^ user)
+List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
 {
 	List<Loan^>^ loanHistory = gcnew(List<Loan^>);
-	loanHistory = nullptr;
 	try {
-		List<LoanOrder^>^ ordenesUsuario = Controller::GetAllLoanOrdersByUser(user);
+		List<LoanOrder^>^ ordenesUsuario = Controller::GetAllLoanOrdersByUserID(userid);
 		for each(LoanOrder^ loanOrder in ordenesUsuario) {
 			List<Loan^>^ loanList = loanOrder->Loans;
 			for each(Loan^ loan in loanList) {
@@ -142,9 +141,12 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUser(User^ user)
 	}
 	catch (Exception^ ex) {
 		throw ex;
+	}if (loanHistory != nullptr) {
+		return loanHistory;
 	}
-	return loanHistory;
+	return nullptr;
 }
+
 
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
@@ -663,18 +665,35 @@ LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 	return nullptr;
 }
 
+List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUserID(int userid)
+{
+	List<LoanOrder^>^ ordenesUsuario = gcnew(List<LoanOrder^>);
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		if (loanOrder->Client->UserID == userid) {
+			ordenesUsuario->Add(loanOrder);
+		}
+	}
+
+	if(ordenesUsuario!=nullptr){
+		return ordenesUsuario;
+	}
+	
+	return nullptr;
+}
+
 List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUser(User^ user)
 {
 	List<LoanOrder^>^ ordenesUsuario = gcnew(List<LoanOrder^>);
 	ordenesUsuario = nullptr;
-	loanOrders = (List<LoanOrder^>^) Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	loanOrders = GetLoanOrders();
 	for each(LoanOrder ^ loanOrder in loanOrders) {
 		if (loanOrder->Client->UserID == user->UserID) {
 			ordenesUsuario->Add(loanOrder);
 		}
 	}
 
-	return ordenesUsuario;;
+	return ordenesUsuario;
 }
 
 int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
