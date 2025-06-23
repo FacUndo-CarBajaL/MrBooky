@@ -284,14 +284,14 @@ namespace MrBookyGUIApp {
 			this->pbBook->Location = System::Drawing::Point(531, 41);
 			this->pbBook->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->pbBook->Name = L"pbBook";
-			this->pbBook->Size = System::Drawing::Size(132, 110);
+			this->pbBook->Size = System::Drawing::Size(132, 143);
 			this->pbBook->TabIndex = 16;
 			this->pbBook->TabStop = false;
 			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(567, 166);
+			this->label9->Location = System::Drawing::Point(567, 192);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(55, 16);
 			this->label9->TabIndex = 17;
@@ -348,7 +348,7 @@ namespace MrBookyGUIApp {
 			this->dvgReviews->Name = L"dvgReviews";
 			this->dvgReviews->RowHeadersWidth = 62;
 			this->dvgReviews->RowTemplate->Height = 28;
-			this->dvgReviews->Size = System::Drawing::Size(683, 120);
+			this->dvgReviews->Size = System::Drawing::Size(683, 192);
 			this->dvgReviews->TabIndex = 23;
 			// 
 			// button1
@@ -367,7 +367,7 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(756, 410);
+			this->ClientSize = System::Drawing::Size(756, 503);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dvgReviews);
 			this->Controls->Add(this->label12);
@@ -408,49 +408,49 @@ namespace MrBookyGUIApp {
 #pragma endregion
 	private: System::Void FoundBookForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		Book^ tempBook = (Book^)Persistance::LoadBinaryFile("tempBook");
-		ShowDetails(tempBook);
-	}
-
-	public:
-		void ShowDetails(Book^ book) {
-			// Se muestra todos los detalles del libro encontrado.
-			txtTitle->Text = book->Title;
-			txtAuthor->Text = book->Author;
-			txtGenre->Text = book->Genre;
-			txtAvailability->Text = book->Availability;
-			txtPublisher->Text = book->Publisher;
-			txtReleaseYear->Text = book->ReleaseYear.ToString();
-			txtStock->Text = book->Quantity.ToString();
-			txtDescription->Text = book->Description;
-
-			array<Byte>^ photoBytes = book->Photo;
-			if (photoBytes != nullptr && photoBytes->Length > 0) {
-				System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
-				System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
-
-				// Insertar la imagen en la última columna
-				pbBook->Image = image;
+		txtTitle->Text = book->Title;
+		txtAuthor->Text = book->Author;
+		txtGenre->Text = book->Genre;
+		txtAvailability->Text = book->Availability;
+		txtPublisher->Text = book->Publisher;
+		txtReleaseYear->Text = book->ReleaseYear.ToString();
+		txtStock->Text = book->Quantity.ToString();
+		txtDescription->Text = book->Description;
+		txtLoanTime->Text = book->LoanTime.ToString();
+		txtWeight->Text = book->Weight.ToString();
+		if (book->Photo != nullptr) {
+			try {
+				System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(book->Photo);
+				pbBook->Image = Image::FromStream(ms);
+				pbBook->SizeMode = PictureBoxSizeMode::Zoom;
 			}
-
-			
-			txtLoanTime->Text = book->LoanTime.ToString();
-			txtWeight->Text = book->Weight.ToString();
-			// Mostrar las reseñas del libro en el DataGridView
-			dvgReviews->Rows->Clear(); // Limpiar el DataGridView antes de mostrar los resultados
-			
-			List<String^>^ reviews = book->Reviews;
-
-			if (reviews != nullptr) {
-				for each (String ^ review in reviews) {
-					int rowIndex = dvgReviews->Rows->Add();
-					dvgReviews->Rows[rowIndex]->Cells[0]->Value = review;
-				}
-
-			}
-			else {
-				MessageBox::Show("No hay reseñas disponibles para este libro.", "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			catch (Exception^ ex) {
+				MessageBox::Show("Error al cargar la imagen: " + ex->Message);
+				pbBook->Image = nullptr;
 			}
 		}
+		else {
+			pbBook->Image = nullptr;
+			pbBook->Invalidate();
+		}
+		
+		dvgReviews->Rows->Clear(); 
+
+		List<String^>^ reviews = book->Reviews;
+
+		if (reviews != nullptr) {
+			for each (String ^ review in reviews) {
+				int rowIndex = dvgReviews->Rows->Add();
+				dvgReviews->Rows[rowIndex]->Cells[0]->Value = review;
+			}
+
+		}
+		else {
+			MessageBox::Show("No hay reseñas disponibles para este libro.", "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		}
+	}
+
+	
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	// Agregar el libro al carrito
 	Loan^ loan1 = gcnew Loan();
@@ -461,6 +461,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		loanCart = gcnew LoanCart();
 		loanCart->Client = user;
 		loanCart->Loans = gcnew List<Loan^>();
+		Controller::AddLoanCart(loanCart);
 	}
 	loan1->LoanID = id;
 	loan1->Book = this->book;
@@ -468,7 +469,7 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	if (loan1->Book != nullptr) {
 		loanCart->Loans->Add(loan1);
 		MessageBox::Show("Total préstamos en carrito: " + loanCart->Loans->Count);
-		Controller::AddLoanCart(loanCart);
+		Controller::UpdateLoanCart(loanCart);
 		MessageBox::Show("Libro agregado al carrito exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 	else {

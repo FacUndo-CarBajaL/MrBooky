@@ -27,25 +27,24 @@ void MrBookyController::Controller::AddBook(Book^ book)
 List<Book^>^ MrBookyController::Controller::GetBooks()
 {
 	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
-    return books;
+	if (books == nullptr) {
+		books = gcnew List<Book^>(); // fallback defensivo
+	}
+	return books;
 }
 
 Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
-	// Busca el libro en la lista de libros
-	books = Controller::GetBooks();
-
+	books = GetBooks();
+	// TODO: Insertar una instrucción "return" aquí
 	for each (Book ^ book in books)
 	{
-		if (book->Title == title)
+		if (book->Title->ToUpper() == title->ToUpper())
 		{
 			return book;
 		}
-		else {
-			return nullptr;
-		}
 	}
-
+	return nullptr;
 }
 
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
@@ -543,6 +542,23 @@ void MrBookyController::Controller::AddLoanCart(LoanCart^ loanCart)
 	loanCarts = Controller::GetLoanCarts();
 	loanCarts->Add(loanCart);
 	Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+}
+
+void MrBookyController::Controller::UpdateLoanCart(LoanCart^ loanCart)
+{
+	// Busca el carrito de préstamos en la lista de carritos de préstamos
+	loanCarts = GetLoanCarts();
+	for (int i = 0; i < loanCarts->Count; i++)
+	{
+		if (loanCarts[i]->LoanCartID == loanCart->LoanCartID)
+		{
+			// Actualiza el carrito de préstamos
+			loanCarts[i] = loanCart;
+			Persistance::PersistBinaryFile(BIN_LOANCART_FILE_NAME, loanCarts);
+			return;
+		}
+	}
+	throw gcnew NotFoundException("Carrito de préstamos no encontrado.");
 }
 
 List<LoanCart^>^ MrBookyController::Controller::GetLoanCarts()

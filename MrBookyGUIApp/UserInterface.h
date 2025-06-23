@@ -13,6 +13,7 @@ namespace MrBookyGUIApp {
 	using namespace System::Drawing;
 	using namespace MrBookyController;
 	using namespace MrBookyModel;
+	using namespace MrBookyPersistance;
 
 
 	/// <summary>
@@ -59,8 +60,23 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookAuthor;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ BookStatus;
-	private: System::Windows::Forms::DataGridViewImageColumn^ BookImage;
+	private: System::Windows::Forms::DataGridViewImageColumn^ ColumnaImagen;
 	private: System::Windows::Forms::DataGridViewButtonColumn^ BookDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -98,7 +114,7 @@ namespace MrBookyGUIApp {
 			this->BookName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookAuthor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->BookStatus = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->BookImage = (gcnew System::Windows::Forms::DataGridViewImageColumn());
+			this->ColumnaImagen = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->BookDetails = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvBooksFound))->BeginInit();
@@ -246,18 +262,17 @@ namespace MrBookyGUIApp {
 			// 
 			this->dgvBooksFound->AllowUserToAddRows = false;
 			this->dgvBooksFound->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
-			this->dgvBooksFound->AutoSizeRowsMode = System::Windows::Forms::DataGridViewAutoSizeRowsMode::DisplayedCells;
 			this->dgvBooksFound->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvBooksFound->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(5) {
 				this->BookName,
-					this->BookAuthor, this->BookStatus, this->BookImage, this->BookDetails
+					this->BookAuthor, this->BookStatus, this->ColumnaImagen, this->BookDetails
 			});
 			this->dgvBooksFound->Location = System::Drawing::Point(11, 401);
 			this->dgvBooksFound->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvBooksFound->Name = L"dgvBooksFound";
 			this->dgvBooksFound->RowHeadersWidth = 62;
-			this->dgvBooksFound->RowTemplate->Height = 28;
-			this->dgvBooksFound->Size = System::Drawing::Size(918, 150);
+			this->dgvBooksFound->RowTemplate->Height = 100;
+			this->dgvBooksFound->Size = System::Drawing::Size(918, 303);
 			this->dgvBooksFound->TabIndex = 11;
 			this->dgvBooksFound->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &UserInterface::dgvBooksFound_CellContentClick);
 			// 
@@ -279,11 +294,14 @@ namespace MrBookyGUIApp {
 			this->BookStatus->MinimumWidth = 8;
 			this->BookStatus->Name = L"BookStatus";
 			// 
-			// BookImage
+			// ColumnaImagen
 			// 
-			this->BookImage->HeaderText = L"Portada";
-			this->BookImage->MinimumWidth = 8;
-			this->BookImage->Name = L"BookImage";
+			this->ColumnaImagen->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::AllCells;
+			this->ColumnaImagen->HeaderText = L"Portada";
+			this->ColumnaImagen->ImageLayout = System::Windows::Forms::DataGridViewImageCellLayout::Zoom;
+			this->ColumnaImagen->MinimumWidth = 8;
+			this->ColumnaImagen->Name = L"ColumnaImagen";
+			this->ColumnaImagen->Width = 61;
 			// 
 			// BookDetails
 			// 
@@ -299,7 +317,7 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(239)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
 				static_cast<System::Int32>(static_cast<System::Byte>(224)));
-			this->ClientSize = System::Drawing::Size(957, 561);
+			this->ClientSize = System::Drawing::Size(957, 715);
 			this->Controls->Add(this->dgvBooksFound);
 			this->Controls->Add(this->txtGenero);
 			this->Controls->Add(this->txtEditorial);
@@ -322,6 +340,33 @@ namespace MrBookyGUIApp {
 
 		}
 #pragma endregion
+	public:
+		void ShowResults(List<Book^>^ books) {
+			dgvBooksFound->Rows->Clear(); // Limpiar el DataGridView antes de mostrar los resultados
+			if (books != nullptr && books->Count > 0) {
+				for (int i = 0; i < books->Count; i++) {
+					int index = dgvBooksFound->Rows->Add(gcnew array<String^>{
+							books[i]->Title,
+							books[i]->Author,
+							books[i]->Availability}
+					);
+
+					array<Byte>^ photoBytes = books[i]->Photo;
+					if (photoBytes != nullptr && photoBytes->Length > 0) {
+						System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
+						System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
+
+						// Insertar la imagen en la última columna
+						dgvBooksFound->Rows[index]->Cells["ColumnaImagen"]->Value = image;
+					}
+
+				}
+			}
+			else {
+				MessageBox::Show("No se encontraron libros con ese criterio de búsqueda.", "Resultado de búsqueda", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+		}
+
 	private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
 		// Al presionar el botón de búsqueda se debe realizar la búsqueda de los libros.
 		// Solo se debe realizar la búsqueda si se ha ingresado algún criterio de búsqueda.
@@ -333,18 +378,7 @@ namespace MrBookyGUIApp {
 		if (System::String::IsNullOrEmpty(bookTitle) == false) {
 			List<Book^>^ booksFound = Controller::AdvancedSearchBook(bookTitle, bookAuthor, bookPublisher, bookGenre);
 			if (booksFound != nullptr) {
-				for each (Book^ book in booksFound) {
-					int rowIndex = dgvBooksFound->Rows->Add();
-					dgvBooksFound->Rows[rowIndex]->Cells["BookName"]->Value = book->Title;
-					dgvBooksFound->Rows[rowIndex]->Cells["BookAuthor"]->Value = book->Author;
-					dgvBooksFound->Rows[rowIndex]->Cells["BookStatus"]->Value = book->Availability;
-					if (book->Photo != nullptr) {
-						dgvBooksFound->Rows[rowIndex]->Cells["BookImage"]->Value = book->Photo;
-					}
-					else {
-						dgvBooksFound->Rows[rowIndex]->Cells["BookImage"]->Value = nullptr; // O una imagen por defecto
-					}
-				}
+				ShowResults(booksFound);
 			}
 			else {
 				MessageBox::Show("No se encontraron libros con ese título.", "Resultado de búsqueda", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -358,7 +392,9 @@ private: System::Void dgvBooksFound_CellContentClick(System::Object^ sender, Sys
 	if (e->RowIndex >= 0 && e->ColumnIndex == dgvBooksFound->Columns["BookDetails"]->Index) {
 		// Obtener el libro seleccionado
 		String^ bookName = dgvBooksFound->Rows[e->RowIndex]->Cells["BookName"]->Value->ToString();
+		MessageBox::Show("Detalles del libro: " + bookName, "Información", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		Book^ selectedBook = Controller::SearchBook(bookName);
+
 		if (selectedBook != nullptr) {
 			// Mostrar los detalles del libro en un nuevo formulario o en un MessageBox
 			Persistance::PersistBinaryFile("tempBook", selectedBook);

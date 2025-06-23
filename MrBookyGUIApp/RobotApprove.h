@@ -1,5 +1,5 @@
 #pragma once
-
+#include "MapSelector.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -8,6 +8,11 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Collections::Generic;
+	using namespace MrBookyModel;
+	using namespace MrBookyController;
+	using namespace MrBookyPersistance;
+
 
 	/// <summary>
 	/// Resumen de RobotApprove
@@ -35,8 +40,10 @@ namespace MrBookyGUIApp {
 			}
 		}
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Label^ lblLatitud;
+	private: System::Windows::Forms::Label^ lblLongitud;
 	protected:
 
 	private:
@@ -54,9 +61,9 @@ namespace MrBookyGUIApp {
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(RobotApprove::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->lblLatitud = (gcnew System::Windows::Forms::Label());
+			this->lblLongitud = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -70,16 +77,6 @@ namespace MrBookyGUIApp {
 			this->label1->Size = System::Drawing::Size(511, 30);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Selección de Robots Disponible para entrega";
-			this->label1->Click += gcnew System::EventHandler(this, &RobotApprove::label1_Click);
-			// 
-			// dataGridView1
-			// 
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(88, 112);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->Size = System::Drawing::Size(784, 248);
-			this->dataGridView1->TabIndex = 1;
 			// 
 			// button1
 			// 
@@ -91,6 +88,27 @@ namespace MrBookyGUIApp {
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Seleccionar";
 			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &RobotApprove::button1_Click);
+			// 
+			// lblLatitud
+			// 
+			this->lblLatitud->AutoSize = true;
+			this->lblLatitud->BackColor = System::Drawing::Color::Transparent;
+			this->lblLatitud->Location = System::Drawing::Point(170, 108);
+			this->lblLatitud->Name = L"lblLatitud";
+			this->lblLatitud->Size = System::Drawing::Size(67, 25);
+			this->lblLatitud->TabIndex = 3;
+			this->lblLatitud->Text = L"label2";
+			// 
+			// lblLongitud
+			// 
+			this->lblLongitud->AutoSize = true;
+			this->lblLongitud->BackColor = System::Drawing::Color::Transparent;
+			this->lblLongitud->Location = System::Drawing::Point(170, 151);
+			this->lblLongitud->Name = L"lblLongitud";
+			this->lblLongitud->Size = System::Drawing::Size(67, 25);
+			this->lblLongitud->TabIndex = 4;
+			this->lblLongitud->Text = L"label2";
 			// 
 			// RobotApprove
 			// 
@@ -98,8 +116,9 @@ namespace MrBookyGUIApp {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
+			this->Controls->Add(this->lblLongitud);
+			this->Controls->Add(this->lblLatitud);
 			this->Controls->Add(this->button1);
-			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->label1);
 			this->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -107,13 +126,28 @@ namespace MrBookyGUIApp {
 			this->Margin = System::Windows::Forms::Padding(5);
 			this->Name = L"RobotApprove";
 			this->Text = L"RobotApprove";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	MapSelector^ selector = gcnew MapSelector();
+	selector->ShowDialog();
+
+	Coordenada^ destino = selector->CoordenadaSeleccionada;
+	if (destino != nullptr) {
+		double lat = selector->CoordenadaSeleccionada->Latitude;
+		double lng = selector->CoordenadaSeleccionada->Longitude;
+
+		// Mostrar o guardar resultado
+		MessageBox::Show("Coordenadas seleccionadas:\nLatitud: " + lat + "\nLongitud: " + lng);
+		// Puedes guardar en variables, etiquetas, campos de texto, etc.
+		lblLatitud->Text = lat.ToString();
+		lblLongitud->Text = lng.ToString();
 	}
+}
 };
 }

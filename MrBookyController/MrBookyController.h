@@ -79,6 +79,7 @@ namespace MrBookyController {
 
 			//Métodos CRUD para LoanCart
 			static void AddLoanCart(LoanCart^ loanCart);
+			static void UpdateLoanCart(LoanCart^ loanCart);
 			static List<LoanCart^>^ GetLoanCarts();
 			static LoanCart^ SearchLoanCartByUser(User^ user);
 			static void ClearLoanCart(User^ user);
