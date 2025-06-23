@@ -492,7 +492,7 @@ private: System::Void btnAceptar_Click(System::Object^ sender, System::EventArgs
 			}
 			else if (loanOrder->IsDelivery == true) {
 				Persistance::PersistBinaryFile("TempLoanOrder.bin", loanOrder);
-				RobotApprove^ robotApproveForm = gcnew RobotApprove();
+				RobotApprove^ robotApproveForm = gcnew RobotApprove(5);
 				robotApproveForm->ShowDialog();
 			}
 		}
