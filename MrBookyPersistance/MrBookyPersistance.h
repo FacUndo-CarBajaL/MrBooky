@@ -5,11 +5,13 @@ using namespace System::Collections::Generic;
 using namespace MrBookyModel;
 using namespace System::IO;
 using namespace System::Xml::Serialization;
+using namespace System::Data::SqlClient;
 
 namespace MrBookyPersistance {
 	public ref class Persistance
 	{
-		// TODO: Agregue aquí los métodos de esta clase.
+	private:
+		static SqlConnection^ GetConnection();
 	public:
 		// Métodos para guardar y leer datos de libros en archivos XML
 		static void PersistXMLFile(String^ fileName, Object^ persistObject);
@@ -55,5 +57,18 @@ namespace MrBookyPersistance {
 		//para bookrequest: tener en cuenta la cantidad y los prestamos de un dia
 		//static void PersistLoanOrdersTodayToXMLFile(String^ fileName, List<LoanOrder^>^ loanOrders);
 		//static List<LoanOrder^>^ LoadLoanOrdersTodayFromXMLFile(String^ fileName);
+
+		static void AddBooksSQL(Book^ book);
+		static List<Book^>^ GetAllBooksSQL();
+		static int UpdateBookSQL(Book^ book);
+		static int DeleteBookSQL(int bookId);
+
+		static void AddLibrarianSQL(User^ user);
+		List<Librarian^>^ GetAllLibrariansSQL();
+		static int UpdateLibrarianSQL(Librarian^ librarian);
+
+		static void AddClientSQL(Client^ user);
+		List<Client^>^ GetAllClientsSQL();
+		static int UpdateClientSQL(Client^ client);
 	};
 }
