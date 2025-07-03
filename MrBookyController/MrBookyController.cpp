@@ -47,6 +47,20 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 	return nullptr;
 }
 
+Book^ MrBookyController::Controller::SearchBookById(int bookId)
+{
+	books = GetBooks();
+	for each(Book ^ book in books)
+	{
+		if (book->BookID == bookId)
+		{
+			return book;
+		}
+	}
+
+	return nullptr;
+}
+
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
 {
 	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
@@ -151,39 +165,45 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
 	// Agrega el robot a la lista de robots
-	try {
-		robots->Add(robot);
-		Persistance::PersistBinaryFileRobots("robots.bin", robots);
-		return 1;
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	return 0;
+	//try {
+	//	robots->Add(robot);
+	//	Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//	return 1;
+	//}
+	//catch (Exception^ ex) {
+	//	throw ex;
+	//}
+	//return 0;
+
+	return MrBookyPersistance::Persistance::AddRobotBd(robot, MrBookyPersistance::Persistance::AddPointBd());
+
 }
 
 List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots(){
 
 
-	robots = (List<DeliveryRobot^>^)Persistance::LoadBinaryFileRobots("robots.bin");
-	if (robots == nullptr) {
-		robots = gcnew List<DeliveryRobot^>(); // fallback defensivo
-	}
-	return robots;
+	//robots = (List<DeliveryRobot^>^)Persistance::LoadBinaryFileRobots("robots.bin");
+	//if (robots == nullptr) {
+	//	robots = gcnew List<DeliveryRobot^>(); // fallback defensivo
+	//}
+	//return robots;
+	return MrBookyPersistance::Persistance::QueryAllRobotsBd();
 }
 
 DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 {
-	robots = GetRobots();
-	// TODO: Insertar una instrucción "return" aquí
-	for each (DeliveryRobot ^ robot in robots)
-	{
-		if (robot->RobotID == robotId)
-		{
-			return robot;
-		}
-	}
-	return nullptr;
+	//robots = GetRobots();
+	//// TODO: Insertar una instrucción "return" aquí
+	//for each (DeliveryRobot ^ robot in robots)
+	//{
+	//	if (robot->RobotID == robotId)
+	//	{
+	//		return robot;
+	//	}
+	//}
+	//return nullptr;
+
+	return MrBookyPersistance::Persistance::QueryRobotByIdBd(robotId);
 }
 
 DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotName)
@@ -202,34 +222,37 @@ DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotNam
 
 int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 {
-	// Busca el robot en la lista de robots
-	for (int i = 0; i < robots->Count; i++)
-	{
-		if (robots[i]->RobotID == robot->RobotID)
-		{
-			// Actualiza el robot
-			robots[i] = robot;
-			Persistance::PersistBinaryFileRobots("robots.bin", robots);
-			return 1;
-		}
-	}
-	return 0;
+	//// Busca el robot en la lista de robots
+	//for (int i = 0; i < robots->Count; i++)
+	//{
+	//	if (robots[i]->RobotID == robot->RobotID)
+	//	{
+	//		// Actualiza el robot
+	//		robots[i] = robot;
+	//		Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//		return 1;
+	//	}
+	//}
+	//return 0;
+	return MrBookyPersistance::Persistance::UpdateRobotBd(robot);
 }
 
 int MrBookyController::Controller::DeleteRobot(int robotId)
 {
-	// Busca el robot en la lista de robots
-	for (int i = 0; i < robots->Count; i++)
-	{
-		if (robots[i]->RobotID == robotId)
-		{
-			// Elimina el robot
-			robots->RemoveAt(i);
-			Persistance::PersistBinaryFileRobots("robots.bin", robots);
-			return 1;
-		}
-	}
-	return 0;
+	//// Busca el robot en la lista de robots
+	//for (int i = 0; i < robots->Count; i++)
+	//{
+	//	if (robots[i]->RobotID == robotId)
+	//	{
+	//		// Elimina el robot
+	//		robots->RemoveAt(i);
+	//		Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//		return 1;
+	//	}
+	//}
+	//return 0;
+	MrBookyPersistance::Persistance::DeletePointBd(robotId);
+	return MrBookyPersistance::Persistance::DeleteRobotBd(robotId);
 }
 
 Byte CalculateChecksum(String^ data) {
@@ -772,4 +795,58 @@ int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
 		}
 	}
 	return 0;
+}
+
+// Solución: Asegúrate de que las propiedades `DateLoan`, `startDate` y `endDate` sean del tipo `DateTime` y utiliza el método `CompareTo` para realizar la comparación.
+
+List<Loan^>^ MrBookyController::Controller::GetLoansByBookID(int bookId, DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByBook = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each (Loan ^ loan in loans) {
+			if (loan->Book->BookID == bookId &&
+				loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
+				loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByBook->Add(loan);
+			}
+		}
+	}
+	return loansByBook;
+}
+
+List<Loan^>^ MrBookyController::Controller::GetAllLoansByDates(DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByDate = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each(LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each(Loan ^ loan in loans) {
+			if (loanOrder->LoanDate != nullptr && loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByDate->Add(loan);
+			}
+		}
+	}
+	return loansByDate;
+}
+
+List<Loan^>^ MrBookyController::Controller::GetAllLoansByUserAndDates(int userId, DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByUser = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each(LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each(Loan ^ loan in loans) {
+			if (loan->Client->UserID == userId &&
+				loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
+				loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByUser->Add(loan);
+			}
+		}
+	}
+	return loansByUser;
 }

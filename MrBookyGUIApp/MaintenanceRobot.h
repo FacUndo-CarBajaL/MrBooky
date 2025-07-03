@@ -309,7 +309,7 @@ namespace MrBookyGUIApp {
 				return;
 			}
 			DeliveryRobot^ robot = gcnew DeliveryRobot(id, name, status, capacity);
-			if (Controller::AddRobot(robot) == 1) {
+			if (Controller::AddRobot(robot) >0) {
 				ShowRobots();
 				MessageBox::Show("Se ha agregado el robot " + name);
 			}

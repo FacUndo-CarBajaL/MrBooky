@@ -33,7 +33,8 @@ namespace MrBookyModel {
 			this->Status = status;
 			this->MaxCapacity = maxCapacity;
 			this->Battery = 100;
-            this->Status = "Disponible";
+            this->Status = Status;
+            this->Position = gcnew Point(0, 0);
         }
 
         void AssignLoan();

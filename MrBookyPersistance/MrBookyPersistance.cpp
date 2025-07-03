@@ -4,8 +4,23 @@ using namespace System::IO;
 using namespace System::Xml::Serialization;
 using namespace System::Runtime::Serialization::Formatters::Binary;
 
+SqlConnection^ MrBookyPersistance::Persistance::GetConnection()
+{
+	SqlConnection^ conn = gcnew SqlConnection();
+	String^ password = "YkvBHsafVKf7$"; // "1INF53_POO#123";
+	String^ serverName = "200.16.7.140";
+	conn->ConnectionString = "Server=" + serverName + ";Database = a20222014;User ID = a20222014; Password = " +
+		password + ";";
+	conn->Open();
+	return conn;
+
+}
+
+
+
 void MrBookyPersistance::Persistance::PersistXMLFile(String^ fileName, Object^ persistObject)
 {
+	
 	StreamWriter^ writer;
 	try {
 
@@ -459,6 +474,369 @@ void MrBookyPersistance::Persistance::UserRAMBinaryFile(String^ fileName, Object
 	finally {
 		if (UserRAMfile != nullptr) UserRAMfile->Close();
 	}
+}
+
+int MrBookyPersistance::Persistance::AddRobotBd(DeliveryRobot^ deliveryRobot, int pointId)
+{
+	int robotId;
+	SqlConnection^ conn;
+	try {
+		//Paso 1: Abrir y obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Preparar la sentencia de BD
+		String^ sqlStr = "dbo.usp_AddDeliveryRobot";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::VarChar, 100);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@STATUS", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@POSITION_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@MAX_CAPACITY", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@BATTERY", System::Data::SqlDbType::Int);
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
+		cmd->Parameters["@NAME"]->Value = deliveryRobot->Name;
+		cmd->Parameters["@STATUS"]->Value = deliveryRobot->Status;
+		//Aqui debo ponerle el positionId
+		cmd->Parameters["@POSITION_ID"]->Value = pointId;
+		cmd->Parameters["@MAX_CAPACITY"]->Value = deliveryRobot->MaxCapacity;
+		cmd->Parameters["@BATTERY"]->Value = deliveryRobot->Battery;
+		//Paso 3: Ejecutar la sentencia de BD
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		robotId = Convert::ToInt32(cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+		return 0;
+	}
+	finally {
+		//Paso 5: Cerrar los objetos de conexión de la BD.
+		if (conn != nullptr) conn->Close();
+	}
+	return robotId;
+
+
+}
+
+int MrBookyPersistance::Persistance::DeleteRobotBd(int robotId)
+{
+	SqlConnection^ conn;
+	try {
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Se prepara la sentencia
+		String^ sqlStr = "dbo.usp_DeleteDeliveryRobot";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = robotId;
+
+		//Paso 3: Se ejecuta las sentencia SQL
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return 1;
+}
+
+int MrBookyPersistance::Persistance::UpdateRobotBd(DeliveryRobot^ deliveryRobot)
+{
+	SqlConnection^ conn = nullptr;
+	try {
+
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Se prepara la sentencia
+		String^ sqlStr = "dbo.usp_UpdateDeliveryRobot";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@STATUS", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@POSITION_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@MAX_CAPACITY", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@BATTERY", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = deliveryRobot->RobotID;
+		cmd->Parameters["@NAME"]->Value = deliveryRobot->Name;
+		cmd->Parameters["@STATUS"]->Value = deliveryRobot->Status;
+		cmd->Parameters["@POSITION_ID"]->Value = deliveryRobot->RobotID;
+		cmd->Parameters["@MAX_CAPACITY"]->Value = deliveryRobot->MaxCapacity;
+		cmd->Parameters["@BATTERY"]->Value = deliveryRobot->Battery;
+		//Paso 3: Se ejecuta las sentncia SQL
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return 1;
+}
+
+List<DeliveryRobot^>^ MrBookyPersistance::Persistance::QueryAllRobotsBd()
+{
+	List<DeliveryRobot^>^ robotsList = gcnew List<DeliveryRobot^>();
+	Point^ point = gcnew Point(0,0);
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Preparar la sentencia SQL
+		String^ sqlStr = "dbo.usp_QueryAllDeliveryRobots";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
+
+		//Paso 3: Ejecutar la sentencia SQL
+		reader = cmd->ExecuteReader();
+
+		//Paso 4: Procesar los resultados
+		while (reader->Read()) {
+			DeliveryRobot^ deliveryRobot = gcnew DeliveryRobot();
+			deliveryRobot->Position = point;
+			deliveryRobot->RobotID = Convert::ToInt32(reader["DELIVERY_ROBOT_ID"]->ToString());
+			deliveryRobot->Name = reader["NAME"]->ToString();
+			deliveryRobot->Status = reader["STATUS"]->ToString();
+			//Aqui tengo que traer el punto de ubicacion del robot
+			//Se que el pointId es el mismo que el RobotId
+			point = QueryPointByIdBd(Convert::ToInt32(reader["POSITION_ID"]->ToString()));
+			deliveryRobot->Position->X = point->X;
+			deliveryRobot->Position->Y = point->Y;
+			deliveryRobot->MaxCapacity = Convert::ToInt32(reader["MAX_CAPACITY"]->ToString());
+			deliveryRobot->Battery = Convert::ToInt32(reader["BATTERY"]->ToString());
+			robotsList->Add(deliveryRobot);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return robotsList;
+
+
+}
+
+DeliveryRobot^ MrBookyPersistance::Persistance::QueryRobotByIdBd(int robotId)
+{
+	DeliveryRobot^ deliveryRobot;
+	Point^ point=gcnew Point(0,0);
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+
+	try {
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Preparar la sentencia SQL
+		String^ sqlStr = "dbo.usp_QueryDeliveryRobotByID";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = robotId;
+
+		//Paso 3: Ejecutar la sentencia SQL
+		reader = cmd->ExecuteReader();
+
+		//Paso 4: Procesar los resultados
+		if (reader->Read()) {
+			deliveryRobot = gcnew DeliveryRobot();
+			deliveryRobot->Position = point;
+			deliveryRobot->RobotID = Convert::ToInt32(reader["DELIVERY_ROBOT_ID"]->ToString());
+			deliveryRobot->Name = reader["NAME"]->ToString();
+			deliveryRobot->Status = reader["STATUS"]->ToString();
+			//Aqui tengo que traer el punto de ubicacion del robot
+			//Se que el pointId es el mismo que el RobotId
+			point = QueryPointByIdBd(Convert::ToInt32(reader["POSITION_ID"]->ToString()));
+			deliveryRobot->Position->X = point->X;
+			deliveryRobot->Position->Y = point->Y;
+			deliveryRobot->MaxCapacity = Convert::ToInt32(reader["MAX_CAPACITY"]->ToString());
+			deliveryRobot->Battery = Convert::ToInt32(reader["BATTERY"]->ToString());
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return deliveryRobot;
+	
+}
+
+int MrBookyPersistance::Persistance::AddPointBd()
+{
+	int pointId;
+	int PositionId;
+	SqlConnection^ conn;
+	try {
+		//Paso 1: Abrir y obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Preparar la sentencia de BD
+		String^ sqlStr = "dbo.usp_AddPoint";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->Parameters->Add("@X", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@X"]->Precision = 10;
+		cmd->Parameters["@X"]->Scale = 2;
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@Y"]->Precision = 10;
+		cmd->Parameters["@Y"]->Scale = 2;
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@POINT_ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
+		//Por defectoo se crea la ubicacion de un robot en la posicion (0,0)
+		cmd->Parameters["@X"]->Value = 0;
+		cmd->Parameters["@Y"]->Value = 0;
+		//Paso 3: Ejecutar la sentencia de BD
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		pointId = Convert::ToInt32(cmd->Parameters["@POINT_ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+		return 0;
+	}
+	finally {
+		//Paso 5: Cerrar los objetos de conexión de la BD.
+		if (conn != nullptr) conn->Close();
+	}
+	return pointId;
+}
+
+int MrBookyPersistance::Persistance::DeletePointBd(int robotId)
+{
+	SqlConnection^ conn;
+	try {
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Se prepara la sentencia
+		String^ sqlStr = "dbo.usp_DeletePoint";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@POINT_ID"]->Value = robotId;
+
+		//Paso 3: Se ejecuta las sentencia SQL
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return 1;
+
+
+}
+
+int MrBookyPersistance::Persistance::UpdatePointBd(DeliveryRobot^ deliveryRobot)
+{
+	SqlConnection^ conn = nullptr;
+	try {
+
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Se prepara la sentencia
+		String^ sqlStr = "dbo.usp_UpdatePoint";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@X", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@POINT_ID"]->Value = deliveryRobot->RobotID;
+		cmd->Parameters["@X"]->Value = deliveryRobot->Position->X;
+		cmd->Parameters["@Y"]->Value = deliveryRobot->Position->Y;
+		//Paso 3: Se ejecuta las sentncia SQL
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return 1;
+}
+
+Point^ MrBookyPersistance::Persistance::QueryPointByIdBd(int pointId)
+{
+	Point^ point;
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+
+	try {
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Preparar la sentencia SQL
+		String^ sqlStr = "dbo.usp_QueryPointByID";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@POINT_ID"]->Value = pointId;
+
+		//Paso 3: Ejecutar la sentencia SQL
+		reader = cmd->ExecuteReader();
+
+		//Paso 4: Procesar los resultados
+		if (reader->Read()) {
+			point = gcnew Point();
+			point->X = Convert::ToInt32(reader["X"]->ToString());
+			point->Y = Convert::ToInt32(reader["Y"]->ToString());
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return point;
 }
 
 void MrBookyPersistance::Persistance::RAMBinaryFile(String^ fileName, Object^ persistObject)
