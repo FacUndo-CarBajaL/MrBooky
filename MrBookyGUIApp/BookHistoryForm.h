@@ -1,5 +1,5 @@
 #pragma once
-
+#include "AddReviewForm.h"
 namespace MrBookyGUIApp {
 
 	using namespace System;
@@ -123,6 +123,7 @@ namespace MrBookyGUIApp {
 			this->dgvHistorial->RowTemplate->Height = 100;
 			this->dgvHistorial->Size = System::Drawing::Size(1045, 353);
 			this->dgvHistorial->TabIndex = 1;
+			this->dgvHistorial->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookHistoryForm::dgvHistorial_CellContentClick);
 			// 
 			// ColumnaID
 			// 
@@ -208,24 +209,25 @@ namespace MrBookyGUIApp {
 			if (loanHistory != nullptr) {
 				dgvHistorial->Rows->Clear();
 				for (int i = 0; i < loanHistory->Count; i++) {
-					int index = dgvHistorial->Rows->Add(gcnew array<String^>{
-						"" + loanHistory[i]->Book->BookID,
-							loanHistory[i]->Book->Title,
-							loanHistory[i]->Book->Author,
-							loanHistory[i]->Book->Publisher,
-							"" + loanHistory[i]->DateLoan,
-					        "" + loanHistory[i]->ReturnDate}
-					);
+					if (loanHistory[i]->Status == "Entregado") {
+						int index = dgvHistorial->Rows->Add(gcnew array<String^>{
+							"" + loanHistory[i]->Book->BookID,
+								loanHistory[i]->Book->Title,
+								loanHistory[i]->Book->Author,
+								loanHistory[i]->Book->Publisher,
+								"" + loanHistory[i]->DateLoan,
+								"" + loanHistory[i]->ReturnDate}
+						);
 
-					array<Byte>^ photoBytes = loanHistory[i]->Book->Photo;
-					if (photoBytes != nullptr && photoBytes->Length > 0) {
-						System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
-						System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
+						array<Byte>^ photoBytes = loanHistory[i]->Book->Photo;
+						if (photoBytes != nullptr && photoBytes->Length > 0) {
+							System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(photoBytes);
+							System::Drawing::Image^ image = System::Drawing::Image::FromStream(ms);
 
-						// Insertar la imagen en la última columna
-						dgvHistorial->Rows[index]->Cells["ColumnaImagen"]->Value = image;
-					}
-
+							// Insertar la imagen en la última columna
+							dgvHistorial->Rows[index]->Cells["ColumnaImagen"]->Value = image;
+						}
+				    }
 				}
 			}
 		};
@@ -233,5 +235,22 @@ namespace MrBookyGUIApp {
 	private: System::Void BookHistoryForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		ShowHistory();
 	}
+private: System::Void dgvHistorial_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->RowIndex < 0 || e->ColumnIndex < 0) {
+		return; // Evitar errores si se hace clic en el encabezado o fuera de las filas
+	}
+	if (dgvHistorial->Columns[e->ColumnIndex]->Name == "ColumnaAñadirReseña") {
+		int bookId = Convert::ToInt32(dgvHistorial->Rows[e->RowIndex]->Cells["ColumnaID"]->Value);
+		Book^ book = Controller::SearchBookById(bookId);
+		if (book != nullptr) {
+			Persistance::PersistBinaryFile("TempBook.bin", book);
+			AddReviewForm^ addReviewForm = gcnew AddReviewForm();
+			addReviewForm->ShowDialog();
+		}
+		else {
+			MessageBox::Show("Libro no encontrado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+	}
+}
 };
 }

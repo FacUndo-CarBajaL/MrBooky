@@ -40,6 +40,7 @@ namespace MrBookyController {
 			static void AddBook(Book^ book);
 			static List<Book^>^ GetBooks();
 			static Book^ SearchBook(String^ title);
+			static Book^ SearchBookById(int bookId);
 			static List<Book^>^ AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch);
 			static int UpdateBook(Book^ book);
 			static int DeleteBook(String^ title);
@@ -117,6 +118,12 @@ namespace MrBookyController {
 			static List<LoanOrder^>^ GetAllLoanOrdersByUserID(int userid);
 			static List<LoanOrder^>^ GetAllLoanOrdersByUser(User^ user);
 			static int UpdateLoanOrder(LoanOrder^ loanOrder);
+
+
+			//Métodos para gráficas
+			static List<Loan^>^ GetLoansByBookID(int bookId, DateTime startDate, DateTime endDate);
+			static List<Loan^>^ GetAllLoansByDates(DateTime startDate, DateTime endDate);
+			static List<Loan^>^ GetAllLoansByUserAndDates(int userId, DateTime startDate, DateTime endDate);
 
 	};
 }

@@ -9,6 +9,9 @@ namespace MrBookyGUIApp {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::Collections::Generic;
+	using namespace MrBookyController;
+	using namespace MrBookyModel;
+	using namespace MrBookyPersistance;
 
 	/// <summary>
 	/// Resumen de Stock
@@ -38,12 +41,14 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::TextBox^ txtIdStock;
 	private: System::Windows::Forms::Button^ btnSearch;
 	private: System::Windows::Forms::TextBox^ txtTitle;
+	private: System::Windows::Forms::TextBox^ txtCantidad;
 
-	private: System::Windows::Forms::TextBox^ textBox2;
+
 	private: System::Windows::Forms::Button^ button1;
 
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridView^ dgvResultados;
+
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colIdBook;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ colTitle;
@@ -88,15 +93,15 @@ namespace MrBookyGUIApp {
 			this->txtIdStock = (gcnew System::Windows::Forms::TextBox());
 			this->btnSearch = (gcnew System::Windows::Forms::Button());
 			this->txtTitle = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->txtCantidad = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->dgvResultados = (gcnew System::Windows::Forms::DataGridView());
 			this->colIdBook = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colTitle = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->colQuantity = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvResultados))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// txtIdStock
@@ -109,6 +114,8 @@ namespace MrBookyGUIApp {
 			this->txtIdStock->Size = System::Drawing::Size(427, 29);
 			this->txtIdStock->TabIndex = 0;
 			this->txtIdStock->Text = L"Ingrese Id del libro";
+			this->txtIdStock->Enter += gcnew System::EventHandler(this, &Stock::txtIdStock_Enter);
+			this->txtIdStock->Leave += gcnew System::EventHandler(this, &Stock::txtIdStock_Leave);
 			// 
 			// btnSearch
 			// 
@@ -133,17 +140,21 @@ namespace MrBookyGUIApp {
 			this->txtTitle->Size = System::Drawing::Size(427, 29);
 			this->txtTitle->TabIndex = 2;
 			this->txtTitle->Text = L"Ingrese Título del libro";
+			this->txtTitle->Enter += gcnew System::EventHandler(this, &Stock::txtTitle_Enter);
+			this->txtTitle->Leave += gcnew System::EventHandler(this, &Stock::txtTitle_Leave);
 			// 
-			// textBox2
+			// txtCantidad
 			// 
-			this->textBox2->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+			this->txtCantidad->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox2->ForeColor = System::Drawing::Color::DarkGray;
-			this->textBox2->Location = System::Drawing::Point(77, 136);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(427, 29);
-			this->textBox2->TabIndex = 3;
-			this->textBox2->Text = L"Cantidad";
+			this->txtCantidad->ForeColor = System::Drawing::Color::DarkGray;
+			this->txtCantidad->Location = System::Drawing::Point(77, 136);
+			this->txtCantidad->Name = L"txtCantidad";
+			this->txtCantidad->Size = System::Drawing::Size(427, 29);
+			this->txtCantidad->TabIndex = 3;
+			this->txtCantidad->Text = L"Cantidad";
+			this->txtCantidad->Enter += gcnew System::EventHandler(this, &Stock::textBox2_Enter);
+			this->txtCantidad->Leave += gcnew System::EventHandler(this, &Stock::textBox2_Leave);
 			// 
 			// button1
 			// 
@@ -170,8 +181,10 @@ namespace MrBookyGUIApp {
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Resultados";
 			// 
-			// dataGridView1
+			// dgvResultados
 			// 
+			this->dgvResultados->AllowUserToAddRows = false;
+			this->dgvResultados->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleCenter;
 			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
 			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14));
@@ -179,17 +192,35 @@ namespace MrBookyGUIApp {
 			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
 			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
-			this->dataGridView1->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
+			this->dgvResultados->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this->dgvResultados->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dgvResultados->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {
 				this->colIdBook,
 					this->colTitle, this->colQuantity
 			});
-			this->dataGridView1->Location = System::Drawing::Point(65, 235);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->RowHeadersWidth = 51;
-			this->dataGridView1->Size = System::Drawing::Size(818, 189);
-			this->dataGridView1->TabIndex = 7;
+			this->dgvResultados->Location = System::Drawing::Point(65, 235);
+			this->dgvResultados->Name = L"dgvResultados";
+			this->dgvResultados->RowHeadersWidth = 51;
+			this->dgvResultados->Size = System::Drawing::Size(818, 189);
+			this->dgvResultados->TabIndex = 7;
+			// 
+			// colIdBook
+			// 
+			this->colIdBook->HeaderText = L"Id";
+			this->colIdBook->MinimumWidth = 6;
+			this->colIdBook->Name = L"colIdBook";
+			// 
+			// colTitle
+			// 
+			this->colTitle->HeaderText = L"Título";
+			this->colTitle->MinimumWidth = 6;
+			this->colTitle->Name = L"colTitle";
+			// 
+			// colQuantity
+			// 
+			this->colQuantity->HeaderText = L"Cantidad";
+			this->colQuantity->MinimumWidth = 6;
+			this->colQuantity->Name = L"colQuantity";
 			// 
 			// button3
 			// 
@@ -202,27 +233,7 @@ namespace MrBookyGUIApp {
 			this->button3->TabIndex = 8;
 			this->button3->Text = L"Actualizar";
 			this->button3->UseVisualStyleBackColor = false;
-			// 
-			// colIdBook
-			// 
-			this->colIdBook->HeaderText = L"Id";
-			this->colIdBook->MinimumWidth = 6;
-			this->colIdBook->Name = L"colIdBook";
-			this->colIdBook->Width = 125;
-			// 
-			// colTitle
-			// 
-			this->colTitle->HeaderText = L"Título";
-			this->colTitle->MinimumWidth = 6;
-			this->colTitle->Name = L"colTitle";
-			this->colTitle->Width = 125;
-			// 
-			// colQuantity
-			// 
-			this->colQuantity->HeaderText = L"Cantidad";
-			this->colQuantity->MinimumWidth = 6;
-			this->colQuantity->Name = L"colQuantity";
-			this->colQuantity->Width = 125;
+			this->button3->Click += gcnew System::EventHandler(this, &Stock::button3_Click);
 			// 
 			// Stock
 			// 
@@ -233,23 +244,109 @@ namespace MrBookyGUIApp {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->button3);
-			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->dgvResultados);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
-			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->txtCantidad);
 			this->Controls->Add(this->txtTitle);
 			this->Controls->Add(this->btnSearch);
 			this->Controls->Add(this->txtIdStock);
 			this->Name = L"Stock";
 			this->Text = L"Stock";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvResultados))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+public:
+	void ShowBook(Book^ book) {
+		dgvResultados->Rows->Clear();
+
+		int index = dgvResultados->Rows->Add(gcnew array<String^> {
+			"" + book->BookID,
+				book->Title,
+				"" + book->Quantity}
+		);
+	}
+private: System::Void txtIdStock_Enter(System::Object^ sender, System::EventArgs^ e) {
+	if (txtIdStock->Text == "Ingrese Id del libro") {
+		txtIdStock->Text = "";
+		txtIdStock->ForeColor = System::Drawing::Color::Black;
+	}
+	else if (txtIdStock->Text->Length == 0) {
+		txtIdStock->ForeColor = System::Drawing::Color::DarkGray;
+		txtIdStock->Text = "Ingrese Id del libro";
+	}
+}
+
+
+private: System::Void txtIdStock_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (txtIdStock->Text->Length == 0) {
+		txtIdStock->ForeColor = System::Drawing::Color::DarkGray;
+		txtIdStock->Text = "Ingrese Id del libro";
+	}
+	else {
+		txtIdStock->ForeColor = System::Drawing::Color::Black;
+	}
+}
+
+private: System::Void txtTitle_Enter(System::Object^ sender, System::EventArgs^ e) {
+	if (txtIdStock->Text == "Ingrese titulo del libro") {
+		txtIdStock->Text = "";
+		txtIdStock->ForeColor = System::Drawing::Color::Black;
+	}
+	else if (txtIdStock->Text->Length == 0) {
+		txtIdStock->ForeColor = System::Drawing::Color::DarkGray;
+		txtIdStock->Text = "Ingrese titulo del libro";
+	}
+}
+
+private: System::Void txtTitle_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (txtTitle->Text->Length == 0) {
+		txtTitle->ForeColor = System::Drawing::Color::DarkGray;
+		txtTitle->Text = "Ingrese Título del libro";
+	}
+	else {
+		txtTitle->ForeColor = System::Drawing::Color::Black;
+	}
+}
+
+private: System::Void textBox2_Enter(System::Object^ sender, System::EventArgs^ e) {
+	if (txtCantidad->Text == "Cantidad") {
+		txtCantidad->Text = "";
+		txtCantidad->ForeColor = System::Drawing::Color::Black;
+	}
+	else if (txtCantidad->Text->Length == 0) {
+		txtCantidad->ForeColor = System::Drawing::Color::DarkGray;
+		txtCantidad->Text = "Cantidad";
+	}
+}
+
+private: System::Void textBox2_Leave(System::Object^ sender, System::EventArgs^ e) {
+	if (txtCantidad->Text->Length == 0) {
+		txtCantidad->ForeColor = System::Drawing::Color::DarkGray;
+		txtCantidad->Text = "Cantidad";
+	}
+	else {
+		txtCantidad->ForeColor = System::Drawing::Color::Black;
+	}
+}
+
 private: System::Void btnSearch_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ id = txtIdStock->Text;
+	if (id->Length == 0) {
+		MessageBox::Show("Por favor, ingrese un id válido.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	Book^ book = Controller::SearchBookById(Convert::ToInt32(id));
+	if (book == nullptr) {
+		MessageBox::Show("Libro no encontrado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+
+	ShowBook(book);
+	
 }
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ title = txtTitle->Text;
@@ -257,7 +354,43 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		MessageBox::Show("Por favor, ingrese un título válido.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
-	
+
+	Book^ book = Controller::SearchBook(title);
+	if (book == nullptr) {
+		MessageBox::Show("Libro no encontrado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	ShowBook(book);
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (dgvResultados->SelectedRows->Count == 0) {
+		MessageBox::Show("Por favor, seleccione un libro para actualizar.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	int selectedRowIndex = dgvResultados->SelectedRows[0]->Index;
+	int bookId = Convert::ToInt32(dgvResultados->Rows[selectedRowIndex]->Cells["colIdBook"]->Value);
+	Book^ book = Controller::SearchBookById(bookId);
+	if (book == nullptr) {
+		MessageBox::Show("Libro no encontrado.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	int cantidad;
+	String^ textoCantidad = dgvResultados->Rows[selectedRowIndex]->Cells["colQuantity"]->Value->ToString();
+	if (!Int32::TryParse(textoCantidad, cantidad) || cantidad < 0) {
+		MessageBox::Show("Ingrese una cantidad válida (entero positivo).");
+		return;
+	}
+	cantidad = Convert::ToInt32(txtCantidad->Text);
+	book->Quantity = cantidad;
+
+	if (Controller::UpdateBook(book)) {
+		MessageBox::Show("Libro actualizado correctamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	else {
+		MessageBox::Show("Error al actualizar el libro.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+
+	ShowBook(book);
 }
 };
 }

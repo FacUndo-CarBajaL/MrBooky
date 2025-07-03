@@ -47,6 +47,20 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 	return nullptr;
 }
 
+Book^ MrBookyController::Controller::SearchBookById(int bookId)
+{
+	books = GetBooks();
+	for each(Book ^ book in books)
+	{
+		if (book->BookID == bookId)
+		{
+			return book;
+		}
+	}
+
+	return nullptr;
+}
+
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
 {
 	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
@@ -772,4 +786,58 @@ int MrBookyController::Controller::UpdateLoanOrder(LoanOrder^ loanOrder)
 		}
 	}
 	return 0;
+}
+
+// Solución: Asegúrate de que las propiedades `DateLoan`, `startDate` y `endDate` sean del tipo `DateTime` y utiliza el método `CompareTo` para realizar la comparación.
+
+List<Loan^>^ MrBookyController::Controller::GetLoansByBookID(int bookId, DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByBook = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each (LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each (Loan ^ loan in loans) {
+			if (loan->Book->BookID == bookId &&
+				loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
+				loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByBook->Add(loan);
+			}
+		}
+	}
+	return loansByBook;
+}
+
+List<Loan^>^ MrBookyController::Controller::GetAllLoansByDates(DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByDate = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each(LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each(Loan ^ loan in loans) {
+			if (loanOrder->LoanDate != nullptr && loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByDate->Add(loan);
+			}
+		}
+	}
+	return loansByDate;
+}
+
+List<Loan^>^ MrBookyController::Controller::GetAllLoansByUserAndDates(int userId, DateTime startDate, DateTime endDate)
+{
+	List<Loan^>^ loansByUser = gcnew List<Loan^>();
+	loanOrders = GetLoanOrders();
+	for each(LoanOrder ^ loanOrder in loanOrders) {
+		List<Loan^>^ loans = loanOrder->Loans;
+		for each(Loan ^ loan in loans) {
+			if (loan->Client->UserID == userId &&
+				loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
+				loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+				loansByUser->Add(loan);
+			}
+		}
+	}
+	return loansByUser;
 }
