@@ -642,6 +642,10 @@ private: System::Void btnConfirmarEntrega_Click(System::Object^ sender, System::
 		if (loanOrder->Status == "En Envío") {
 			loanOrder->Status = "Entregado";
 			loanOrder->LoanDate = DateTime::Now; // Actualizar la fecha de entrega al momento actual
+			List<Loan^>^ loans = loanOrder->Loans;
+			for each (Loan^ loan in loans) {
+				loan->DateLoan = DateTime::Now; // Actualizar la fecha de préstamo al momento actual.
+			}
 			Controller::UpdateLoanOrder(loanOrder);
 			MessageBox::Show("Entrega confirmada exitosamente.");
 			ShowEntregadoLoans();
