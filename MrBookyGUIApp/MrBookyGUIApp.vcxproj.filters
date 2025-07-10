@@ -32,6 +32,7 @@
     <ClCompile Include="RequestDetails.cpp" />
     <ClCompile Include="RequestDisapprove.cpp" />
     <ClCompile Include="DispatchProblemForm.cpp" />
+    <ClCompile Include="AddReviewForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BookForm.cpp">
@@ -109,5 +110,6 @@
     <ClInclude Include="RequestDetails.h" />
     <ClInclude Include="RequestDisapprove.h" />
     <ClInclude Include="DispatchProblemForm.h" />
+    <ClInclude Include="AddReviewForm.h" />
   </ItemGroup>
 </Project>
