@@ -12,6 +12,8 @@ namespace MrBookyGUIApp {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Drawing::Text;
+	using namespace System::Runtime::InteropServices;
 	using namespace MrBookyController;
 	using namespace MrBookyModel;
 
@@ -27,6 +29,7 @@ namespace MrBookyGUIApp {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			// Inicializa la colección de fuentes privadas
 		}
 
 	protected:
@@ -46,11 +49,14 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ txtUserName;
 	private: System::Windows::Forms::TextBox^ txtUserPassword;
+	private:
+		PrivateFontCollection^ privateFonts;
 
 
 
 	private: System::Windows::Forms::LinkLabel^ linkLabel1;
 	private: System::Windows::Forms::Button^ btnIngresar;
+
 
 
 	private:
@@ -79,13 +85,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->label1->Location = System::Drawing::Point(276, 111);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(341, 75);
+			this->label1->Size = System::Drawing::Size(358, 82);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Mr. Booky";
 			// 

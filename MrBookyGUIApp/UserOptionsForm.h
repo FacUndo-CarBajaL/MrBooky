@@ -71,10 +71,11 @@ namespace MrBookyGUIApp {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 40, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(81, 59);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(91, 74);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(719, 69);
+			this->label1->Size = System::Drawing::Size(847, 83);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Bienvenido a Mr. Booky";
 			// 
@@ -83,19 +84,23 @@ namespace MrBookyGUIApp {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label2->Location = System::Drawing::Point(282, 191);
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label2->Location = System::Drawing::Point(317, 239);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(283, 29);
+			this->label2->Size = System::Drawing::Size(333, 36);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Selecciona una opción :";
 			// 
 			// btnBuscarLibros
 			// 
-			this->btnBuscarLibros->BackColor = System::Drawing::Color::White;
-			this->btnBuscarLibros->Location = System::Drawing::Point(345, 257);
+			this->btnBuscarLibros->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnBuscarLibros->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnBuscarLibros->Location = System::Drawing::Point(388, 321);
+			this->btnBuscarLibros->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnBuscarLibros->Name = L"btnBuscarLibros";
-			this->btnBuscarLibros->Size = System::Drawing::Size(172, 37);
+			this->btnBuscarLibros->Size = System::Drawing::Size(194, 46);
 			this->btnBuscarLibros->TabIndex = 2;
 			this->btnBuscarLibros->Text = L"Busqueda de Libros";
 			this->btnBuscarLibros->UseVisualStyleBackColor = false;
@@ -103,10 +108,13 @@ namespace MrBookyGUIApp {
 			// 
 			// btnVerPerfil
 			// 
-			this->btnVerPerfil->BackColor = System::Drawing::Color::White;
-			this->btnVerPerfil->Location = System::Drawing::Point(345, 317);
+			this->btnVerPerfil->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnVerPerfil->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnVerPerfil->Location = System::Drawing::Point(388, 396);
+			this->btnVerPerfil->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnVerPerfil->Name = L"btnVerPerfil";
-			this->btnVerPerfil->Size = System::Drawing::Size(172, 37);
+			this->btnVerPerfil->Size = System::Drawing::Size(194, 46);
 			this->btnVerPerfil->TabIndex = 3;
 			this->btnVerPerfil->Text = L"Ver Perfil";
 			this->btnVerPerfil->UseVisualStyleBackColor = false;
@@ -114,20 +122,26 @@ namespace MrBookyGUIApp {
 			// 
 			// btnBuscarLibrerias
 			// 
-			this->btnBuscarLibrerias->BackColor = System::Drawing::Color::White;
-			this->btnBuscarLibrerias->Location = System::Drawing::Point(345, 376);
+			this->btnBuscarLibrerias->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(142)), static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnBuscarLibrerias->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnBuscarLibrerias->Location = System::Drawing::Point(388, 470);
+			this->btnBuscarLibrerias->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnBuscarLibrerias->Name = L"btnBuscarLibrerias";
-			this->btnBuscarLibrerias->Size = System::Drawing::Size(172, 37);
+			this->btnBuscarLibrerias->Size = System::Drawing::Size(194, 46);
 			this->btnBuscarLibrerias->TabIndex = 4;
 			this->btnBuscarLibrerias->Text = L"Buscar Librerias";
 			this->btnBuscarLibrerias->UseVisualStyleBackColor = false;
 			// 
 			// btnSolicitudesRealizadas
 			// 
-			this->btnSolicitudesRealizadas->BackColor = System::Drawing::Color::White;
-			this->btnSolicitudesRealizadas->Location = System::Drawing::Point(345, 438);
+			this->btnSolicitudesRealizadas->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(142)), static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnSolicitudesRealizadas->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnSolicitudesRealizadas->Location = System::Drawing::Point(388, 548);
+			this->btnSolicitudesRealizadas->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnSolicitudesRealizadas->Name = L"btnSolicitudesRealizadas";
-			this->btnSolicitudesRealizadas->Size = System::Drawing::Size(172, 37);
+			this->btnSolicitudesRealizadas->Size = System::Drawing::Size(194, 46);
 			this->btnSolicitudesRealizadas->TabIndex = 5;
 			this->btnSolicitudesRealizadas->Text = L"Solicitudes Realizadas";
 			this->btnSolicitudesRealizadas->UseVisualStyleBackColor = false;
@@ -135,17 +149,18 @@ namespace MrBookyGUIApp {
 			// 
 			// UserOptionsForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->ClientSize = System::Drawing::Size(869, 533);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(224)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(224)));
+			this->ClientSize = System::Drawing::Size(978, 666);
 			this->Controls->Add(this->btnSolicitudesRealizadas);
 			this->Controls->Add(this->btnBuscarLibrerias);
 			this->Controls->Add(this->btnVerPerfil);
 			this->Controls->Add(this->btnBuscarLibros);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"UserOptionsForm";
 			this->Text = L"UserOptionsForm";
 			this->ResumeLayout(false);

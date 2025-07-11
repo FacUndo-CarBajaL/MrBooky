@@ -65,7 +65,6 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(RobotApprove::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -77,22 +76,28 @@ namespace MrBookyGUIApp {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->label1->Location = System::Drawing::Point(66, 43);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(77, 29);
+			this->label1->Size = System::Drawing::Size(102, 37);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Robot";
 			this->label1->Click += gcnew System::EventHandler(this, &RobotApprove::label1_Click);
 			// 
 			// button1
 			// 
-			this->button1->BackColor = System::Drawing::Color::White;
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Location = System::Drawing::Point(404, 399);
+			this->button1->Location = System::Drawing::Point(379, 399);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(147, 34);
+			this->button1->Size = System::Drawing::Size(167, 40);
 			this->button1->TabIndex = 2;
 			this->button1->Text = L"Seleccionar";
 			this->button1->UseVisualStyleBackColor = false;
@@ -101,18 +106,22 @@ namespace MrBookyGUIApp {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::Transparent;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->label2->Location = System::Drawing::Point(517, 47);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(99, 25);
+			this->label2->Size = System::Drawing::Size(135, 32);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"Protocolo";
 			// 
 			// cmbRobot
 			// 
 			this->cmbRobot->FormattingEnabled = true;
-			this->cmbRobot->Location = System::Drawing::Point(162, 39);
+			this->cmbRobot->Location = System::Drawing::Point(184, 39);
 			this->cmbRobot->Name = L"cmbRobot";
-			this->cmbRobot->Size = System::Drawing::Size(221, 33);
+			this->cmbRobot->Size = System::Drawing::Size(221, 38);
 			this->cmbRobot->TabIndex = 4;
 			// 
 			// cmbProtocol
@@ -121,14 +130,14 @@ namespace MrBookyGUIApp {
 			this->cmbProtocol->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"UART", L"NMEA" });
 			this->cmbProtocol->Location = System::Drawing::Point(670, 43);
 			this->cmbProtocol->Name = L"cmbProtocol";
-			this->cmbProtocol->Size = System::Drawing::Size(202, 33);
+			this->cmbProtocol->Size = System::Drawing::Size(202, 38);
 			this->cmbProtocol->TabIndex = 5;
 			// 
 			// RobotApprove
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(13, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(16, 30);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->cmbProtocol);
 			this->Controls->Add(this->cmbRobot);

@@ -78,7 +78,7 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(DispatchBooks::typeid));
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->dgvDespachoLibros = (gcnew System::Windows::Forms::DataGridView());
 			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaUsuario = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -101,15 +101,25 @@ namespace MrBookyGUIApp {
 			// 
 			this->dgvDespachoLibros->AllowUserToAddRows = false;
 			this->dgvDespachoLibros->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			dataGridViewCellStyle1->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle1->BackColor = System::Drawing::SystemColors::Control;
+			dataGridViewCellStyle1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			dataGridViewCellStyle1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			dataGridViewCellStyle1->SelectionBackColor = System::Drawing::SystemColors::Highlight;
+			dataGridViewCellStyle1->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
+			dataGridViewCellStyle1->WrapMode = System::Windows::Forms::DataGridViewTriState::True;
+			this->dgvDespachoLibros->ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this->dgvDespachoLibros->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dgvDespachoLibros->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->ColumnaID,
 					this->ColumnaUsuario, this->ColumnaEntrega, this->ColumnaEstado
 			});
-			this->dgvDespachoLibros->Location = System::Drawing::Point(51, 303);
+			this->dgvDespachoLibros->Location = System::Drawing::Point(33, 219);
 			this->dgvDespachoLibros->Name = L"dgvDespachoLibros";
 			this->dgvDespachoLibros->RowHeadersWidth = 51;
-			this->dgvDespachoLibros->Size = System::Drawing::Size(859, 459);
+			this->dgvDespachoLibros->Size = System::Drawing::Size(859, 301);
 			this->dgvDespachoLibros->TabIndex = 0;
 			this->dgvDespachoLibros->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &DispatchBooks::dgvDespachoLibros_CellClick);
 			// 
@@ -141,15 +151,19 @@ namespace MrBookyGUIApp {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Location = System::Drawing::Point(46, 80);
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(28, 25);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(203, 30);
+			this->label1->Size = System::Drawing::Size(157, 25);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"ID de Préstamo :";
 			// 
 			// txtIDPrestamo
 			// 
-			this->txtIDPrestamo->Location = System::Drawing::Point(255, 72);
+			this->txtIDPrestamo->Location = System::Drawing::Point(209, 15);
 			this->txtIDPrestamo->Name = L"txtIDPrestamo";
 			this->txtIDPrestamo->Size = System::Drawing::Size(211, 38);
 			this->txtIDPrestamo->TabIndex = 2;
@@ -159,9 +173,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->cbNoRecogido->AutoSize = true;
 			this->cbNoRecogido->BackColor = System::Drawing::Color::Transparent;
-			this->cbNoRecogido->Location = System::Drawing::Point(542, 97);
+			this->cbNoRecogido->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->cbNoRecogido->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->cbNoRecogido->Location = System::Drawing::Point(542, 60);
 			this->cbNoRecogido->Name = L"cbNoRecogido";
-			this->cbNoRecogido->Size = System::Drawing::Size(341, 34);
+			this->cbNoRecogido->Size = System::Drawing::Size(342, 33);
 			this->cbNoRecogido->TabIndex = 3;
 			this->cbNoRecogido->Text = L"Ver prestamos no recogidos";
 			this->cbNoRecogido->UseVisualStyleBackColor = false;
@@ -171,9 +189,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->cbEntregado->AutoSize = true;
 			this->cbEntregado->BackColor = System::Drawing::Color::Transparent;
-			this->cbEntregado->Location = System::Drawing::Point(542, 137);
+			this->cbEntregado->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->cbEntregado->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->cbEntregado->Location = System::Drawing::Point(542, 99);
 			this->cbEntregado->Name = L"cbEntregado";
-			this->cbEntregado->Size = System::Drawing::Size(321, 34);
+			this->cbEntregado->Size = System::Drawing::Size(323, 33);
 			this->cbEntregado->TabIndex = 4;
 			this->cbEntregado->Text = L"Ver prestamos entregados";
 			this->cbEntregado->UseVisualStyleBackColor = false;
@@ -183,9 +205,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->cbEnEnvio->AutoSize = true;
 			this->cbEnEnvio->BackColor = System::Drawing::Color::Transparent;
-			this->cbEnEnvio->Location = System::Drawing::Point(542, 56);
+			this->cbEnEnvio->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->cbEnEnvio->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->cbEnEnvio->Location = System::Drawing::Point(542, 21);
 			this->cbEnEnvio->Name = L"cbEnEnvio";
-			this->cbEnEnvio->Size = System::Drawing::Size(295, 34);
+			this->cbEnEnvio->Size = System::Drawing::Size(292, 33);
 			this->cbEnEnvio->TabIndex = 6;
 			this->cbEnEnvio->Text = L"Ver prestamos en envio";
 			this->cbEnEnvio->UseVisualStyleBackColor = false;
@@ -193,11 +219,13 @@ namespace MrBookyGUIApp {
 			// 
 			// btnConfirmarEntrega
 			// 
-			this->btnConfirmarEntrega->BackColor = System::Drawing::Color::AntiqueWhite;
-			this->btnConfirmarEntrega->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->btnConfirmarEntrega->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(142)), static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnConfirmarEntrega->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnConfirmarEntrega->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->btnConfirmarEntrega->ForeColor = System::Drawing::Color::Black;
-			this->btnConfirmarEntrega->Location = System::Drawing::Point(51, 187);
+			this->btnConfirmarEntrega->Location = System::Drawing::Point(51, 124);
 			this->btnConfirmarEntrega->Name = L"btnConfirmarEntrega";
 			this->btnConfirmarEntrega->Size = System::Drawing::Size(205, 34);
 			this->btnConfirmarEntrega->TabIndex = 7;
@@ -207,11 +235,13 @@ namespace MrBookyGUIApp {
 			// 
 			// btnReportarProblemas
 			// 
-			this->btnReportarProblemas->BackColor = System::Drawing::Color::AntiqueWhite;
-			this->btnReportarProblemas->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
+			this->btnReportarProblemas->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(142)), static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnReportarProblemas->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnReportarProblemas->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->btnReportarProblemas->ForeColor = System::Drawing::Color::Black;
-			this->btnReportarProblemas->Location = System::Drawing::Point(51, 237);
+			this->btnReportarProblemas->Location = System::Drawing::Point(51, 164);
 			this->btnReportarProblemas->Name = L"btnReportarProblemas";
 			this->btnReportarProblemas->Size = System::Drawing::Size(360, 34);
 			this->btnReportarProblemas->TabIndex = 8;
@@ -223,9 +253,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->cbVerReprogramados->AutoSize = true;
 			this->cbVerReprogramados->BackColor = System::Drawing::Color::Transparent;
-			this->cbVerReprogramados->Location = System::Drawing::Point(542, 177);
+			this->cbVerReprogramados->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->cbVerReprogramados->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->cbVerReprogramados->Location = System::Drawing::Point(542, 138);
 			this->cbVerReprogramados->Name = L"cbVerReprogramados";
-			this->cbVerReprogramados->Size = System::Drawing::Size(369, 34);
+			this->cbVerReprogramados->Size = System::Drawing::Size(367, 33);
 			this->cbVerReprogramados->TabIndex = 9;
 			this->cbVerReprogramados->Text = L"Ver prestamos reprogramados";
 			this->cbVerReprogramados->UseVisualStyleBackColor = false;
@@ -233,11 +267,13 @@ namespace MrBookyGUIApp {
 			// 
 			// button1
 			// 
-			this->button1->BackColor = System::Drawing::Color::AntiqueWhite;
-			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button1->ForeColor = System::Drawing::Color::Black;
-			this->button1->Location = System::Drawing::Point(274, 187);
+			this->button1->Location = System::Drawing::Point(262, 123);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(205, 34);
 			this->button1->TabIndex = 10;
@@ -247,13 +283,15 @@ namespace MrBookyGUIApp {
 			// 
 			// btnProcesarPedidos
 			// 
-			this->btnProcesarPedidos->BackColor = System::Drawing::Color::AntiqueWhite;
-			this->btnProcesarPedidos->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->btnProcesarPedidos->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)),
+				static_cast<System::Int32>(static_cast<System::Byte>(142)), static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnProcesarPedidos->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnProcesarPedidos->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnProcesarPedidos->ForeColor = System::Drawing::Color::Black;
-			this->btnProcesarPedidos->Location = System::Drawing::Point(51, 137);
+			this->btnProcesarPedidos->Location = System::Drawing::Point(51, 79);
 			this->btnProcesarPedidos->Name = L"btnProcesarPedidos";
-			this->btnProcesarPedidos->Size = System::Drawing::Size(360, 34);
+			this->btnProcesarPedidos->Size = System::Drawing::Size(288, 39);
 			this->btnProcesarPedidos->TabIndex = 11;
 			this->btnProcesarPedidos->Text = L"Procesar pedidos aprobados";
 			this->btnProcesarPedidos->UseVisualStyleBackColor = false;
@@ -261,10 +299,10 @@ namespace MrBookyGUIApp {
 			// 
 			// DispatchBooks
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(15, 29);
+			this->AutoScaleDimensions = System::Drawing::SizeF(18, 34);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(942, 878);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(942, 536);
 			this->Controls->Add(this->btnProcesarPedidos);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->cbVerReprogramados);

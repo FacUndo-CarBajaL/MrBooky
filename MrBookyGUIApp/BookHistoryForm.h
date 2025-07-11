@@ -81,7 +81,6 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(BookHistoryForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dgvHistorial = (gcnew System::Windows::Forms::DataGridView());
 			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -99,12 +98,13 @@ namespace MrBookyGUIApp {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Arial Rounded MT Bold", 30, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(347, 47);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(393, 19);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(473, 58);
+			this->label1->Size = System::Drawing::Size(340, 46);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Historial de Libros";
 			// 
@@ -117,11 +117,12 @@ namespace MrBookyGUIApp {
 					this->ColumnaTitulo, this->ColumnaAutor, this->ColumnaEditorial, this->ColumnaFechaPrestamo, this->ColumnaFechaFinPrestamo, this->ColumnaImagen,
 					this->ColumnaAñadirReseña
 			});
-			this->dgvHistorial->Location = System::Drawing::Point(46, 135);
+			this->dgvHistorial->Location = System::Drawing::Point(33, 97);
+			this->dgvHistorial->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->dgvHistorial->Name = L"dgvHistorial";
 			this->dgvHistorial->RowHeadersWidth = 51;
 			this->dgvHistorial->RowTemplate->Height = 100;
-			this->dgvHistorial->Size = System::Drawing::Size(1045, 353);
+			this->dgvHistorial->Size = System::Drawing::Size(1176, 441);
 			this->dgvHistorial->TabIndex = 1;
 			this->dgvHistorial->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &BookHistoryForm::dgvHistorial_CellContentClick);
 			// 
@@ -188,12 +189,13 @@ namespace MrBookyGUIApp {
 			// 
 			// BookHistoryForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(1132, 537);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(1248, 562);
 			this->Controls->Add(this->dgvHistorial);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"BookHistoryForm";
 			this->Text = L"BookHistoryForm";
 			this->Load += gcnew System::EventHandler(this, &BookHistoryForm::BookHistoryForm_Load);

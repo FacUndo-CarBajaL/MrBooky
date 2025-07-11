@@ -82,16 +82,11 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(RequestDetails::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->dgvLoanOrder = (gcnew System::Windows::Forms::DataGridView());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->ColumnaID = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaTitulo = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaTiempoPrestamos = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -99,6 +94,10 @@ namespace MrBookyGUIApp {
 			this->ColumnaAutor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaCantidad = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaImagen = (gcnew System::Windows::Forms::DataGridViewImageColumn());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLoanOrder))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -108,12 +107,14 @@ namespace MrBookyGUIApp {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(69, 48);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(75, 29);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(122, 28);
+			this->label1->Size = System::Drawing::Size(148, 32);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"ID Solicitud :";
+			this->label1->Click += gcnew System::EventHandler(this, &RequestDetails::label1_Click);
 			// 
 			// label2
 			// 
@@ -121,10 +122,11 @@ namespace MrBookyGUIApp {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label2->Location = System::Drawing::Point(69, 202);
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label2->Location = System::Drawing::Point(75, 170);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(183, 28);
+			this->label2->Size = System::Drawing::Size(226, 32);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Nombre de cliente :";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -135,10 +137,11 @@ namespace MrBookyGUIApp {
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label3->Location = System::Drawing::Point(69, 98);
+			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label3->Location = System::Drawing::Point(75, 75);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(177, 28);
+			this->label3->Size = System::Drawing::Size(218, 32);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Fecha de solicitud :";
 			// 
@@ -148,10 +151,11 @@ namespace MrBookyGUIApp {
 			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label4->Location = System::Drawing::Point(69, 149);
+			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label4->Location = System::Drawing::Point(75, 123);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(175, 28);
+			this->label4->Size = System::Drawing::Size(215, 32);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Código de cliente :";
 			// 
@@ -165,66 +169,13 @@ namespace MrBookyGUIApp {
 				this->ColumnaID,
 					this->ColumnaTitulo, this->ColumnaTiempoPrestamos, this->ColumnaPeso, this->ColumnaAutor, this->ColumnaCantidad, this->ColumnaImagen
 			});
-			this->dgvLoanOrder->Location = System::Drawing::Point(72, 320);
+			this->dgvLoanOrder->Location = System::Drawing::Point(29, 262);
+			this->dgvLoanOrder->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->dgvLoanOrder->Name = L"dgvLoanOrder";
 			this->dgvLoanOrder->RowHeadersWidth = 51;
 			this->dgvLoanOrder->RowTemplate->Height = 24;
-			this->dgvLoanOrder->Size = System::Drawing::Size(978, 236);
+			this->dgvLoanOrder->Size = System::Drawing::Size(1100, 295);
 			this->dgvLoanOrder->TabIndex = 4;
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->BackColor = System::Drawing::Color::Transparent;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label5->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label5->Location = System::Drawing::Point(452, 266);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(175, 28);
-			this->label5->TabIndex = 5;
-			this->label5->Text = L"Libros solicitados";
-			this->label5->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->BackColor = System::Drawing::Color::Transparent;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label6->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label6->Location = System::Drawing::Point(537, 69);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(199, 28);
-			this->label6->TabIndex = 6;
-			this->label6->Text = L"Biblioteca de Recojo :";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->BackColor = System::Drawing::Color::Transparent;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label7->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label7->Location = System::Drawing::Point(697, 32);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(195, 28);
-			this->label7->TabIndex = 7;
-			this->label7->Text = L"Detalles de entrega";
-			this->label7->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->BackColor = System::Drawing::Color::Transparent;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label8->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label8->Location = System::Drawing::Point(537, 110);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(180, 28);
-			this->label8->TabIndex = 8;
-			this->label8->Text = L"Horario de Recojo :";
 			// 
 			// ColumnaID
 			// 
@@ -269,12 +220,70 @@ namespace MrBookyGUIApp {
 			this->ColumnaImagen->MinimumWidth = 6;
 			this->ColumnaImagen->Name = L"ColumnaImagen";
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->BackColor = System::Drawing::Color::Transparent;
+			this->label5->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label5->Location = System::Drawing::Point(426, 226);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(213, 32);
+			this->label5->TabIndex = 5;
+			this->label5->Text = L"Libros solicitados";
+			this->label5->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->BackColor = System::Drawing::Color::Transparent;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label6->Location = System::Drawing::Point(604, 71);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(243, 32);
+			this->label6->TabIndex = 6;
+			this->label6->Text = L"Biblioteca de Recojo :";
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->BackColor = System::Drawing::Color::Transparent;
+			this->label7->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label7->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label7->Location = System::Drawing::Point(604, 29);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(235, 32);
+			this->label7->TabIndex = 7;
+			this->label7->Text = L"Detalles de entrega";
+			this->label7->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->BackColor = System::Drawing::Color::Transparent;
+			this->label8->Font = (gcnew System::Drawing::Font(L"Leelawadee UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label8->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label8->Location = System::Drawing::Point(604, 119);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(218, 32);
+			this->label8->TabIndex = 8;
+			this->label8->Text = L"Horario de Recojo :";
+			// 
 			// RequestDetails
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(1098, 568);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(1158, 576);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
@@ -284,6 +293,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"RequestDetails";
 			this->Text = L"RequestDetails";
 			this->Load += gcnew System::EventHandler(this, &RequestDetails::RequestDetails_Load);
@@ -346,6 +356,8 @@ private: System::Void RequestDetails_Load(System::Object^ sender, System::EventA
 		}
 		ShowLoans();
 	}
+}
+private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

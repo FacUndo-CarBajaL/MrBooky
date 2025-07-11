@@ -55,7 +55,6 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AddReviewForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->btnPublicar = (gcnew System::Windows::Forms::Button());
@@ -67,40 +66,47 @@ namespace MrBookyGUIApp {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(20, 22);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(22, 28);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(174, 25);
+			this->label1->Size = System::Drawing::Size(211, 29);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Ingrese su reseña:";
 			// 
 			// richTextBox1
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(30, 70);
+			this->richTextBox1->Location = System::Drawing::Point(34, 88);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(654, 223);
+			this->richTextBox1->Size = System::Drawing::Size(735, 278);
 			this->richTextBox1->TabIndex = 1;
 			this->richTextBox1->Text = L"";
 			// 
 			// btnPublicar
 			// 
-			this->btnPublicar->Location = System::Drawing::Point(296, 320);
+			this->btnPublicar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnPublicar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnPublicar->Location = System::Drawing::Point(333, 400);
+			this->btnPublicar->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnPublicar->Name = L"btnPublicar";
-			this->btnPublicar->Size = System::Drawing::Size(121, 24);
+			this->btnPublicar->Size = System::Drawing::Size(136, 30);
 			this->btnPublicar->TabIndex = 2;
 			this->btnPublicar->Text = L"Publicar Reseña";
-			this->btnPublicar->UseVisualStyleBackColor = true;
+			this->btnPublicar->UseVisualStyleBackColor = false;
 			this->btnPublicar->Click += gcnew System::EventHandler(this, &AddReviewForm::btnPublicar_Click);
 			// 
 			// AddReviewForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(714, 388);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(803, 485);
 			this->Controls->Add(this->btnPublicar);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"AddReviewForm";
 			this->Text = L"AddReviewForm";
 			this->ResumeLayout(false);

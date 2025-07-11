@@ -131,12 +131,14 @@ namespace MrBookyGUIApp {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 16.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(468, 26);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(268, 9);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(499, 49);
+			this->label1->Size = System::Drawing::Size(414, 37);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Ingresar datos de la librería:";
 			this->label1->Click += gcnew System::EventHandler(this, &MaintenanceLibrary::label1_Click);
@@ -144,88 +146,109 @@ namespace MrBookyGUIApp {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(135, 129);
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label2->Location = System::Drawing::Point(16, 65);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(116, 33);
+			this->label2->Size = System::Drawing::Size(96, 26);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Nombre:";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(135, 176);
+			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label3->Location = System::Drawing::Point(16, 103);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(44, 33);
+			this->label3->Size = System::Drawing::Size(122, 26);
 			this->label3->TabIndex = 2;
-			this->label3->Text = L"X:";
+			this->label3->Text = L"Posicion X:";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(135, 229);
+			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label4->Location = System::Drawing::Point(16, 145);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(41, 33);
+			this->label4->Size = System::Drawing::Size(123, 26);
 			this->label4->TabIndex = 3;
-			this->label4->Text = L"Y:";
+			this->label4->Text = L"Posicion Y:";
 			// 
 			// btnAddLibrary
 			// 
-			this->btnAddLibrary->Location = System::Drawing::Point(233, 344);
+			this->btnAddLibrary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnAddLibrary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnAddLibrary->Location = System::Drawing::Point(124, 209);
+			this->btnAddLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnAddLibrary->Name = L"btnAddLibrary";
-			this->btnAddLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnAddLibrary->Size = System::Drawing::Size(165, 45);
 			this->btnAddLibrary->TabIndex = 4;
 			this->btnAddLibrary->Text = L"Agregar Librería";
-			this->btnAddLibrary->UseVisualStyleBackColor = true;
+			this->btnAddLibrary->UseVisualStyleBackColor = false;
 			this->btnAddLibrary->Click += gcnew System::EventHandler(this, &MaintenanceLibrary::btnAddLibrary_Click);
 			// 
 			// btnUpdateLibrary
 			// 
-			this->btnUpdateLibrary->Location = System::Drawing::Point(579, 344);
+			this->btnUpdateLibrary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnUpdateLibrary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnUpdateLibrary->Location = System::Drawing::Point(356, 209);
+			this->btnUpdateLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnUpdateLibrary->Name = L"btnUpdateLibrary";
-			this->btnUpdateLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnUpdateLibrary->Size = System::Drawing::Size(165, 45);
 			this->btnUpdateLibrary->TabIndex = 5;
 			this->btnUpdateLibrary->Text = L"Modificar Librería";
-			this->btnUpdateLibrary->UseVisualStyleBackColor = true;
+			this->btnUpdateLibrary->UseVisualStyleBackColor = false;
 			this->btnUpdateLibrary->Click += gcnew System::EventHandler(this, &MaintenanceLibrary::btnUpdateLibrary_Click);
 			// 
 			// btnDeleteLibrary
 			// 
-			this->btnDeleteLibrary->Location = System::Drawing::Point(936, 344);
+			this->btnDeleteLibrary->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnDeleteLibrary->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnDeleteLibrary->Location = System::Drawing::Point(592, 209);
+			this->btnDeleteLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnDeleteLibrary->Name = L"btnDeleteLibrary";
-			this->btnDeleteLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnDeleteLibrary->Size = System::Drawing::Size(165, 45);
 			this->btnDeleteLibrary->TabIndex = 6;
 			this->btnDeleteLibrary->Text = L"Eliminar Librería";
-			this->btnDeleteLibrary->UseVisualStyleBackColor = true;
+			this->btnDeleteLibrary->UseVisualStyleBackColor = false;
 			this->btnDeleteLibrary->Click += gcnew System::EventHandler(this, &MaintenanceLibrary::btnDeleteLibrary_Click);
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(309, 134);
+			this->txtName->Location = System::Drawing::Point(147, 69);
+			this->txtName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(424, 31);
+			this->txtName->Size = System::Drawing::Size(319, 26);
 			this->txtName->TabIndex = 7;
 			// 
 			// txtX
 			// 
-			this->txtX->Location = System::Drawing::Point(309, 179);
+			this->txtX->Location = System::Drawing::Point(147, 105);
+			this->txtX->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtX->Name = L"txtX";
-			this->txtX->Size = System::Drawing::Size(132, 31);
+			this->txtX->Size = System::Drawing::Size(100, 26);
 			this->txtX->TabIndex = 8;
 			// 
 			// txtY
 			// 
-			this->txtY->Location = System::Drawing::Point(309, 234);
+			this->txtY->Location = System::Drawing::Point(147, 149);
+			this->txtY->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtY->Name = L"txtY";
-			this->txtY->Size = System::Drawing::Size(132, 31);
+			this->txtY->Size = System::Drawing::Size(100, 26);
 			this->txtY->TabIndex = 9;
 			// 
 			// dgvLibraries
@@ -235,11 +258,12 @@ namespace MrBookyGUIApp {
 				this->LibraryName,
 					this->XPosition, this->YPosition, this->Email, this->OpenHour, this->CloseHour
 			});
-			this->dgvLibraries->Location = System::Drawing::Point(113, 428);
+			this->dgvLibraries->Location = System::Drawing::Point(32, 286);
+			this->dgvLibraries->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dgvLibraries->Name = L"dgvLibraries";
 			this->dgvLibraries->RowHeadersWidth = 82;
 			this->dgvLibraries->RowTemplate->Height = 33;
-			this->dgvLibraries->Size = System::Drawing::Size(1280, 247);
+			this->dgvLibraries->Size = System::Drawing::Size(960, 198);
 			this->dgvLibraries->TabIndex = 10;
 			// 
 			// LibraryName
@@ -287,70 +311,79 @@ namespace MrBookyGUIApp {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(773, 179);
+			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label5->Location = System::Drawing::Point(495, 105);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(210, 33);
+			this->label5->Size = System::Drawing::Size(181, 26);
 			this->label5->TabIndex = 11;
 			this->label5->Text = L"Hora de apertura:";
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label6->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label6->ForeColor = System::Drawing::Color::White;
-			this->label6->Location = System::Drawing::Point(773, 134);
+			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label6->Location = System::Drawing::Point(495, 69);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(114, 33);
+			this->label6->Size = System::Drawing::Size(84, 25);
 			this->label6->TabIndex = 12;
 			this->label6->Text = L"EMAIL:";
 			// 
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(773, 229);
+			this->label7->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label7->Location = System::Drawing::Point(495, 145);
+			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(183, 33);
+			this->label7->Size = System::Drawing::Size(155, 26);
 			this->label7->TabIndex = 13;
 			this->label7->Text = L"Hora de cierre:";
 			// 
 			// txtEmail
 			// 
-			this->txtEmail->Location = System::Drawing::Point(1002, 129);
+			this->txtEmail->Location = System::Drawing::Point(680, 65);
+			this->txtEmail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtEmail->Name = L"txtEmail";
-			this->txtEmail->Size = System::Drawing::Size(413, 31);
+			this->txtEmail->Size = System::Drawing::Size(311, 26);
 			this->txtEmail->TabIndex = 14;
 			// 
 			// txtOpenHour
 			// 
-			this->txtOpenHour->Location = System::Drawing::Point(1002, 182);
+			this->txtOpenHour->Location = System::Drawing::Point(680, 107);
+			this->txtOpenHour->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtOpenHour->Mask = L"00:00";
 			this->txtOpenHour->Name = L"txtOpenHour";
-			this->txtOpenHour->Size = System::Drawing::Size(270, 31);
+			this->txtOpenHour->Size = System::Drawing::Size(204, 26);
 			this->txtOpenHour->TabIndex = 15;
 			this->txtOpenHour->ValidatingType = System::DateTime::typeid;
 			// 
 			// txtCLoseHour
 			// 
-			this->txtCLoseHour->Location = System::Drawing::Point(1002, 234);
+			this->txtCLoseHour->Location = System::Drawing::Point(680, 147);
+			this->txtCLoseHour->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtCLoseHour->Mask = L"00:00";
 			this->txtCLoseHour->Name = L"txtCLoseHour";
-			this->txtCLoseHour->Size = System::Drawing::Size(270, 31);
+			this->txtCLoseHour->Size = System::Drawing::Size(204, 26);
 			this->txtCLoseHour->TabIndex = 16;
 			this->txtCLoseHour->ValidatingType = System::DateTime::typeid;
 			// 
 			// MaintenanceLibrary
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::MidnightBlue;
-			this->ClientSize = System::Drawing::Size(1479, 736);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(1036, 502);
 			this->Controls->Add(this->txtCLoseHour);
 			this->Controls->Add(this->txtOpenHour);
 			this->Controls->Add(this->txtEmail);
@@ -368,6 +401,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MaintenanceLibrary";
 			this->Text = L"MaintenanceLibrary";
 			this->Load += gcnew System::EventHandler(this, &MaintenanceLibrary::MaintenanceLibrary_Load);

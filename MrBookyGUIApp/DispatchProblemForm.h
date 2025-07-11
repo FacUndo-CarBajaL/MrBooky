@@ -58,7 +58,6 @@ namespace MrBookyGUIApp {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(DispatchProblemForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->btnCancelar = (gcnew System::Windows::Forms::Button());
@@ -71,51 +70,62 @@ namespace MrBookyGUIApp {
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::SystemColors::ControlLightLight;
-			this->label1->Location = System::Drawing::Point(39, 25);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(12, 9);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(246, 29);
+			this->label1->Size = System::Drawing::Size(284, 36);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Detalle el problema :";
 			// 
 			// richTextBox1
 			// 
-			this->richTextBox1->Location = System::Drawing::Point(41, 75);
+			this->richTextBox1->Location = System::Drawing::Point(29, 49);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(691, 247);
+			this->richTextBox1->Size = System::Drawing::Size(640, 308);
 			this->richTextBox1->TabIndex = 1;
 			this->richTextBox1->Text = L"";
 			// 
 			// btnCancelar
 			// 
-			this->btnCancelar->Location = System::Drawing::Point(117, 342);
+			this->btnCancelar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnCancelar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnCancelar->Location = System::Drawing::Point(42, 378);
+			this->btnCancelar->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnCancelar->Name = L"btnCancelar";
-			this->btnCancelar->Size = System::Drawing::Size(226, 31);
+			this->btnCancelar->Size = System::Drawing::Size(254, 39);
 			this->btnCancelar->TabIndex = 2;
 			this->btnCancelar->Text = L"Cancelar Entrega";
-			this->btnCancelar->UseVisualStyleBackColor = true;
+			this->btnCancelar->UseVisualStyleBackColor = false;
 			this->btnCancelar->Click += gcnew System::EventHandler(this, &DispatchProblemForm::btnCancelar_Click);
 			// 
 			// btnReprogramar
 			// 
-			this->btnReprogramar->Location = System::Drawing::Point(394, 342);
+			this->btnReprogramar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnReprogramar->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnReprogramar->Location = System::Drawing::Point(398, 378);
+			this->btnReprogramar->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnReprogramar->Name = L"btnReprogramar";
-			this->btnReprogramar->Size = System::Drawing::Size(226, 31);
+			this->btnReprogramar->Size = System::Drawing::Size(254, 39);
 			this->btnReprogramar->TabIndex = 3;
 			this->btnReprogramar->Text = L"Reprogramar Entrega";
-			this->btnReprogramar->UseVisualStyleBackColor = true;
+			this->btnReprogramar->UseVisualStyleBackColor = false;
 			this->btnReprogramar->Click += gcnew System::EventHandler(this, &DispatchProblemForm::btnReprogramar_Click);
 			// 
 			// DispatchProblemForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
-			this->ClientSize = System::Drawing::Size(775, 424);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(707, 435);
 			this->Controls->Add(this->btnReprogramar);
 			this->Controls->Add(this->btnCancelar);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"DispatchProblemForm";
 			this->Text = L"DispatchProblemForm";
 			this->ResumeLayout(false);

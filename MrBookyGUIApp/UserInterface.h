@@ -125,13 +125,13 @@ namespace MrBookyGUIApp {
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::Color::Transparent;
 			this->label1->Cursor = System::Windows::Forms::Cursors::Default;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(69)),
-				static_cast<System::Int32>(static_cast<System::Byte>(89)));
-			this->label1->Location = System::Drawing::Point(55, 45);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(63, 80);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(202, 41);
+			this->label1->Size = System::Drawing::Size(247, 40);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"BIENVENIDO";
 			// 
@@ -139,34 +139,33 @@ namespace MrBookyGUIApp {
 			// 
 			this->label2->AutoSize = true;
 			this->label2->BackColor = System::Drawing::Color::Transparent;
-			this->label2->Font = (gcnew System::Drawing::Font(L"Nirmala UI", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(69)),
-				static_cast<System::Int32>(static_cast<System::Byte>(89)));
-			this->label2->Location = System::Drawing::Point(57, 83);
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label2->Location = System::Drawing::Point(63, 120);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(363, 32);
+			this->label2->Size = System::Drawing::Size(440, 32);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Sistema de búsqueda MRBOOKY";
 			// 
 			// BookTitletxt
 			// 
-			this->BookTitletxt->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
-				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->BookTitletxt->Location = System::Drawing::Point(62, 156);
+			this->BookTitletxt->BackColor = System::Drawing::Color::White;
+			this->BookTitletxt->Location = System::Drawing::Point(70, 195);
 			this->BookTitletxt->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->BookTitletxt->Name = L"BookTitletxt";
-			this->BookTitletxt->Size = System::Drawing::Size(326, 22);
+			this->BookTitletxt->Size = System::Drawing::Size(366, 26);
 			this->BookTitletxt->TabIndex = 2;
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(401, 156);
+			this->pictureBox1->Location = System::Drawing::Point(451, 195);
 			this->pictureBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(24, 21);
+			this->pictureBox1->Size = System::Drawing::Size(27, 26);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -178,11 +177,11 @@ namespace MrBookyGUIApp {
 			this->label3->BackColor = System::Drawing::Color::Transparent;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
-				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label3->Location = System::Drawing::Point(57, 199);
+			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label3->Location = System::Drawing::Point(65, 259);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(231, 29);
+			this->label3->Size = System::Drawing::Size(277, 32);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"Búsqueda Avanzada";
 			// 
@@ -192,11 +191,11 @@ namespace MrBookyGUIApp {
 			this->label4->BackColor = System::Drawing::Color::Transparent;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
-				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label4->Location = System::Drawing::Point(58, 256);
+			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label4->Location = System::Drawing::Point(65, 320);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(49, 20);
+			this->label4->Size = System::Drawing::Size(59, 25);
 			this->label4->TabIndex = 5;
 			this->label4->Text = L"Autor";
 			// 
@@ -206,11 +205,11 @@ namespace MrBookyGUIApp {
 			this->label5->BackColor = System::Drawing::Color::Transparent;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
-				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label5->Location = System::Drawing::Point(58, 299);
+			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label5->Location = System::Drawing::Point(65, 374);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(70, 20);
+			this->label5->Size = System::Drawing::Size(81, 25);
 			this->label5->TabIndex = 6;
 			this->label5->Text = L"Editorial";
 			// 
@@ -220,42 +219,39 @@ namespace MrBookyGUIApp {
 			this->label6->BackColor = System::Drawing::Color::Transparent;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(1)), static_cast<System::Int32>(static_cast<System::Byte>(22)),
-				static_cast<System::Int32>(static_cast<System::Byte>(30)));
-			this->label6->Location = System::Drawing::Point(58, 343);
+			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label6->Location = System::Drawing::Point(65, 429);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(64, 20);
+			this->label6->Size = System::Drawing::Size(77, 25);
 			this->label6->TabIndex = 7;
 			this->label6->Text = L"Género";
 			// 
 			// txtAutor
 			// 
-			this->txtAutor->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
-				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->txtAutor->Location = System::Drawing::Point(180, 255);
+			this->txtAutor->BackColor = System::Drawing::Color::White;
+			this->txtAutor->Location = System::Drawing::Point(202, 319);
 			this->txtAutor->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtAutor->Name = L"txtAutor";
-			this->txtAutor->Size = System::Drawing::Size(208, 22);
+			this->txtAutor->Size = System::Drawing::Size(234, 26);
 			this->txtAutor->TabIndex = 8;
 			// 
 			// txtEditorial
 			// 
-			this->txtEditorial->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
-				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->txtEditorial->Location = System::Drawing::Point(180, 299);
+			this->txtEditorial->BackColor = System::Drawing::Color::White;
+			this->txtEditorial->Location = System::Drawing::Point(202, 374);
 			this->txtEditorial->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtEditorial->Name = L"txtEditorial";
-			this->txtEditorial->Size = System::Drawing::Size(208, 22);
+			this->txtEditorial->Size = System::Drawing::Size(234, 26);
 			this->txtEditorial->TabIndex = 9;
 			// 
 			// txtGenero
 			// 
-			this->txtGenero->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
-				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->txtGenero->Location = System::Drawing::Point(180, 343);
+			this->txtGenero->BackColor = System::Drawing::Color::White;
+			this->txtGenero->Location = System::Drawing::Point(202, 429);
 			this->txtGenero->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtGenero->Name = L"txtGenero";
-			this->txtGenero->Size = System::Drawing::Size(208, 22);
+			this->txtGenero->Size = System::Drawing::Size(234, 26);
 			this->txtGenero->TabIndex = 10;
 			// 
 			// dgvBooksFound
@@ -267,12 +263,12 @@ namespace MrBookyGUIApp {
 				this->BookName,
 					this->BookAuthor, this->BookStatus, this->ColumnaImagen, this->BookDetails
 			});
-			this->dgvBooksFound->Location = System::Drawing::Point(11, 401);
+			this->dgvBooksFound->Location = System::Drawing::Point(12, 501);
 			this->dgvBooksFound->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvBooksFound->Name = L"dgvBooksFound";
 			this->dgvBooksFound->RowHeadersWidth = 62;
 			this->dgvBooksFound->RowTemplate->Height = 100;
-			this->dgvBooksFound->Size = System::Drawing::Size(918, 303);
+			this->dgvBooksFound->Size = System::Drawing::Size(1033, 379);
 			this->dgvBooksFound->TabIndex = 11;
 			this->dgvBooksFound->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &UserInterface::dgvBooksFound_CellContentClick);
 			// 
@@ -301,7 +297,7 @@ namespace MrBookyGUIApp {
 			this->ColumnaImagen->ImageLayout = System::Windows::Forms::DataGridViewImageCellLayout::Zoom;
 			this->ColumnaImagen->MinimumWidth = 8;
 			this->ColumnaImagen->Name = L"ColumnaImagen";
-			this->ColumnaImagen->Width = 61;
+			this->ColumnaImagen->Width = 71;
 			// 
 			// BookDetails
 			// 
@@ -313,11 +309,10 @@ namespace MrBookyGUIApp {
 			// 
 			// UserInterface
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(239)), static_cast<System::Int32>(static_cast<System::Byte>(246)),
-				static_cast<System::Int32>(static_cast<System::Byte>(224)));
-			this->ClientSize = System::Drawing::Size(957, 715);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(1077, 894);
 			this->Controls->Add(this->dgvBooksFound);
 			this->Controls->Add(this->txtGenero);
 			this->Controls->Add(this->txtEditorial);
