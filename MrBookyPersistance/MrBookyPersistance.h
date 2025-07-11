@@ -62,13 +62,24 @@ namespace MrBookyPersistance {
 		static List<Book^>^ GetAllBooksSQL();
 		static int UpdateBookSQL(Book^ book);
 		static int DeleteBookSQL(int bookId);
+		static Book^ GetBookByIdSQL(int bookId);
 
 		static void AddLibrarianSQL(User^ user);
-		List<Librarian^>^ GetAllLibrariansSQL();
+		static List<Librarian^>^ GetAllLibrariansSQL();
 		static int UpdateLibrarianSQL(Librarian^ librarian);
+		static int DeleteLibrarianSQL(int librarianId);
+		static Librarian^ GetLibrarianByIdSQL(int librarianId);
 
 		static void AddClientSQL(Client^ user);
-		List<Client^>^ GetAllClientsSQL();
+		static List<Client^>^ GetAllClientsSQL();
 		static int UpdateClientSQL(Client^ client);
+		static int DeleteClientSQL(int clientId);
+		static Client^ GetClientByIdSQL(int clientId);
+
+		static void AddLibrarySQL(Library^ library);
+		static List<Library^>^ GetAllLibrariesSQL();
+		static int DeleteLibrarySQL(int libraryId);
+		static int UpdateLibrarySQL(Library^ library);
+		static Library^ GetLibraryByIdSQL(int libraryId);
 	};
 }
