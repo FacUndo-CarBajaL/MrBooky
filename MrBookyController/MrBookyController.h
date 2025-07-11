@@ -124,7 +124,6 @@ namespace MrBookyController {
 			static List<Loan^>^ GetLoansByBookID(int bookId, DateTime startDate, DateTime endDate);
 			static List<Loan^>^ GetAllLoansByDates(DateTime startDate, DateTime endDate);
 			static List<Loan^>^ GetAllLoansByUserAndDates(int userId, DateTime startDate, DateTime endDate);
-			
 
 	};
 }
