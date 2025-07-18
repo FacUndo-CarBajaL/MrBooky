@@ -18,12 +18,16 @@ namespace MrBookyGUIApp {
 	public ref class UserOptionsForm : public System::Windows::Forms::Form
 	{
 	public:
-		UserOptionsForm(void)
+		User^ usuario;
+
+		UserOptionsForm(User^ user)
 		{
 			InitializeComponent();
+
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			usuario = user;
 		}
 
 	protected:

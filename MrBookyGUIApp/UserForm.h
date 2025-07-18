@@ -210,7 +210,7 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 	else {
 		if (user->GetType() == Client::typeid) {
 			Persistance::UserRAMBinaryFile("TempUser.bin", user);
-			UserOptionsForm^ clientForm = gcnew UserOptionsForm();
+			UserOptionsForm^ clientForm = gcnew UserOptionsForm(user);
 			MessageBox::Show("Se ha ingresado como cliente. Bienvenid@ "+ userName);
 			clientForm->Show();
 			//this->Close();
