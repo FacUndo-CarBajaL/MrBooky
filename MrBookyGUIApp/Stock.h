@@ -201,8 +201,10 @@ namespace MrBookyGUIApp {
 			this->dgvResultados->Location = System::Drawing::Point(65, 235);
 			this->dgvResultados->Name = L"dgvResultados";
 			this->dgvResultados->RowHeadersWidth = 51;
+			this->dgvResultados->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
 			this->dgvResultados->Size = System::Drawing::Size(818, 189);
 			this->dgvResultados->TabIndex = 7;
+			this->dgvResultados->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &Stock::dgvResultados_CellContentClick);
 			// 
 			// colIdBook
 			// 
@@ -391,6 +393,9 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	}
 
 	ShowBook(book);
+}
+private: System::Void dgvResultados_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+
 }
 };
 }

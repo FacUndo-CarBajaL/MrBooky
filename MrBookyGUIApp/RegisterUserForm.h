@@ -262,11 +262,11 @@ namespace MrBookyGUIApp {
 			user->Email = txtCorreo->Text->Trim();
 			user->PhoneNumber = Convert::ToInt32(txtCelular->Text);
 			user->StudentCode = Convert::ToInt32(txtCodigoEstudiante->Text);
-			user->UserID =(user->StudentCode) * 100 + 1;
 
 
-			Controller::AddUser(user);
+			
 			if (user != nullptr) {
+				int userid=Controller::AddUser(user);
 				MessageBox::Show("Usuario " + user->Name + " Tipo: " + user->UserType + " registrado éxitosamente.");
 				txtNombreCompleto->Clear();
 				txtNombreUsuario->Clear();

@@ -621,7 +621,7 @@ private: System::Void btnRegistrar_Click(System::Object^ sender, System::EventAr
 			|| txtEditorial->Text->Length == 0 || txtDescripcion->Text->Length == 0 || txtCantidad->Text->Length == 0
 			|| txtAño->Text->Length == 0 || txtTiempoPrestamo->Text->Length == 0 || txtDisponibilidad->Text->Length == 0
 			|| txtPeso->Text->Length == 0) {
-			MessageBox::Show("El campo Año de realización es obligatorio.");
+			MessageBox::Show("No debe haber cmapos vacíos");
 			return;
 		}
 
@@ -637,7 +637,7 @@ private: System::Void btnRegistrar_Click(System::Object^ sender, System::EventAr
 
 		Book^ book = gcnew Book();
 
-		book->BookID = Int32::Parse(txtID->Text);
+		//book->BookID = Int32::Parse(txtID->Text);
 		book->Title = txtTitulo->Text;
 		book->Author = txtAutor->Text;
 		book->Genre = txtGenero->Text;
@@ -655,9 +655,9 @@ private: System::Void btnRegistrar_Click(System::Object^ sender, System::EventAr
 			book->Photo = ms->ToArray();
 		}
 
-		Controller::AddBook(book);
+		int bookid=Controller::AddBook(book);
 		ShowBooks();
-		MessageBox::Show("Se ha agregado el libro " + book->BookID + " - " + book->Title);
+		MessageBox::Show("Se ha agregado el libro " + bookid + " - " + book->Title);
 	}
 	catch (Exception^ ex) {
 		MessageBox::Show("No se ha podido agregar el libro por el siguiente motivo:\n" +
@@ -691,7 +691,6 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 
 
 		Book^ book = gcnew Book();
-		
 		book->BookID = Int32::Parse(txtID->Text);
 		book->Title = txtTitulo->Text;
 		book->Author = txtAutor->Text;
@@ -710,12 +709,12 @@ private: System::Void btnModificar_Click(System::Object^ sender, System::EventAr
 			pbPhoto->Image->Save(ms, System::Drawing::Imaging::ImageFormat::Jpeg);
 			book->Photo = ms->ToArray();
 		}
-		Controller::UpdateBook(book);
+		int bookid=Controller::UpdateBook(book);
 		ShowBooks();
-		MessageBox::Show("Se ha modificado el libro " + book->BookID + " - " + book->Title);
+		MessageBox::Show("Se ha modificado el libro " + bookid + " - " + book->Title);
 	}
 	catch (Exception^ ex) {
-		MessageBox::Show("No se ha podido agregar el libro por el siguiente motivo:\n" +
+		MessageBox::Show("No se ha podido modificar el libro por el siguiente motivo:\n" +
 			ex->Message);
 	}
 }
@@ -730,12 +729,12 @@ private: System::Void btnEliminar_Click(System::Object^ sender, System::EventArg
 			"Confirmación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
 		if (dlgResult == System::Windows::Forms::DialogResult::Yes) {
-			Controller::DeleteBook(bookName);
+			int bookid=Controller::DeleteBook(bookName);
 			pbPhoto->Image = nullptr;
 			pbPhoto->Invalidate();
 			ShowBooks();
 			ClearControls();
-			MessageBox::Show("Se ha eliminado el libro  " + bookName + " de manera exitosa.");
+			MessageBox::Show("Se ha eliminado el libro  " + bookid + " de manera exitosa.");
 		}
 	}
 	catch (Exception^ ex) {
@@ -761,6 +760,11 @@ private: System::Void dgvlibros_CellClick(System::Object^ sender, System::Window
 	txtID->Text = "" + book->BookID;
 	txtCantidad->Text = "" + book->Quantity;
 	txtDescripcion->Text = book->Description;
+	txtAño->Text = "" + book->ReleaseYear;
+	txtDisponibilidad->Text = book->Availability;
+	txtPeso->Text = "" + book->Weight;;
+	txtTiempoPrestamo->Text = "" + book->LoanTime;
+
 
 	if (book->Photo != nullptr) {
 		System::IO::MemoryStream^ ms = gcnew System::IO::MemoryStream(book->Photo);

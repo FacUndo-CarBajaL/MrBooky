@@ -486,7 +486,6 @@ int MrBookyPersistance::Persistance::AddBooksSQL(Book^ book)
 		cmd->Parameters->Add("@Author", System::Data::SqlDbType::VarChar,500);
 		cmd->Parameters->Add("@Publisher", System::Data::SqlDbType::VarChar,500);
 		cmd->Parameters->Add("@Release_YEAR", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@Genre", System::Data::SqlDbType::VarChar, 500);
 		cmd->Parameters->Add("@STOCK", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50);
 		cmd->Parameters->Add("@DESCRIPTION_BOOK", System::Data::SqlDbType::VarChar, 500);
@@ -612,15 +611,15 @@ int MrBookyPersistance::Persistance::UpdateBookSQL(Book^ book)
 		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::VarChar, 500);
 		cmd->Parameters->Add("@AUTHOR", System::Data::SqlDbType::VarChar, 500);
 		cmd->Parameters->Add("@PUBLISHER", System::Data::SqlDbType::VarChar, 500);
-		cmd->Parameters->Add("@RELEASE_YEAR", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@ReleaseYear", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@STOCK", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50);
-		cmd->Parameters->Add("@DESCRIPTION_BOOK", System::Data::SqlDbType::VarChar, 500);
-		cmd->Parameters->Add("@AVAILABILITY_BOOK", System::Data::SqlDbType::VarChar, 50);
-		cmd->Parameters->Add("@LOAN_TIME", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@WEIGHT_BOOK", System::Data::SqlDbType::Decimal);
-		cmd->Parameters["@WEIGHT_BOOK"]->Precision = 5;
-		cmd->Parameters["@WEIGHT_BOOK"]->Scale = 2;
+		cmd->Parameters->Add("@DescriptionBook", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@AvailabilityBook", System::Data::SqlDbType::VarChar, 50);
+		cmd->Parameters->Add("@LoanTime", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@WeightBook", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@WeightBook"]->Precision = 5;
+		cmd->Parameters["@WeightBook"]->Scale = 2;
 		cmd->Parameters->Add("@PHOTO", System::Data::SqlDbType::Image);
 
 		cmd->Prepare();
@@ -630,13 +629,13 @@ int MrBookyPersistance::Persistance::UpdateBookSQL(Book^ book)
 		cmd->Parameters["@TITLE"]->Value = book->Title;
 		cmd->Parameters["@AUTHOR"]->Value = book->Author;
 		cmd->Parameters["@PUBLISHER"]->Value = book->Publisher;
-		cmd->Parameters["@RELEASE_YEAR"]->Value = book->ReleaseYear;
+		cmd->Parameters["@ReleaseYear"]->Value = book->ReleaseYear;
 		cmd->Parameters["@STOCK"]->Value = book->Quantity;
 		cmd->Parameters["@GENRE"]->Value = book->Genre;
-		cmd->Parameters["@DESCRIPTION_BOOK"]->Value = book->Description;
-		cmd->Parameters["@AVAILABILITY_BOOK"]->Value = book->Availability;
-		cmd->Parameters["@LOAN_TIME"]->Value = book->LoanTime;
-		cmd->Parameters["@WEIGHT_BOOK"]->Value = Decimal(book->Weight);
+		cmd->Parameters["@DescriptionBook"]->Value = book->Description;
+		cmd->Parameters["@AvailabilityBook"]->Value = book->Availability;
+		cmd->Parameters["@LoanTime"]->Value = book->LoanTime;
+		cmd->Parameters["@WeightBook"]->Value = Decimal(book->Weight);
 
 		if (book->Photo == nullptr)
 			cmd->Parameters["@PHOTO"]->Value = DBNull::Value;
@@ -666,7 +665,7 @@ int MrBookyPersistance::Persistance::DeleteBookSQL(String^ bookId) {
 		String^ sqlStr = "dbo.usp_DeleteBook";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@ITITLE", System::Data::SqlDbType::NVarChar,500);
+		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::NVarChar,500);
 		cmd->Prepare();
 		cmd->Parameters["@TITLE"]->Value = bookId;
 
@@ -745,7 +744,7 @@ Book^ MrBookyPersistance::Persistance::GetBookByNameSQL(String^ bookName)
 		reader = cmd->ExecuteReader();
 		if (reader->Read()) {
 			book = gcnew Book();
-			book->BookID = Convert::ToInt32(reader["@ID"]);
+			book->BookID = Convert::ToInt32(reader["ID"]);
 			book->Title = reader["TITLE"]->ToString();
 			book->Author = reader["AUTHOR"]->ToString();
 			book->Publisher = reader["PUBLISHER"]->ToString();
@@ -1218,45 +1217,53 @@ Client^ MrBookyPersistance::Persistance::GetClientByIdSQL(int clientId)
 
 int MrBookyPersistance::Persistance::AddUserSQL(User^ user)
 {
-	int userId =0;
+	int userId = 0;
 	SqlConnection^ conn = nullptr;
 
 	try {
 		conn = GetConnection();
+
 		String^ sqlStr = "dbo.usp_AddUser";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
 
-		cmd->Parameters->Add("@PASSWORD", System::Data::SqlDbType::VarChar, 20);
-		cmd->Parameters->Add("@EMAIL", System::Data::SqlDbType::VarChar, 100);
-		cmd->Parameters->Add("@USERNAME", System::Data::SqlDbType::VarChar, 100);
-		cmd->Parameters->Add("@FULL_NAME", System::Data::SqlDbType::VarChar, 200);
-		cmd->Parameters->Add("@PHONE_NUMBER", System::Data::SqlDbType::VarChar, 15);
-		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Int);
-		if (user->UserType == '0') {
-			MrBookyModel::Client^ client = dynamic_cast<MrBookyModel::Client^>(user);
-			if (client != nullptr) {
-				cmd->Parameters->Add("@STUDENT_CODE", System::Data::SqlDbType::Int)->Value = client->StudentCode;
-				cmd->Parameters->Add("@PREFERENCES", System::Data::SqlDbType::NVarChar, -1)->Value = DBNull::Value;
-			}
-			else {
-				// En caso de que el cast falle por algún motivo inesperado
-				cmd->Parameters->Add("@STUDENT_CODE", System::Data::SqlDbType::Int)->Value = DBNull::Value;
-				cmd->Parameters->Add("@PREFERENCES", System::Data::SqlDbType::NVarChar, -1)->Value = DBNull::Value;
-			}
+		// Parámetros de entrada
+		cmd->Parameters->AddWithValue("@PASSWORD", user->Password);
+		cmd->Parameters->AddWithValue("@EMAIL", user->Email);
+		cmd->Parameters->AddWithValue("@USERNAME", user->Name);
+		cmd->Parameters->AddWithValue("@FULL_NAME", user->FormalName);
+		cmd->Parameters->AddWithValue("@PHONE_NUMBER", user->PhoneNumber);
+		cmd->Parameters->AddWithValue("@USER_TYPE", Convert::ToInt32(user->UserType));
+
+		// Solo si es cliente
+		if (MrBookyModel::Client^ client = dynamic_cast<MrBookyModel::Client^>(user)) {
+			cmd->Parameters->AddWithValue("@STUDENT_CODE", client->StudentCode);
+			String^ prefs = (client->Preferences != nullptr) ? String::Join(",", client->Preferences) : nullptr;
+			if (prefs != nullptr)
+				cmd->Parameters->AddWithValue("@PREFERENCES", prefs);
+			else
+				cmd->Parameters->AddWithValue("@PREFERENCES", DBNull::Value);
+
 		}
 		else {
-			cmd->Parameters->Add("@STUDENT_CODE", System::Data::SqlDbType::Int)->Value = DBNull::Value;
-			cmd->Parameters->Add("@PREFERENCES", System::Data::SqlDbType::NVarChar, -1)->Value = DBNull::Value;
+			cmd->Parameters->AddWithValue("@STUDENT_CODE", DBNull::Value);
+			cmd->Parameters->AddWithValue("@PREFERENCES", DBNull::Value);
 		}
 
+		// Parámetro de salida
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+
+		// Ejecutar
+		cmd->ExecuteNonQuery();
+		userId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
 	}
 	catch (Exception^ ex) {
 		throw ex;
 	}
 	finally {
-		if(conn !=nullptr) conn->Close();
-
+		if (conn != nullptr) conn->Close();
 	}
 	return userId;
 }
@@ -1472,9 +1479,9 @@ User^ MrBookyPersistance::Persistance::GetUserByNameAndPasswordSQL(String^ userN
 		reader = cmd->ExecuteReader();
 
 		if (reader->Read()) {
-			char userType = Convert::ToInt32(reader["USER_TYPE"]);
+			int userType = Convert::ToInt32(reader["USER_TYPE"]);
 
-			if (userType == '0') {
+			if (userType == 0) {
 				MrBookyModel::Client^ client = gcnew MrBookyModel::Client();
 				client->StudentCode = !reader->IsDBNull(reader->GetOrdinal("STUDENT_CODE"))
 					? Convert::ToInt32(reader["STUDENT_CODE"]) : 0;
@@ -1489,10 +1496,10 @@ User^ MrBookyPersistance::Persistance::GetUserByNameAndPasswordSQL(String^ userN
 				}
 				user = client;
 			}
-			else if (userType == '1') {
+			else if (userType == 1) {
 				user = gcnew MrBookyModel::Librarian(); // Si existe
 			}
-			else if (userType == '2') {
+			else if (userType == 2) {
 				user = gcnew MrBookyModel::Admin(); // Si existe
 			}
 			else {
