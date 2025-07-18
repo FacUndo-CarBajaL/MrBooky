@@ -6,7 +6,9 @@
 #ifndef _DELIVERYROBOT_H
 #define _DELIVERYROBOT_H
 
-#include "LoanOrder.h"
+#include "Loan.h"
+#include "Point.h"
+
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -17,15 +19,14 @@ namespace MrBookyModel {
     [Serializable]
     public ref class DeliveryRobot {
     public:
-        int RobotID;
-        String^ Name;
-        String^ Status;
-        Point^ Position;
-        int MaxCapacity;
-        List<Loan^> Loans;
-        int Battery;
-        LoanOrder Robot;
-
+        property int RobotID;
+        property String^ Name;
+        property String^ Status;
+        property Point^ Position;
+        property int MaxCapacity;
+        property List<Loan^>^ Loans;
+        property int Battery;
+ 
         DeliveryRobot() {};
 		DeliveryRobot(int id, String^ name, String^ status, int maxCapacity) {
 			this->RobotID = id;

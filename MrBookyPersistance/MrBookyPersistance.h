@@ -81,5 +81,14 @@ namespace MrBookyPersistance {
 		static int DeleteLibrarySQL(int libraryId);
 		static int UpdateLibrarySQL(Library^ library);
 		static Library^ GetLibraryByIdSQL(int libraryId);
+
+
+		//Persistencia para  LoanOrder
+		static int CreateLoanBd(LoanOrder^ loanOrder);
+		static List <LoanOrder^>^ QueryAllRegisteredLoanOrders();
+		static List <LoanOrder^>^ QueryLoanOrdersByStudentId(int studentId);
+
+		static DeliveryPoint^ QueryDeliveryPointById(int DeliveryPointId);
+
 	};
 }

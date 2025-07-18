@@ -8,6 +8,7 @@
 
 #include "DeliveryPoint.h"
 #include "Loan.h"
+#include "DeliveryRobot.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -22,7 +23,7 @@ namespace MrBookyModel {
         property DateTime^ DueDate;
         property List<Loan^>^ Loans;
         property Boolean IsDelivery;
-        property int DeliveryRobotID;
+        property DeliveryRobot^ Deliveryrobot;
         property DeliveryPoint^ DeliveryPoint;
         property String^ Library;
         property String^ Status;

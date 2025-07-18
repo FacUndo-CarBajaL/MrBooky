@@ -7,6 +7,7 @@
 #define _UNIVERSITYMAP_H
 
 #include "Library.h"
+#include "DeliveryPoint.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
