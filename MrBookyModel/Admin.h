@@ -15,10 +15,10 @@ namespace MrBookyModel {
 	public:
 		
 		Admin() {
-			UserType = '2';
+			UserType = 2;
 		}
 		Admin(int id, String^ name, String^ password) : User(id, name, password) {
-			UserType = '2';
+			UserType = 2;
 		}
 	};
 }

@@ -36,10 +36,10 @@ namespace MrBookyModel {
         void MakeDailyReport();
 
         Librarian(){
-            UserType = '1';
+            UserType = 1;
         }
         Librarian(int id, String^ name, String^ password) : User(id, name, password) {
-            UserType = '1';
+            UserType = 1;
         }
     };
 }

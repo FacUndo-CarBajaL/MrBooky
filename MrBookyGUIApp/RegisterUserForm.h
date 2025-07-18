@@ -267,7 +267,7 @@ namespace MrBookyGUIApp {
 
 			Controller::AddUser(user);
 			if (user != nullptr) {
-				MessageBox::Show("Usuario " + user->Name + " registrado éxitosamente.");
+				MessageBox::Show("Usuario " + user->Name + " Tipo: " + user->UserType + " registrado éxitosamente.");
 				txtNombreCompleto->Clear();
 				txtNombreUsuario->Clear();
 				txtCorreo->Clear();

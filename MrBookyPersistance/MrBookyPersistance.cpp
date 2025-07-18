@@ -1232,7 +1232,7 @@ int MrBookyPersistance::Persistance::AddUserSQL(User^ user)
 		cmd->Parameters->Add("@USERNAME", System::Data::SqlDbType::VarChar, 100);
 		cmd->Parameters->Add("@FULL_NAME", System::Data::SqlDbType::VarChar, 200);
 		cmd->Parameters->Add("@PHONE_NUMBER", System::Data::SqlDbType::VarChar, 15);
-		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Char,1);
+		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Int);
 		if (user->UserType == '0') {
 			MrBookyModel::Client^ client = dynamic_cast<MrBookyModel::Client^>(user);
 			if (client != nullptr) {
@@ -1281,7 +1281,7 @@ List<User^>^ MrBookyPersistance::Persistance::GetAllUsersSQL()
 			user->Name = reader["USERNAME"]->ToString();
 			user->FormalName = reader["FULL_NAME"]->ToString();
 			user->PhoneNumber = Convert::ToInt32(reader["PHONE_NUMBER"]->ToString());
-			user->UserType = Convert::ToChar(reader["USER_TYPE"]);
+			user->UserType = Convert::ToInt32(reader["USER_TYPE"]);
 			if (user->UserType == '0') { // Client
 				Client^ client = dynamic_cast<Client^>(user);
 				if (client != nullptr) {
@@ -1329,7 +1329,7 @@ int MrBookyPersistance::Persistance::UpdateUserSQL(User^ user)
 		cmd->Parameters->Add("@USERNAME", System::Data::SqlDbType::VarChar, 100);
 		cmd->Parameters->Add("@FULL_NAME", System::Data::SqlDbType::VarChar, 200);
 		cmd->Parameters->Add("@PHONE_NUMBER", System::Data::SqlDbType::VarChar, 15);
-		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Char, 1);
+		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@STUDENT_CODE", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@PREFERENCES", System::Data::SqlDbType::NVarChar, -1);
 		cmd->Prepare();
@@ -1423,7 +1423,7 @@ User^ MrBookyPersistance::Persistance::GetUserByIdSQL(int userId)
 			user->Name = reader["USERNAME"]->ToString();
 			user->FormalName = reader["FULL_NAME"]->ToString();
 			user->PhoneNumber = Convert::ToInt32(reader["PHONE_NUMBER"]);
-			user->UserType = Convert::ToChar(reader["USER_TYPE"]);
+			user->UserType = Convert::ToInt32(reader["USER_TYPE"]);
 			if (user->UserType == '0') { // Client
 				Client^ client = dynamic_cast<Client^>(user);
 				if (client != nullptr) {
@@ -1472,7 +1472,7 @@ User^ MrBookyPersistance::Persistance::GetUserByNameAndPasswordSQL(String^ userN
 		reader = cmd->ExecuteReader();
 
 		if (reader->Read()) {
-			char userType = Convert::ToChar(reader["USER_TYPE"]);
+			char userType = Convert::ToInt32(reader["USER_TYPE"]);
 
 			if (userType == '0') {
 				MrBookyModel::Client^ client = gcnew MrBookyModel::Client();

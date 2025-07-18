@@ -35,10 +35,10 @@ namespace MrBookyModel {
             void ReturnBook();
 
             Client(){
-				UserType = '0'; // Client
+				UserType = 0; // Client
             }
             Client(int id, String^ name, String^ password) : User(id, name, password){
-                UserType = '0'; // Client
+                UserType = 0; // Client
             }
     };
 }

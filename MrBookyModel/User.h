@@ -20,7 +20,7 @@ namespace MrBookyModel {
             String^ Name;
             String^ FormalName;
             int PhoneNumber;
-			char UserType; // '0' for Client, '1' for Librarian, '2' for Administrator
+			int UserType; // '0' for Client, '1' for Librarian, '2' for Administrator
             void Register();
 
             void Login();
