@@ -11,6 +11,7 @@ namespace MrBookyGUIApp {
 	using namespace MrBookyModel;
 	using namespace MrBookyController;
 	using namespace MrBookyPersistance;
+	using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Resumen de AddReviewForm
@@ -122,8 +123,11 @@ namespace MrBookyGUIApp {
 		}
 		// Aquí se puede agregar la lógica para guardar la reseña
 		Book^ book = (Book^)Persistance::LoadBinaryFile("TempBook.bin");
+		if (book->Reviews == nullptr) {
+			book->Reviews = gcnew List<String^>();
+		}
 		book->Reviews->Add(reviewText); // Agregar la reseña al libro
-		// Por ejemplo, guardarla en un archivo o base de datos
+		Controller::UpdateBook(book); // Actualizar el libro con la nueva reseña
 		MessageBox::Show("Reseña publicada exitosamente.", "Éxito", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		this->Close(); // Cerrar el formulario después de publicar
 	}

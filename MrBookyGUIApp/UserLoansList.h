@@ -45,7 +45,7 @@ namespace MrBookyGUIApp {
 
 
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ btnVerMapa;
+
 
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::RichTextBox^ txtIDPrestamo;
@@ -92,7 +92,6 @@ namespace MrBookyGUIApp {
 			this->ColumnaEstado = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->ColumnaTipoEntrega = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->btnVerMapa = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->txtIDPrestamo = (gcnew System::Windows::Forms::RichTextBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -118,12 +117,12 @@ namespace MrBookyGUIApp {
 			});
 			this->dgvLoans->GridColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(174)), static_cast<System::Int32>(static_cast<System::Byte>(195)),
 				static_cast<System::Int32>(static_cast<System::Byte>(176)));
-			this->dgvLoans->Location = System::Drawing::Point(34, 378);
+			this->dgvLoans->Location = System::Drawing::Point(30, 302);
 			this->dgvLoans->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dgvLoans->Name = L"dgvLoans";
 			this->dgvLoans->RowHeadersWidth = 62;
 			this->dgvLoans->RowTemplate->Height = 28;
-			this->dgvLoans->Size = System::Drawing::Size(1287, 299);
+			this->dgvLoans->Size = System::Drawing::Size(1144, 239);
 			this->dgvLoans->TabIndex = 0;
 			this->dgvLoans->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &UserLoansList::dgvLoans_CellClick);
 			this->dgvLoans->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &UserLoansList::dgvLoans_CellContentClick);
@@ -178,27 +177,11 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label1->Location = System::Drawing::Point(25, 26);
+			this->label1->Location = System::Drawing::Point(22, 21);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(407, 38);
+			this->label1->Size = System::Drawing::Size(348, 32);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"SOLICITUDES DE PRÉSTAMOS";
-			// 
-			// btnVerMapa
-			// 
-			this->btnVerMapa->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
-				static_cast<System::Int32>(static_cast<System::Byte>(60)));
-			this->btnVerMapa->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnVerMapa->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->btnVerMapa->ForeColor = System::Drawing::Color::Black;
-			this->btnVerMapa->Location = System::Drawing::Point(39, 288);
-			this->btnVerMapa->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->btnVerMapa->Name = L"btnVerMapa";
-			this->btnVerMapa->Size = System::Drawing::Size(154, 39);
-			this->btnVerMapa->TabIndex = 2;
-			this->btnVerMapa->Text = L"Ver Mapa";
-			this->btnVerMapa->UseVisualStyleBackColor = false;
 			// 
 			// label2
 			// 
@@ -208,18 +191,17 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label2->Location = System::Drawing::Point(35, 94);
+			this->label2->Location = System::Drawing::Point(31, 75);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(157, 29);
+			this->label2->Size = System::Drawing::Size(130, 25);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"ID Préstamo :";
 			// 
 			// txtIDPrestamo
 			// 
-			this->txtIDPrestamo->Location = System::Drawing::Point(198, 94);
-			this->txtIDPrestamo->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->txtIDPrestamo->Location = System::Drawing::Point(176, 75);
 			this->txtIDPrestamo->Name = L"txtIDPrestamo";
-			this->txtIDPrestamo->Size = System::Drawing::Size(256, 43);
+			this->txtIDPrestamo->Size = System::Drawing::Size(228, 35);
 			this->txtIDPrestamo->TabIndex = 4;
 			this->txtIDPrestamo->Text = L"";
 			// 
@@ -231,9 +213,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label3->Location = System::Drawing::Point(547, 94);
+			this->label3->Location = System::Drawing::Point(486, 75);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(243, 29);
+			this->label3->Size = System::Drawing::Size(201, 25);
 			this->label3->TabIndex = 5;
 			this->label3->Text = L"Visualizar Préstamos:";
 			// 
@@ -244,20 +226,18 @@ namespace MrBookyGUIApp {
 				L"Solicitado", L"Aprobado", L"Desaprobado",
 					L"En recojo", L"Enviado", L"Entregado", L"Cancelado", L"Reprogramado", L"Todas"
 			});
-			this->cmbEstadoPrestamo->Location = System::Drawing::Point(786, 94);
-			this->cmbEstadoPrestamo->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->cmbEstadoPrestamo->Location = System::Drawing::Point(699, 75);
 			this->cmbEstadoPrestamo->Name = L"cmbEstadoPrestamo";
-			this->cmbEstadoPrestamo->Size = System::Drawing::Size(245, 28);
+			this->cmbEstadoPrestamo->Size = System::Drawing::Size(218, 24);
 			this->cmbEstadoPrestamo->TabIndex = 6;
 			// 
 			// btnVisualizar
 			// 
 			this->btnVisualizar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
 				static_cast<System::Int32>(static_cast<System::Byte>(60)));
-			this->btnVisualizar->Location = System::Drawing::Point(786, 168);
-			this->btnVisualizar->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnVisualizar->Location = System::Drawing::Point(699, 134);
 			this->btnVisualizar->Name = L"btnVisualizar";
-			this->btnVisualizar->Size = System::Drawing::Size(225, 42);
+			this->btnVisualizar->Size = System::Drawing::Size(200, 34);
 			this->btnVisualizar->TabIndex = 7;
 			this->btnVisualizar->Text = L"Visualizar";
 			this->btnVisualizar->UseVisualStyleBackColor = false;
@@ -271,9 +251,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label4->Location = System::Drawing::Point(35, 236);
+			this->label4->Location = System::Drawing::Point(31, 189);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(274, 28);
+			this->label4->Size = System::Drawing::Size(234, 23);
 			this->label4->TabIndex = 8;
 			this->label4->Text = L"PRÉSTAMOS CON DELIVERY";
 			// 
@@ -285,10 +265,10 @@ namespace MrBookyGUIApp {
 			this->btnConfirmarEntrega->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnConfirmarEntrega->ForeColor = System::Drawing::Color::Black;
-			this->btnConfirmarEntrega->Location = System::Drawing::Point(250, 288);
+			this->btnConfirmarEntrega->Location = System::Drawing::Point(36, 229);
 			this->btnConfirmarEntrega->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnConfirmarEntrega->Name = L"btnConfirmarEntrega";
-			this->btnConfirmarEntrega->Size = System::Drawing::Size(210, 39);
+			this->btnConfirmarEntrega->Size = System::Drawing::Size(187, 31);
 			this->btnConfirmarEntrega->TabIndex = 9;
 			this->btnConfirmarEntrega->Text = L"Confirmar entrega";
 			this->btnConfirmarEntrega->UseVisualStyleBackColor = false;
@@ -302,9 +282,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label5->Location = System::Drawing::Point(34, 172);
+			this->label5->Location = System::Drawing::Point(30, 138);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(245, 29);
+			this->label5->Size = System::Drawing::Size(201, 25);
 			this->label5->TabIndex = 10;
 			this->label5->Text = L"Préstamo cancelado\?";
 			// 
@@ -313,10 +293,9 @@ namespace MrBookyGUIApp {
 			this->btnVerMotivo->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
 				static_cast<System::Int32>(static_cast<System::Byte>(60)));
 			this->btnVerMotivo->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->btnVerMotivo->Location = System::Drawing::Point(285, 172);
-			this->btnVerMotivo->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnVerMotivo->Location = System::Drawing::Point(253, 138);
 			this->btnVerMotivo->Name = L"btnVerMotivo";
-			this->btnVerMotivo->Size = System::Drawing::Size(225, 42);
+			this->btnVerMotivo->Size = System::Drawing::Size(200, 34);
 			this->btnVerMotivo->TabIndex = 11;
 			this->btnVerMotivo->Text = L"Ver motivo";
 			this->btnVerMotivo->UseVisualStyleBackColor = false;
@@ -324,10 +303,10 @@ namespace MrBookyGUIApp {
 			// 
 			// UserLoansList
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::WhiteSmoke;
-			this->ClientSize = System::Drawing::Size(1349, 707);
+			this->ClientSize = System::Drawing::Size(1199, 566);
 			this->Controls->Add(this->btnVerMotivo);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->btnConfirmarEntrega);
@@ -337,7 +316,6 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->txtIDPrestamo);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->btnVerMapa);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dgvLoans);
 			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
@@ -357,6 +335,20 @@ namespace MrBookyGUIApp {
 				if (loanOrders != nullptr) {
 					dgvLoans->Rows->Clear();
 					for (int i = 0; i < loanOrders->Count; i++) {
+						if (loanOrders[i]->Status == "Entregado") {
+							for (int j = 0; j < loanOrders[i]->Loans->Count; j++) {
+								int index = dgvLoans->Rows->Add(gcnew array<String^> {
+									"" + loanOrders[i]->LoanOrderID,
+										loanOrders[i]->Loans[j]->Book->Title,
+										loanOrders[i]->LoanDate->ToString("dd/MM/yyyy"),
+										loanOrders[i]->LoanDate->AddDays(loanOrders[i]->Loans[j]->Book->LoanTime).ToString("dd/MM/yyyy"),
+										"" + loanOrders[i]->Loans[j]->Quantity,
+										loanOrders[i]->Status,
+										loanOrders[i]->IsDelivery ? "Delivery por Robot" : "Recojo en biblioteca"}
+								);
+							}
+						}
+						else {
 							for (int j = 0; j < loanOrders[i]->Loans->Count; j++) {
 								int index = dgvLoans->Rows->Add(gcnew array<String^> {
 									"" + loanOrders[i]->LoanOrderID,
@@ -368,6 +360,7 @@ namespace MrBookyGUIApp {
 										loanOrders[i]->IsDelivery ? "Delivery por Robot" : "Recojo en biblioteca"}
 								);
 							}
+						}
 					}
 				}
 				else {

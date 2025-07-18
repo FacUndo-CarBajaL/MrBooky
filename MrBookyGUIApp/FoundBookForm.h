@@ -75,6 +75,9 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::DataGridView^ dvgReviews;
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ ColumnaComentario;
+
+
 
 
 
@@ -139,6 +142,7 @@ namespace MrBookyGUIApp {
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->dvgReviews = (gcnew System::Windows::Forms::DataGridView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->ColumnaComentario = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pbBook))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dvgReviews))->BeginInit();
 			this->SuspendLayout();
@@ -342,7 +346,9 @@ namespace MrBookyGUIApp {
 			// 
 			// dvgReviews
 			// 
+			this->dvgReviews->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dvgReviews->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dvgReviews->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->ColumnaComentario });
 			this->dvgReviews->Location = System::Drawing::Point(31, 286);
 			this->dvgReviews->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dvgReviews->Name = L"dvgReviews";
@@ -360,6 +366,12 @@ namespace MrBookyGUIApp {
 			this->button1->Text = L"Agregar al carrito";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &FoundBookForm::button1_Click);
+			// 
+			// ColumnaComentario
+			// 
+			this->ColumnaComentario->HeaderText = L"Comentarios";
+			this->ColumnaComentario->MinimumWidth = 6;
+			this->ColumnaComentario->Name = L"ColumnaComentario";
 			// 
 			// FoundBookForm
 			// 

@@ -147,9 +147,11 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
 	try {
 		List<LoanOrder^>^ ordenesUsuario = Controller::GetAllLoanOrdersByUserID(userid);
 		for each(LoanOrder^ loanOrder in ordenesUsuario) {
-			List<Loan^>^ loanList = loanOrder->Loans;
-			for each(Loan^ loan in loanList) {
-				loanHistory->Add(loan);
+			if (loanOrder->Status == "Entregado") {
+				List<Loan^>^ loanList = loanOrder->Loans;
+				for each (Loan ^ loan in loanList) {
+					loanHistory->Add(loan);
+				}
 			}
 		}
 	}
@@ -829,13 +831,15 @@ List<Loan^>^ MrBookyController::Controller::GetAllLoansByUserAndDates(int userId
 	List<Loan^>^ loansByUser = gcnew List<Loan^>();
 	loanOrders = GetLoanOrders();
 	for each(LoanOrder ^ loanOrder in loanOrders) {
-		List<Loan^>^ loans = loanOrder->Loans;
-		for each(Loan ^ loan in loans) {
-			if (loan->Client->UserID == userId &&
-				loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
-				loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
-				loanOrder->LoanDate->CompareTo(endDate) <= 0) {
-				loansByUser->Add(loan);
+		if (loanOrder->Loans != nullptr) {
+			List<Loan^>^ loans = loanOrder->Loans;
+			for each (Loan ^ loan in loans) {
+				if (loanOrder->Client->UserID == userId &&
+					loanOrder->LoanDate != nullptr && // Asegúrate de que DateLoan no sea nulo
+					loanOrder->LoanDate->CompareTo(startDate) >= 0 &&
+					loanOrder->LoanDate->CompareTo(endDate) <= 0) {
+					loansByUser->Add(loan);
+				}
 			}
 		}
 	}
