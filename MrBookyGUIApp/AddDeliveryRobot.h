@@ -85,102 +85,100 @@ namespace MrBookyGUIApp {
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10));
-			this->label1->Location = System::Drawing::Point(18, 14);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(14, 11);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(172, 31);
+			this->label1->Size = System::Drawing::Size(125, 25);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Añadir Robot";
 			// 
 			// ID
 			// 
 			this->ID->AutoSize = true;
-			this->ID->Location = System::Drawing::Point(82, 102);
-			this->ID->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->ID->Location = System::Drawing::Point(62, 82);
 			this->ID->Name = L"ID";
-			this->ID->Size = System::Drawing::Size(32, 25);
+			this->ID->Size = System::Drawing::Size(26, 20);
 			this->ID->TabIndex = 1;
 			this->ID->Text = L"ID";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(82, 158);
-			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label3->Location = System::Drawing::Point(62, 126);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(87, 25);
+			this->label3->Size = System::Drawing::Size(65, 20);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"Nombre";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(82, 227);
-			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label4->Location = System::Drawing::Point(62, 182);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(79, 25);
+			this->label4->Size = System::Drawing::Size(60, 20);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Estado";
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(82, 286);
-			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label5->Location = System::Drawing::Point(62, 229);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(228, 25);
+			this->label5->Size = System::Drawing::Size(166, 20);
 			this->label5->TabIndex = 4;
 			this->label5->Text = L"Maxima Capacidad (g)";
 			// 
 			// txtID
 			// 
-			this->txtID->Location = System::Drawing::Point(366, 92);
-			this->txtID->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->txtID->Location = System::Drawing::Point(274, 74);
+			this->txtID->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->txtID->Name = L"txtID";
-			this->txtID->Size = System::Drawing::Size(148, 31);
+			this->txtID->Size = System::Drawing::Size(112, 26);
 			this->txtID->TabIndex = 6;
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(366, 148);
-			this->txtName->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->txtName->Location = System::Drawing::Point(274, 118);
+			this->txtName->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(148, 31);
+			this->txtName->Size = System::Drawing::Size(112, 26);
 			this->txtName->TabIndex = 7;
 			// 
 			// txtStatus
 			// 
-			this->txtStatus->Location = System::Drawing::Point(366, 217);
-			this->txtStatus->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->txtStatus->Location = System::Drawing::Point(274, 174);
+			this->txtStatus->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->txtStatus->Name = L"txtStatus";
-			this->txtStatus->Size = System::Drawing::Size(148, 31);
+			this->txtStatus->Size = System::Drawing::Size(112, 26);
 			this->txtStatus->TabIndex = 8;
 			// 
 			// txtCapacity
 			// 
-			this->txtCapacity->Location = System::Drawing::Point(366, 277);
-			this->txtCapacity->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->txtCapacity->Location = System::Drawing::Point(274, 222);
+			this->txtCapacity->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->txtCapacity->Name = L"txtCapacity";
-			this->txtCapacity->Size = System::Drawing::Size(148, 31);
+			this->txtCapacity->Size = System::Drawing::Size(112, 26);
 			this->txtCapacity->TabIndex = 9;
 			// 
 			// btnAdd
 			// 
-			this->btnAdd->Location = System::Drawing::Point(87, 383);
-			this->btnAdd->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnAdd->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnAdd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnAdd->Location = System::Drawing::Point(65, 306);
+			this->btnAdd->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(112, 36);
+			this->btnAdd->Size = System::Drawing::Size(84, 29);
 			this->btnAdd->TabIndex = 11;
 			this->btnAdd->Text = L"Añadir";
-			this->btnAdd->UseVisualStyleBackColor = true;
+			this->btnAdd->UseVisualStyleBackColor = false;
 			this->btnAdd->Click += gcnew System::EventHandler(this, &AddDeliveryRobot::btnAdd_Click);
 			// 
 			// AddDeliveryRobot
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::AntiqueWhite;
-			this->ClientSize = System::Drawing::Size(747, 540);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(560, 432);
 			this->Controls->Add(this->btnAdd);
 			this->Controls->Add(this->txtCapacity);
 			this->Controls->Add(this->txtStatus);
@@ -191,7 +189,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->ID);
 			this->Controls->Add(this->label1);
-			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"AddDeliveryRobot";
 			this->Text = L"AddDeliveryRobot";
 			this->ResumeLayout(false);

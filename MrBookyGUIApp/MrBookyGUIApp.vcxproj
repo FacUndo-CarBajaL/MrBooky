@@ -266,6 +266,9 @@
     <EmbeddedResource Include="DispatchProblemForm.resx">
       <DependentUpon>DispatchProblemForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LibrarianLogIn.resx">
+      <DependentUpon>LibrarianLogIn.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LibrarianMaintenance.resx">
       <DependentUpon>LibrarianMaintenance.h</DependentUpon>
     </EmbeddedResource>

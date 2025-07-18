@@ -125,11 +125,12 @@ namespace MrBookyGUIApp {
 				this->LibrarianId,
 					this->LibrarianName, this->LibrarianEmail
 			});
-			this->dgvLibrarians->Location = System::Drawing::Point(378, 493);
+			this->dgvLibrarians->Location = System::Drawing::Point(31, 308);
+			this->dgvLibrarians->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dgvLibrarians->Name = L"dgvLibrarians";
 			this->dgvLibrarians->RowHeadersWidth = 82;
 			this->dgvLibrarians->RowTemplate->Height = 33;
-			this->dgvLibrarians->Size = System::Drawing::Size(862, 190);
+			this->dgvLibrarians->Size = System::Drawing::Size(646, 152);
 			this->dgvLibrarians->TabIndex = 57;
 			this->dgvLibrarians->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MaintenanceLibrarian::dgvLibrarians_CellContentClick);
 			// 
@@ -162,11 +163,14 @@ namespace MrBookyGUIApp {
 			// 
 			// btnDelete
 			// 
-			this->btnDelete->BackColor = System::Drawing::Color::White;
+			this->btnDelete->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnDelete->ForeColor = System::Drawing::Color::Black;
-			this->btnDelete->Location = System::Drawing::Point(1131, 359);
+			this->btnDelete->Location = System::Drawing::Point(419, 243);
+			this->btnDelete->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnDelete->Name = L"btnDelete";
-			this->btnDelete->Size = System::Drawing::Size(173, 46);
+			this->btnDelete->Size = System::Drawing::Size(130, 37);
 			this->btnDelete->TabIndex = 56;
 			this->btnDelete->Text = L"Eliminar\r\n";
 			this->btnDelete->UseVisualStyleBackColor = false;
@@ -174,11 +178,14 @@ namespace MrBookyGUIApp {
 			// 
 			// btnUpdate
 			// 
-			this->btnUpdate->BackColor = System::Drawing::Color::White;
+			this->btnUpdate->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnUpdate->ForeColor = System::Drawing::Color::Black;
-			this->btnUpdate->Location = System::Drawing::Point(643, 359);
+			this->btnUpdate->Location = System::Drawing::Point(203, 243);
+			this->btnUpdate->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnUpdate->Name = L"btnUpdate";
-			this->btnUpdate->Size = System::Drawing::Size(226, 46);
+			this->btnUpdate->Size = System::Drawing::Size(170, 37);
 			this->btnUpdate->TabIndex = 55;
 			this->btnUpdate->Text = L"Modificar";
 			this->btnUpdate->UseVisualStyleBackColor = false;
@@ -186,13 +193,16 @@ namespace MrBookyGUIApp {
 			// 
 			// btnAdd
 			// 
-			this->btnAdd->BackColor = System::Drawing::Color::White;
-			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->btnAdd->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnAdd->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnAdd->ForeColor = System::Drawing::Color::Black;
-			this->btnAdd->Location = System::Drawing::Point(215, 359);
+			this->btnAdd->Location = System::Drawing::Point(31, 243);
+			this->btnAdd->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(183, 46);
+			this->btnAdd->Size = System::Drawing::Size(137, 37);
 			this->btnAdd->TabIndex = 54;
 			this->btnAdd->Text = L"Agregar";
 			this->btnAdd->UseVisualStyleBackColor = false;
@@ -200,39 +210,45 @@ namespace MrBookyGUIApp {
 			// 
 			// txtPassword
 			// 
-			this->txtPassword->Location = System::Drawing::Point(602, 285);
+			this->txtPassword->Location = System::Drawing::Point(150, 186);
+			this->txtPassword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtPassword->Name = L"txtPassword";
-			this->txtPassword->Size = System::Drawing::Size(332, 31);
+			this->txtPassword->Size = System::Drawing::Size(224, 26);
 			this->txtPassword->TabIndex = 50;
 			// 
 			// txtEmail
 			// 
-			this->txtEmail->Location = System::Drawing::Point(602, 231);
+			this->txtEmail->Location = System::Drawing::Point(150, 143);
+			this->txtEmail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtEmail->Name = L"txtEmail";
-			this->txtEmail->Size = System::Drawing::Size(333, 31);
+			this->txtEmail->Size = System::Drawing::Size(225, 26);
 			this->txtEmail->TabIndex = 49;
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(602, 178);
+			this->txtName->Location = System::Drawing::Point(150, 100);
+			this->txtName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(500, 31);
+			this->txtName->Size = System::Drawing::Size(225, 26);
 			this->txtName->TabIndex = 48;
 			// 
 			// txtId
 			// 
-			this->txtId->Location = System::Drawing::Point(602, 127);
+			this->txtId->Location = System::Drawing::Point(150, 60);
+			this->txtId->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtId->Name = L"txtId";
-			this->txtId->Size = System::Drawing::Size(500, 31);
+			this->txtId->Size = System::Drawing::Size(224, 26);
 			this->txtId->TabIndex = 47;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(413, 292);
+			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label5->Location = System::Drawing::Point(31, 192);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(135, 25);
+			this->label5->Size = System::Drawing::Size(100, 20);
 			this->label5->TabIndex = 43;
 			this->label5->Text = L"Contraseña :";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -240,20 +256,24 @@ namespace MrBookyGUIApp {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(413, 240);
+			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label4->Location = System::Drawing::Point(31, 150);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(84, 25);
+			this->label4->Size = System::Drawing::Size(61, 20);
 			this->label4->TabIndex = 42;
 			this->label4->Text = L"E-mail :";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(413, 127);
+			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label3->Location = System::Drawing::Point(31, 60);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(41, 25);
+			this->label3->Size = System::Drawing::Size(31, 20);
 			this->label3->TabIndex = 41;
 			this->label3->Text = L"Id :";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -261,33 +281,36 @@ namespace MrBookyGUIApp {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->ForeColor = System::Drawing::Color::WhiteSmoke;
-			this->label2->Location = System::Drawing::Point(413, 178);
+			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label2->Location = System::Drawing::Point(31, 100);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(99, 25);
+			this->label2->Size = System::Drawing::Size(73, 20);
 			this->label2->TabIndex = 40;
 			this->label2->Text = L"Nombre :";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(394, 18);
+			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label1->Location = System::Drawing::Point(26, 9);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(507, 38);
+			this->label1->Size = System::Drawing::Size(417, 32);
 			this->label1->TabIndex = 39;
 			this->label1->Text = L"Ingresar datos del bibliotecario :";
 			this->label1->Click += gcnew System::EventHandler(this, &MaintenanceLibrarian::label1_Click);
 			// 
 			// MaintenanceLibrarian
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->ClientSize = System::Drawing::Size(1463, 775);
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
+			this->ClientSize = System::Drawing::Size(708, 479);
 			this->Controls->Add(this->dgvLibrarians);
 			this->Controls->Add(this->btnDelete);
 			this->Controls->Add(this->btnUpdate);
@@ -301,6 +324,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MaintenanceLibrarian";
 			this->Text = L"MaintenanceLibrarian";
 			this->Load += gcnew System::EventHandler(this, &MaintenanceLibrarian::MaintenanceLibrarian_Load);

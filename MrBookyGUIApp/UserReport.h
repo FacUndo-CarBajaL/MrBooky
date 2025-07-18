@@ -78,62 +78,79 @@ namespace MrBookyGUIApp {
 			// 
 			// txtUser
 			// 
-			this->txtUser->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+			this->txtUser->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtUser->ForeColor = System::Drawing::Color::DarkGray;
-			this->txtUser->Location = System::Drawing::Point(48, 25);
+			this->txtUser->Location = System::Drawing::Point(49, 24);
 			this->txtUser->Name = L"txtUser";
-			this->txtUser->Size = System::Drawing::Size(568, 29);
+			this->txtUser->Size = System::Drawing::Size(568, 35);
 			this->txtUser->TabIndex = 0;
 			this->txtUser->Text = L"Ingrese Usuario";
 			// 
 			// btnSearch
 			// 
+			this->btnSearch->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(56)), static_cast<System::Int32>(static_cast<System::Byte>(142)),
+				static_cast<System::Int32>(static_cast<System::Byte>(60)));
+			this->btnSearch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSearch->ForeColor = System::Drawing::Color::Black;
 			this->btnSearch->Location = System::Drawing::Point(645, 23);
 			this->btnSearch->Name = L"btnSearch";
-			this->btnSearch->Size = System::Drawing::Size(86, 33);
+			this->btnSearch->Size = System::Drawing::Size(110, 34);
 			this->btnSearch->TabIndex = 1;
 			this->btnSearch->Text = L"Buscar";
-			this->btnSearch->UseVisualStyleBackColor = true;
+			this->btnSearch->UseVisualStyleBackColor = false;
 			this->btnSearch->Click += gcnew System::EventHandler(this, &UserReport::btnSearch_Click);
 			// 
 			// lbResults
 			// 
 			this->lbResults->AutoSize = true;
-			this->lbResults->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
+			this->lbResults->BackColor = System::Drawing::Color::Transparent;
+			this->lbResults->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lbResults->ForeColor = System::Drawing::Color::White;
-			this->lbResults->Location = System::Drawing::Point(44, 68);
+			this->lbResults->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->lbResults->Location = System::Drawing::Point(44, 75);
 			this->lbResults->Name = L"lbResults";
-			this->lbResults->Size = System::Drawing::Size(106, 22);
+			this->lbResults->Size = System::Drawing::Size(146, 29);
 			this->lbResults->TabIndex = 2;
 			this->lbResults->Text = L"Resultados :";
 			// 
 			// lbName
 			// 
 			this->lbName->AutoSize = true;
+			this->lbName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbName->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->lbName->Location = System::Drawing::Point(44, 116);
 			this->lbName->Name = L"lbName";
-			this->lbName->Size = System::Drawing::Size(83, 22);
+			this->lbName->Size = System::Drawing::Size(113, 29);
 			this->lbName->TabIndex = 3;
 			this->lbName->Text = L"Nombre :";
 			// 
 			// lbEmail
 			// 
 			this->lbEmail->AutoSize = true;
-			this->lbEmail->Location = System::Drawing::Point(44, 163);
+			this->lbEmail->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbEmail->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->lbEmail->Location = System::Drawing::Point(44, 157);
 			this->lbEmail->Name = L"lbEmail";
-			this->lbEmail->Size = System::Drawing::Size(70, 22);
+			this->lbEmail->Size = System::Drawing::Size(86, 29);
 			this->lbEmail->TabIndex = 4;
 			this->lbEmail->Text = L"Email :";
 			// 
 			// lbPhone
 			// 
 			this->lbPhone->AutoSize = true;
+			this->lbPhone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbPhone->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->lbPhone->Location = System::Drawing::Point(571, 116);
 			this->lbPhone->Name = L"lbPhone";
-			this->lbPhone->Size = System::Drawing::Size(181, 22);
+			this->lbPhone->Size = System::Drawing::Size(245, 29);
 			this->lbPhone->TabIndex = 5;
 			this->lbPhone->Text = L"Número de teléfono : ";
 			// 
@@ -149,18 +166,21 @@ namespace MrBookyGUIApp {
 			// lbHistorial
 			// 
 			this->lbHistorial->AutoSize = true;
+			this->lbHistorial->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lbHistorial->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
 			this->lbHistorial->Location = System::Drawing::Point(428, 196);
 			this->lbHistorial->Name = L"lbHistorial";
-			this->lbHistorial->Size = System::Drawing::Size(83, 22);
+			this->lbHistorial->Size = System::Drawing::Size(101, 29);
 			this->lbHistorial->TabIndex = 7;
 			this->lbHistorial->Text = L"Historial";
 			// 
 			// UserReport
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(11, 22);
+			this->AutoScaleDimensions = System::Drawing::SizeF(14, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->BackColor = System::Drawing::Color::WhiteSmoke;
 			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->lbHistorial);
 			this->Controls->Add(this->pnHistorial);
