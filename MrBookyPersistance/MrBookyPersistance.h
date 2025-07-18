@@ -81,5 +81,19 @@ namespace MrBookyPersistance {
 		static int DeleteLibrarySQL(int libraryId);
 		static int UpdateLibrarySQL(Library^ library);
 		static Library^ GetLibraryByIdSQL(int libraryId);
+
+		//Persistencia  de robot con babse de datos
+		static int AddRobotBd(DeliveryRobot^ deliveryRobot, int pointId);
+		static int DeleteRobotBd(int robotId);
+		static int UpdateRobotBd(DeliveryRobot^ deliveryRobot);
+		static List <DeliveryRobot^>^ QueryAllRobotsBd();
+		static DeliveryRobot^ QueryRobotByIdBd(int robotId);
+
+
+		//Persistencia  de Punto de ubicacion del robot con base de datos
+		static int AddPointBd();
+		static int DeletePointBd(int robotId);
+		static int UpdatePointBd(DeliveryRobot^ deliveryRobot);
+		static Point^ QueryPointByIdBd(int pointId);
 	};
 }
