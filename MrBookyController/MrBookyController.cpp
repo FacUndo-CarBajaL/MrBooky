@@ -167,39 +167,44 @@ List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
 int MrBookyController::Controller::AddRobot(DeliveryRobot^ robot)
 {
 	// Agrega el robot a la lista de robots
-	try {
-		robots->Add(robot);
-		Persistance::PersistBinaryFileRobots("robots.bin", robots);
-		return 1;
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	return 0;
+	//try {
+	//	robots->Add(robot);
+	//	Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//	return 1;
+	//}
+	//catch (Exception^ ex) {
+	//	throw ex;
+	//}
+	//return 0;
+
+	return MrBookyPersistance::Persistance::AddRobotBd(robot, MrBookyPersistance::Persistance::AddPointBd());
 }
 
 List<DeliveryRobot^>^ MrBookyController::Controller::GetRobots(){
 
 
-	robots = (List<DeliveryRobot^>^)Persistance::LoadBinaryFileRobots("robots.bin");
-	if (robots == nullptr) {
-		robots = gcnew List<DeliveryRobot^>(); // fallback defensivo
-	}
-	return robots;
+	//robots = (List<DeliveryRobot^>^)Persistance::LoadBinaryFileRobots("robots.bin");
+	//if (robots == nullptr) {
+	//	robots = gcnew List<DeliveryRobot^>(); // fallback defensivo
+	//}
+	//return robots;
+	return MrBookyPersistance::Persistance::QueryAllRobotsBd();
 }
 
 DeliveryRobot^ MrBookyController::Controller::SearchRobot(int robotId)
 {
-	robots = GetRobots();
-	// TODO: Insertar una instrucción "return" aquí
-	for each (DeliveryRobot ^ robot in robots)
-	{
-		if (robot->RobotID == robotId)
-		{
-			return robot;
-		}
-	}
-	return nullptr;
+	//robots = GetRobots();
+	//// TODO: Insertar una instrucción "return" aquí
+	//for each (DeliveryRobot ^ robot in robots)
+	//{
+	//	if (robot->RobotID == robotId)
+	//	{
+	//		return robot;
+	//	}
+	//}
+	//return nullptr;
+
+	return MrBookyPersistance::Persistance::QueryRobotByIdBd(robotId);
 }
 
 DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotName)
@@ -218,34 +223,37 @@ DeliveryRobot^ MrBookyController::Controller::SearchRobotByName(String^ robotNam
 
 int MrBookyController::Controller::UpdateRobot(DeliveryRobot^ robot)
 {
-	// Busca el robot en la lista de robots
-	for (int i = 0; i < robots->Count; i++)
-	{
-		if (robots[i]->RobotID == robot->RobotID)
-		{
-			// Actualiza el robot
-			robots[i] = robot;
-			Persistance::PersistBinaryFileRobots("robots.bin", robots);
-			return 1;
-		}
-	}
-	return 0;
+	//// Busca el robot en la lista de robots
+	//for (int i = 0; i < robots->Count; i++)
+	//{
+	//	if (robots[i]->RobotID == robot->RobotID)
+	//	{
+	//		// Actualiza el robot
+	//		robots[i] = robot;
+	//		Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//		return 1;
+	//	}
+	//}
+	//return 0;
+	return MrBookyPersistance::Persistance::UpdateRobotBd(robot);
 }
 
 int MrBookyController::Controller::DeleteRobot(int robotId)
 {
-	// Busca el robot en la lista de robots
-	for (int i = 0; i < robots->Count; i++)
-	{
-		if (robots[i]->RobotID == robotId)
-		{
-			// Elimina el robot
-			robots->RemoveAt(i);
-			Persistance::PersistBinaryFileRobots("robots.bin", robots);
-			return 1;
-		}
-	}
-	return 0;
+	//// Busca el robot en la lista de robots
+	//for (int i = 0; i < robots->Count; i++)
+	//{
+	//	if (robots[i]->RobotID == robotId)
+	//	{
+	//		// Elimina el robot
+	//		robots->RemoveAt(i);
+	//		Persistance::PersistBinaryFileRobots("robots.bin", robots);
+	//		return 1;
+	//	}
+	//}
+	//return 0;
+	MrBookyPersistance::Persistance::DeletePointBd(robotId);
+	return MrBookyPersistance::Persistance::DeleteRobotBd(robotId);
 }
 
 Byte CalculateChecksum(String^ data) {
