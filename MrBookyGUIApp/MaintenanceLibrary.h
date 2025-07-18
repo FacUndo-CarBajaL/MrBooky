@@ -134,9 +134,10 @@ namespace MrBookyGUIApp {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 16.125F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(468, 26);
+			this->label1->Location = System::Drawing::Point(312, 17);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(499, 49);
+			this->label1->Size = System::Drawing::Size(316, 31);
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"Ingresar datos de la librería:";
 			this->label1->Click += gcnew System::EventHandler(this, &MaintenanceLibrary::label1_Click);
@@ -147,9 +148,10 @@ namespace MrBookyGUIApp {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(135, 129);
+			this->label2->Location = System::Drawing::Point(90, 83);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(116, 33);
+			this->label2->Size = System::Drawing::Size(75, 21);
 			this->label2->TabIndex = 1;
 			this->label2->Text = L"Nombre:";
 			// 
@@ -159,9 +161,10 @@ namespace MrBookyGUIApp {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(135, 176);
+			this->label3->Location = System::Drawing::Point(90, 113);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(44, 33);
+			this->label3->Size = System::Drawing::Size(27, 21);
 			this->label3->TabIndex = 2;
 			this->label3->Text = L"X:";
 			// 
@@ -171,17 +174,19 @@ namespace MrBookyGUIApp {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(135, 229);
+			this->label4->Location = System::Drawing::Point(90, 147);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(41, 33);
+			this->label4->Size = System::Drawing::Size(25, 21);
 			this->label4->TabIndex = 3;
 			this->label4->Text = L"Y:";
 			// 
 			// btnAddLibrary
 			// 
-			this->btnAddLibrary->Location = System::Drawing::Point(233, 344);
+			this->btnAddLibrary->Location = System::Drawing::Point(155, 220);
+			this->btnAddLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnAddLibrary->Name = L"btnAddLibrary";
-			this->btnAddLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnAddLibrary->Size = System::Drawing::Size(147, 36);
 			this->btnAddLibrary->TabIndex = 4;
 			this->btnAddLibrary->Text = L"Agregar Librería";
 			this->btnAddLibrary->UseVisualStyleBackColor = true;
@@ -189,9 +194,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnUpdateLibrary
 			// 
-			this->btnUpdateLibrary->Location = System::Drawing::Point(579, 344);
+			this->btnUpdateLibrary->Location = System::Drawing::Point(386, 220);
+			this->btnUpdateLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnUpdateLibrary->Name = L"btnUpdateLibrary";
-			this->btnUpdateLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnUpdateLibrary->Size = System::Drawing::Size(147, 36);
 			this->btnUpdateLibrary->TabIndex = 5;
 			this->btnUpdateLibrary->Text = L"Modificar Librería";
 			this->btnUpdateLibrary->UseVisualStyleBackColor = true;
@@ -199,9 +205,10 @@ namespace MrBookyGUIApp {
 			// 
 			// btnDeleteLibrary
 			// 
-			this->btnDeleteLibrary->Location = System::Drawing::Point(936, 344);
+			this->btnDeleteLibrary->Location = System::Drawing::Point(624, 220);
+			this->btnDeleteLibrary->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnDeleteLibrary->Name = L"btnDeleteLibrary";
-			this->btnDeleteLibrary->Size = System::Drawing::Size(220, 56);
+			this->btnDeleteLibrary->Size = System::Drawing::Size(147, 36);
 			this->btnDeleteLibrary->TabIndex = 6;
 			this->btnDeleteLibrary->Text = L"Eliminar Librería";
 			this->btnDeleteLibrary->UseVisualStyleBackColor = true;
@@ -209,23 +216,26 @@ namespace MrBookyGUIApp {
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(309, 134);
+			this->txtName->Location = System::Drawing::Point(206, 86);
+			this->txtName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(424, 31);
+			this->txtName->Size = System::Drawing::Size(284, 22);
 			this->txtName->TabIndex = 7;
 			// 
 			// txtX
 			// 
-			this->txtX->Location = System::Drawing::Point(309, 179);
+			this->txtX->Location = System::Drawing::Point(206, 115);
+			this->txtX->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtX->Name = L"txtX";
-			this->txtX->Size = System::Drawing::Size(132, 31);
+			this->txtX->Size = System::Drawing::Size(89, 22);
 			this->txtX->TabIndex = 8;
 			// 
 			// txtY
 			// 
-			this->txtY->Location = System::Drawing::Point(309, 234);
+			this->txtY->Location = System::Drawing::Point(206, 150);
+			this->txtY->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtY->Name = L"txtY";
-			this->txtY->Size = System::Drawing::Size(132, 31);
+			this->txtY->Size = System::Drawing::Size(89, 22);
 			this->txtY->TabIndex = 9;
 			// 
 			// dgvLibraries
@@ -235,12 +245,14 @@ namespace MrBookyGUIApp {
 				this->LibraryName,
 					this->XPosition, this->YPosition, this->Email, this->OpenHour, this->CloseHour
 			});
-			this->dgvLibraries->Location = System::Drawing::Point(113, 428);
+			this->dgvLibraries->Location = System::Drawing::Point(75, 274);
+			this->dgvLibraries->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->dgvLibraries->Name = L"dgvLibraries";
 			this->dgvLibraries->RowHeadersWidth = 82;
 			this->dgvLibraries->RowTemplate->Height = 33;
-			this->dgvLibraries->Size = System::Drawing::Size(1280, 247);
+			this->dgvLibraries->Size = System::Drawing::Size(853, 158);
 			this->dgvLibraries->TabIndex = 10;
+			this->dgvLibraries->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MaintenanceLibrary::dgvLibraries_CellContentClick);
 			// 
 			// LibraryName
 			// 
@@ -290,9 +302,10 @@ namespace MrBookyGUIApp {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(773, 179);
+			this->label5->Location = System::Drawing::Point(515, 115);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(210, 33);
+			this->label5->Size = System::Drawing::Size(139, 21);
 			this->label5->TabIndex = 11;
 			this->label5->Text = L"Hora de apertura:";
 			// 
@@ -302,9 +315,10 @@ namespace MrBookyGUIApp {
 			this->label6->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label6->ForeColor = System::Drawing::Color::White;
-			this->label6->Location = System::Drawing::Point(773, 134);
+			this->label6->Location = System::Drawing::Point(515, 86);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(114, 33);
+			this->label6->Size = System::Drawing::Size(71, 21);
 			this->label6->TabIndex = 12;
 			this->label6->Text = L"EMAIL:";
 			// 
@@ -314,43 +328,47 @@ namespace MrBookyGUIApp {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Times New Roman", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(773, 229);
+			this->label7->Location = System::Drawing::Point(515, 147);
+			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(183, 33);
+			this->label7->Size = System::Drawing::Size(120, 21);
 			this->label7->TabIndex = 13;
 			this->label7->Text = L"Hora de cierre:";
 			// 
 			// txtEmail
 			// 
-			this->txtEmail->Location = System::Drawing::Point(1002, 129);
+			this->txtEmail->Location = System::Drawing::Point(668, 83);
+			this->txtEmail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtEmail->Name = L"txtEmail";
-			this->txtEmail->Size = System::Drawing::Size(413, 31);
+			this->txtEmail->Size = System::Drawing::Size(277, 22);
 			this->txtEmail->TabIndex = 14;
 			// 
 			// txtOpenHour
 			// 
-			this->txtOpenHour->Location = System::Drawing::Point(1002, 182);
+			this->txtOpenHour->Location = System::Drawing::Point(668, 116);
+			this->txtOpenHour->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtOpenHour->Mask = L"00:00";
 			this->txtOpenHour->Name = L"txtOpenHour";
-			this->txtOpenHour->Size = System::Drawing::Size(270, 31);
+			this->txtOpenHour->Size = System::Drawing::Size(181, 22);
 			this->txtOpenHour->TabIndex = 15;
 			this->txtOpenHour->ValidatingType = System::DateTime::typeid;
 			// 
 			// txtCLoseHour
 			// 
-			this->txtCLoseHour->Location = System::Drawing::Point(1002, 234);
+			this->txtCLoseHour->Location = System::Drawing::Point(668, 150);
+			this->txtCLoseHour->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtCLoseHour->Mask = L"00:00";
 			this->txtCLoseHour->Name = L"txtCLoseHour";
-			this->txtCLoseHour->Size = System::Drawing::Size(270, 31);
+			this->txtCLoseHour->Size = System::Drawing::Size(181, 22);
 			this->txtCLoseHour->TabIndex = 16;
 			this->txtCLoseHour->ValidatingType = System::DateTime::typeid;
 			// 
 			// MaintenanceLibrary
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::MidnightBlue;
-			this->ClientSize = System::Drawing::Size(1479, 736);
+			this->ClientSize = System::Drawing::Size(986, 471);
 			this->Controls->Add(this->txtCLoseHour);
 			this->Controls->Add(this->txtOpenHour);
 			this->Controls->Add(this->txtEmail);
@@ -368,6 +386,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"MaintenanceLibrary";
 			this->Text = L"MaintenanceLibrary";
 			this->Load += gcnew System::EventHandler(this, &MaintenanceLibrary::MaintenanceLibrary_Load);
@@ -394,7 +413,7 @@ namespace MrBookyGUIApp {
 				return;
 			}
 			Library^ library = gcnew Library(name, email, openHour, closeHour, xPosition, yPosition);
-			if (Controller::AddLibrary(library) == 1) {
+			if (Controller::AddLibrary(library)>=0) {
 				ShowLibraries();
 				MessageBox::Show("Se ha agregado la libreria " + name);
 			}
@@ -498,6 +517,20 @@ private: System::Void btnDeleteLibrary_Click(System::Object^ sender, System::Eve
 private: System::Void MaintenanceLibrary_Load(System::Object^ sender, System::EventArgs^ e) {
 	ShowLibraries();
 
+}
+private: System::Void dgvLibraries_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
+	if (e->RowIndex >= 0 && e->RowIndex < dgvLibraries->Rows->Count) {
+		DataGridViewRow^ row = dgvLibraries->Rows[e->RowIndex];
+		txtName->Text = row->Cells["LibraryName"]->Value->ToString();
+		txtX->Text = row->Cells["XPosition"]->Value->ToString();
+		txtY->Text = row->Cells["YPosition"]->Value->ToString();
+		txtEmail->Text = row->Cells["Email"]->Value->ToString();
+		txtOpenHour->Text = row->Cells["OpenHour"]->Value->ToString();
+		txtCLoseHour->Text = row->Cells["CloseHour"]->Value->ToString();
+	}
+	else {
+		MessageBox::Show("Seleccione una fila válida.");
+	}
 }
 };
 }

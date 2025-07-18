@@ -266,16 +266,23 @@ namespace MrBookyGUIApp {
 
 
 			Controller::AddUser(user);
-			txtNombreCompleto->Clear();
-			txtNombreUsuario->Clear();
-			txtCorreo->Clear();
-			txtCelular->Clear();
-			txtContraseña->Clear();
-			txtCodigoEstudiante->Clear();
-			this->Close();
-			userId++;
+			if (user != nullptr) {
+				MessageBox::Show("Usuario " + user->Name + " registrado éxitosamente.");
+				txtNombreCompleto->Clear();
+				txtNombreUsuario->Clear();
+				txtCorreo->Clear();
+				txtCelular->Clear();
+				txtContraseña->Clear();
+				txtCodigoEstudiante->Clear();
+				this->Close();
+				userId++;
 
-			MessageBox::Show("Usuario registrado éxitosamente.");
+				MessageBox::Show("Usuario registrado éxitosamente.");
+			}
+			else {
+				MessageBox::Show("No se ha podido registrar el usuario.");
+			}
+			
 			
 		}
 		catch (Exception^ ex) {

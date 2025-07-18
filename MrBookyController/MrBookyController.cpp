@@ -4,7 +4,7 @@
 #include "DuplicateBookException.h"
 #include "NotFoundException.h"
 
-void MrBookyController::Controller::AddBook(Book^ book)
+int MrBookyController::Controller::AddBook(Book^ book)
 {
 	// Agrega el libro a la lista de libros
 	//books = GetBooks();
@@ -14,28 +14,29 @@ void MrBookyController::Controller::AddBook(Book^ book)
 			throw gcnew DuplicateBookException("El nombre del libro ya existe en la base de datos.");
 		}
 	}*/
-	books = GetBooks();
+	/*books = GetBooks();
 	if (books == nullptr) {
 		books = gcnew List<Book^>(); // fallback defensivo
 	}
 	books->Add(book);
-	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);
-	
-	
+	Persistance::PersistBinaryFile(BIN_BOOK_FILE_NAME, books);*/
+	return Persistance::AddBooksSQL(book);
 }
 
 List<Book^>^ MrBookyController::Controller::GetBooks()
 {
-	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	/*books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	if (books == nullptr) {
 		books = gcnew List<Book^>(); // fallback defensivo
 	}
-	return books;
+	return books;*/
+
+	return Persistance::GetAllBooksSQL();
 }
 
 Book^ MrBookyController::Controller::SearchBook(String^ title)
 {
-	books = GetBooks();
+	/*books = GetBooks();
 	// TODO: Insertar una instrucción "return" aquí
 	for each (Book ^ book in books)
 	{
@@ -44,12 +45,13 @@ Book^ MrBookyController::Controller::SearchBook(String^ title)
 			return book;
 		}
 	}
-	return nullptr;
+	return nullptr;*/
+	return Persistance::GetBookByNameSQL(title);
 }
 
 Book^ MrBookyController::Controller::SearchBookById(int bookId)
 {
-	books = GetBooks();
+	/*books = GetBooks();
 	for each(Book ^ book in books)
 	{
 		if (book->BookID == bookId)
@@ -58,12 +60,13 @@ Book^ MrBookyController::Controller::SearchBookById(int bookId)
 		}
 	}
 
-	return nullptr;
+	return nullptr;*/
+	return Persistance::GetBookByIdSQL(bookId);
 }
 
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSearch, String^ authorSearch, String^ publisherSearch, String^ genreSearch)
 {
-	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	/*books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	List<Book^>^ resultBooks = gcnew List<Book^>();
 	resultBooks = nullptr;
 
@@ -84,13 +87,14 @@ List<Book^>^ MrBookyController::Controller::AdvancedSearchBook1(String^ titleSea
 			}
 		
 	}
-	return resultBooks;
+	return resultBooks;*/
+	return Persistance::AdvancedSearchBookSQL1(titleSearch, authorSearch, publisherSearch, genreSearch);
 }
 
 int MrBookyController::Controller::UpdateBook(Book^ book)
 {
 	// Busca el libro en la lista de libros
-	books = Controller::GetBooks();
+	/*books = Controller::GetBooks();
 	for (int i = 0; i < books->Count; i++)
 	{
 		if (books[i]->Title == book->Title)
@@ -101,13 +105,14 @@ int MrBookyController::Controller::UpdateBook(Book^ book)
 			return 1;
 		}
 	}
-	return 0;
+	return 0;*/
+	return Persistance::UpdateBookSQL(book);
 }
 
 int MrBookyController::Controller::DeleteBook(String^ Title)
 {
 	//books = Controller::GetBooks();
-	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	/*books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	for (int i = 0; i < books->Count; i++)
 	{
 		if (books[i]->Title == Title)
@@ -118,12 +123,13 @@ int MrBookyController::Controller::DeleteBook(String^ Title)
 		}
 	}
 	
-	return 0;
+	return 0;*/
+	return Persistance::DeleteBookSQL(Title);
 }
 
 List<Book^>^ MrBookyController::Controller::AdvancedSearchBook(String^ title, String^ author, String^ publisher, String^ genre)
 {
-	List<Book^>^ foundBooks = gcnew List<Book^>();
+	/*List<Book^>^ foundBooks = gcnew List<Book^>();
 	try {
 		books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 		for each (Book ^ book in books) {
@@ -138,7 +144,8 @@ List<Book^>^ MrBookyController::Controller::AdvancedSearchBook(String^ title, St
 	catch (Exception^ ex) {
 		throw ex;
 	}
-	return foundBooks;
+	return foundBooks;*/
+	return Persistance::AdvancedSearchBookSQL(title, author, publisher, genre);
 }
 
 List<Loan^>^ MrBookyController::Controller::GetLoanHistoryByUserID(int userid)
@@ -309,62 +316,66 @@ void MrBookyController::Controller::ClosePort()
 
 int MrBookyController::Controller::AddLibrary(Library^ library)
 {
-	try {
+	/*try {
 		// Agrega la biblioteca a la lista de bibliotecas
 		if (libraries == nullptr) {
 			libraries= gcnew List<Library^>();;
 		}
 
 		MrBookyController::Controller::libraries ->Add(library);
-		Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
+		Persistance::AddLibrarySQL(library);
 		return 1;
 	}
 	catch (Exception^ ex) {
 		throw ex;
 	}
-	return 0;
+	return 0;*/
+
+	return Persistance::AddLibrarySQL(library);
 }
 
 List<Library^>^ MrBookyController::Controller::GetLibraries()
 {
-	libraries = (List<Library^>^)Persistance::LoadBinaryFileLibraries("libraries.bin");
+	/*libraries = (List<Library^>^)Persistance::GetAllLibrariesSQL();
 	if (libraries == nullptr) {
 		libraries = gcnew List<Library^>(); // fallback defensivo
 	}
-	return libraries;
+	return libraries;*/
+	return Persistance::GetAllLibrariesSQL();
 }
 
 Library^ MrBookyController::Controller::SearchLibrary(String^ libraryName)
 {
 	// TODO: Insertar una instrucción "return" aquí
-	for each (Library ^ library in libraries)
+	/*for each (Library ^ library in libraries)
 	{
 		if (library->Name->ToLower() == libraryName->ToLower())
 		{
 			return library;
 		}
 	}
-	return nullptr;
+	return nullptr;*/
+	return Persistance::GetLibraryByNameSQL(libraryName);
 }
 
 Library^ MrBookyController::Controller::SearchLibrarybyID(int libraryId)
 {
-	libraries = GetLibraries();
+	/*libraries = GetLibraries();
 	for each (Library ^ library in libraries)
 	{
 		if (library->LibraryID == libraryId)
 		{
 			return library;
 		}
-	}
+	}*/
 
-	return nullptr;
+	return Persistance::GetLibraryByIdSQL(libraryId);
 }
 
 int MrBookyController::Controller::UpdateLibrary(Library^ library)
 {
 	// Busca la biblioteca en la lista de bibliotecas
-	for (int i = 0; i < libraries->Count; i++)
+	/*for (int i = 0; i < libraries->Count; i++)
 	{
 		if (libraries[i]->LibraryID == library->LibraryID)
 		{
@@ -373,14 +384,14 @@ int MrBookyController::Controller::UpdateLibrary(Library^ library)
 			MrBookyPersistance::Persistance::PersistBinaryFileLibraries("libraries.bin", libraries);
 			return 1;
 		}
-	}
-	return 0;
+	}*/
+	return Persistance::UpdateLibrarySQL(library);
 }
 
 int MrBookyController::Controller::DeleteLibrary(String^ libraryName)
 {
 	// Busca la biblioteca en la lista de bibliotecas
-	for (int i = 0; i < libraries->Count; i++)
+	/*for (int i = 0; i < libraries->Count; i++)
 	{
 		if (libraries[i]->Name == libraryName)
 		{
@@ -390,40 +401,45 @@ int MrBookyController::Controller::DeleteLibrary(String^ libraryName)
 			return 1;
 		}
 	}
-	return 0;
+	return 0;*/
+	return Persistance::DeleteLibrarySQL(libraryName);
 }
 
-void MrBookyController::Controller::AddUser(User^ user)
+int MrBookyController::Controller::AddUser(User^ user)
 {
-	users = Controller::GetUsers();
+	/*users = Controller::GetUsers();
 	for each (User^ registeredUser in users) {
 		if (registeredUser->Name == user->Name) {
 			throw gcnew DuplicateBookException("El nombre de el usuario ya existe en la base de datos.");
 		}
 	}
     users->Add(user);
-	Persistance::PersistBinaryFile(BIN_USER_FILE_NAME, users);
+	Persistance::PersistBinaryFile(BIN_USER_FILE_NAME, users);*/
+	return Persistance::AddUserSQL(user);
 }
 
 List<User^>^ MrBookyController::Controller::GetUsers()
 {
-	users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
+	/*users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
 	if (users == nullptr) {
 		users = gcnew List<User^>(); // fallback defensivo
 	}
-	return users;
+	return users;*/
+
+	return Persistance::GetAllUsersSQL();
 }
 
 User^ MrBookyController::Controller::SearchUser(int userId)
 {
-	users = GetUsers();
+	/*users = GetUsers();
 	for each (User ^ user in users)
 	{
 		if (user->UserID == userId)
 		{
 			return user;
 		}
-	}
+	}*/
+	return Persistance::GetUserByIdSQL(userId);
 }
 
 
@@ -432,7 +448,7 @@ User^ MrBookyController::Controller::SearchUser(int userId)
 User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userName, String^ userPassword)
 {
 	
-	users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
+	/*users = (List<User^>^)Persistance::LoadBinaryFile(BIN_USER_FILE_NAME);
 	for each (User ^ user in users)
 	{
 		if (user->Name == userName)
@@ -442,20 +458,21 @@ User^ MrBookyController::Controller::SearchUserByNameAndPassword(String^ userNam
 			}
 		}
 
-	}
-
+	}*/
+	return Persistance::GetUserByNameAndPasswordSQL(userName, userPassword);
 }
 Book^ MrBookyController::Controller::SearchBookByName(String^ bookName)
 {
 
-	books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
+	/*books = (List<Book^>^)Persistance::LoadBinaryFile(BIN_BOOK_FILE_NAME);
 	for each (Book ^ book in books)
 	{
 		if (book->Title == bookName)
 		{
 			return book;
 		}
-	}
+	}*/
+	return Persistance::GetBookByNameSQL(bookName);
 }
 //
 
@@ -464,7 +481,7 @@ Book^ MrBookyController::Controller::SearchBookByName(String^ bookName)
 int MrBookyController::Controller::UpdateUser(User^ user)
 {
 	// Busca el usuario en la lista de usuarios
-	for (int i = 0; i < users->Count; i++)
+	/*for (int i = 0; i < users->Count; i++)
 	{
 		if (users[i]->UserID == user->UserID)
 		{
@@ -474,13 +491,14 @@ int MrBookyController::Controller::UpdateUser(User^ user)
 			return 1;
 		}
 	}
-	return 0;
+	return 0;*/
+	return Persistance::UpdateUserSQL(user);
 }
 
 int MrBookyController::Controller::DeleteUser(int userId)
 {
 	// Busca el usuario en la lista de usuarios
-	for (int i = 0; i < users->Count; i++)
+	/*for (int i = 0; i < users->Count; i++)
 	{
 		if (users[i]->UserID == userId)
 		{
@@ -490,7 +508,8 @@ int MrBookyController::Controller::DeleteUser(int userId)
 			return 1;
 		}
 	}
-	return 0;
+	return 0;*/
+	return Persistance::DeleteUserSQL(userId);
 }
 
 int MrBookyController::Controller::AddLoan(Loan^ loan)

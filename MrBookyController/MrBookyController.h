@@ -37,7 +37,7 @@ namespace MrBookyController {
 		// TODO: Agregue aquí los métodos de esta clase.
 		public:
 			// Métodos CRUD para Book
-			static void AddBook(Book^ book);
+			static int AddBook(Book^ book);
 			static List<Book^>^ GetBooks();
 			static Book^ SearchBook(String^ title);
 			static Book^ SearchBookById(int bookId);
@@ -79,7 +79,7 @@ namespace MrBookyController {
 			static int DeleteLibrary(String^ Name);
 
 			// M�todos CRUD para User
-			static void AddUser(User^ user);
+			static int AddUser(User^ user);
 			static List<User^>^ GetUsers();
 			static User^ SearchUser(int userId);
 			static int UpdateUser(User^ user);
