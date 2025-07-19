@@ -279,21 +279,28 @@ namespace MrBookyGUIApp {
 			user->Email = txtCorreo->Text->Trim();
 			user->PhoneNumber = Convert::ToInt32(txtCelular->Text);
 			user->StudentCode = Convert::ToInt32(txtCodigoEstudiante->Text);
-			user->UserID =(user->StudentCode) * 100 + 1;
 
 
-			Controller::AddUser(user);
-			txtNombreCompleto->Clear();
-			txtNombreUsuario->Clear();
-			txtCorreo->Clear();
-			txtCelular->Clear();
-			txtContraseña->Clear();
-			txtCodigoEstudiante->Clear();
-			this->Close();
-			userId++;
 
-			MessageBox::Show("Usuario registrado éxitosamente.");
-			
+			if (user != nullptr) {
+				int userid = Controller::AddUser(user);
+				MessageBox::Show("Usuario " + user->Name + " Tipo: " + user->UserType + " registrado éxitosamente.");
+				txtNombreCompleto->Clear();
+				txtNombreUsuario->Clear();
+				txtCorreo->Clear();
+				txtCelular->Clear();
+				txtContraseña->Clear();
+				txtCodigoEstudiante->Clear();
+				this->Close();
+				userId++;
+
+				MessageBox::Show("Usuario registrado éxitosamente.");
+			}
+			else {
+				MessageBox::Show("No se ha podido registrar el usuario.");
+			}
+
+
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("No se ha podido agregar el usuario por el siguiente motivo:\n" +

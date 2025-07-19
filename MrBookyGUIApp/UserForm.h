@@ -203,33 +203,30 @@ private: System::Void btnIngresar_Click(System::Object^ sender, System::EventArg
 	String^ userName = txtUserName->Text->Trim();
 	String^ userPassword = txtUserPassword->Text->Trim();
 	User^ user = Controller::SearchUserByNameAndPassword(userName, userPassword);
-	
+
 	if (user == nullptr) {
 		MessageBox::Show("Usuario y/o contraseña inválidos");
+		return;
+	}
+
+	if (Client^ client = dynamic_cast<Client^>(user)) {
+		Persistance::UserRAMBinaryFile("TempUser.bin", client); // <== SOLO SI ES CLIENTE
+		UserOptionsForm^ clientForm = gcnew UserOptionsForm();
+		MessageBox::Show("Se ha ingresado como cliente. Bienvenido@ " + userName);
+		clientForm->Show();
+	}
+	else if (Librarian^ librarian = dynamic_cast<Librarian^>(user)) {
+		MessageBox::Show("Se ha ingresado como bibliotecario. Bienvenido@ " + userName);
+		LibrarianLogIn^ librarianForm = gcnew LibrarianLogIn();
+		librarianForm->Show();
+	}
+	else if (Admin^ admin = dynamic_cast<Admin^>(user)) {
+		MessageBox::Show("Se ha ingresado como administrador. Bienvenido@ " + userName);
+		AdminInterface^ adminForm = gcnew AdminInterface();
+		adminForm->Show();
 	}
 	else {
-		if (user->GetType() == Client::typeid) {
-			Persistance::UserRAMBinaryFile("TempUser.bin", user);
-			UserOptionsForm^ clientForm = gcnew UserOptionsForm(user);
-			MessageBox::Show("Se ha ingresado como cliente. Bienvenid@ "+ userName);
-			clientForm->Show();
-			//this->Close();
-		}
-		else if (user->GetType() == Librarian::typeid) {
-			LibrarianLogIn^ librarianForm = gcnew LibrarianLogIn();
-			MessageBox::Show("Se ha ingresado como blibliotecario. Bienvenid@ "+ userName);
-			librarianForm->Show();
-			//this->Close();
-		}
-		else if (user->GetType() == Administrador::typeid) {
-			MessageBox::Show("Se ha ingresado como administrador. Bienvenid@ " + userName);
-			// Se debe abrir la ventana de administración
-			AdminInterface^ adminForm = gcnew AdminInterface();
-			adminForm->Show();
-		}
-		else {
-			MessageBox::Show("Tipo de usuario desconocido.");
-		}
+		MessageBox::Show("Tipo de usuario desconocido.");
 	}
 }
 };

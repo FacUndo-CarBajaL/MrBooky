@@ -75,6 +75,11 @@ namespace MrBookyGUIApp {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LibrarianId;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LibrarianName;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ LibrarianEmail;
+	private: System::Windows::Forms::TextBox^ txtPhone;
+	private: System::Windows::Forms::TextBox^ txtFullName;
+
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::Label^ label7;
 
 
 
@@ -115,6 +120,10 @@ namespace MrBookyGUIApp {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->txtPhone = (gcnew System::Windows::Forms::TextBox());
+			this->txtFullName = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->label7 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvLibrarians))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -125,12 +134,13 @@ namespace MrBookyGUIApp {
 				this->LibrarianId,
 					this->LibrarianName, this->LibrarianEmail
 			});
-			this->dgvLibrarians->Location = System::Drawing::Point(31, 308);
-			this->dgvLibrarians->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dgvLibrarians->Location = System::Drawing::Point(28, 246);
+			this->dgvLibrarians->Margin = System::Windows::Forms::Padding(2);
 			this->dgvLibrarians->Name = L"dgvLibrarians";
 			this->dgvLibrarians->RowHeadersWidth = 82;
 			this->dgvLibrarians->RowTemplate->Height = 33;
-			this->dgvLibrarians->Size = System::Drawing::Size(646, 152);
+			this->dgvLibrarians->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dgvLibrarians->Size = System::Drawing::Size(574, 122);
 			this->dgvLibrarians->TabIndex = 57;
 			this->dgvLibrarians->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MaintenanceLibrarian::dgvLibrarians_CellContentClick);
 			// 
@@ -167,10 +177,10 @@ namespace MrBookyGUIApp {
 				static_cast<System::Int32>(static_cast<System::Byte>(60)));
 			this->btnDelete->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnDelete->ForeColor = System::Drawing::Color::Black;
-			this->btnDelete->Location = System::Drawing::Point(419, 243);
-			this->btnDelete->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnDelete->Location = System::Drawing::Point(372, 194);
+			this->btnDelete->Margin = System::Windows::Forms::Padding(2);
 			this->btnDelete->Name = L"btnDelete";
-			this->btnDelete->Size = System::Drawing::Size(130, 37);
+			this->btnDelete->Size = System::Drawing::Size(116, 30);
 			this->btnDelete->TabIndex = 56;
 			this->btnDelete->Text = L"Eliminar\r\n";
 			this->btnDelete->UseVisualStyleBackColor = false;
@@ -182,10 +192,10 @@ namespace MrBookyGUIApp {
 				static_cast<System::Int32>(static_cast<System::Byte>(60)));
 			this->btnUpdate->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnUpdate->ForeColor = System::Drawing::Color::Black;
-			this->btnUpdate->Location = System::Drawing::Point(203, 243);
-			this->btnUpdate->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnUpdate->Location = System::Drawing::Point(180, 194);
+			this->btnUpdate->Margin = System::Windows::Forms::Padding(2);
 			this->btnUpdate->Name = L"btnUpdate";
-			this->btnUpdate->Size = System::Drawing::Size(170, 37);
+			this->btnUpdate->Size = System::Drawing::Size(151, 30);
 			this->btnUpdate->TabIndex = 55;
 			this->btnUpdate->Text = L"Modificar";
 			this->btnUpdate->UseVisualStyleBackColor = false;
@@ -199,10 +209,10 @@ namespace MrBookyGUIApp {
 			this->btnAdd->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->btnAdd->ForeColor = System::Drawing::Color::Black;
-			this->btnAdd->Location = System::Drawing::Point(31, 243);
-			this->btnAdd->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnAdd->Location = System::Drawing::Point(28, 194);
+			this->btnAdd->Margin = System::Windows::Forms::Padding(2);
 			this->btnAdd->Name = L"btnAdd";
-			this->btnAdd->Size = System::Drawing::Size(137, 37);
+			this->btnAdd->Size = System::Drawing::Size(122, 30);
 			this->btnAdd->TabIndex = 54;
 			this->btnAdd->Text = L"Agregar";
 			this->btnAdd->UseVisualStyleBackColor = false;
@@ -210,34 +220,34 @@ namespace MrBookyGUIApp {
 			// 
 			// txtPassword
 			// 
-			this->txtPassword->Location = System::Drawing::Point(150, 186);
-			this->txtPassword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtPassword->Location = System::Drawing::Point(118, 130);
+			this->txtPassword->Margin = System::Windows::Forms::Padding(2);
 			this->txtPassword->Name = L"txtPassword";
-			this->txtPassword->Size = System::Drawing::Size(224, 26);
+			this->txtPassword->Size = System::Drawing::Size(200, 22);
 			this->txtPassword->TabIndex = 50;
 			// 
 			// txtEmail
 			// 
-			this->txtEmail->Location = System::Drawing::Point(150, 143);
-			this->txtEmail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtEmail->Location = System::Drawing::Point(418, 129);
+			this->txtEmail->Margin = System::Windows::Forms::Padding(2);
 			this->txtEmail->Name = L"txtEmail";
-			this->txtEmail->Size = System::Drawing::Size(225, 26);
+			this->txtEmail->Size = System::Drawing::Size(200, 22);
 			this->txtEmail->TabIndex = 49;
 			// 
 			// txtName
 			// 
-			this->txtName->Location = System::Drawing::Point(150, 100);
-			this->txtName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtName->Location = System::Drawing::Point(118, 90);
+			this->txtName->Margin = System::Windows::Forms::Padding(2);
 			this->txtName->Name = L"txtName";
-			this->txtName->Size = System::Drawing::Size(225, 26);
+			this->txtName->Size = System::Drawing::Size(200, 22);
 			this->txtName->TabIndex = 48;
 			// 
 			// txtId
 			// 
-			this->txtId->Location = System::Drawing::Point(150, 60);
-			this->txtId->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtId->Location = System::Drawing::Point(118, 48);
+			this->txtId->Margin = System::Windows::Forms::Padding(2);
 			this->txtId->Name = L"txtId";
-			this->txtId->Size = System::Drawing::Size(224, 26);
+			this->txtId->Size = System::Drawing::Size(200, 22);
 			this->txtId->TabIndex = 47;
 			// 
 			// label5
@@ -245,10 +255,10 @@ namespace MrBookyGUIApp {
 			this->label5->AutoSize = true;
 			this->label5->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label5->Location = System::Drawing::Point(31, 192);
+			this->label5->Location = System::Drawing::Point(28, 132);
 			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(100, 20);
+			this->label5->Size = System::Drawing::Size(82, 16);
 			this->label5->TabIndex = 43;
 			this->label5->Text = L"Contraseña :";
 			this->label5->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -258,10 +268,10 @@ namespace MrBookyGUIApp {
 			this->label4->AutoSize = true;
 			this->label4->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label4->Location = System::Drawing::Point(31, 150);
+			this->label4->Location = System::Drawing::Point(328, 132);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(61, 20);
+			this->label4->Size = System::Drawing::Size(51, 16);
 			this->label4->TabIndex = 42;
 			this->label4->Text = L"E-mail :";
 			// 
@@ -270,10 +280,10 @@ namespace MrBookyGUIApp {
 			this->label3->AutoSize = true;
 			this->label3->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label3->Location = System::Drawing::Point(31, 60);
+			this->label3->Location = System::Drawing::Point(28, 49);
 			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(31, 20);
+			this->label3->Size = System::Drawing::Size(24, 16);
 			this->label3->TabIndex = 41;
 			this->label3->Text = L"Id :";
 			this->label3->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -283,12 +293,13 @@ namespace MrBookyGUIApp {
 			this->label2->AutoSize = true;
 			this->label2->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label2->Location = System::Drawing::Point(31, 100);
+			this->label2->Location = System::Drawing::Point(28, 91);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(73, 20);
+			this->label2->Size = System::Drawing::Size(60, 16);
 			this->label2->TabIndex = 40;
-			this->label2->Text = L"Nombre :";
+			this->label2->Text = L"Usuario :";
+			this->label2->Click += gcnew System::EventHandler(this, &MaintenanceLibrarian::label2_Click);
 			// 
 			// label1
 			// 
@@ -297,20 +308,65 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label1->Location = System::Drawing::Point(26, 9);
+			this->label1->Location = System::Drawing::Point(23, 7);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(417, 32);
+			this->label1->Size = System::Drawing::Size(357, 29);
 			this->label1->TabIndex = 39;
 			this->label1->Text = L"Ingresar datos del bibliotecario :";
 			this->label1->Click += gcnew System::EventHandler(this, &MaintenanceLibrarian::label1_Click);
 			// 
+			// txtPhone
+			// 
+			this->txtPhone->Location = System::Drawing::Point(418, 89);
+			this->txtPhone->Margin = System::Windows::Forms::Padding(2);
+			this->txtPhone->Name = L"txtPhone";
+			this->txtPhone->Size = System::Drawing::Size(200, 22);
+			this->txtPhone->TabIndex = 61;
+			// 
+			// txtFullName
+			// 
+			this->txtFullName->Location = System::Drawing::Point(418, 48);
+			this->txtFullName->Margin = System::Windows::Forms::Padding(2);
+			this->txtFullName->Name = L"txtFullName";
+			this->txtFullName->Size = System::Drawing::Size(200, 22);
+			this->txtFullName->TabIndex = 60;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label6->Location = System::Drawing::Point(328, 49);
+			this->label6->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(62, 16);
+			this->label6->TabIndex = 59;
+			this->label6->Text = L"Nombre :";
+			this->label6->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
+				static_cast<System::Int32>(static_cast<System::Byte>(33)));
+			this->label7->Location = System::Drawing::Point(328, 90);
+			this->label7->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(55, 16);
+			this->label7->TabIndex = 58;
+			this->label7->Text = L"Celular :";
+			// 
 			// MaintenanceLibrarian
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::WhiteSmoke;
-			this->ClientSize = System::Drawing::Size(708, 479);
+			this->ClientSize = System::Drawing::Size(629, 383);
+			this->Controls->Add(this->txtPhone);
+			this->Controls->Add(this->txtFullName);
+			this->Controls->Add(this->label6);
+			this->Controls->Add(this->label7);
 			this->Controls->Add(this->dgvLibrarians);
 			this->Controls->Add(this->btnDelete);
 			this->Controls->Add(this->btnUpdate);
@@ -324,7 +380,7 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MaintenanceLibrarian";
 			this->Text = L"MaintenanceLibrarian";
 			this->Load += gcnew System::EventHandler(this, &MaintenanceLibrarian::MaintenanceLibrarian_Load);
@@ -352,7 +408,35 @@ namespace MrBookyGUIApp {
 				return;
 			}
 			Librarian^ librarian = gcnew Librarian(id, name, password);
-			Controller::AddUser(librarian);
+			librarian->Email = email;
+			librarian->FormalName = txtFullName->Text;
+			librarian->PhoneNumber = Int32::Parse(txtPhone->Text);
+
+			User^ found = Controller::SearchUser(id);
+			if (found != nullptr) {
+				MessageBox::Show("Ya existe un bibliotecario con el id " + id + ". Por favor, ingrese otro id.");
+				return;
+			}
+
+			if (librarian != nullptr) {
+				int librarianId = MrBookyController::Controller::AddUser(librarian);
+				if (librarianId > 0) {
+					MessageBox::Show("Se ha agregado el bibliotecario " + id + "-" + name);
+					ShowUsers();
+					txtFullName->Clear();
+					txtEmail->Clear();
+					txtPassword->Clear();
+					txtPhone->Clear();
+					txtId->Clear();
+					id++;
+				}
+				else {
+					MessageBox::Show("No se ha podido agregar el bibliotecario " + id + "-" + name);
+				}
+			}
+			else {
+				MessageBox::Show("El bibliotecario no puede ser nulo.");
+			}
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("No se ha podido agregar el bibliotecario por el siguiente motivo:\n" +
@@ -398,6 +482,9 @@ private: System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^
 		}
 
 		Librarian^ librarian = gcnew Librarian(id, name, password);
+		librarian->Email = email;
+		librarian->FormalName = txtFullName->Text;
+		librarian->PhoneNumber = Int32::Parse(txtPhone->Text);
 		if (MrBookyController::Controller::UpdateUser(librarian) == 1) {
 			MessageBox::Show("Se ha modificado el bibliotecario " + id + "-" + name);
 			ShowUsers();
@@ -412,6 +499,7 @@ private: System::Void btnUpdate_Click(System::Object^ sender, System::EventArgs^
 	}
 
 
+
 }
 private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e) {
 	String^ id = txtId->Text->Trim();
@@ -424,9 +512,12 @@ private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^
 			"Confirmación", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 		int idLibrarian = Int32::Parse(txtId->Text->Trim());
 		if (dlgResult == System::Windows::Forms::DialogResult::Yes) {
-			Controller::DeleteRobot(idLibrarian);
+			int deleted = Controller::DeleteUser(idLibrarian);
 			ShowUsers();
-			MessageBox::Show("Se ha eliminado el bibliotecario con id " + idLibrarian + " de manera exitosa.");
+			if (deleted == 1) {
+				MessageBox::Show("Se ha eliminado el bibliotecario con id " + idLibrarian + " de manera exitosa.");
+				return;
+			}
 		}
 	}
 	catch (Exception^ ex) {
@@ -443,6 +534,10 @@ private: System::Void dgvLibrarians_CellContentClick(System::Object^ sender, Sys
 	txtName->Text = librarian->Name;
 	txtEmail->Text = librarian->Email;
 	txtPassword->Text = librarian->Password;
+	txtFullName->Text = librarian->FormalName;
+	txtPhone->Text = "" + librarian->PhoneNumber;
+}
+private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

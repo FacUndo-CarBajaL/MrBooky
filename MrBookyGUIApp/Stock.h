@@ -108,10 +108,9 @@ namespace MrBookyGUIApp {
 			this->txtIdStock->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtIdStock->ForeColor = System::Drawing::Color::DarkGray;
-			this->txtIdStock->Location = System::Drawing::Point(87, 46);
-			this->txtIdStock->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->txtIdStock->Location = System::Drawing::Point(77, 37);
 			this->txtIdStock->Name = L"txtIdStock";
-			this->txtIdStock->Size = System::Drawing::Size(480, 35);
+			this->txtIdStock->Size = System::Drawing::Size(427, 30);
 			this->txtIdStock->TabIndex = 0;
 			this->txtIdStock->Text = L"Ingrese Id del libro";
 			this->txtIdStock->Enter += gcnew System::EventHandler(this, &Stock::txtIdStock_Enter);
@@ -124,10 +123,9 @@ namespace MrBookyGUIApp {
 			this->btnSearch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->btnSearch->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->btnSearch->Location = System::Drawing::Point(600, 44);
-			this->btnSearch->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->btnSearch->Location = System::Drawing::Point(533, 35);
 			this->btnSearch->Name = L"btnSearch";
-			this->btnSearch->Size = System::Drawing::Size(125, 40);
+			this->btnSearch->Size = System::Drawing::Size(111, 32);
 			this->btnSearch->TabIndex = 1;
 			this->btnSearch->Text = L"Buscar";
 			this->btnSearch->UseVisualStyleBackColor = false;
@@ -138,10 +136,9 @@ namespace MrBookyGUIApp {
 			this->txtTitle->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtTitle->ForeColor = System::Drawing::Color::DarkGray;
-			this->txtTitle->Location = System::Drawing::Point(87, 110);
-			this->txtTitle->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->txtTitle->Location = System::Drawing::Point(77, 88);
 			this->txtTitle->Name = L"txtTitle";
-			this->txtTitle->Size = System::Drawing::Size(480, 35);
+			this->txtTitle->Size = System::Drawing::Size(427, 30);
 			this->txtTitle->TabIndex = 2;
 			this->txtTitle->Text = L"Ingrese Título del libro";
 			this->txtTitle->Enter += gcnew System::EventHandler(this, &Stock::txtTitle_Enter);
@@ -152,10 +149,9 @@ namespace MrBookyGUIApp {
 			this->txtCantidad->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtCantidad->ForeColor = System::Drawing::Color::DarkGray;
-			this->txtCantidad->Location = System::Drawing::Point(87, 170);
-			this->txtCantidad->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->txtCantidad->Location = System::Drawing::Point(77, 136);
 			this->txtCantidad->Name = L"txtCantidad";
-			this->txtCantidad->Size = System::Drawing::Size(480, 35);
+			this->txtCantidad->Size = System::Drawing::Size(427, 30);
 			this->txtCantidad->TabIndex = 3;
 			this->txtCantidad->Text = L"Cantidad";
 			this->txtCantidad->Enter += gcnew System::EventHandler(this, &Stock::textBox2_Enter);
@@ -168,10 +164,9 @@ namespace MrBookyGUIApp {
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button1->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(600, 108);
-			this->button1->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->button1->Location = System::Drawing::Point(533, 86);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(125, 40);
+			this->button1->Size = System::Drawing::Size(111, 32);
 			this->button1->TabIndex = 4;
 			this->button1->Text = L"Buscar";
 			this->button1->UseVisualStyleBackColor = false;
@@ -185,9 +180,9 @@ namespace MrBookyGUIApp {
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(33)), static_cast<System::Int32>(static_cast<System::Byte>(33)),
 				static_cast<System::Int32>(static_cast<System::Byte>(33)));
-			this->label1->Location = System::Drawing::Point(81, 239);
+			this->label1->Location = System::Drawing::Point(72, 191);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(157, 32);
+			this->label1->Size = System::Drawing::Size(134, 29);
 			this->label1->TabIndex = 6;
 			this->label1->Text = L"Resultados";
 			// 
@@ -208,11 +203,11 @@ namespace MrBookyGUIApp {
 				this->colIdBook,
 					this->colTitle, this->colQuantity
 			});
-			this->dgvResultados->Location = System::Drawing::Point(73, 294);
-			this->dgvResultados->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->dgvResultados->Location = System::Drawing::Point(65, 235);
 			this->dgvResultados->Name = L"dgvResultados";
 			this->dgvResultados->RowHeadersWidth = 51;
-			this->dgvResultados->Size = System::Drawing::Size(920, 236);
+			this->dgvResultados->SelectionMode = System::Windows::Forms::DataGridViewSelectionMode::FullRowSelect;
+			this->dgvResultados->Size = System::Drawing::Size(818, 189);
 			this->dgvResultados->TabIndex = 7;
 			// 
 			// colIdBook
@@ -240,10 +235,9 @@ namespace MrBookyGUIApp {
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button3->Font = (gcnew System::Drawing::Font(L"Modern No. 20", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button3->Location = System::Drawing::Point(487, 561);
-			this->button3->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->button3->Location = System::Drawing::Point(433, 449);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(140, 40);
+			this->button3->Size = System::Drawing::Size(124, 32);
 			this->button3->TabIndex = 8;
 			this->button3->Text = L"Actualizar";
 			this->button3->UseVisualStyleBackColor = false;
@@ -251,10 +245,10 @@ namespace MrBookyGUIApp {
 			// 
 			// Stock
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::WhiteSmoke;
-			this->ClientSize = System::Drawing::Size(1060, 616);
+			this->ClientSize = System::Drawing::Size(942, 493);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->dgvResultados);
 			this->Controls->Add(this->label1);
@@ -263,7 +257,6 @@ namespace MrBookyGUIApp {
 			this->Controls->Add(this->txtTitle);
 			this->Controls->Add(this->btnSearch);
 			this->Controls->Add(this->txtIdStock);
-			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"Stock";
 			this->Text = L"Stock";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvResultados))->EndInit();
