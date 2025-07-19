@@ -35,8 +35,11 @@ namespace MrBookyModel {
 
         void MakeDailyReport();
 
-        Librarian(){}
+        Librarian(){
+			this->UserType = 1; // '1' for Librarian
+        }
         Librarian(int id, String^ name, String^ password) : User(id, name, password) {
+			this->UserType = 1; // '1' for Librarian
         }
     };
 }

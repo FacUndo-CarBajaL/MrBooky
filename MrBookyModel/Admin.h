@@ -14,8 +14,12 @@ namespace MrBookyModel {
 	public ref class Admin : public User {
 	public:
 		
-		Admin() {}
-		Admin(int id, String^ name, String^ password) : User(id, name, password) {}
+		Admin() {
+			this->UserType = 2; // '2' for Administrator
+		}
+		Admin(int id, String^ name, String^ password) : User(id, name, password) {
+			this->UserType = 2; // '2' for Administrator
+		}
 	};
 }
 

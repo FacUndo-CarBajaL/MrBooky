@@ -34,8 +34,12 @@ namespace MrBookyModel {
 
             void ReturnBook();
 
-            Client(){}
-            Client(int id, String^ name, String^ password) : User(id, name, password){}
+            Client(){
+				this->UserType = 0; // '0' for Client
+            }
+            Client(int id, String^ name, String^ password) : User(id, name, password){
+				this->UserType = 0; // '0' for Client
+            }
     };
 }
 
