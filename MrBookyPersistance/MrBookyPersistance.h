@@ -87,6 +87,9 @@ namespace MrBookyPersistance {
 		static int CreateLoanBd(LoanOrder^ loanOrder);
 		static List <LoanOrder^>^ QueryAllRegisteredLoanOrders();
 		static List <LoanOrder^>^ QueryLoanOrdersByStudentId(int studentId);
+		static LoanOrder^ QueryLoanOrderById(int id);
+		static int UpdateLoanOrder(LoanOrder^ loanOrder);
+		static int UpdateLoan(Loan^ loan, int loanorderid);
 
 		static DeliveryPoint^ QueryDeliveryPointById(int DeliveryPointId);
 

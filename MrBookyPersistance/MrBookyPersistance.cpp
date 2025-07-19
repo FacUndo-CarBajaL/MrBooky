@@ -1431,6 +1431,122 @@ List<LoanOrder^>^ MrBookyPersistance::Persistance::QueryLoanOrdersByStudentId(in
 	return LoanordersList;
 }
 
+LoanOrder^ MrBookyPersistance::Persistance::QueryLoanOrderById(int id)
+{
+	LoanOrder^ loanOrder = gcnew LoanOrder();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		//Paso 1: Se obtiene la conexión
+		conn = GetConnection();
+		//Paso 2: Se prepara la sentencia SQL
+		String^ sqlStr = "dbo.usp_GetStudentLoans";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@LOAN_ORDER_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@LOAN_ORDER_ID"]->Value = id;
+		//Paso 3: Se ejecuta la sentencia
+		reader = cmd->ExecuteReader();
+		// Paso 4: Se procesan los resultados
+		int old_id = -1, new_id = -1;
+		int loanId;
+		LoanOrder^ loanOrder = nullptr;
+		while (reader->Read()) {
+			new_id = Convert::ToInt32(reader["LOAN_ORDER_ID"]->ToString());
+			if (new_id != old_id) { //aqui se verifica si se sigue en el mismo prestamo y este tiene varios detalles de préstamo
+				loanOrder = gcnew LoanOrder();
+				loanOrder->LoanOrderID = new_id;
+				loanOrder->Client = GetClientByIdSQL(Convert::ToInt32(reader["CLIENT_ID"]->ToString()));
+				loanOrder->LoanDate = DateTime::Parse(reader["LOAN_DATE"]->ToString());
+				loanOrder->DueDate = DateTime::Parse(reader["DUE_DATE"]->ToString());
+				loanOrder->IsDelivery = Boolean::Parse(reader["IS_DELIVERY"]->ToString());
+				//Esta funcion la hice en otra rama
+				loanOrder->Deliveryrobot = QueryDeliveryRobotById(Convert::ToInt32(reader["DELIVERY_ROBOT_ID"]->ToString()));
+				loanOrder->DeliveryPoint = QueryDeliveryPointById(Convert::ToInt32(reader["DELIVERY_POINT_ID"]->ToString()));
+				loanOrder->Library = reader["LIBRARY"]->ToString();
+				loanOrder->Status = reader["STATUS"]->ToString();
+				loanOrder->DisapprovalReason = reader["DISAPPROVAL_REASON"]->ToString();
+				old_id = new_id;
+			}
+			Loan^ loan = gcnew Loan();
+			loan->LoanID = Convert::ToInt32(reader["LOAN_ID"]->ToString());
+			loan->DateLoan = DateTime::Parse(reader["LOAN_DATE"]->ToString());
+			loan->ReturnDate = DateTime::Parse(reader["DUE_DATE"]->ToString());
+			loan->Book = GetBookByIdSQL(Convert::ToInt32(reader["BOOK_ID"]->ToString()));
+			loan->Client = GetClientByIdSQL(Convert::ToInt32(reader["CLIENT_ID"]->ToString()));
+			loanId = Convert::ToInt32(reader["LOAN_ORDER_ID"]->ToString());
+
+			loanOrder->Loans->Add(loan);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		// Paso 5: Se cierra la conexión
+		if (conn != nullptr) conn->Close();
+	}
+	return loanOrder;
+}
+
+int MrBookyPersistance::Persistance::UpdateLoanOrder(LoanOrder^ loanOrder)
+{
+	SqlConnection^ conn = nullptr;
+	try {
+
+		//Paso 1: Obtener la conexión a la BD
+		conn = GetConnection();
+
+		//Paso 2: Se prepara la sentencia
+		String^ sqlStr = "dbo.usp_UpdateLoanOrder";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->Parameters->Add("@LOAN_ORDER_ID", System::Data::SqlDbType::Int);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@CLIENT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@LOAN_DATE", System::Data::SqlDbType::DateTime);
+		cmd->Parameters->Add("@DUE_DATE", System::Data::SqlDbType::DateTime);
+		cmd->Parameters->Add("@IS_DELIVERY", System::Data::SqlDbType::Binary);
+		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@DELIVERY_POINT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@LIBRARY", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@STATUS", System::Data::SqlDbType::VarChar, 50);
+		cmd->Parameters->Add("@DISAPPROVAL_REASON", System::Data::SqlDbType::VarChar, 300);
+
+		cmd->Prepare();
+		cmd->Parameters["@LOAN_ORDER_ID"]->Value = loanOrder->LoanOrderID;
+		cmd->Parameters["@CLIENT_ID"]->Value = loanOrder->Client->UserID;
+		cmd->Parameters["@LOAN_DATE"]->Value = loanOrder->LoanDate;
+		cmd->Parameters["@DUE_DATE"]->Value = loanOrder->DueDate;
+		cmd->Parameters["@IS_DELIVERY"]->Value = loanOrder->IsDelivery;
+		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = loanOrder->Deliveryrobot->RobotID;
+		cmd->Parameters["@DELIVERY_POINT_ID"]->Value = loanOrder->DeliveryPoint->DeliveryPointID;
+		cmd->Parameters["@LIBRARY"]->Value = loanOrder->Library;
+		cmd->Parameters["@STATUS"]->Value = loanOrder->Status;
+		cmd->Parameters["@DISAPPROVAL_REASON"]->Value = loanOrder->DisapprovalReason;
+		//Paso 3: Se ejecuta las sentncia SQL
+		cmd->ExecuteNonQuery();
+
+		//Paso 4: Se procesan los resultados
+		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return 1;
+}
+
+int MrBookyPersistance::Persistance::UpdateLoan(Loan^ loan, int loanorderid)
+{
+
+
+
+	return 0;
+}
+
 DeliveryPoint^ MrBookyPersistance::Persistance::QueryDeliveryPointById(int DeliveryPointId)
 {
 	DeliveryPoint^ deliverypoint;

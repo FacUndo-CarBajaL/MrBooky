@@ -687,45 +687,50 @@ void MrBookyController::Controller::ClearLoanCart(User^ user)
 
 List<LoanOrder^>^ MrBookyController::Controller::GetLoanOrders()
 {
-	try {
-		loanOrders = (List<LoanOrder^>^)Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
-	}
-	catch (Exception^) {
-		// Si el archivo no existe o está corrupto, se crea una lista vacía
-		loanOrders = gcnew List<LoanOrder^>();
-		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
-	}
+	//try {
+	//	loanOrders = (List<LoanOrder^>^)Persistance::LoadBinaryFile(BIN_LOANORDER_FILE_NAME);
+	//}
+	//catch (Exception^) {
+	//	// Si el archivo no existe o está corrupto, se crea una lista vacía
+	//	loanOrders = gcnew List<LoanOrder^>();
+	//	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	//}
 
-	// Seguridad adicional
-	if (loanOrders == nullptr) {
-		loanOrders = gcnew List<LoanOrder^>();
-		Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
-	}
+	//// Seguridad adicional
+	//if (loanOrders == nullptr) {
+	//	loanOrders = gcnew List<LoanOrder^>();
+	//	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	//}
 
-	return loanOrders;
+	//return loanOrders;
+
+	return Persistance::QueryAllRegisteredLoanOrders();
 }
 
 void MrBookyController::Controller::AddLoanOrder(LoanOrder^ loanOrder)
 {
-	loanOrders = GetLoanOrders();
-	/*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
-		if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
-			throw gcnew DuplicateBookException("ID ya utilizado.");
-		}
-	}*/
-	loanOrders->Add(loanOrder);
-	Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	//loanOrders = GetLoanOrders();
+	///*for each (LoanOrder ^ registeredLoanOrder in loanOrders) {
+	//	if (registeredLoanOrder->LoanOrderID == loanOrder->LoanOrderID) {
+	//		throw gcnew DuplicateBookException("ID ya utilizado.");
+	//	}
+	//}*/
+	//loanOrders->Add(loanOrder);
+	//Persistance::PersistBinaryFile(BIN_LOANORDER_FILE_NAME, loanOrders);
+	return Persistance::CreateLoanBd(loanOrder);
+
 }
 
 LoanOrder^ MrBookyController::Controller::SearchLoanOrderById(int loanOrderId)
 {
-	loanOrders = GetLoanOrders();
+	/*loanOrders = GetLoanOrders();
 	for each (LoanOrder ^ loanOrder in loanOrders) {
 		if (loanOrder->LoanOrderID == loanOrderId) {
 			return loanOrder;
 		}
-	}
-	return nullptr;
+	}*/
+	/*return nullptr;*/
+	return Persistance::QueryLoanOrderById(loanOrderId);
 }
 
 LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
@@ -741,7 +746,7 @@ LoanOrder^ MrBookyController::Controller::SearchLoanOrderByUser(User^ user)
 }
 
 List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUserID(int userid)
-{
+{/*
 	List<LoanOrder^>^ ordenesUsuario = gcnew(List<LoanOrder^>);
 	loanOrders = GetLoanOrders();
 	for each (LoanOrder ^ loanOrder in loanOrders) {
@@ -754,7 +759,8 @@ List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUserID(int us
 		return ordenesUsuario;
 	}
 	
-	return nullptr;
+	return nullptr;*/
+	return Persistance::QueryLoanOrdersByStudentId(userid);
 }
 
 List<LoanOrder^>^ MrBookyController::Controller::GetAllLoanOrdersByUser(User^ user)
