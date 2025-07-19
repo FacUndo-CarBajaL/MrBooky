@@ -58,13 +58,16 @@ namespace MrBookyPersistance {
 		//static void PersistLoanOrdersTodayToXMLFile(String^ fileName, List<LoanOrder^>^ loanOrders);
 		//static List<LoanOrder^>^ LoadLoanOrdersTodayFromXMLFile(String^ fileName);
 
-		static void AddBooksSQL(Book^ book);
+		static int AddBooksSQL(Book^ book);
 		static List<Book^>^ GetAllBooksSQL();
 		static int UpdateBookSQL(Book^ book);
-		static int DeleteBookSQL(int bookId);
+		static int DeleteBookSQL(String^ bookId);
 		static Book^ GetBookByIdSQL(int bookId);
+		static Book^ GetBookByNameSQL(String^ bookName);
+		static List<Book^>^ AdvancedSearchBookSQL(String^ title, String^ author, String^ publisher, String^ genre);
+		static List<Book^>^ AdvancedSearchBookSQL1(String^ title, String^ author, String^ publisher, String^ genre);
 
-		static void AddLibrarianSQL(User^ user);
+		/*static void AddLibrarianSQL(User^ user);
 		static List<Librarian^>^ GetAllLibrariansSQL();
 		static int UpdateLibrarianSQL(Librarian^ librarian);
 		static int DeleteLibrarianSQL(int librarianId);
@@ -74,26 +77,20 @@ namespace MrBookyPersistance {
 		static List<Client^>^ GetAllClientsSQL();
 		static int UpdateClientSQL(Client^ client);
 		static int DeleteClientSQL(int clientId);
-		static Client^ GetClientByIdSQL(int clientId);
+		static Client^ GetClientByIdSQL(int clientId);*/
 
-		static void AddLibrarySQL(Library^ library);
+		static int AddUserSQL(User^ user);
+		static List<User^>^ GetAllUsersSQL();
+		static int UpdateUserSQL(User^ user);
+		static int DeleteUserSQL(int userId);
+		static User^ GetUserByIdSQL(int userId);
+		static User^ GetUserByNameAndPasswordSQL(String^ userName, String^ userPassword);
+
+		static int AddLibrarySQL(Library^ library);
 		static List<Library^>^ GetAllLibrariesSQL();
-		static int DeleteLibrarySQL(int libraryId);
+		static int DeleteLibrarySQL(String^ libraryId);
 		static int UpdateLibrarySQL(Library^ library);
 		static Library^ GetLibraryByIdSQL(int libraryId);
-
-		//Persistencia  de robot con babse de datos
-		static int AddRobotBd(DeliveryRobot^ deliveryRobot, int pointId);
-		static int DeleteRobotBd(int robotId);
-		static int UpdateRobotBd(DeliveryRobot^ deliveryRobot);
-		static List <DeliveryRobot^>^ QueryAllRobotsBd();
-		static DeliveryRobot^ QueryRobotByIdBd(int robotId);
-
-
-		//Persistencia  de Punto de ubicacion del robot con base de datos
-		static int AddPointBd();
-		static int DeletePointBd(int robotId);
-		static int UpdatePointBd(DeliveryRobot^ deliveryRobot);
-		static Point^ QueryPointByIdBd(int pointId);
+		static Library^ GetLibraryByNameSQL(String^ libraryName);
 	};
 }
