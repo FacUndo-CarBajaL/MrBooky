@@ -472,37 +472,52 @@ void MrBookyPersistance::Persistance::UserRAMBinaryFile(String^ fileName, Object
 	}
 }
 
-void MrBookyPersistance::Persistance::AddBooksSQL(Book^ book)
+int MrBookyPersistance::Persistance::AddBooksSQL(Book^ book)
 {
-	SqlConnection^ conn = GetConnection();
+	int bookId;
+	SqlConnection^ conn;
 	try {
 		conn = GetConnection();
 
 		String^ sqlStr = "dbo.usp_AddBook";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@ID", System::Data::SqlDbType::Int)->Value = book->BookID;
-		cmd->Parameters->Add("@Title", System::Data::SqlDbType::VarChar, 500)->Value = book->Title;
-		cmd->Parameters->Add("@Author", System::Data::SqlDbType::VarChar, 500)->Value = book->Author;
-		cmd->Parameters->Add("@Publisher", System::Data::SqlDbType::VarChar, 500)->Value = book->Publisher;
-		cmd->Parameters->Add("@Release_YEAR", System::Data::SqlDbType::Int)->Value = book->ReleaseYear;
-		cmd->Parameters->Add("@Genre", System::Data::SqlDbType::VarChar, 500)->Value = book->Genre;
-		cmd->Parameters->Add("@STOCK", System::Data::SqlDbType::Int)->Value = book->Quantity;
-		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50)->Value = book->Genre;
-		cmd->Parameters->Add("@DESCRIPTION_BOOK", System::Data::SqlDbType::VarChar, 500)->Value = book->Description;
-		cmd->Parameters->Add("@AVAILABILITY_BOOK", System::Data::SqlDbType::VarChar, 50)->Value = book->Availability;
-		cmd->Parameters->Add("@LOAN_TIME", System::Data::SqlDbType::Int)->Value = book->LoanTime;
-		cmd->Parameters->Add("@WEIGHT_BOOK", System::Data::SqlDbType::Decimal)->Value = Decimal(book->Weight);
+		cmd->Parameters->Add("@Title", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@Author", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@Publisher", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@Release_YEAR", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@STOCK", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50);
+		cmd->Parameters->Add("@DESCRIPTION_BOOK", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@AVAILABILITY_BOOK", System::Data::SqlDbType::VarChar, 50);
+		cmd->Parameters->Add("@LOAN_TIME", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@WEIGHT_BOOK", System::Data::SqlDbType::Decimal);
 		cmd->Parameters["@WEIGHT_BOOK"]->Precision = 5;
 		cmd->Parameters["@WEIGHT_BOOK"]->Scale = 2;
+		cmd->Parameters->Add("@PHOTO", System::Data::SqlDbType::Image);
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+		cmd->Prepare();
 
-		if (book->Photo != nullptr)
-			cmd->Parameters->Add("@PHOTO", System::Data::SqlDbType::Image)->Value = book->Photo;
+		cmd->Parameters["@Title"]->Value = book->Title;
+		cmd->Parameters["@Author"]->Value = book->Author;
+		cmd->Parameters["@Publisher"]->Value = book->Publisher;
+		cmd->Parameters["@Release_YEAR"]->Value = book->ReleaseYear;
+		cmd->Parameters["@Genre"]->Value = book->Genre;
+		cmd->Parameters["@STOCK"]->Value = book->Quantity;
+		cmd->Parameters["@DESCRIPTION_BOOK"]->Value = book->Description;
+		cmd->Parameters["@AVAILABILITY_BOOK"]->Value = book->Availability;
+		cmd->Parameters["@LOAN_TIME"]->Value = book->LoanTime;
+		cmd->Parameters["@WEIGHT_BOOK"]->Value = Decimal(book->Weight);
+		if (book->Photo == nullptr)
+			cmd->Parameters["@PHOTO"]->Value = DBNull::Value;
 		else
-			cmd->Parameters->Add("@PHOTO", System::Data::SqlDbType::Image)->Value = DBNull::Value;
+			cmd->Parameters["@PHOTO"]->Value = book->Photo;
 
 		cmd->ExecuteNonQuery();
 
+		bookId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
 	}
 	catch (Exception^ ex) {
 		throw ex;
@@ -511,6 +526,7 @@ void MrBookyPersistance::Persistance::AddBooksSQL(Book^ book)
 		if (conn != nullptr) conn->Close();
 		delete conn;
 	}
+	return bookId;
 }
 
 void MrBookyPersistance::Persistance::RAMBinaryFile(String^ fileName, Object^ persistObject)
@@ -531,13 +547,15 @@ List<Book^>^ MrBookyPersistance::Persistance::GetAllBooksSQL()
 {
 	List<Book^>^ books = gcnew List<Book^>();
 	SqlConnection^ conn = nullptr;
+	SqlDataReader^ reader;
 
 	try {
 		conn = GetConnection();
 		String^ sqlStr = "dbo.usp_QueryAllBooks";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		SqlDataReader^ reader = cmd->ExecuteReader();
+		cmd->Prepare();
+		reader = cmd->ExecuteReader();
 
 		while (reader->Read()) {
 			Book^ book = gcnew Book();
@@ -593,29 +611,31 @@ int MrBookyPersistance::Persistance::UpdateBookSQL(Book^ book)
 		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::VarChar, 500);
 		cmd->Parameters->Add("@AUTHOR", System::Data::SqlDbType::VarChar, 500);
 		cmd->Parameters->Add("@PUBLISHER", System::Data::SqlDbType::VarChar, 500);
-		cmd->Parameters->Add("@RELEASE_YEAR", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@ReleaseYear", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@STOCK", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50);
-		cmd->Parameters->Add("@DESCRIPTION_BOOK", System::Data::SqlDbType::VarChar, 500);
-		cmd->Parameters->Add("@AVAILABILITY_BOOK", System::Data::SqlDbType::VarChar, 50);
-		cmd->Parameters->Add("@LOAN_TIME", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@WEIGHT_BOOK", System::Data::SqlDbType::Decimal);
-		cmd->Parameters["@WEIGHT_BOOK"]->Precision = 5;
-		cmd->Parameters["@WEIGHT_BOOK"]->Scale = 2;
+		cmd->Parameters->Add("@DescriptionBook", System::Data::SqlDbType::VarChar, 500);
+		cmd->Parameters->Add("@AvailabilityBook", System::Data::SqlDbType::VarChar, 50);
+		cmd->Parameters->Add("@LoanTime", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@WeightBook", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@WeightBook"]->Precision = 5;
+		cmd->Parameters["@WeightBook"]->Scale = 2;
 		cmd->Parameters->Add("@PHOTO", System::Data::SqlDbType::Image);
+
+		cmd->Prepare();
 
 		// Paso 4: Asignar valores
 		cmd->Parameters["@ID"]->Value = book->BookID;
 		cmd->Parameters["@TITLE"]->Value = book->Title;
 		cmd->Parameters["@AUTHOR"]->Value = book->Author;
 		cmd->Parameters["@PUBLISHER"]->Value = book->Publisher;
-		cmd->Parameters["@RELEASE_YEAR"]->Value = book->ReleaseYear;
+		cmd->Parameters["@ReleaseYear"]->Value = book->ReleaseYear;
 		cmd->Parameters["@STOCK"]->Value = book->Quantity;
 		cmd->Parameters["@GENRE"]->Value = book->Genre;
-		cmd->Parameters["@DESCRIPTION_BOOK"]->Value = book->Description;
-		cmd->Parameters["@AVAILABILITY_BOOK"]->Value = book->Availability;
-		cmd->Parameters["@LOAN_TIME"]->Value = book->LoanTime;
-		cmd->Parameters["@WEIGHT_BOOK"]->Value = Decimal(book->Weight);
+		cmd->Parameters["@DescriptionBook"]->Value = book->Description;
+		cmd->Parameters["@AvailabilityBook"]->Value = book->Availability;
+		cmd->Parameters["@LoanTime"]->Value = book->LoanTime;
+		cmd->Parameters["@WeightBook"]->Value = Decimal(book->Weight);
 
 		if (book->Photo == nullptr)
 			cmd->Parameters["@PHOTO"]->Value = DBNull::Value;
@@ -637,7 +657,7 @@ int MrBookyPersistance::Persistance::UpdateBookSQL(Book^ book)
 }
 
 
-int MrBookyPersistance::Persistance::DeleteBookSQL(int bookId) {
+int MrBookyPersistance::Persistance::DeleteBookSQL(String^ bookId) {
 	SqlConnection^ conn = nullptr;
 
 	try {
@@ -645,10 +665,11 @@ int MrBookyPersistance::Persistance::DeleteBookSQL(int bookId) {
 		String^ sqlStr = "dbo.usp_DeleteBook";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@BookID", System::Data::SqlDbType::Int)->Value = bookId;
+		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::NVarChar, 500);
+		cmd->Prepare();
+		cmd->Parameters["@TITLE"]->Value = bookId;
 
 		cmd->ExecuteNonQuery();
-		return 1;
 	}
 	catch (Exception^ ex) {
 		throw ex;
@@ -657,7 +678,7 @@ int MrBookyPersistance::Persistance::DeleteBookSQL(int bookId) {
 		if (conn != nullptr) conn->Close();
 	}
 
-	return 0;
+	return 1;
 }
 
 Book^ MrBookyPersistance::Persistance::GetBookByIdSQL(int bookId)
@@ -671,7 +692,9 @@ Book^ MrBookyPersistance::Persistance::GetBookByIdSQL(int bookId)
 		String^ sqlStr = "dbo.usp_QueryBookByID";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@BookID", System::Data::SqlDbType::Int)->Value = bookId;
+		cmd->Parameters->Add("@ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@ID"]->Value = bookId;
 		reader = cmd->ExecuteReader();
 		if (reader->Read()) {
 			book = gcnew Book();
@@ -704,7 +727,151 @@ Book^ MrBookyPersistance::Persistance::GetBookByIdSQL(int bookId)
 	return book;
 }
 
-void MrBookyPersistance::Persistance::AddLibrarianSQL(User^ user)
+Book^ MrBookyPersistance::Persistance::GetBookByNameSQL(String^ bookName)
+{
+	Book^ book = nullptr;
+	SqlConnection^ conn = nullptr;
+	SqlDataReader^ reader;
+
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_QueryBookByName";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::NVarChar, 500);
+		cmd->Prepare();
+		cmd->Parameters["@TITLE"]->Value = bookName;
+		reader = cmd->ExecuteReader();
+		if (reader->Read()) {
+			book = gcnew Book();
+			book->BookID = Convert::ToInt32(reader["ID"]);
+			book->Title = reader["TITLE"]->ToString();
+			book->Author = reader["AUTHOR"]->ToString();
+			book->Publisher = reader["PUBLISHER"]->ToString();
+			book->ReleaseYear = Convert::ToInt32(reader["RELEASE_YEAR"]);
+			book->Quantity = Convert::ToInt32(reader["STOCK"]);
+			book->Genre = reader["GENRE"]->ToString();
+			book->Description = reader["DESCRIPTION_BOOK"]->ToString();
+			book->Availability = reader["AVAILABILITY_BOOK"]->ToString();
+			book->LoanTime = Convert::ToInt32(reader["LOAN_TIME"]);
+			book->Weight = Convert::ToDouble(reader["WEIGHT_BOOK"]);
+			if (!reader["PHOTO"]->Equals(DBNull::Value)) {
+				array<Byte>^ photoData = (array<Byte>^)reader["PHOTO"];
+				book->Photo = photoData;
+			}
+			else {
+				book->Photo = nullptr;
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return book;
+}
+
+List<Book^>^ MrBookyPersistance::Persistance::AdvancedSearchBookSQL(String^ title, String^ author, String^ publisher, String^ genre)
+{
+	List<Book^>^ books = gcnew List<Book^>();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_AdvancedSearchBooks";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::NVarChar, 500)->Value =
+			String::IsNullOrEmpty(title) ? (Object^)DBNull::Value : title;
+		cmd->Parameters->Add("@AUTHOR", System::Data::SqlDbType::VarChar, 500)->Value =
+			String::IsNullOrEmpty(author) ? (Object^)DBNull::Value : author;
+		cmd->Parameters->Add("@PUBLISHER", System::Data::SqlDbType::VarChar, 500)->Value =
+			String::IsNullOrEmpty(publisher) ? (Object^)DBNull::Value : publisher;
+		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50)->Value =
+			String::IsNullOrEmpty(genre) ? (Object^)DBNull::Value : genre;
+
+		reader = cmd->ExecuteReader();
+
+		while (reader->Read())
+		{
+			Book^ book = gcnew Book();
+			book->BookID = Convert::ToInt32(reader["ID"]);
+			book->Title = reader["TITLE"]->ToString();
+			book->Author = reader["AUTHOR"]->ToString();
+			book->Publisher = reader["PUBLISHER"]->ToString();
+			book->ReleaseYear = Convert::ToInt32(reader["RELEASE_YEAR"]);
+			book->Quantity = Convert::ToInt32(reader["STOCK"]);
+			book->Genre = reader["GENRE"]->ToString();
+			book->Description = reader["DESCRIPTION_BOOK"]->ToString();
+			book->Availability = reader["AVAILABILITY_BOOK"]->ToString();
+			book->LoanTime = Convert::ToInt32(reader["LOAN_TIME"]);
+			book->Weight = Convert::ToDouble(reader["WEIGHT_BOOK"]);
+			books->Add(book);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return books;
+}
+
+List<Book^>^ MrBookyPersistance::Persistance::AdvancedSearchBookSQL1(String^ title, String^ author, String^ publisher, String^ genre)
+{
+	List<Book^>^ books = gcnew List<Book^>();
+	SqlConnection^ conn;
+	SqlDataReader^ reader;
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_AdvancedSearchBooks1";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@TITLE", System::Data::SqlDbType::NVarChar, 500)->Value =
+			String::IsNullOrEmpty(title) ? (Object^)DBNull::Value : title;
+		cmd->Parameters->Add("@AUTHOR", System::Data::SqlDbType::VarChar, 500)->Value =
+			String::IsNullOrEmpty(author) ? (Object^)DBNull::Value : author;
+		cmd->Parameters->Add("@PUBLISHER", System::Data::SqlDbType::VarChar, 500)->Value =
+			String::IsNullOrEmpty(publisher) ? (Object^)DBNull::Value : publisher;
+		cmd->Parameters->Add("@GENRE", System::Data::SqlDbType::VarChar, 50)->Value =
+			String::IsNullOrEmpty(genre) ? (Object^)DBNull::Value : genre;
+		reader = cmd->ExecuteReader();
+		while (reader->Read())
+		{
+			Book^ book = gcnew Book();
+			book->BookID = Convert::ToInt32(reader["ID"]);
+			book->Title = reader["TITLE"]->ToString();
+			book->Author = reader["AUTHOR"]->ToString();
+			book->Publisher = reader["PUBLISHER"]->ToString();
+			book->ReleaseYear = Convert::ToInt32(reader["RELEASE_YEAR"]);
+			book->Quantity = Convert::ToInt32(reader["STOCK"]);
+			book->Genre = reader["GENRE"]->ToString();
+			book->Description = reader["DESCRIPTION_BOOK"]->ToString();
+			book->Availability = reader["AVAILABILITY_BOOK"]->ToString();
+			book->LoanTime = Convert::ToInt32(reader["LOAN_TIME"]);
+			book->Weight = Convert::ToDouble(reader["WEIGHT_BOOK"]);
+			if (!reader["PHOTO"]->Equals(DBNull::Value)) {
+				array<Byte>^ photoData = (array<Byte>^)reader["PHOTO"];
+				book->Photo = photoData;
+			}
+			books->Add(book);
+		}
+
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return books;
+}
+
+/*void MrBookyPersistance::Persistance::AddLibrarianSQL(User^ user)
 {
 	SqlConnection^ conn = nullptr;
 	try {
@@ -1046,10 +1213,322 @@ Client^ MrBookyPersistance::Persistance::GetClientByIdSQL(int clientId)
 		if (conn != nullptr) conn->Close();
 	}
 	return client;
+}*/
+
+int MrBookyPersistance::Persistance::AddUserSQL(User^ user)
+{
+	int userId = 0;
+	SqlConnection^ conn = nullptr;
+
+	try {
+		conn = GetConnection();
+
+		String^ sqlStr = "dbo.usp_AddUser";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+
+		// Parámetros de entrada
+		cmd->Parameters->AddWithValue("@PASSWORD", user->Password);
+		cmd->Parameters->AddWithValue("@EMAIL", user->Email);
+		cmd->Parameters->AddWithValue("@USERNAME", user->Name);
+		cmd->Parameters->AddWithValue("@FULL_NAME", user->FormalName);
+		cmd->Parameters->AddWithValue("@PHONE_NUMBER", user->PhoneNumber);
+		cmd->Parameters->AddWithValue("@USER_TYPE", Convert::ToInt32(user->UserType));
+
+		// Solo si es cliente
+		if (MrBookyModel::Client^ client = dynamic_cast<MrBookyModel::Client^>(user)) {
+			cmd->Parameters->AddWithValue("@STUDENT_CODE", client->StudentCode);
+			String^ prefs = (client->Preferences != nullptr) ? String::Join(",", client->Preferences) : nullptr;
+			if (prefs != nullptr)
+				cmd->Parameters->AddWithValue("@PREFERENCES", prefs);
+			else
+				cmd->Parameters->AddWithValue("@PREFERENCES", DBNull::Value);
+
+		}
+		else {
+			cmd->Parameters->AddWithValue("@STUDENT_CODE", DBNull::Value);
+			cmd->Parameters->AddWithValue("@PREFERENCES", DBNull::Value);
+		}
+
+		// Parámetro de salida
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
+
+		// Ejecutar
+		cmd->ExecuteNonQuery();
+		userId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return userId;
 }
 
-void MrBookyPersistance::Persistance::AddLibrarySQL(Library^ library)
+List<User^>^ MrBookyPersistance::Persistance::GetAllUsersSQL()
 {
+	List<User^>^ users = gcnew List<User^>();
+	SqlConnection^ conn = nullptr;
+	SqlDataReader^ reader;
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_QueryAllUsers";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
+		reader = cmd->ExecuteReader();
+		while (reader->Read()) {
+			User^ user = gcnew User();
+			user->UserID = Convert::ToInt32(reader["ID"]);
+			user->Password = reader["PASSWORD"]->ToString();
+			user->Email = reader["EMAIL"]->ToString();
+			user->Name = reader["USERNAME"]->ToString();
+			user->FormalName = reader["FULL_NAME"]->ToString();
+			user->PhoneNumber = Convert::ToInt32(reader["PHONE_NUMBER"]->ToString());
+			user->UserType = Convert::ToInt32(reader["USER_TYPE"]);
+			if (user->UserType == '0') { // Client
+				Client^ client = dynamic_cast<Client^>(user);
+				if (client != nullptr) {
+					client->StudentCode = Convert::ToInt32(reader["STUDENT_CODE"]);
+
+					// Leer cadena de preferencias desde SQL
+					String^ prefs = !reader->IsDBNull(reader->GetOrdinal("PREFERENCES"))
+						? reader["PREFERENCES"]->ToString()
+						: nullptr;
+
+					// Convertir string a lista
+					client->Preferences = gcnew List<String^>();
+					if (!String::IsNullOrEmpty(prefs)) {
+						array<String^>^ splitPrefs = prefs->Split(',');
+						client->Preferences->AddRange(splitPrefs);
+					}
+				}
+			}
+			users->Add(user);
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+	return users;
+}
+
+int MrBookyPersistance::Persistance::UpdateUserSQL(User^ user)
+{
+	int result = 0;
+	SqlConnection^ conn = nullptr;
+
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_UpdateUser";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@PASSWORD", System::Data::SqlDbType::VarChar, 20);
+		cmd->Parameters->Add("@EMAIL", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@USERNAME", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@FULL_NAME", System::Data::SqlDbType::VarChar, 200);
+		cmd->Parameters->Add("@PHONE_NUMBER", System::Data::SqlDbType::VarChar, 15);
+		cmd->Parameters->Add("@USER_TYPE", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@STUDENT_CODE", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@PREFERENCES", System::Data::SqlDbType::NVarChar, -1);
+		cmd->Prepare();
+		cmd->Parameters["@ID"]->Value = user->UserID;
+		cmd->Parameters["@PASSWORD"]->Value = user->Password;
+		cmd->Parameters["@EMAIL"]->Value = user->Email;
+		cmd->Parameters["@USERNAME"]->Value = user->Name;
+		cmd->Parameters["@FULL_NAME"]->Value = user->FormalName;
+		cmd->Parameters["@PHONE_NUMBER"]->Value = user->PhoneNumber;
+		cmd->Parameters["@USER_TYPE"]->Value = user->UserType;
+
+		if (user->UserType == '0') {
+			MrBookyModel::Client^ client = dynamic_cast<MrBookyModel::Client^>(user);
+			if (client != nullptr) {
+				cmd->Parameters["@STUDENT_CODE"]->Value = client->StudentCode;
+				if (client->Preferences != nullptr && client->Preferences->Count > 0) {
+					cmd->Parameters["@PREFERENCES"]->Value = String::Join(",", client->Preferences);
+				}
+				else {
+					cmd->Parameters["@PREFERENCES"]->Value = DBNull::Value;
+				}
+			}
+			else {
+				cmd->Parameters["@STUDENT_CODE"]->Value = DBNull::Value;
+				cmd->Parameters["@PREFERENCES"]->Value = DBNull::Value;
+			}
+		}
+		else {
+			cmd->Parameters["@STUDENT_CODE"]->Value = DBNull::Value;
+			cmd->Parameters["@PREFERENCES"]->Value = DBNull::Value;
+		}
+
+		cmd->ExecuteNonQuery();
+		result = 1;
+
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+
+	return result;
+}
+
+int MrBookyPersistance::Persistance::DeleteUserSQL(int userId)
+{
+	int result = 0;
+
+	SqlConnection^ conn = nullptr;
+
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_DeleteUser";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@ID"]->Value = userId;
+		cmd->ExecuteNonQuery();
+		result = 1;
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return result;
+
+}
+
+User^ MrBookyPersistance::Persistance::GetUserByIdSQL(int userId)
+{
+	User^ user = nullptr;
+	SqlConnection^ conn = nullptr;
+	SqlDataReader^ reader;
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_QueryUserByID";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Parameters->Add("@ID", System::Data::SqlDbType::Int)->Value = userId;
+		reader = cmd->ExecuteReader();
+		if (reader->Read()) {
+			user = gcnew User();
+			user->UserID = Convert::ToInt32(reader["ID"]);
+			user->Password = reader["PASSWORD"]->ToString();
+			user->Email = reader["EMAIL"]->ToString();
+			user->Name = reader["USERNAME"]->ToString();
+			user->FormalName = reader["FULL_NAME"]->ToString();
+			user->PhoneNumber = Convert::ToInt32(reader["PHONE_NUMBER"]);
+			user->UserType = Convert::ToInt32(reader["USER_TYPE"]);
+			if (user->UserType == '0') { // Client
+				Client^ client = dynamic_cast<Client^>(user);
+				if (client != nullptr) {
+					client->StudentCode = Convert::ToInt32(reader["STUDENT_CODE"]);
+					// Leer cadena de preferencias desde SQL
+					String^ prefs = !reader->IsDBNull(reader->GetOrdinal("PREFERENCES"))
+						? reader["PREFERENCES"]->ToString()
+						: nullptr;
+					// Convertir string a lista
+					client->Preferences = gcnew List<String^>();
+					if (!String::IsNullOrEmpty(prefs)) {
+						array<String^>^ splitPrefs = prefs->Split(',');
+						client->Preferences->AddRange(splitPrefs);
+					}
+				}
+			}
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (conn != nullptr) conn->Close();
+	}
+	return user;
+}
+
+User^ MrBookyPersistance::Persistance::GetUserByNameAndPasswordSQL(String^ userName, String^ userPassword)
+{
+	User^ user = nullptr;
+	SqlConnection^ conn = nullptr;
+	SqlDataReader^ reader;
+
+	try {
+		conn = GetConnection();
+		String^ sqlStr = "dbo.usp_SearchUserByNameAndPassword";
+		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+
+		cmd->Parameters->Add("@USERNAME", System::Data::SqlDbType::VarChar, 100);
+		cmd->Parameters->Add("@PASSWORD", System::Data::SqlDbType::VarChar, 20);
+		cmd->Prepare();
+		cmd->Parameters["@USERNAME"]->Value = userName;
+		cmd->Parameters["@PASSWORD"]->Value = userPassword;
+
+		reader = cmd->ExecuteReader();
+
+		if (reader->Read()) {
+			int userType = Convert::ToInt32(reader["USER_TYPE"]);
+
+			if (userType == 0) {
+				MrBookyModel::Client^ client = gcnew MrBookyModel::Client();
+				client->StudentCode = !reader->IsDBNull(reader->GetOrdinal("STUDENT_CODE"))
+					? Convert::ToInt32(reader["STUDENT_CODE"]) : 0;
+
+				String^ prefs = !reader->IsDBNull(reader->GetOrdinal("PREFERENCES"))
+					? reader["PREFERENCES"]->ToString() : nullptr;
+
+				client->Preferences = gcnew List<String^>();
+				if (!String::IsNullOrEmpty(prefs)) {
+					array<String^>^ prefArray = prefs->Split(',');
+					client->Preferences->AddRange(prefArray);
+				}
+				user = client;
+			}
+			else if (userType == 1) {
+				user = gcnew MrBookyModel::Librarian(); // Si existe
+			}
+			else if (userType == 2) {
+				user = gcnew MrBookyModel::Admin(); // Si existe
+			}
+			else {
+				user = gcnew MrBookyModel::User();
+			}
+
+			user->UserID = Convert::ToInt32(reader["ID"]);
+			user->Name = reader["USERNAME"]->ToString();
+			user->Password = reader["PASSWORD"]->ToString();
+			user->Email = reader["EMAIL"]->ToString();
+			user->FormalName = reader["FULL_NAME"]->ToString();
+			user->PhoneNumber = Convert::ToInt32(reader["PHONE_NUMBER"]->ToString());
+			user->UserType = userType;
+		}
+	}
+	catch (Exception^ ex) {
+		throw ex;
+	}
+	finally {
+		if (reader != nullptr) reader->Close();
+		if (conn != nullptr) conn->Close();
+	}
+
+	return user;
+}
+
+int MrBookyPersistance::Persistance::AddLibrarySQL(Library^ library)
+{
+	int libraryId;
 	SqlConnection^ conn = nullptr;
 
 	try {
@@ -1062,18 +1541,23 @@ void MrBookyPersistance::Persistance::AddLibrarySQL(Library^ library)
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
 
 		// Paso 3: Agregar parámetros
-		cmd->Parameters->Add("@LIBRARY_ID", System::Data::SqlDbType::Int);
 		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::NVarChar, 100);
-		cmd->Parameters->Add("@CONTACT_EMAIL", System::Data::SqlDbType::NVarChar, 100);
+		cmd->Parameters->Add("@CONTACT_EMAIL", System::Data::SqlDbType::NVarChar, 50);
 		cmd->Parameters->Add("@OPENING_HOUR", System::Data::SqlDbType::NVarChar, 50);
 		cmd->Parameters->Add("@CLOSE_HOUR", System::Data::SqlDbType::NVarChar, 50);
-		cmd->Parameters->Add("@X", System::Data::SqlDbType::Decimal, 10);
-		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Decimal, 10);
+		cmd->Parameters->Add("@X", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@X"]->Precision = 10;
+		cmd->Parameters["@X"]->Scale = 2;
+		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Decimal);
+		cmd->Parameters["@Y"]->Precision = 10;
+		cmd->Parameters["@Y"]->Scale = 2;
 
+		SqlParameter^ outputIdParam = gcnew SqlParameter("@LIBRARY_ID", System::Data::SqlDbType::Int);
+		outputIdParam->Direction = System::Data::ParameterDirection::Output;
+		cmd->Parameters->Add(outputIdParam);
 		cmd->Prepare();
 
 		// Paso 4: Asignar valores
-		cmd->Parameters["@LIBRARY_ID"]->Value = library->LibraryID;
 		cmd->Parameters["@NAME"]->Value = library->Name;
 		cmd->Parameters["@CONTACT_EMAIL"]->Value = library->ContactEmail;
 		cmd->Parameters["@OPENING_HOUR"]->Value = library->OpeningHour;
@@ -1083,6 +1567,8 @@ void MrBookyPersistance::Persistance::AddLibrarySQL(Library^ library)
 
 		// Paso 5: Ejecutar sentencia
 		cmd->ExecuteNonQuery();
+
+		libraryId = Convert::ToInt32(cmd->Parameters["@LIBRARY_ID"]->Value);
 	}
 	catch (Exception^ ex) {
 		throw ex;
@@ -1090,6 +1576,7 @@ void MrBookyPersistance::Persistance::AddLibrarySQL(Library^ library)
 	finally {
 		if (conn != nullptr) conn->Close();
 	}
+	return libraryId;
 }
 
 List<Library^>^ MrBookyPersistance::Persistance::GetAllLibrariesSQL()
@@ -1105,9 +1592,12 @@ List<Library^>^ MrBookyPersistance::Persistance::GetAllLibrariesSQL()
 		// Paso 2: Preparar sentencia
 		String^ sqlStr = "dbo.usp_QueryAllLibraries";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
+		cmd->CommandType = System::Data::CommandType::StoredProcedure;
+		cmd->Prepare();
 
 		// Paso 3: Ejecutar y leer
 		reader = cmd->ExecuteReader();
+
 		while (reader->Read()) {
 			Library^ library = gcnew Library();
 			library->LibraryID = Convert::ToInt32(reader["LIBRARY_ID"]);
@@ -1131,7 +1621,7 @@ List<Library^>^ MrBookyPersistance::Persistance::GetAllLibrariesSQL()
 	return libraries;
 }
 
-int MrBookyPersistance::Persistance::DeleteLibrarySQL(int libraryId)
+int MrBookyPersistance::Persistance::DeleteLibrarySQL(String^ libraryId)
 {
 	SqlConnection^ conn = nullptr;
 
@@ -1140,10 +1630,11 @@ int MrBookyPersistance::Persistance::DeleteLibrarySQL(int libraryId)
 		String^ sqlStr = "dbo.usp_DeleteLibrary";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@LIBRARY_ID", System::Data::SqlDbType::Int)->Value = libraryId;
+		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::NVarChar, 500);
+		cmd->Prepare();
+		cmd->Parameters["@NAME"]->Value = libraryId;
 
 		cmd->ExecuteNonQuery();
-		return 1;
 	}
 	catch (Exception^ ex) {
 		throw ex;
@@ -1152,7 +1643,7 @@ int MrBookyPersistance::Persistance::DeleteLibrarySQL(int libraryId)
 		if (conn != nullptr) conn->Close();
 	}
 
-	return 0;
+	return 1;
 }
 
 int MrBookyPersistance::Persistance::UpdateLibrarySQL(Library^ library)
@@ -1207,7 +1698,9 @@ Library^ MrBookyPersistance::Persistance::GetLibraryByIdSQL(int libraryId)
 		String^ sqlStr = "dbo.usp_QueryLibraryByID";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@LIBRARY_ID", System::Data::SqlDbType::Int)->Value = libraryId;
+		cmd->Parameters->Add("@LIBRARY_ID", System::Data::SqlDbType::Int);
+		cmd->Prepare();
+		cmd->Parameters["@LIBRARY_ID"]->Value = libraryId;
 		reader = cmd->ExecuteReader();
 		if (reader->Read()) {
 			library = gcnew Library();
@@ -1229,366 +1722,41 @@ Library^ MrBookyPersistance::Persistance::GetLibraryByIdSQL(int libraryId)
 	return library;
 }
 
-int MrBookyPersistance::Persistance::AddRobotBd(DeliveryRobot^ deliveryRobot, int pointId)
+Library^ MrBookyPersistance::Persistance::GetLibraryByNameSQL(String^ libraryName)
 {
-	int robotId;
-	SqlConnection^ conn;
-	try {
-		//Paso 1: Abrir y obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Preparar la sentencia de BD
-		String^ sqlStr = "dbo.usp_AddDeliveryRobot";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::VarChar, 100);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@STATUS", System::Data::SqlDbType::VarChar, 100);
-		cmd->Parameters->Add("@POSITION_ID", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@MAX_CAPACITY", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@BATTERY", System::Data::SqlDbType::Int);
-		SqlParameter^ outputIdParam = gcnew SqlParameter("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
-		outputIdParam->Direction = System::Data::ParameterDirection::Output;
-		cmd->Parameters->Add(outputIdParam);
-		cmd->Prepare();
-		cmd->Parameters["@NAME"]->Value = deliveryRobot->Name;
-		cmd->Parameters["@STATUS"]->Value = deliveryRobot->Status;
-		//Aqui debo ponerle el positionId
-		cmd->Parameters["@POSITION_ID"]->Value = pointId;
-		cmd->Parameters["@MAX_CAPACITY"]->Value = deliveryRobot->MaxCapacity;
-		cmd->Parameters["@BATTERY"]->Value = deliveryRobot->Battery;
-		//Paso 3: Ejecutar la sentencia de BD
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		robotId = Convert::ToInt32(cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-		return 0;
-	}
-	finally {
-		//Paso 5: Cerrar los objetos de conexión de la BD.
-		if (conn != nullptr) conn->Close();
-	}
-	return robotId;
-
-
-}
-
-int MrBookyPersistance::Persistance::DeleteRobotBd(int robotId)
-{
-	SqlConnection^ conn;
-	try {
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Se prepara la sentencia
-		String^ sqlStr = "dbo.usp_DeleteDeliveryRobot";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
-		cmd->Prepare();
-		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = robotId;
-
-		//Paso 3: Se ejecuta las sentencia SQL
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		if (conn != nullptr) conn->Close();
-	}
-	return 1;
-}
-
-int MrBookyPersistance::Persistance::UpdateRobotBd(DeliveryRobot^ deliveryRobot)
-{
+	Library^ library = nullptr;
 	SqlConnection^ conn = nullptr;
-	try {
-
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Se prepara la sentencia
-		String^ sqlStr = "dbo.usp_UpdateDeliveryRobot";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::VarChar, 100);
-		cmd->Parameters->Add("@STATUS", System::Data::SqlDbType::VarChar, 100);
-		cmd->Parameters->Add("@POSITION_ID", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@MAX_CAPACITY", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@BATTERY", System::Data::SqlDbType::Int);
-		cmd->Prepare();
-		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = deliveryRobot->RobotID;
-		cmd->Parameters["@NAME"]->Value = deliveryRobot->Name;
-		cmd->Parameters["@STATUS"]->Value = deliveryRobot->Status;
-		cmd->Parameters["@POSITION_ID"]->Value = deliveryRobot->RobotID;
-		cmd->Parameters["@MAX_CAPACITY"]->Value = deliveryRobot->MaxCapacity;
-		cmd->Parameters["@BATTERY"]->Value = deliveryRobot->Battery;
-		//Paso 3: Se ejecuta las sentncia SQL
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		if (conn != nullptr) conn->Close();
-	}
-	return 1;
-}
-
-List<DeliveryRobot^>^ MrBookyPersistance::Persistance::QueryAllRobotsBd()
-{
-	List<DeliveryRobot^>^ robotsList = gcnew List<DeliveryRobot^>();
-	Point^ point = gcnew Point(0, 0);
-	SqlConnection^ conn;
-	SqlDataReader^ reader;
-	try {
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Preparar la sentencia SQL
-		String^ sqlStr = "dbo.usp_QueryAllDeliveryRobots";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Prepare();
-
-		//Paso 3: Ejecutar la sentencia SQL
-		reader = cmd->ExecuteReader();
-
-		//Paso 4: Procesar los resultados
-		while (reader->Read()) {
-			DeliveryRobot^ deliveryRobot = gcnew DeliveryRobot();
-			deliveryRobot->Position = point;
-			deliveryRobot->RobotID = Convert::ToInt32(reader["DELIVERY_ROBOT_ID"]->ToString());
-			deliveryRobot->Name = reader["NAME"]->ToString();
-			deliveryRobot->Status = reader["STATUS"]->ToString();
-			//Aqui tengo que traer el punto de ubicacion del robot
-			//Se que el pointId es el mismo que el RobotId
-			point = QueryPointByIdBd(Convert::ToInt32(reader["POSITION_ID"]->ToString()));
-			deliveryRobot->Position->X = point->X;
-			deliveryRobot->Position->Y = point->Y;
-			deliveryRobot->MaxCapacity = Convert::ToInt32(reader["MAX_CAPACITY"]->ToString());
-			deliveryRobot->Battery = Convert::ToInt32(reader["BATTERY"]->ToString());
-			robotsList->Add(deliveryRobot);
-		}
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
-		if (reader != nullptr) reader->Close();
-		if (conn != nullptr) conn->Close();
-	}
-	return robotsList;
-
-
-}
-
-DeliveryRobot^ MrBookyPersistance::Persistance::QueryRobotByIdBd(int robotId)
-{
-	DeliveryRobot^ deliveryRobot;
-	Point^ point = gcnew Point(0, 0);
-	SqlConnection^ conn;
 	SqlDataReader^ reader;
 
 	try {
-		//Paso 1: Obtener la conexión a la BD
 		conn = GetConnection();
-
-		//Paso 2: Preparar la sentencia SQL
-		String^ sqlStr = "dbo.usp_QueryDeliveryRobotByID";
+		String^ sqlStr = "dbo.usp_QueryLibraryByName";
 		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
 		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@DELIVERY_ROBOT_ID", System::Data::SqlDbType::Int);
+		cmd->Parameters->Add("@NAME", System::Data::SqlDbType::NVarChar, 100);
 		cmd->Prepare();
-		cmd->Parameters["@DELIVERY_ROBOT_ID"]->Value = robotId;
-
-		//Paso 3: Ejecutar la sentencia SQL
+		cmd->Parameters["@NAME"]->Value = libraryName;
 		reader = cmd->ExecuteReader();
-
-		//Paso 4: Procesar los resultados
 		if (reader->Read()) {
-			deliveryRobot = gcnew DeliveryRobot();
-			deliveryRobot->Position = point;
-			deliveryRobot->RobotID = Convert::ToInt32(reader["DELIVERY_ROBOT_ID"]->ToString());
-			deliveryRobot->Name = reader["NAME"]->ToString();
-			deliveryRobot->Status = reader["STATUS"]->ToString();
-			//Aqui tengo que traer el punto de ubicacion del robot
-			//Se que el pointId es el mismo que el RobotId
-			point = QueryPointByIdBd(Convert::ToInt32(reader["POSITION_ID"]->ToString()));
-			deliveryRobot->Position->X = point->X;
-			deliveryRobot->Position->Y = point->Y;
-			deliveryRobot->MaxCapacity = Convert::ToInt32(reader["MAX_CAPACITY"]->ToString());
-			deliveryRobot->Battery = Convert::ToInt32(reader["BATTERY"]->ToString());
+			library = gcnew Library();
+			library->LibraryID = Convert::ToInt32(reader["LIBRARY_ID"]);
+			library->Name = reader["NAME"]->ToString();
+			library->ContactEmail = reader["CONTACT_EMAIL"]->ToString();
+			library->OpeningHour = reader["OPENING_HOUR"]->ToString();
+			library->CloseHour = reader["CLOSE_HOUR"]->ToString();
+			library->X = Convert::ToDouble(reader["X"]);
+			library->Y = Convert::ToDouble(reader["Y"]);
 		}
 	}
 	catch (Exception^ ex) {
 		throw ex;
 	}
 	finally {
-		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
-		if (reader != nullptr) reader->Close();
 		if (conn != nullptr) conn->Close();
 	}
-	return deliveryRobot;
-
+	return library;
 }
 
-int MrBookyPersistance::Persistance::AddPointBd()
-{
-	int pointId;
-	int PositionId;
-	SqlConnection^ conn;
-	try {
-		//Paso 1: Abrir y obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Preparar la sentencia de BD
-		String^ sqlStr = "dbo.usp_AddPoint";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->Parameters->Add("@X", System::Data::SqlDbType::Decimal);
-		cmd->Parameters["@X"]->Precision = 10;
-		cmd->Parameters["@X"]->Scale = 2;
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Decimal);
-		cmd->Parameters["@Y"]->Precision = 10;
-		cmd->Parameters["@Y"]->Scale = 2;
-		SqlParameter^ outputIdParam = gcnew SqlParameter("@POINT_ID", System::Data::SqlDbType::Int);
-		outputIdParam->Direction = System::Data::ParameterDirection::Output;
-		cmd->Parameters->Add(outputIdParam);
-		cmd->Prepare();
-		//Por defectoo se crea la ubicacion de un robot en la posicion (0,0)
-		cmd->Parameters["@X"]->Value = 0;
-		cmd->Parameters["@Y"]->Value = 0;
-		//Paso 3: Ejecutar la sentencia de BD
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		pointId = Convert::ToInt32(cmd->Parameters["@POINT_ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-		return 0;
-	}
-	finally {
-		//Paso 5: Cerrar los objetos de conexión de la BD.
-		if (conn != nullptr) conn->Close();
-	}
-	return pointId;
-}
-
-int MrBookyPersistance::Persistance::DeletePointBd(int robotId)
-{
-	SqlConnection^ conn;
-	try {
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Se prepara la sentencia
-		String^ sqlStr = "dbo.usp_DeletePoint";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
-		cmd->Prepare();
-		cmd->Parameters["@POINT_ID"]->Value = robotId;
-
-		//Paso 3: Se ejecuta las sentencia SQL
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		if (conn != nullptr) conn->Close();
-	}
-	return 1;
 
 
-}
-
-int MrBookyPersistance::Persistance::UpdatePointBd(DeliveryRobot^ deliveryRobot)
-{
-	SqlConnection^ conn = nullptr;
-	try {
-
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Se prepara la sentencia
-		String^ sqlStr = "dbo.usp_UpdatePoint";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@X", System::Data::SqlDbType::Int);
-		cmd->Parameters->Add("@Y", System::Data::SqlDbType::Int);
-		cmd->Prepare();
-		cmd->Parameters["@POINT_ID"]->Value = deliveryRobot->RobotID;
-		cmd->Parameters["@X"]->Value = deliveryRobot->Position->X;
-		cmd->Parameters["@Y"]->Value = deliveryRobot->Position->Y;
-		//Paso 3: Se ejecuta las sentncia SQL
-		cmd->ExecuteNonQuery();
-
-		//Paso 4: Se procesan los resultados
-		//robotId = Convert::ToInt32(cmd->Parameters["@ID"]->Value);
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		if (conn != nullptr) conn->Close();
-	}
-	return 1;
-}
-
-Point^ MrBookyPersistance::Persistance::QueryPointByIdBd(int pointId)
-{
-	Point^ point;
-	SqlConnection^ conn;
-	SqlDataReader^ reader;
-
-	try {
-		//Paso 1: Obtener la conexión a la BD
-		conn = GetConnection();
-
-		//Paso 2: Preparar la sentencia SQL
-		String^ sqlStr = "dbo.usp_QueryPointByID";
-		SqlCommand^ cmd = gcnew SqlCommand(sqlStr, conn);
-		cmd->CommandType = System::Data::CommandType::StoredProcedure;
-		cmd->Parameters->Add("@POINT_ID", System::Data::SqlDbType::Int);
-		cmd->Prepare();
-		cmd->Parameters["@POINT_ID"]->Value = pointId;
-
-		//Paso 3: Ejecutar la sentencia SQL
-		reader = cmd->ExecuteReader();
-
-		//Paso 4: Procesar los resultados
-		if (reader->Read()) {
-			point = gcnew Point();
-			point->X = Convert::ToInt32(reader["X"]->ToString());
-			point->Y = Convert::ToInt32(reader["Y"]->ToString());
-		}
-	}
-	catch (Exception^ ex) {
-		throw ex;
-	}
-	finally {
-		//Paso 5: Importante! Cerrar los objetos de conexión a la BD
-		if (reader != nullptr) reader->Close();
-		if (conn != nullptr) conn->Close();
-	}
-	return point;
-}
 
